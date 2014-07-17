@@ -4,6 +4,6 @@ Title: An R stemmatology package
 Version: 0.2.2
 Date: 2014-07-16
 Author: Jean-Baptiste Camps ; Florian Cafiero
-Maintainer: complain to <jbcamps@hotmail.com>, <florian.cafiero@hotmail.fr>
-Description: More about what it does (maybe more than one line)
+Maintainer: complain to <jbcamps@hotmail.com>, <florian.cafiero@polytechnique.edu>
+Description: This package helps building and analysing the stemmata of textual or musical traditions.
 License: CC BY-NC-SA 2.0
