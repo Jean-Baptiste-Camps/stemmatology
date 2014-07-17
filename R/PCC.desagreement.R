@@ -4,14 +4,17 @@ function(x, omissionsAsReadings = FALSE) {
     # In addition to the tables giving benigne and severe
     # desagreements, the function also returns, for information only,
     # the count of agreements and common omissions,
-    tableVariantes = as.matrix(x)  #Should we use here data.matrix to coerce to a data matrix the original database? => to do, as long as we do not integrate the ability to have several readings for a same place.
-    # tableVariantes = data.matrix(x) #On crée des tables proposant un
-    # croisement de l'ensemble des manuscrits D'abord, celles qui servent à
-    # la construction du stemma N.B.: à terme, pour gérer les cas où un
-    # manuscrit à plusieurs leçons à un lieu variant donné (ou a plusieurs
+    tableVariantes = as.matrix(x)  
+    # if is.matrix(x)=TRUE
+    # if is.matrix(x)=FALSE
+    
+    # tableVariantes = data.matrix(x) #We create tables proposing to cross
+    # the whole set of manuscripts. First, celles qui servent to
+    # build the stemma N.B.: Plus tard, pour gerer les cas d un
+    # manuscrit a plusieurs lecons a un lieu variant donne (ou a plusieurs
     # leçons à partir d'un traitement de la contamination), il faudra
     # peut-être faire une table de ce type pour chaque lieu variant, et
-    # calculer les sommes de manière différenciées à la fin.
+    # calculer les sommes de maniere differenciees a la fin.
     severeDesagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
         dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
     benigneDesagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
@@ -115,10 +118,10 @@ function(x, omissionsAsReadings = FALSE) {
                           # severeDisagreements++ On commence donc par créer une table des autres
                           # variantes de ce même lieu (i.e. tous sauf j et k)
                           tableSansjk = tableVariantes[i, -c(j, k), drop = FALSE]  #Puis on croise
-                          # x%in%y permet de tester la présence de la valeur x dans le vecteur j,
-                          # et retourne TRUE ou FALSE ; les fonctions any(y==x) permet de faire
-                          # exactement la même chose, tout comme is.element(x,y); pour récupérer la
-                          # première occurrence de x dans y, on peut utiliser match(x,y) ou
+                          # x%in%y Allows to test the presence of value x in vector j,
+                          # and returns TRUE ou FALSE. The functions any(y==x) allow to do 
+                          # the exact same thing, as is.element(x,y); to get the first occurence of
+                          #  x in y, we can use match(x,y) or
                           # which(x,y)
                           if ((tableVariantes[i, j] %in% tableSansjk) && 
                             (tableVariantes[i, k] %in% tableSansjk)) {
@@ -146,7 +149,7 @@ function(x, omissionsAsReadings = FALSE) {
     X = as.list(X)
     X$database = tableVariantes
     X$severeDesagreement = severeDesagreement
-    X$benigneDesagreement = benigneDesagreement  #Ensuite, celles qui sont proposées à titre informatif
+    X$benigneDesagreement = benigneDesagreement  #Then the one being proposed as an FYI.
     X$agreements = agreements
     X$omissionsInCommon = omissionsInCommon
     X$omissionsOriented = omissionsOriented
