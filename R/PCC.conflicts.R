@@ -1,8 +1,16 @@
 PCC.conflicts <-
 function(x, omissionsAsReadings = FALSE) {
+    # Optimisation : temps comparatifs
+    # version pré-package (déjà optimisée un peu) - 16/07/2014
+    # utilisateur     système      écoulé 
+    #      25.030       0.106      25.134 
+    # version intermédiaire                       - 17/07/2014
+    # utilisateur     système      écoulé 
+    #      24.774       0.084      24.865 
+    # 
     ## V2 : Nouvelle version pour intégrer la possibilité d'avoir plusieurs
     ## variantes pour le même lieu variant/ms + index de conflictualité
-    tableVariantes = as.matrix(x)  #Apparemment le tableau importé est soi disant une liste et non pas un dataframe. Donc, on tente de le contraindre
+    tableVariantes = as.matrix(x)  #Apparemment le tableau importé est soi disant une liste et non pas un dataframe. Donc, on tente de le contraindre. Normalement, ce ne devrait pas être le cas, si la base a été importée correctement
     if (omissionsAsReadings == FALSE) {
         # Standard case: omissions are not considered as potential common errors
         tableVariantes[tableVariantes == 0] = NA
@@ -10,28 +18,17 @@ function(x, omissionsAsReadings = FALSE) {
     # Créer une matrice (edgelist) à deux colonnes, à laquelle on ajoute une
     # ligne par paire en conflit.  edgelist = c(character(0),character(0));
     edgelist = matrix(c(character(0), character(0)), ncol = 2)  # Créer un tableau du nombre de conflits
-    conflictsTotal = as.data.frame(c(character(0)))
-    for (i in 1:nrow(tableVariantes)) {
-        conflictsTotal = rbind(conflictsTotal, 0)
-    }
-    row.names(conflictsTotal) = rownames(tableVariantes)  ## na.omit pour ne pas tenir compte des valeurs inconnues.
-    ## test[test==0]<-NA pour virer les 0 Convertir toutes les lignes en
-    ## factor TEST = apply(tableVariantes,MARGIN=2,FUN=as.factor) #Ne marche
-    ## pas très bien.  interaction(TEST[19,],TEST[143,]) [1] 2.1 1.2 2.2 1.1
-    ## <NA> 2.2 1.1 <NA> 1.1 1.2 Levels: 1.1 2.1 1.2 2.2
-    ## as.factor(TEST[19,]):as.factor(TEST[143,]) [1] 2:1 1:2 2:2 1:1 <NA> 2:2
-    ## 1:1 <NA> 1:1 1:2 Levels: 1:1 1:2 2:1 2:2 Optimisation : using variables
-    ## to avoid systematic calculation (to do for all the code)
-    totalVL = nrow(tableVariantes)
-    for (i in 1:(totalVL - 1)) {
-        VLA = i  #Renaming it to be more explicit
-        supVLA = VLA + 1
-        if (!supVLA > totalVL) {
-            # Éviter d'avoir un indice hors limites
-            for (j in supVLA:totalVL) {
+    # Créer une matrice des conflits (nouvelle solution, optimisée). NB: ceci étant auparavant un dataframe, j'en fait à présent une matrice
+    conflictsTotal = matrix(data = 0, nrow = nrow(tableVariantes), ncol = 1, dimnames = list(rownames(tableVariantes), "conflictsTotal")) 
+    for (i in 1:(nrow(tableVariantes) - 1)) {
+        #VLA = i  #Renaming it to be more explicit
+        #supVLA = VLA + 1
+        #if (!supVLA > nrow(tableVariantes)) {
+            # Éviter d'avoir un indice hors limites #On ne devrait pas en avoir un, car le calcul est déjà fait au dessus !
+            for (j in (i + 1):nrow(tableVariantes)) {
                 VLB = j  #Idem
-                factorVLA = as.factor(tableVariantes[VLA, ])  #Optimisation : putting it in a factor to avoid repeating this operation
-                factorVLB = as.factor(tableVariantes[VLB, ])  #Optimisation : putting it in a factor to avoid repeating this operation
+                factorVLA = as.factor(tableVariantes[i, ])  #Optimisation : putting it in a factor to avoid repeating this operation
+                factorVLB = as.factor(tableVariantes[j, ])  #Optimisation : putting it in a factor to avoid repeating this operation
                 problematicConfiguration = FALSE  #False until proven otherwise
                 interactions = interaction(factorVLA:factorVLB, drop = TRUE)  ##### Ajout de la possibilité d'avoir plusieurs variantes pour un même VL/MS #####     
                 if (length(grep(",", interactions)) > 1) {
@@ -111,13 +108,13 @@ function(x, omissionsAsReadings = FALSE) {
                   }
                 }
                 if (problematicConfiguration == TRUE) {
-                  edgelist = rbind(edgelist, c(rownames(tableVariantes)[VLA], 
-                    rownames(tableVariantes)[VLB]))  #adding a new edge to the network of conflicts !
-                  conflictsTotal[VLA, ] = conflictsTotal[VLA, ] + 1
-                  conflictsTotal[VLB, ] = conflictsTotal[VLB, ] + 1  #ajouter le nombre de conflits pour chacun des deux lieux variants
+                  edgelist = rbind(edgelist, c(rownames(tableVariantes)[i], 
+                    rownames(tableVariantes)[j]))  #adding a new edge to the network of conflicts !
+                  conflictsTotal[i, ] = conflictsTotal[i, ] + 1
+                  conflictsTotal[j, ] = conflictsTotal[j, ] + 1  #ajouter le nombre de conflits pour chacun des deux lieux variants
                 }
             }  # crossing with a second variant location
-        }
+        #} fermeture du if (!supVLA > nrow(tableVariantes)) {
     }
     centrality = conflictsTotal  ##Computing the centrality index as described in CC 2013
     ## We have to test first that there actual are conflicts in the database
