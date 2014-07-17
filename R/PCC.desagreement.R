@@ -5,8 +5,10 @@ function(x, omissionsAsReadings = FALSE) {
     # desagreements, the function also returns, for information only,
     # the count of agreements and common omissions,
     tableVariantes = as.matrix(x)  
-    # if is.matrix(x)=TRUE
-    # if is.matrix(x)=FALSE
+    
+    if (is.matrix(x) = FALSE)  {
+        stop ("Input is not a matrix.")
+    } 
     
     # tableVariantes = data.matrix(x) #We create tables proposing to cross
     # the whole set of manuscripts. First, celles qui servent to
@@ -25,15 +27,15 @@ function(x, omissionsAsReadings = FALSE) {
         dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
     omissionsOriented = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
         dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))  #Je n'en mets pas pour les NA, qui, en tant que manque d'information, peuvent être soit des lacunes, soit des oublis d'encodage, soit des oublis de collation, etc.
-    # On prend chacune des lignes (= lieux variants)
+    # We take each line (= variant locations)
     for (i in 1:nrow(tableVariantes)) {
-        # Puis, on prend chacune des colonnes (= manuscrits)
+        # Then we take each column (= manuscritps)
         for (j in 1:ncol(tableVariantes)) {
-            # Premier cas, la leçon du ms. est inconnue, donc on ne fait rien
+            # First case: the lesson of tha manuscript is unknown, and we don't do anything
             if (is.na(tableVariantes[i, j])) {
             } else {
-                # Si la leçon est connue, on croise avec tous les autres Si on veut, on
-                # peut éviter de croiser avec soi-même le ms. grâce à la commande
+                # If the lesson is known, on croise avec tous les autres Si on veut, on
+                # peut éviter de croiser avec soi-même le ms. thanks to la commande
                 # variantesAComp = tableVariantes[i,-j] #####Début du traitement des
                 # omissions Commençons par tester si la leçon est une omission ou non
                 if ((tableVariantes[i, j] == 0) && (omissionsAsReadings == 
