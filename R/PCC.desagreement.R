@@ -1,9 +1,9 @@
 PCC.desagreement <-
 function(x, omissionsAsReadings = FALSE) {
-    # En entrée une table de variantes. En sortie, les matrices de désaccords
-    # et la base de données in supplement of the tables giving benigne and
-    # severe desagreements, the function also returns, for information only,
-    # the count of agreements, common omissions,
+    # Input are tables of variants. Ouput are desagreement matrices and database.
+    # In addition to the tables giving benigne and severe
+    # desagreements, the function also returns, for information only,
+    # the count of agreements and common omissions,
     tableVariantes = as.matrix(x)  #Should we use here data.matrix to coerce to a data matrix the original database? => to do, as long as we do not integrate the ability to have several readings for a same place.
     # tableVariantes = data.matrix(x) #On crée des tables proposant un
     # croisement de l'ensemble des manuscrits D'abord, celles qui servent à
@@ -15,7 +15,7 @@ function(x, omissionsAsReadings = FALSE) {
     severeDesagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
         dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
     benigneDesagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-        dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))  #Ensuite, celles qui sont proposées à titre informatif
+        dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))  #Then the one being proposed as an FYI
     agreements = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
         dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
     omissionsInCommon = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
@@ -49,7 +49,7 @@ function(x, omissionsAsReadings = FALSE) {
                         colnames(tableVariantes)[k]])) {
                         omissionsOriented[colnames(tableVariantes)[j], colnames(tableVariantes)[k]] = 0
                       }
-                      # Premier cas, omission commune
+                      # First case: common omission
                       if (tableVariantes[i, j] == tableVariantes[i, k]) {
                         # On utilise la fonction maison pour incrémenter la table
                         omissionsInCommon = incrementTable(omissionsInCommon, 
