@@ -127,8 +127,6 @@ function(x, omissionsAsReadings = FALSE) {
             # sure are superior to any centrality threshold we could choose... if()
             centrality[z, ] = centrality[z, ]/(sumConflicts - centrality[z, 
                 ])  # added an option to remove infinity and to replace it with 2
-            # TODO(global): This is not very clean, nor mentioned in the paper, we
-            # should arbitrate on it, and mention it somewhere.
             if (is.infinite(centrality[z, ])) {
                 centrality[z, ] = 2
             }
