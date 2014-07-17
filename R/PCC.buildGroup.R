@@ -1,15 +1,14 @@
 PCC.buildGroup <-
 function(x, limit = 0) {
-    ### PCC.buildGroup Function that builds new manuscripts clusters and then
-    ### proceed to reconstruct and identify their model # where limit is the
+    ### PCC.buildGroup Function that groups together manuscripts in relevant clusters, then
+    ### identify and eventually reconstructs their model # where limit is the
     ### limit of severe desagreements (errores separativi) allowed within a
-    ### group (default - and strongly advised value - is 0). En entrée, un
-    ### objet de type PCC.desagreement
-    severeDesagreement = x$severeDesagreement  #We remove NA from the severeDesagreement list
-    # Removing removed because, now, we differentiate between NA and 0
+    ### group (default - and strongly advised value - is 0). Inputs are PCC.desagreement objects.
+    severeDesagreement = x$severeDesagreement  #We remove NA from the severeDesagreement list,
+    # thus starting to distinguish between NA and 0.
     # severeDesagreement[is.na(severeDesagreement)] = 0;
     if (length(severeDesagreement[is.na(severeDesagreement)]) > 0) {
-        print("There are NA values in your severeDesagreement matrix")
+        print("There are NA values in your severeDesagreement matrix.")
         answered = FALSE
         writeLines("Do you whish to proceed anyway (careful !) ?")
         while (answered == FALSE) {
@@ -21,18 +20,19 @@ function(x, limit = 0) {
                 return()
             }
             if (answer == "Y") {
+              #if answer is yes, we assume that no information about disagreement means "no disagreement".
                 severeDesagreement[is.na(severeDesagreement)] = 0
                 answered = TRUE
             }
         }
-        ## TODO(JBC): Add an option to proceed anyway.
+       
     }
     groups = as.list(NULL)
     for (i in 1:nrow(severeDesagreement)) {
         groups[[i]] = labels(severeDesagreement[i, severeDesagreement[i, 
             ] == limit])
     }
-    # Comparer toutes les listes et supprimer celles qui sont identiques
+    # Comparing all lists and deleting identical lines.
     toBeRemoved = as.vector(NULL)
     for (j in 1:(length(groups) - 1)) {
         for (k in (j + 1):length(groups)) {
