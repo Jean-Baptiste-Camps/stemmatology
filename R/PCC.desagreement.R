@@ -51,7 +51,7 @@ function(x, omissionsAsReadings = FALSE) {
                       }
                       # First case: common omission
                       if (tableVariantes[i, j] == tableVariantes[i, k]) {
-                        # On utilise la fonction maison pour incrémenter la table
+                        # We use our own function for the table's incrementation.
                         omissionsInCommon = incrementTable(omissionsInCommon, 
                           tableVariantes, j, k)  #if(is.na(omissionsInCommon[colnames(tableVariantes)[j],colnames(tableVariantes)[k]])){
                         # omissionsInCommon[colnames(tableVariantes)[j],colnames(tableVariantes)[k]]
@@ -61,7 +61,7 @@ function(x, omissionsAsReadings = FALSE) {
                         # omissionsInCommon[colnames(tableVariantes)[j],colnames(tableVariantes)[k]]
                         # + 1 ; }
                       }
-                      # Second cas, omission orientée
+                      # Second case: oriented omission
                       if (tableVariantes[i, j] < tableVariantes[i, k]) {
                         omissionsOriented = incrementTable(omissionsOriented, 
                           tableVariantes, j, k)  #if(is.na(omissionsOriented[colnames(tableVariantes)[j],colnames(tableVariantes)[k]])){
@@ -75,7 +75,7 @@ function(x, omissionsAsReadings = FALSE) {
                     }
                   }
                 } else {
-                  #### Début du traitement des leçons Maintenant, nous savons qu'elle est une
+                  #### Beginning of lesson's treatment. Maintenant, nous savons qu'elle est une
                   #### leçon, mais faisons une dernière vérification
                   if (is.numeric(tableVariantes[i, j])) {
                     # Maintenant, everything is good for a go
