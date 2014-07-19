@@ -12,9 +12,9 @@ function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE) {
         par(ask = FALSE)
     }
     tableVariantes = x$database
-    conflictsDifferences = as.data.frame(character(0))
-    X = character(0)
-    X = as.list(X)
+    #conflictsDifferences = as.data.frame(character(0))
+    conflictsDifferences = as.matrix(integer(0))
+    X = as.list(NULL)
     X$totalByMs = x$conflictsTotal
     for (i in 1:ncol(tableVariantes)) {
         database = tableVariantes[, -i, drop = FALSE]  #Adding the new row to the synthesis of the conflicts differences
@@ -31,15 +31,14 @@ function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE) {
             }
         }
         # Calculating the differences in conflict number
-        difference = (sum(pccConflicts$conflictsTotal[1])/2) - (sum(x$conflictsTotal[1])/2)
+        difference = (sum(pccConflicts$conflictsTotal[,1])/2) - (sum(x$conflictsTotal[,1])/2)
         conflictsDifferences = rbind(conflictsDifferences, difference)
         rownames(conflictsDifferences)[i] = colnames(tableVariantes)[i]  #Adding the conflicts per VL with this ms. removed
         colnames(pccConflicts$conflictsTotal)[1] = colnames(tableVariantes)[i]
         X$totalByMs = cbind(X$totalByMs, pccConflicts$conflictsTotal)  #Adding the difference in number of conflicts
-        diffMSTotal = pccConflicts$conflictsTotal[1]
+        diffMSTotal = pccConflicts$conflictsTotal[, 1, drop = FALSE]
         for (j in 1:nrow(X$totalByMs)) {
-            diffMSTotal[j, ] = pccConflicts$conflictsTotal[j, 1] - X$totalByMs[j, 
-                1]
+            diffMSTotal[j, ] = pccConflicts$conflictsTotal[j, 1] - X$totalByMs[j, 1]
         }
         colnames(diffMSTotal) = "Difference"
         X$totalByMs = cbind(X$totalByMs, diffMSTotal)
