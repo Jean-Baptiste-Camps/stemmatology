@@ -14,7 +14,7 @@ More about what it does (maybe more than one line)
 \tabular{ll}{
 Package: \tab stemmatology\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 0.2.2\cr
 Date: \tab 2014-07-16\cr
 License: \tab What license is it under?\cr
 }
@@ -28,6 +28,7 @@ Maintainer: Who to complain to <yourfault@somewhere.net>
 ~~ The author and/or maintainer of the package ~~
 }
 \references{
+Jean-Baptiste Camps And Florian Cafiero, « Genealogical Variant Locations And Simplified Stemma: A Test Case », 2014
 ~~ Literature or other references for background information ~~
 }
 ~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
