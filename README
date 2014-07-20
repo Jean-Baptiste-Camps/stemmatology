@@ -32,6 +32,13 @@
 
 ##NB: Pour le nettoyage du code R, il existe des fonctions internes, mais elles enlèvent les commentaires ## pour ne pas enlever les commentaires, formatR (cf. http://www.r-bloggers.com/tools-to-tidy-up-r-code/)
 
+##NNB: pour augmenter l'efficacité du code R et faire du profiling, benchmark :
+# https://www.stat.auckland.ac.nz/~stat782/downloads/10-Efficiency-handouts.pdf
+# Advanced R, Performance : http://adv-r.had.co.nz/Performance.html
+# Commandes Rprof() et summaryRprof()
+# package microbenchmark
+
+
 #library("statnet") #Apparently, we use statnet only for sna (and its gplot function), as well as network (see http://cran.r-project.org/web/packages/statnet/statnet.pdf for full details), so it will be lighter with only,
 library("network")
 library("sna")

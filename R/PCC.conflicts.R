@@ -1,6 +1,6 @@
 PCC.conflicts <-
-    function(x, omissionsAsReadings = FALSE) {
-        # Optimisation : temps comparatifs sur données fournival avec system.time()
+    function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE) {
+        # Optimisation : temps comparatifs sur données *fournival* avec system.time()
         # v2 version pré-package (déjà optimisée un peu) - 16/07/2014
         # utilisateur     système      écoulé 
         #      25.030       0.106      25.134 
@@ -19,32 +19,171 @@ PCC.conflicts <-
         #      21.877       0.054      21.926 
         # 
         # TODO(JBC) /!\ very important : vérifier que la nouvelle version donne bien systématiquement les mêmes résultats que l'ancienne sur tous les corpus test. NB: faire aussi cette vérification sur PCC.contam (a priori, devrait fonctionner)
-        # TODO(JBC) : important aussi, la nouvelle version, optimisée, ne contient plus la possibilité d'utiliser les virgules pour mettre plusieurs variantes pour le même manuscrit au même lieu variant. Lorsqu'il y en aura besoin, il faudra la réimplémenter. Ce ne devrait pas être si compliqué : il faut juste, lorsqu'une entrée contient des virgules, utiliser strsplit pour séparer les entrées, et utiliser cbind pour ajouter les combinaisons supplémentaires à la liste par ex. si on a, pour A au lieu variant 1 "1,2" et au lieu variant 2 "1", il faut supprimer cette entrée et créer deux nouvelles colonnes donnat 1:1, 2:1
-        ## V2 : Nouvelle version pour intégrer la possibilité d'avoir plusieurs
-        ## variantes pour le même lieu variant/ms + index de conflictualité
-        tableVariantes = as.matrix(x)  #Apparemment le tableau importé est soi disant une liste et non pas un dataframe. Donc, on tente de le contraindre. Normalement, ce ne devrait pas être le cas, si la base a été importée correctement
+        # v3.1+ : la possibilité d'avoir des variantes alternatives pour un ms. donné à un lieu variant donné a été rétablie (de manière sensiblement optimisée), et mise en option.
+        # v2
+        # utilisateur     système      écoulé 
+        #    118.254       0.264     118.519 
+        # v3.1
+        #utilisateur     système      écoulé 
+        #     93.816       0.218      94.018 
+        # v3.1.1
+        # utilisateur     système      écoulé 
+        #     86.660       0.292      86.943 
+        # v3.1.2
+        #     82.342       0.239      82.647 
+        # v.3.1.3 (avec stringasfactors = false)
+        #     74.520       0.172      74.684 
+        # v.3.1.4 (en testant sur nchar avant de grep => pas un gros progrès, et peut ralentir sur un corpus où les alternates seraient majoritaires)
+        #     72.366       0.224      72.604 
+        # v.3.1.5. (version with no duplicate execution)
+        #utilisateur     système      écoulé 
+        #     48.181       0.098      48.271 
+        # TODO(JBC): For further optimisation, here are the results of profiling for the 20 or so most consuming
+#         summaryPccConflicts$by.total[1-10,]
+#                                        total.time total.pct self.time self.pct
+#         "PCC.conflicts"                   51.22     99.53     10.00    19.43
+#         "gplot"                           24.52     47.65      1.10     2.14
+#         "rbind"                           15.16     29.46      9.34    18.15
+# NB: rbind est gourmand (alors qu'il est très peu utilisé en pratique...), mais comment faire autrement ? Les tentatives de ne pas l'utiliser pour l'edgelist ne causent pas de gain significatif (je les ai laissées en commentées, au cas où)       
+#         "gplot.arrow"                     14.68     28.53      0.04     0.08
+#         "unique"                          11.54     22.43      4.98     9.68
+#         "make.coords"                      5.98     11.62      1.00     1.94
+#         "c"                                5.94     11.54      5.94    11.54
+#         "par"                              4.22      8.20      0.42     0.82
+#         ".External2"                       2.42      4.70      2.42     4.70
+#         "grep"                             2.34      4.55      2.28     4.43
+#         "unique.default"                   1.72      3.34      1.16     2.25
+#         "na.omit.default"                  1.40      2.72      1.14     2.22
+#         "as.list"                          1.34      2.60      0.70     1.36
+#         ">"                                0.88      1.71      0.88     1.71
+#         "as.vector"                        0.82      1.59      0.82     1.59
+#         "=="                               0.80      1.55      0.80     1.55
+#         "which"                            0.70      1.36      0.52     1.01
+#         "as.list.default"                  0.64      1.24      0.64     1.24
+#         "as.character"                     0.60      1.17      0.60     1.17
+#         "is.factor"                        0.56      1.09      0.56     1.09
+#         ".C"                               0.46      0.89      0.46     0.89
+        #
+        options(stringsAsFactors = FALSE) # Option to avoid using factor and gaining efficiency
+        tableVariantes = as.matrix(x) 
+        # Initial test to verify if the input is what it is supposed to be 
+        if (!is.numeric(tableVariantes) & alternateReadings == FALSE) {
+            stop("The imput database is not a numeric matrix. If it is a character matrix containing alternate readings please set alternateReadings to true. Otherwise, try converting it to a numeric matrix object.")
+        }
+        if (!is.character(tableVariantes) & alternateReadings == TRUE) {
+            stop("The imput database is not a character matrix. If it is a numeric matrix (i.e. not containing alternate readings) please set alternateReadings to false.")
+        }
+        # Preparing the objects we will need later
         tableVariantesInitial = tableVariantes
+        # Créer une matrice (edgelist) à deux colonnes, à laquelle on ajoute une
+        # ligne par paire en conflit.
+         edgelist = matrix(c(character(0), character(0)), ncol = 2)  # Créer un tableau du nombre de conflits
+        # we try not to use the time consuming rbind => it does not cause a gain
+        # edgelist = NULL ;
+        # Créer une matrice des conflits (nouvelle solution, optimisée). NB: ceci étant auparavant un dataframe, j'en fait à présent une matrice
+        conflictsTotal = matrix(data = 0, nrow = nrow(tableVariantes), ncol = 1, dimnames = list(rownames(tableVariantes), "conflictsTotal")) 
+        # Treating the case of omissions
         if (omissionsAsReadings == FALSE) {
             # Standard case: omissions are not considered as potential common errors
             tableVariantes[tableVariantes == 0] = NA
         }
-        # Créer une matrice (edgelist) à deux colonnes, à laquelle on ajoute une
-        # ligne par paire en conflit.  edgelist = c(character(0),character(0));
-        edgelist = matrix(c(character(0), character(0)), ncol = 2)  # Créer un tableau du nombre de conflits
-        # Créer une matrice des conflits (nouvelle solution, optimisée). NB: ceci étant auparavant un dataframe, j'en fait à présent une matrice
-        conflictsTotal = matrix(data = 0, nrow = nrow(tableVariantes), ncol = 1, dimnames = list(rownames(tableVariantes), "conflictsTotal")) 
-        #### début de la nouvelle version de la comparaison
         for (i in 1:(nrow(tableVariantes) - 1)) {
             # the problematic configuration can only happen if there are at least two unique values for each VL (i and j). So we test for i (if not, we can stop here), and then for j
-            # NB: peut-être que d'utiliser des vecteurs au lieu de matrice serait marginalement plus efficace
-            if(length(unique(tableVariantes[i, !is.na(tableVariantes[i,]), drop = TRUE])) > 1) {
+            VLA = as.vector(tableVariantes[i, , drop = TRUE])
+            # here a function to treat the case where there are alternate readings, comma separated, for a single manuscrit
+            if (alternateReadings == TRUE) {
+                toBeRemovedForA = NULL # the entry containing the splitted values (with ","), that will be removed after splitting, and are necessary for establishing the new values of B
+                splittedInForA = NULL # the number of time each values was splitted
+                newValuesForA = NULL # and the new added 
+                hasBeenSplittedA = FALSE # a test to check afterwards if A has been modified
+                # and to vectors we need for modifying B if A has been modified
+                for (l in 1:length(VLA) ) {
+                    if (!is.na(VLA[l])){
+                        #if (nchar(VLA[l]) > 1) { # if the value is more than one character long : NB: removed, cause it actually consumates more time on a database with a lot of alternate readings...
+                            if (length(grep(",", VLA[l], fixed = TRUE)) > 0) { # fixed = TRUE means we are not using a regexp. It is also much faster.
+                                newA = unlist(strsplit(VLA[l], split = ",", fixed = TRUE))
+                                splittedInForA = c(splittedInForA, length(newA))
+                                newValuesForA = c(newValuesForA, newA)
+                                toBeRemovedForA = c(toBeRemovedForA, l)
+                            }
+                        #}
+                    }
+                }
+                if (!is.null(toBeRemovedForA)) {
+                    hasBeenSplittedA = TRUE
+                    VLA = VLA[-toBeRemovedForA]
+                    VLA = c(VLA, newValuesForA)
+                }
+                VLA = as.numeric(VLA)
+                if (omissionsAsReadings == FALSE) {
+                    # Standard case: omissions are not considered as potential common errors
+                    VLA[VLA == 0] = NA
+                }
+                # We need to save the VLA object, because it will be modified later 
+                savedVLA = VLA
+                hasBeenModifiedAbyB = FALSE # for the moment, changes in B have not affected A 
+            }
+            if(length(unique(VLA[!is.na(VLA), drop = TRUE])) > 1) {
                 # We store the row and its unique values in a vector, because we will need them frequently
-                VLA = as.vector(tableVariantes[i, , drop = TRUE])
                 uniqueVLA = unique(VLA[!is.na(VLA)])
                 for (j in (i + 1):nrow(tableVariantes)) {
                     # Same test for j here
-                    if (length(unique(tableVariantes[j, !is.na(tableVariantes[j,]), drop = TRUE])) > 1){
-                        VLB = as.vector(tableVariantes[j, , drop = TRUE])
+                    VLB = as.vector(tableVariantes[j, , drop = TRUE])
+                    if (alternateReadings == TRUE) {
+                        # First we check if A has been modified, and if it has been, we modify B accordingly (only B for now)
+                        if (hasBeenSplittedA == TRUE) {
+                            newValuesForB = NULL
+                            for (index in 1:length(toBeRemovedForA)) {
+                                newValuesForB = c(newValuesForB, rep(VLB[toBeRemovedForA[index]], splittedInForA[index])) # we take the values of B corresponding to the rows of A that have been splitted, and multiply them by the number of values it was splitted in, to keep the correspondence
+                            }
+                            VLB = VLB[-toBeRemovedForA]
+                            VLB = c(VLB, newValuesForB)
+                        }
+                        newValuesForB = NULL
+                        toBeRemovedForB = NULL 
+                        splittedInForB = NULL
+                        hasBeenSplittedB = FALSE
+                        for (l in 1:length(VLB) ) {
+                            if (!is.na(VLB[l])){
+                                #if (nchar(VLB[l]) > 1) {
+                                    if (length(grep(",", VLB[l], fixed = TRUE)) > 0) {
+                                        newB = unlist(strsplit(VLB[l], split = ",", fixed = TRUE))
+                                        splittedInForB = c(splittedInForB, length(newB))
+                                        newValuesForB = c(newValuesForB, newB)
+                                        toBeRemovedForB = c(toBeRemovedForB, l)
+                                    }
+                                #}
+                            }
+                        }
+                        if (!is.null(toBeRemovedForB)) { 
+                            hasBeenSplittedB = TRUE
+                            VLB = VLB[-toBeRemovedForB]
+                            VLB = c(VLB, newValuesForB)
+                        }
+                        VLB = as.numeric(VLB)
+                        if (omissionsAsReadings == FALSE) {
+                            # Standard case: omissions are not considered as potential common errors
+                            VLB[VLB == 0] = NA
+                        }
+                    }
+                    if (length(unique(VLB[!is.na(VLB), drop = TRUE])) > 1){
+                        # Last specificity for the treatment of alternate readings, create the two updated rows, in a corresponding fashion. To do that, we have to go back a step...
+                        # it will be dirty
+                        if (alternateReadings == TRUE) { # Finally, if B has been modified, we modify A accordingly
+                            # First, if A has been modified during a previous comparison, we need to set it back to its original value
+                            if (hasBeenModifiedAbyB == TRUE) {
+                                VLA = savedVLA
+                            }
+                            if (hasBeenSplittedB == TRUE) {
+                                newValuesForA = NULL
+                                for (index in 1:length(toBeRemovedForB)) {
+                                    newValuesForA = c(newValuesForA, rep(VLA[toBeRemovedForB[index]], splittedInForB[index]))
+                                }
+                                VLA = VLA[-toBeRemovedForB]
+                                VLA = c(VLA, newValuesForA)
+                                hasBeenModifiedAbyB = TRUE 
+                            }
+                        }
                         # Et c'est ici que les problèmes commencent
                         # We look for configuration such as, given a first , variant location containing {x, x', ..} and a second {y, y', ... }, for each combination {x, y} € m_k and {x, y'} € m_k, is there a x' such as {x', y} € m_k and {x', y'} € m_k
                         problematicConfiguration = FALSE # FALSE until proven otherwise
@@ -70,27 +209,18 @@ PCC.conflicts <-
                                     # and, finally, we create a list of unique values of the second variant locations that are both associated with x and with another one (that is, the y's that have other associations than x to themselves)
                                     uniqueNewVLB = uniqueVLBmatchingx[uniqueVLBmatchingx %in% newVLB]
                                     # and a vector, in which each entry corresponds to a unique value excepted x (an x', x'', ...) of the first location
-                                    ##########PARTIE à revoir
                                     myMatches = vector(mode = "numeric", length = (length(uniqueVLA)))
                                     names(myMatches) = uniqueVLA
                                     # Now for the hard part. We have to see if at least two y have an x' (other than x) in common
                                     for (y in 1:length(uniqueNewVLB)) {
-                                        #debug :
-                                        #print(paste("iteration number", y, "for uniqueNewVLB", uniqueNewVLB[y]))
-                                        #/debug
                                         myNewMatches = unique(na.omit(newVLA[which(newVLB == uniqueNewVLB[y])]))
                                         if( length(myNewMatches) > 0 ){ # Very important test, to verify we are not going to bind a NA column to myMatches...
                                             for (m in 1:length(myNewMatches) ) {
-                                                myMatches[as.character(myNewMatches[m])] = myMatches[as.character(myNewMatches[m])] +1  # It might be a tad faster not to use vector names for the entry, which can be done by using myMatches[which(uniqueVLA == myNewMatches[m], arr.ind = TRUE)] => i'll try that after
+                                                myMatches[as.character(myNewMatches[m])] = myMatches[as.character(myNewMatches[m])] +1
                                             }
                                         }
                                         if (length(myMatches[myMatches > 1]) > 0) {
                                             problematicConfiguration = TRUE
-                                            # Debug :
-                                            #print(paste("Problematic configuration found for VL", rownames(tableVariantes)[i], rownames(tableVariantes)[j]))
-                                            #print(myMatches)
-                                            #print(myNewMatches)
-                                            #/debug
                                             break()
                                         }
                                     }
@@ -98,113 +228,21 @@ PCC.conflicts <-
                             }
                         }
                         if (problematicConfiguration == TRUE) {
-                            edgelist = rbind(edgelist, c(rownames(tableVariantes)[i], 
-                                                         rownames(tableVariantes)[j]))  #adding a new edge to the network of conflicts !
+                            #adding a new edge to the network of conflicts !
+                            edgelist = rbind(edgelist, c(rownames(tableVariantes)[i], rownames(tableVariantes)[j]))  
+                            # trying not to use rbind => does not cause a gain
+                            #edgelist = c(edgelist, c(rownames(tableVariantes)[i], rownames(tableVariantes)[j]))
                             conflictsTotal[i, ] = conflictsTotal[i, ] + 1
                             conflictsTotal[j, ] = conflictsTotal[j, ] + 1  #ajouter le nombre de conflits pour chacun des deux lieux variants
                         }
                     }
                 }
             }
-            
-            #### Fin de la nouvelle version de la comparaison
-            #### Début de la v2 de la comparaison
-            # for (i in 1:(nrow(tableVariantes) - 1)) {
-            #     #VLA = i  #Renaming it to be more explicit
-            #     #supVLA = VLA + 1
-            #     #if (!supVLA > nrow(tableVariantes)) {
-            #     # Éviter d'avoir un indice hors limites #On ne devrait pas en avoir un, car le calcul est déjà fait au dessus !
-            #     for (j in (i + 1):nrow(tableVariantes)) {
-            #         VLB = j  #Idem
-            #         factorVLA = as.factor(tableVariantes[i, ])  #Optimisation : putting it in a factor to avoid repeating this operation
-            #         factorVLB = as.factor(tableVariantes[j, ])  #Optimisation : putting it in a factor to avoid repeating this operation
-            #         problematicConfiguration = FALSE  #False until proven otherwise
-            #         interactions = interaction(factorVLA:factorVLB, drop = TRUE)  ##### Ajout de la possibilité d'avoir plusieurs variantes pour un même VL/MS #####     
-            #         if (length(grep(",", interactions)) > 1) {
-            #             toBeSplitted = grep(".*,.*", interactions, value = TRUE)  #Catching the places where there are several readings
-            #             interactions = as.factor(grep(".*,.*", interactions, value = TRUE, 
-            #                                           invert = TRUE))  #Removing them from the list of interactions
-            #             factorVLA = as.factor(grep(".*,.*", factorVLA, value = TRUE, 
-            #                                        invert = TRUE))  #idem
-            #             factorVLB = as.factor(grep(".*,.*", factorVLA, value = TRUE, 
-            #                                        invert = TRUE))  #idem
-            #             toBeSplitted = strsplit(toBeSplitted, ":")
-            #             for (z in toBeSplitted) {
-            #                 N1 = strsplit(z[1], ",")
-            #                 N2 = strsplit(z[2], ",")
-            #                 combinations = expand.grid(N1[[1]], N2[[1]])
-            #                 factorVLA = factor(c(as.character(factorVLA), as.character(combinations[, 
-            #                                                                                         1])))
-            #                 factorVLB = factor(c(as.character(factorVLB), as.character(combinations[, 
-            #                                                                                         2])))
-            #                 newInteractions = interaction(combinations, sep = ":")
-            #                 interactions = factor(c(as.character(interactions), as.character(newInteractions)))
-            #             }
-            #         }
-            #         ##### Fin de cet ajout ##### Attention, plus de labels des mss, et plus de
-            #         ##### correspondances en factorVLA et factorVLB (ce qui n'est pas grave vu
-            #         ##### qu'on a interactions déjà, mais s'en souvenir tout de même)
-            #         levelsInteractions = levels(interactions)
-            #         if (length(levelsInteractions) > 3) {
-            #             # More than three configurations, let's go
-            #             levelsVLA = levels(factorVLA)  #Variable for optimisation
-            #             lengthLevelsVLA = length(levelsVLA)
-            #             testCounter = 0
-            #             while (problematicConfiguration == FALSE && testCounter < 
-            #                        (lengthLevelsVLA - 1)) {
-            #                 # Stops if one of the conditions is met Testing every level of the first
-            #                 # variant location Let's add a loop to avoid unnecessary comparisons
-            #                 for (k in levelsVLA) {
-            #                     searchForK = paste(k, ":(.+)", sep = "")  # We create the regexp we will need afterwards. Impossible to use variables inside a regex... such a bother...
-            #                     if (length(grep(searchForK, levelsInteractions, ignore.case = TRUE, 
-            #                                     perl = TRUE)) > 1) {
-            #                         # More than one configuration for this , here we go Let's start by
-            #                         # capturing the second numbers. Not so easy here.
-            #                         secondNumbers = regexec(searchForK, levelsInteractions, 
-            #                                                 ignore.case = TRUE)
-            #                         secondNumbers = do.call(rbind, lapply(regmatches(levelsInteractions, 
-            #                                                                          secondNumbers), `[`))  #On reverse les matches dans une variable. Les second nombres sont dans matches[,2]
-            #                         levelsSecondNumbers = levels(as.factor(secondNumbers[, 
-            #                                                                              2]))
-            #                         invertMatches = grep(searchForK, levelsInteractions, 
-            #                                              ignore.case = TRUE, perl = TRUE, value = TRUE, 
-            #                                              invert = TRUE)  #On récupère les cas où le premier nombre n'est pas celui qu'on est en train de tester.
-            #                         # On crée une liste de ces premiers nombres autres
-            #                         alternativeFirstNumbers = regexec("(.+?):.+", levels(as.factor(invertMatches)), 
-            #                                                           ignore.case = TRUE)
-            #                         alternativeFirstNumbers = do.call(rbind, lapply(regmatches(levels(as.factor(invertMatches)), 
-            #                                                                                    alternativeFirstNumbers), `[`))
-            #                         levelsAlternativeFirstNumbers = levels(as.factor(alternativeFirstNumbers[, 
-            #                                                                                                  2]))
-            #                         for (l in levelsAlternativeFirstNumbers) {
-            #                             # testing each alternative first number
-            #                             problems = 0  #variable problems to count the problematic configurations #l'emplacement de la définition de cette variable est problématique
-            #                             for (m in levelsSecondNumbers) {
-            #                                 # with each alternative second number
-            #                                 searchForProblem = paste(l, ":", m, sep = "")
-            #                                 if (length(grep(searchForProblem, invertMatches, 
-            #                                                 ignore.case = TRUE, perl = TRUE)) > 0) {
-            #                                     problems = problems + 1
-            #                                 }
-            #                                 if (problems > 1) {
-            #                                     problematicConfiguration = TRUE
-            #                                 }
-            #                             }
-            #                         }
-            #                     }
-            #                     testCounter = testCounter + 1
-            #                 }
-            #             }
-            #         }
-            #             if (problematicConfiguration == TRUE) {
-            #                 edgelist = rbind(edgelist, c(rownames(tableVariantes)[i], 
-            #                                              rownames(tableVariantes)[j]))  #adding a new edge to the network of conflicts !
-            #                 conflictsTotal[i, ] = conflictsTotal[i, ] + 1
-            #                 conflictsTotal[j, ] = conflictsTotal[j, ] + 1  #ajouter le nombre de conflits pour chacun des deux lieux variants
-            #             }
-            ##### fin de la v2 de la comparaison
         }  # end of crossing with a second variant location
-        #} fermeture du if (!supVLA > nrow(tableVariantes)) {
+        # And here we create the edgelist matrix if we try not to use rbind
+#         if (!is.null(edgelist)) {
+#             edgelist = matrix(edgelist, ncol = 2, nrow = (length(edgelist)/2) , byrow = TRUE)
+#         }
         centrality = conflictsTotal  ##Computing the centrality index as described in CC 2013
         ## We have to test first that there actual are conflicts in the database
         if (sum(conflictsTotal) > 0) {
