@@ -27,6 +27,7 @@
 #       - intégration de la fonction de construction de l'arbre en tradition contaminée.
 #    - à faire, comme partie de la mise en module : définir un ensemble de classes ; différencier les comportements selon les classes ; cf. Leisch, Creating packages, p. 5 et suiv.
 #et R TEAM, “Writing R Extensions”, 2008
+#	 NB: documentation files must be regenerated (using prompt) when a modification to the code has been made.
 
 ##NB: Functions for Debugging
 # Debug Mode

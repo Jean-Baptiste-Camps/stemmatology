@@ -3,9 +3,11 @@ function(x) {
     ### Fonction qui prend en entrée un objet de type PCC.elimination, et
     ### procède à la suppression des lieux variants étiquetés comme
     ### overconflicting, et donne en sortie la nouvelle base de données
-    ### (seulement ; il faut donc rappeler ensuite PCC.conflicts, etc.) On crée
-    ### une liste des étiquettes des lieux variants overconflicting
-    # Cette fonction est relativement rapide, mais on peut peut-être l'optimiser en vectorisant la boucle
+    ### (seulement ; il faut donc rappeler ensuite PCC.conflicts, etc.)
+    ### Cette fonction, de dimensions très restreintes, pourrait peut-être
+    ### aller entièrement dans PCC.elimination... (permet de diminuer le 
+    ### nombre de fonctions)
+    ### Cette fonction est relativement rapide, mais on peut peut-être l'optimiser en vectorisant la boucle
     # gains (microbenchmark, 100 iter)
 #     Unit: microseconds
 #     expr    min       lq   median       uq     max    neval
