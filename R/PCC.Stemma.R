@@ -1,5 +1,5 @@
 PCC.Stemma <-
-function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = FALSE) {
+function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = TRUE) {
     # TODO(JBC): dans ce groupe de fonction, comme dans le précédent, il est
     # impératif de tester que les options font bien leur job (y compris en
     # étant passées aux sous-fonctions) Première possibilité, le contenu est
@@ -16,7 +16,7 @@ function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = FALSE) {
     # limit) output[[i]] = pccStemma # } return(output) # } Deuxième
     # possibilité, le contenu n'est qu'une seule table de variantes
     tableVariantes = x
-    edgelistGlobal = matrix(c(character(0), character(0)), ncol = 2)
+    edgelistGlobal = NULL # matrix(c(character(0), character(0)), ncol = 2)
     modelsGlobal = as.list(NULL)
     modelsByGroupGlobal = as.list(NULL)
     counter = 0
@@ -25,7 +25,19 @@ function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = FALSE) {
         pccDesagreement = PCC.desagreement(tableVariantes)
         pccBuildGroup = PCC.buildGroup(pccDesagreement)  # We test if no group was found
         if (identical(pccBuildGroup$groups, list())) {
-            stop("No group was found. Unable to build stemma.")
+            message("No group was found. Unable to build stemma.")
+            # Plot the stemma at this step, if it exists
+            if (!is.null(edgelistGlobal)) {
+                stemma = as.network(edgelistGlobal, directed = TRUE, matrix.type = "edgelist")
+                gplot(stemma, displaylabels, label = network.vertex.names(stemma), gmode = "digraph", 
+                      boxed.labels = TRUE, usearrows = TRUE)
+                output = as.list(NULL)
+                output$edgelist = edgelistGlobal
+                output$database = tableVariantes
+                output$modelsGlobal = modelsGlobal
+                output$modelsByGroupGlobal = modelsByGroupGlobal
+                return(output)
+            } else {return()}
         }
         pccReconstructModel = PCC.reconstructModel(pccBuildGroup, recoverNAs = recoverNAs, omissionsAsReadings = omissionsAsReadings)
         tableVariantes = pccReconstructModel$database

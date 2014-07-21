@@ -11,7 +11,19 @@ function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE) {
     } else {
         par(ask = FALSE)
     }
-    tableVariantes = x$database
+    if (is.matrix(x)) {
+        tableVariantes = x
+    } else {
+        if (class(x) == "pccConflicts" | class(x) == "pccElimination") { # TODO(JBC): There is a cleaner way to define methods for classes
+            tableVariantes = x$database
+        } else {
+            if (class(x) == "pccEquipollentDatabases") {
+                stop("It does not really make sense to apply PCC.contam() to an already equipollented database.")
+            } else {
+                stop("Input is neither a matrix, nor a object of class pccConflicts or pccElimination.")
+            }
+        }
+    }
     #conflictsDifferences = as.data.frame(character(0))
     conflictsDifferences = as.matrix(integer(0))
     X = as.list(NULL)
@@ -45,6 +57,8 @@ function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE) {
     }
     X$conflictsDifferences = conflictsDifferences  #Summary of differences for the removal of each ms.
     colnames(X$conflictsDifferences) = "Conflicts differences"  #Remove the pause at plot option before finishing the function
+    X$database = tableVariantes
     par(ask = FALSE)
+    class(X) = "pccContam"
     return(X)  ##Pourquoi récupère-t-on une edgelist inutile?
 }

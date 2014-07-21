@@ -1,5 +1,5 @@
 PCC.reconstructModel <-
-function(x, omissionsAsReadings = FALSE, recoverNAs = FALSE) {
+function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
     # Ajouter la conservation de la base de données initiales, dans sa version complétée
     # Is omissionsAsReadings implemented ?
     # Function to reconstruct the model for a group of ms.  Take in entry an
@@ -187,7 +187,9 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = FALSE) {
             # We create a database containing the model and the mss outside the group
             others = colnames(tableVariantes)[!colnames(tableVariantes) %in% 
                 myGroup]
-            othersAndModel = cbind(tableVariantes[, others, drop = FALSE], 
+            # if there are still other manuscripts
+            if (length(others) > 0) {
+                othersAndModel = cbind(tableVariantes[, others, drop = FALSE], 
                 myModel)  # We compare them ####TODO(JBC): it might not be a good idea to have this level 1 function call another level 1 function. Perhaps the comparison should go in the higher level global function...
             myOthersComp = PCC.desagreement(othersAndModel)
             for (n in 1:length(others)) {
@@ -228,6 +230,10 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = FALSE) {
                     }
                 }
             }
+            } else {
+                print("There are no other manuscript left in the database.")
+            }
+            
             if (length(extantModel) == 0) {
                 # If length is STILL equal to 0, then the manuscript is lost, and we keep
                 # the virtual model

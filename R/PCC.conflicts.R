@@ -39,33 +39,37 @@ PCC.conflicts <-
         #utilisateur     système      écoulé 
         #     48.181       0.098      48.271 
         # TODO(JBC): For further optimisation, here are the results of profiling for the 20 or so most consuming
-#         summaryPccConflicts$by.total[1-10,]
-#                                        total.time total.pct self.time self.pct
-#         "PCC.conflicts"                   51.22     99.53     10.00    19.43
-#         "gplot"                           24.52     47.65      1.10     2.14
-#         "rbind"                           15.16     29.46      9.34    18.15
-# NB: rbind est gourmand (alors qu'il est très peu utilisé en pratique...), mais comment faire autrement ? Les tentatives de ne pas l'utiliser pour l'edgelist ne causent pas de gain significatif (je les ai laissées en commentées, au cas où)       
-#         "gplot.arrow"                     14.68     28.53      0.04     0.08
-#         "unique"                          11.54     22.43      4.98     9.68
-#         "make.coords"                      5.98     11.62      1.00     1.94
-#         "c"                                5.94     11.54      5.94    11.54
-#         "par"                              4.22      8.20      0.42     0.82
-#         ".External2"                       2.42      4.70      2.42     4.70
-#         "grep"                             2.34      4.55      2.28     4.43
-#         "unique.default"                   1.72      3.34      1.16     2.25
-#         "na.omit.default"                  1.40      2.72      1.14     2.22
-#         "as.list"                          1.34      2.60      0.70     1.36
-#         ">"                                0.88      1.71      0.88     1.71
-#         "as.vector"                        0.82      1.59      0.82     1.59
-#         "=="                               0.80      1.55      0.80     1.55
-#         "which"                            0.70      1.36      0.52     1.01
-#         "as.list.default"                  0.64      1.24      0.64     1.24
-#         "as.character"                     0.60      1.17      0.60     1.17
-#         "is.factor"                        0.56      1.09      0.56     1.09
-#         ".C"                               0.46      0.89      0.46     0.89
+        #         summaryPccConflicts$by.total[1-10,]
+        #                                        total.time total.pct self.time self.pct
+        #         "PCC.conflicts"                   51.22     99.53     10.00    19.43
+        #         "gplot"                           24.52     47.65      1.10     2.14
+        #         "rbind"                           15.16     29.46      9.34    18.15
+        # NB: rbind est gourmand (alors qu'il est très peu utilisé en pratique...), mais comment faire autrement ? Les tentatives de ne pas l'utiliser pour l'edgelist ne causent pas de gain significatif (je les ai laissées en commentées, au cas où)       
+        #         "gplot.arrow"                     14.68     28.53      0.04     0.08
+        #         "unique"                          11.54     22.43      4.98     9.68
+        #         "make.coords"                      5.98     11.62      1.00     1.94
+        #         "c"                                5.94     11.54      5.94    11.54
+        #         "par"                              4.22      8.20      0.42     0.82
+        #         ".External2"                       2.42      4.70      2.42     4.70
+        #         "grep"                             2.34      4.55      2.28     4.43
+        #         "unique.default"                   1.72      3.34      1.16     2.25
+        #         "na.omit.default"                  1.40      2.72      1.14     2.22
+        #         "as.list"                          1.34      2.60      0.70     1.36
+        #         ">"                                0.88      1.71      0.88     1.71
+        #         "as.vector"                        0.82      1.59      0.82     1.59
+        #         "=="                               0.80      1.55      0.80     1.55
+        #         "which"                            0.70      1.36      0.52     1.01
+        #         "as.list.default"                  0.64      1.24      0.64     1.24
+        #         "as.character"                     0.60      1.17      0.60     1.17
+        #         "is.factor"                        0.56      1.09      0.56     1.09
+        #         ".C"                               0.46      0.89      0.46     0.89
         #
         options(stringsAsFactors = FALSE) # Option to avoid using factor and gaining efficiency
         tableVariantes = as.matrix(x) 
+        # Perhaps better to do:
+        #         if (!is.matrix(x)) {
+        #             stop("Please input a matrix")
+        #         }
         # Initial test to verify if the input is what it is supposed to be 
         if (!is.numeric(tableVariantes) & alternateReadings == FALSE) {
             stop("The imput database is not a numeric matrix. If it is a character matrix containing alternate readings please set alternateReadings to true. Otherwise, try converting it to a numeric matrix object.")
@@ -77,7 +81,7 @@ PCC.conflicts <-
         tableVariantesInitial = tableVariantes
         # Créer une matrice (edgelist) à deux colonnes, à laquelle on ajoute une
         # ligne par paire en conflit.
-         edgelist = matrix(c(character(0), character(0)), ncol = 2)  # Créer un tableau du nombre de conflits
+        edgelist = matrix(c(character(0), character(0)), ncol = 2)  # Créer un tableau du nombre de conflits
         # we try not to use the time consuming rbind => it does not cause a gain
         # edgelist = NULL ;
         # Créer une matrice des conflits (nouvelle solution, optimisée). NB: ceci étant auparavant un dataframe, j'en fait à présent une matrice
@@ -100,12 +104,12 @@ PCC.conflicts <-
                 for (l in 1:length(VLA) ) {
                     if (!is.na(VLA[l])){
                         #if (nchar(VLA[l]) > 1) { # if the value is more than one character long : NB: removed, cause it actually consumates more time on a database with a lot of alternate readings...
-                            if (length(grep(",", VLA[l], fixed = TRUE)) > 0) { # fixed = TRUE means we are not using a regexp. It is also much faster.
-                                newA = unlist(strsplit(VLA[l], split = ",", fixed = TRUE))
-                                splittedInForA = c(splittedInForA, length(newA))
-                                newValuesForA = c(newValuesForA, newA)
-                                toBeRemovedForA = c(toBeRemovedForA, l)
-                            }
+                        if (length(grep(",", VLA[l], fixed = TRUE)) > 0) { # fixed = TRUE means we are not using a regexp. It is also much faster.
+                            newA = unlist(strsplit(VLA[l], split = ",", fixed = TRUE))
+                            splittedInForA = c(splittedInForA, length(newA))
+                            newValuesForA = c(newValuesForA, newA)
+                            toBeRemovedForA = c(toBeRemovedForA, l)
+                        }
                         #}
                     }
                 }
@@ -146,12 +150,12 @@ PCC.conflicts <-
                         for (l in 1:length(VLB) ) {
                             if (!is.na(VLB[l])){
                                 #if (nchar(VLB[l]) > 1) {
-                                    if (length(grep(",", VLB[l], fixed = TRUE)) > 0) {
-                                        newB = unlist(strsplit(VLB[l], split = ",", fixed = TRUE))
-                                        splittedInForB = c(splittedInForB, length(newB))
-                                        newValuesForB = c(newValuesForB, newB)
-                                        toBeRemovedForB = c(toBeRemovedForB, l)
-                                    }
+                                if (length(grep(",", VLB[l], fixed = TRUE)) > 0) {
+                                    newB = unlist(strsplit(VLB[l], split = ",", fixed = TRUE))
+                                    splittedInForB = c(splittedInForB, length(newB))
+                                    newValuesForB = c(newValuesForB, newB)
+                                    toBeRemovedForB = c(toBeRemovedForB, l)
+                                }
                                 #}
                             }
                         }
@@ -240,9 +244,9 @@ PCC.conflicts <-
             }
         }  # end of crossing with a second variant location
         # And here we create the edgelist matrix if we try not to use rbind
-#         if (!is.null(edgelist)) {
-#             edgelist = matrix(edgelist, ncol = 2, nrow = (length(edgelist)/2) , byrow = TRUE)
-#         }
+        #         if (!is.null(edgelist)) {
+        #             edgelist = matrix(edgelist, ncol = 2, nrow = (length(edgelist)/2) , byrow = TRUE)
+        #         }
         centrality = conflictsTotal  ##Computing the centrality index as described in CC 2013
         ## We have to test first that there actual are conflicts in the database
         if (sum(conflictsTotal) > 0) {
@@ -281,5 +285,6 @@ PCC.conflicts <-
         } else {
             print("There is absolutely no conflicts in this database.")
         }
+        class(output) = "pccConflicts"
         return(output)
     }

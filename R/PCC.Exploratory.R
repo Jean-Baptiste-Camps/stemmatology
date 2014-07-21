@@ -9,6 +9,9 @@ function(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE,
     # with numbers.  TODO(JBC): une version prenant en compte interactive =
     # FALSE, pour tout faire d'elle-même avec des valeurs moyennes (pas pour
     # tout de suite)
+    if (!is.matrix(x)) {
+        stop("Input must be a matrix.")
+    }
     tableVariantes = x
     pccConflicts = PCC.conflicts(tableVariantes, omissionsAsReadings = omissionsAsReadings)  # Simple interaction, which tests for value inputed by the user
     answered = FALSE

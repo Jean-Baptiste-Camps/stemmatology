@@ -6,7 +6,7 @@ function(x, omissionsAsReadings = FALSE) {
     # the count of agreements and common omissions,
     tableVariantes = as.matrix(x)  
     
-    if (is.matrix(x) = FALSE)  {
+    if (is.matrix(x) == FALSE)  {
         stop ("Input is not a matrix.")
     } 
     

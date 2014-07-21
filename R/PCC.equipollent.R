@@ -19,24 +19,25 @@ PCC.equipollent <-
         database = x$database  #Pour chaque nœud, prendre tous les nœuds avec lesquels il n'est pas en conflit, et en faire la liste
         notInConflict = as.list(NULL)
         for (i in 1:nrow(adjacencyTable)) {
-            # notInConflict[[i]] = labels(adjacencyTable[i, <= i (i:ncol(adjacencyTable) & adjacencyTable[i, ] == 0]) )
+             notInConflict[[i]] = labels(adjacencyTable[i, adjacencyTable[i, ] == 0]) 
             # Modified code to compare only to half the table, since it is symetrical
-            cols =  which(adjacencyTable[i, ] == 0,  arr.ind = TRUE)
-            cols = cols[cols >= i]
-            notInConflict[[i]] = colnames(adjacencyTable[i, cols, drop = FALSE])
+            # When we will put this version in function, we can also remove the next for loop, since there will be no identical lists
+            # cols =  which(adjacencyTable[i, ] == 0,  arr.ind = TRUE)
+            # cols = cols[cols >= i]
+            # notInConflict[[i]] = colnames(adjacencyTable[i, cols, drop = FALSE])
         }
         # Comparer toutes les listes et supprimer celles qui sont identiques
-        #     toBeRemoved = as.vector(NULL)
-        #     for (j in 1:(length(notInConflict) - 1)) {
-        #         for (k in (j + 1):length(notInConflict)) {
-        #             if (identical(notInConflict[[j]], notInConflict[[k]])) {
-        #                 toBeRemoved = c(toBeRemoved, k)
-        #             }
-        #         }
-        #     }
-        #     if (!is.null(toBeRemoved)) {
-        #         notInConflict = notInConflict[-toBeRemoved, drop = FALSE]
-        #     }
+            toBeRemoved = as.vector(NULL)
+            for (j in 1:(length(notInConflict) - 1)) {
+                for (k in (j + 1):length(notInConflict)) {
+                    if (identical(notInConflict[[j]], notInConflict[[k]])) {
+                        toBeRemoved = c(toBeRemoved, k)
+                    }
+                }
+            }
+            if (!is.null(toBeRemoved)) {
+                notInConflict = notInConflict[-toBeRemoved, drop = FALSE]
+            }
         # And here, we add a final test to check if there are unvalid
         # configurations in which some members are in conflict between
         # themselves, in which case we will remove them.
@@ -47,19 +48,23 @@ PCC.equipollent <-
                 # We test for problematic configurations TODO(JBC): ce code pose problème
                 # sur des configurations comme celle du Chevalier au Lyon.  À VOIR AVEC
                 # FLORIAN, LA COMPLEXITÉ PEUT ÊTRE PLUS GRANDE QUE PRÉVUE
-                problems = 0
+                problems = FALSE
                 for (m in 1:(length(notInConflict[[l]]) - 1)) {
                     for (n in (m + 1):length(notInConflict[[l]])) {
                         # We confront them in the adjacencyTable
                         if (adjacencyTable[notInConflict[[l]][m], notInConflict[[l]][n]] > 
                                 0) {
                             problems = TRUE
+                            break()
                         } else {
                             problems = FALSE
                         }
                     }
+                    if (problems == TRUE) {
+                        break() #break also from the upper loop
+                    }
                 }
-                if (problems > 0) {
+                if (problems == TRUE) {
                     message = paste("there is a weird configuration ; we will remove this group from the list alltogether.\n It concerns VL:")
                     writeLines(message)
                     print(notInConflict[[l]])
@@ -102,8 +107,10 @@ PCC.equipollent <-
                     databases[[o]][rownames(database) %in% delete, mss] = NA
                 }
             }
+            class(databases) = "pccEquipollentDatabases" # class containing alternative databases
             return(databases)
         } else {
+            class(notInConflict) = "pccEquipollentEdges" # class containing simply edges
             return(notInConflict)
         }
     }

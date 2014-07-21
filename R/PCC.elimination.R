@@ -17,20 +17,20 @@ function(x) {
     # individuals in the database. If not, warn the user and use three
     # classes only
     testClasses = ordConflTot[, 1]
-    if (length(testClasses[test > 0]) > 3) {
+    if (length(testClasses[testClasses > 0]) > 3) {
         numberOfClasses = 4
     } else {
         print("The number of conflicts is VERY LOW. Is your database correct?")
         numberOfClasses = 3
     }
-    classes1 = pam(ordConflTot[1], numberOfClasses)
+    classes1 = pam(ordConflTot[,1], numberOfClasses)
     barplot(ordConflTot[, 1], col = classes1$clustering, main = "Total de conflits par lieu variant", 
         names.arg = rownames(ordConflTot), xlab = "VL", ylab = "Conflicts Total", 
         ylim = (c(0, ordConflTot[1, 1])), cex.axis = "1", sub = "coloured according to partitioning around medoids with 4 clusters", 
         yaxt = "n")
     axis(side = 2, at = seq(0, ordConflTot[1, 1], by = 2))  #Arrêt, et demander à procéder jusqu'au second graphique
     par(ask = TRUE)
-    classes2 = pam(ordConflTot[2], numberOfClasses)
+    classes2 = pam(ordConflTot[, 2], numberOfClasses)
     barplot(ordConflTot[, 2], col = classes2$clustering, main = "Indice de centralité par lieu variant", 
         names.arg = rownames(ordConflTot), xlab = "VL", ylab = "Centrality Index", 
         ylim = (c(0, ordConflTot[1, 2])), cex.axis = "1", sub = "coloured according to partitioning around medoids with 4 clusters", 
@@ -123,5 +123,6 @@ function(x) {
         boxed.labels = TRUE)
     par(ask = FALSE)  #Qu'est-ce que cette fonction doit-elle retourner ? Le réseau avec attributs ou la liste des attributs ? Une liste avec cet ensemble de choses? Ou la base déjà nettoyée?
     reseau$vertexAttributes = vertexAttributes
+    class(reseau) = "pccElimination"
     return(reseau)
 }

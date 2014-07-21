@@ -5,12 +5,19 @@ function(x) {
     ### overconflicting, et donne en sortie la nouvelle base de données
     ### (seulement ; il faut donc rappeler ensuite PCC.conflicts, etc.) On crée
     ### une liste des étiquettes des lieux variants overconflicting
-    overconflicting = NULL  #on teste
-    for (i in 1:nrow(x$vertexAttributes)) {
-        if (x$vertexAttributes[i, 1] == "overconflicting") {
-            overconflicting = c(overconflicting, rownames(x$vertexAttributes)[i])
-        }
-    }
+    # Cette fonction est relativement rapide, mais on peut peut-être l'optimiser en vectorisant la boucle
+    # gains (microbenchmark, 100 iter)
+#     Unit: microseconds
+#     expr    min       lq   median       uq     max    neval
+#     V1     410.19 415.0665 422.7815 441.4395 852.865   100
+#     V2      81.31  83.0445  83.9625  85.8750 180.253   100
+    overconflicting = rownames(x$vertexAttributes)[x$vertexAttributes[, 1] == "overconflicting"]
+#     overconflicting = NULL  #on teste
+#     for (i in 1:nrow(x$vertexAttributes)) {
+#         if (x$vertexAttributes[i, 1] == "overconflicting") {
+#             overconflicting = c(overconflicting, rownames(x$vertexAttributes)[i])
+#         }
+#     }
     # and we remove them
     x$database = x$database[!rownames(x$database) %in% overconflicting, , 
         drop = FALSE]
