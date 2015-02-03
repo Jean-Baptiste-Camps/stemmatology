@@ -1,15 +1,15 @@
 \name{parzival}
 \alias{parzival}
 \docType{data}
-\title{
+\title{Parzival data set
 %%   ~~ data name/kind ... ~~
 }
-\description{
+\description{Data from the artifical textual tradition (view )
 %%  ~~ A concise (1-5 lines) description of the dataset. ~~
 }
 \usage{data(parzival)}
 \format{
-  A data frame with 139 observations on the following 16 variables.
+  A matrix with 139 observations on the following 16 variables.
   \describe{
     \item{\code{p1}}{a numeric vector}
     \item{\code{p2}}{a numeric vector}
@@ -33,6 +33,7 @@
 %%  ~~ If necessary, more details than the __description__ above ~~
 }
 \source{
+Computer assisted stemmatology challenge...
 %%  ~~ reference to a publication or URL from which the data were obtained ~~
 }
 \references{

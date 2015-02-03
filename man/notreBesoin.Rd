@@ -1,15 +1,15 @@
 \name{notreBesoin}
 \alias{notreBesoin}
 \docType{data}
-\title{
+\title{Notre Besoin data set
 %%   ~~ data name/kind ... ~~
 }
-\description{
+\description{Data from the artificial tradition ...
 %%  ~~ A concise (1-5 lines) description of the dataset. ~~
 }
 \usage{data(notreBesoin)}
 \format{
-  A data frame with 42 observations on the following 13 variables.
+  A matrix with 42 observations on the following 13 variables.
   \describe{
     \item{\code{nb1}}{a numeric vector}
     \item{\code{nb2}}{a numeric vector}
@@ -26,10 +26,13 @@
     \item{\code{nb13}}{a numeric vector}
   }
 }
-\details{
+\details{ The variant locations have been selected and encoded ...
 %%  ~~ If necessary, more details than the __description__ above ~~
 }
 \source{
+    CASC
+    
+    Macé et al.
 %%  ~~ reference to a publication or URL from which the data were obtained ~~
 }
 \references{

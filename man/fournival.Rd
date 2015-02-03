@@ -1,15 +1,15 @@
 \name{fournival}
 \alias{fournival}
 \docType{data}
-\title{
+\title{Fournival data set
 %%   ~~ data name/kind ... ~~
 }
-\description{
+\description{Data from the tradition of Richart de Fournival, Bestiaire d'Amours, from Segre's edition
 %%  ~~ A concise (1-5 lines) description of the dataset. ~~
 }
 \usage{data(fournival)}
 \format{
-  A data frame with 292 observations on the following 10 variables.
+  A matrix with 292 observations on the following 10 variables.
   \describe{
     \item{\code{A}}{a numeric vector}
     \item{\code{B}}{a numeric vector}
@@ -26,10 +26,10 @@
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
 }
-\source{
+\source{Richart de Fournival, Li Bestiaire d'Amours, éd. Cesare Segre...
 %%  ~~ reference to a publication or URL from which the data were obtained ~~
 }
-\references{
+\references{ Camps, JB and Cafiero, F, 2014, ....
 %%  ~~ possibly secondary sources and usages ~~
 }
 \examples{

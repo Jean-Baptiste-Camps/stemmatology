@@ -1,15 +1,15 @@
 \name{otinel}
 \alias{otinel}
 \docType{data}
-\title{
+\title{Otinel data set
 %%   ~~ data name/kind ... ~~
 }
-\description{
+\description{Data for the tradition of the \emph{Chanson d'Otinel}
 %%  ~~ A concise (1-5 lines) description of the dataset. ~~
 }
 \usage{data(otinel)}
 \format{
-  A data frame with 36 observations on the following 8 variables.
+  A matrix with 36 observations on the following 8 variables.
   \describe{
     \item{\code{A}}{a numeric vector}
     \item{\code{B}}{a numeric vector}
@@ -24,7 +24,7 @@
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
 }
-\source{
+\source{JB Camps, La Chanson d'Otinel,...
 %%  ~~ reference to a publication or URL from which the data were obtained ~~
 }
 \references{

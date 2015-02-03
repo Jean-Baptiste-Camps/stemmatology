@@ -1,15 +1,15 @@
 \name{heinrichi}
 \alias{heinrichi}
 \docType{data}
-\title{
+\title{Heinrichi data set
 %%   ~~ data name/kind ... ~~
 }
-\description{
+\description{Data from the artificial textual tradition ...
 %%  ~~ A concise (1-5 lines) description of the dataset. ~~
 }
 \usage{data(heinrichi)}
 \format{
-  A data frame with 1208 observations on the following 37 variables.
+  A matrix with 1208 observations on the following 37 variables.
   \describe{
     \item{\code{A}}{a numeric vector}
     \item{\code{Ab}}{a numeric vector}
@@ -53,7 +53,7 @@
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
 }
-\source{
+\source{CASC
 %%  ~~ reference to a publication or URL from which the data were obtained ~~
 }
 \references{

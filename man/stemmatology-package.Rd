@@ -1,8 +1,7 @@
-\name{stemmatology-package}
+\name{stemmatology}
 \alias{stemmatology-package}
-\alias{stemmatology}
 \docType{package}
-\title{
+\title{A R Stemmatology package
 What the package does (short line)
 ~~ package title ~~
 }
@@ -20,6 +19,38 @@ License: \tab What license is it under?\cr
 }
 ~~ An overview of how to use the package, including the most important ~~
 ~~ functions ~~
+This package includes various functions for stemmatological analysis.
+
+% Import functions
+\subsection{Import functions}{
+    \code{\link{Import.TEIApparatus}}: a function to import a TEI P5 encoded apparatus into a stemmatological matrix usable with other functions. It should have options for import from CollateX and from Juxta.
+}
+% Fonctions 
+
+\subsection{PCC Method}{
+    Functions are made available for the PCC method (See Camps and Cafiero 2014...), the most important are
+    
+    \code{\link{PCC}}: global shell for the PCC functions
+    
+    \code{\link{PCC.Exploratory}}
+    
+    \code{\link{PCC.Stemma}}
+}
+
+% Exploratory methods
+Methods to explore the possible proofs of contamination inside a textual tradition
+\code{\link{VL.pValues}}
+
+% Other methods
+The package aims at making available various other stemmatological methods ...
+
+% Tools
+Various tools for stemmatological analysis
+
+The package should include a function to generate arbitrary stemmata based on a set of parameters (fecundity, decimation rate at each level, number of generations, ...).
+
+It should also have a function for the analysis of stemmata shapes, and making hypotheses on the parameters of the original tradition
+
 }
 \author{
 Who wrote it
