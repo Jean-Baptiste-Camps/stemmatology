@@ -1,0 +1,90 @@
+% Pour un exemple de vignette, voir
+% browseVignettes("network")
+
+%\documentclass{article}
+\documentclass[article,nojss]{jss}
+% ou documentclass{jss} pour le Journal of Statistical Software
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% RJournal
+%\usepackage{RJournal}
+\usepackage{amsmath,amssymb,array}
+%\usepackage{booktabs}
+
+\usepackage{Sweave}
+
+%Les lignes suivantes doivent rester commentées, pour être utilisée par R et pas par LaTeX
+% !Rnw weave = Sweave
+%!\SweaveUTF8
+%\VignetteIndexEntry{About the stemmatology package}
+%\VignetteIndexEntry{stemmatology Vignette}
+
+
+\author{J.B. Camps, Florian Cafiero}
+
+\title{\pkg{stemmatology}: A \proglang{R} Stemmatology Package}
+\Plaintitle{stemmatology: A R Stemmatology Package}
+\Shorttitle{\pkg{stemmatology}: A \proglang{R} Stemmatology Package}
+
+\Abstract{
+This package includes various functions for stemmatological analysis. Its purpose is to provide the user with implementation of the PCC Method, but also with various other tools and utilities...
+}
+
+\Keywords{stemmatology, network, graphs, relational data}
+%\Keywords{relational data, data structures, graphs, \pkg{network}, \pkg{statnet}, \proglang{R}}
+
+\Address{
+JB Camps\\
+École nationale des chartes\\
+\url{jbcamps@hotmail.com}\\
+URL: \url{...}
+}
+
+\begin{document}
+
+\definecolor{Sinput}{rgb}{0.19,0.19,0.75}
+\definecolor{Soutput}{rgb}{0.2,0.3,0.2}
+\definecolor{Scode}{rgb}{0.75,0.19,0.19}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom = {\color{Sinput}}} 
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom = {\color{Soutput}}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom = {\color{Scode}}} 
+\renewenvironment{Schunk}{}{}
+
+\SweaveOpts{concordance=TRUE}
+
+% Ce fichier sert à donner une documentation généraliste du package sous la forme d'un article, qui peut être plus complet que la documentation proprement dite des fichiers .Rd
+% Voir notamment http://www.stats.uwo.ca/faculty/murdoch/ism2013/5Vignettes.pdf
+% ainsi que http://cran.r-project.org/doc/manuals/R-exts.html#Documenting-packages
+
+\maketitle
+
+%\begin{abstract}
+%This package includes various functions for stemmatological analysis. Its purpose is to provide the user with ...
+%\end{abstract}
+\pkg{Stemmatology} in 
+
+\section*{Requirements}
+
+<<>>=
+library(network)
+@
+
+
+\section{Functions for the PCC method}
+
+
+
+\section{Import functions}
+
+\section{Various exploratory methods}
+
+\section{Other Methods}
+
+\section{Tools}
+
+\section{Low level functions}
+
+
+
+\end{document}
