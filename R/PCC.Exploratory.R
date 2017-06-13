@@ -1,5 +1,5 @@
 PCC.Exploratory <-
-function(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE, 
+function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, 
     interactive = TRUE) {
     # TODO(JBC): dans ce groupe de fonction, comme dans le précédent, il est
     # impératif de tester que les options font bien leur job (y compris en
@@ -13,7 +13,7 @@ function(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE,
         stop("Input must be a matrix.")
     }
     tableVariantes = x
-    pccConflicts = PCC.conflicts(tableVariantes, omissionsAsReadings = omissionsAsReadings)  # Simple interaction, which tests for value inputed by the user
+    pccConflicts = PCC.conflicts(tableVariantes, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)  # Simple interaction, which tests for value inputed by the user
     answered = FALSE
     while (answered == FALSE) {
         answerOne = readline("Do you want to proceed to the analysis of the network conflictuality ? Y/N \n ")
@@ -50,7 +50,7 @@ function(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE,
         }
     }
     pccDoElimination = PCC.doElimination(pccElimination)
-    pccConflicts = PCC.conflicts(pccDoElimination, omissionsAsReadings = omissionsAsReadings)
+    pccConflicts = PCC.conflicts(pccDoElimination, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)
     if (sum(pccConflicts$conflictsTotal[, 1]) == 0) {
         print("There is no longer any conflict in the database. Function will stop.")
         return(pccConflicts)
@@ -70,7 +70,7 @@ function(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE,
             answered = TRUE
         }
     }
-    pccContam = PCC.contam(pccConflicts, pauseAtPlot = pauseAtPlot, omissionsAsReadings = omissionsAsReadings)
+    pccContam = PCC.contam(pccConflicts, pauseAtPlot = pauseAtPlot, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)
     print(pccContam$conflictsDifferences)
     answered = FALSE
     while (answered == FALSE) {

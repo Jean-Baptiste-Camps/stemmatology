@@ -1,5 +1,5 @@
 PCC.contam <-
-function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE) {
+function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE, alternateReadings = FALSE) {
     ##### Fonction supplémentaire testant le retrait de chacun des mss pour voir
     ##### la différence en termes de nombre de conflits ### /!\ temps très long
     ##### d'exécution... Pour Ambroise, a priori 290s*16 soit 1h20 # En entrée,
@@ -30,7 +30,7 @@ function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE) {
     X$totalByMs = x$conflictsTotal
     for (i in 1:ncol(tableVariantes)) {
         database = tableVariantes[, -i, drop = FALSE]  #Adding the new row to the synthesis of the conflicts differences
-        pccConflicts = PCC.conflicts(database, omissionsAsReadings = omissionsAsReadings)  #Adding a label to the plot (if there is actually a plot, otherwise, stating that there is no conflicts
+        pccConflicts = PCC.conflicts(database, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)  #Adding a label to the plot (if there is actually a plot, otherwise, stating that there is no conflicts
         if (length(pccConflicts$edgelist) != 0) {
             legend("topright", c("Without ms. ", colnames(tableVariantes)[i]))
         } else {

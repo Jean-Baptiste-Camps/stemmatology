@@ -56,8 +56,7 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
                   # We select readings that happens more than once in the whole tradition
                   if (omissionsAsReadings == FALSE) {
                     # Normal case, omissions are not considered as common readings
-                    if (length(myVL[myVL == myReadings[l] & myVL != 0 & !is.na(myVL)]) > 
-                      1) {
+                    if (length(myVL[myVL == myReadings[l] & myVL != 0 & !is.na(myVL)]) > 1) {
                       myCommonReading = c(myCommonReading, myReadings[l])
                     }
                   }
@@ -71,7 +70,7 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
                 }
                 if (length(myCommonReading) > 1) {
                   stop(paste("More than one non-singular reading for the group ", 
-                    labelMyMss, " at VL ", rownames(tableVariantes)[j], ". This is normally not possible and looks like a bug or inconsistency. Try setting omissionsAsReadings to FALSE.", 
+                    labelMyMss, " at VL ", rownames(tableVariantes)[j], ". This is normally not possible and looks like a bug or inconsistency. Try setting omissionsAsReadings to FALSE.",  tableVariantes[j, myGroup],
                     sep = ""))
                 }
                 if (length(myCommonReading) == 1) {

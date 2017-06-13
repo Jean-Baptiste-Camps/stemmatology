@@ -1,11 +1,10 @@
 "PCC" <-
-    function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = TRUE, pauseAtPlot = FALSE, interactive = TRUE) {
+    function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recoverNAs = TRUE, pauseAtPlot = FALSE, interactive = TRUE) {
     # Global shell for the PCC functions. Successively calls PCC.Exploratory
     # and PCC.Stemma on the dataset NB: TODO(JBC) this function should be
     # updated when we will have defined appropriate object classes for the
     # various functions, and harmonised them.
-    pccExploratory = PCC.Exploratory(x, omissionsAsReadings = omissionsAsReadings, 
-        pauseAtPlot = pauseAtPlot, interactive = interactive)
+    pccExploratory = PCC.Exploratory(x, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings, pauseAtPlot = pauseAtPlot, interactive = interactive)
     # Here, we will need to have appropriate version of the command for the
     # various outputs of PCC.Exploratory if is.pccDoElimination
     if (is.matrix(pccExploratory)) {
