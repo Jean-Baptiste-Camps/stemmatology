@@ -12,36 +12,34 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recove
 \arguments{
   \item{x}{
   if \code{alternateReadings = FALSE} (default), a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number;
-  if \code{alternateReadings = TRUE}, a character matrix, with with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings). 
+  if \code{alternateReadings = TRUE}, a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings). 
 }
   \item{omissionsAsReadings}{
-     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses); if \code{FALSE}, they are treated only as omissions.  Default: \code{FALSE}.
+     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
+     Default: \code{FALSE}.
 }
   \item{alternateReadings}{
-  logical; if \code{TRUE}, a witness can have multiples (> 1) variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values; if \code{FALSE}, only one reading per witness is allowed. Default: \code{FALSE}.
+  logical; if \code{TRUE}, a witness can have multiple variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values. %; if \code{FALSE}, only one reading per witness is allowed. 
+  Default: \code{FALSE}.
   }
   \item{limit}{The maximum number of severe disagreements expected for witnesses to be in the same group. Default: \code{0}.
   %%%TODO(JBC): Implémenter cette option !!!
 }
   \item{recoverNAs}{
   logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. Default: \code{TRUE}.
-%%     ~~Describe \code{recoverNAs} here~~
 }
   \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
-%%     ~~Describe \code{pauseAtPlot} here~~
 }
   \item{interactive}{logical; if \code{TRUE} (recommended), the algorithm stops each time user input is needed; if \code{FALSE}, it tries to guess an appropriate value. Default: \code{TRUE}.
-%%     ~~Describe \code{interactive} here~~
 }
 }
 \details{
-%%TODO JBC: donner plus d'éléments dès ici
 This function provides a single entry to all the algorithms used in the PCC method. It successively calls \code{\link{PCC.Exploratory}} and  \code{\link{PCC.Stemma}}.
 The algorithmic principles of the PCC method are described in Camps & Cafiero 2015. It builds on the propositions of Poole 1974, 1979. 
 
-In a first stage, problematic configurations in the traditions (i.e. configurations that cannot be linked to a normal genealogy) are identified by crossing every possible pair of variant locations, and are then plotted as a network. When overconflicting (i.e. unreliable) variant locations are identified, different methods of eliminating problematic variant locations are offered.
+In a first stage, problematic configurations in the traditions (i.e. configurations that cannot be linked to a normal genealogy, without contamination or polygenesis) are identified by crossing every possible pair of variant locations, and are then plotted as a network. When the most unreliable variant locations (i.e. unreliable) variant locations are identified, different methods of eliminating problematic variant locations are offered.
 
-In a second time, a stemma is build, using the result from the previous function, in an iterative fashion. At each step, witness with no severe disagreements (i.e. disagreements between two witnesses, on two readings both shared with at least one other
+In a second time, a stemma is built, using the results from the previous function, in an iterative fashion. At each step, witness with no severe disagreements (i.e. disagreements between two witnesses, on two readings both shared with at least one other
 witness, cf. \emph{Trennfehler}, \emph{errores separativi}) are grouped, a model is then reconstructed for each group, and either identified to a witness of the group or to an hypothetic subarchetype.
 
 The option \code{recoverNAs=TRUE} is a novelty not described in the original paper (Camps & Cafiero 2015). 
@@ -50,7 +48,7 @@ To understand the underlying principles behind all the functions from this metho
 }
 
 \value{
-Output: either a single object of class \code{"pccStemma"}, or a list containing several objects of class \code{"pccStemma"} (if multiple stemmatas were drawn); 
+The function returns either a single object of class \code{"pccStemma"}, or a list containing several objects of class \code{"pccStemma"} (if multiple stemmatas were drawn); 
 see \code{\link{PCC.Stemma}}.
 }
 \references{

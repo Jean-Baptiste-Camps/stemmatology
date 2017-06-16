@@ -1,32 +1,36 @@
 \name{PCC.Exploratory}
 \alias{PCC.Exploratory}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{PCC Exploratory methods}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This is the global function for exploratory methods of the PCC family.  
+It interactively makes use of the lower-level exploratory functions, to assess conflicts between variant locations, eliminate problematic configurations or identify likely contaminations. 
 }
 \usage{
-PCC.Exploratory(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE, interactive = TRUE)
+PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, interactive = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+  if \code{alternateReadings = FALSE} (default), a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number;
+  if \code{alternateReadings = TRUE}, a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings). 
 }
   \item{omissionsAsReadings}{
-%%     ~~Describe \code{omissionsAsReadings} here~~
+     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
+     Default: \code{FALSE}.
 }
-  \item{pauseAtPlot}{
-%%     ~~Describe \code{pauseAtPlot} here~~
+  \item{alternateReadings}{
+  logical; if \code{TRUE}, a witness can have multiple variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values. %; if \code{FALSE}, only one reading per witness is allowed. 
+  Default: \code{FALSE}.
+  }
+  \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
 }
-  \item{interactive}{
-%%     ~~Describe \code{interactive} here~~
+  \item{interactive}{logical; if \code{TRUE} (recommended), the algorithm stops each time user input is needed; if \code{FALSE}, it tries to guess an appropriate value. Default: \code{TRUE}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+This function is meant to guide the user through the process of assessing and eliminating unreliable variant locations and/or identify competing genealogies (i.e. contamination), as described in Camps & Cafiero 2015. 
+
+It starts by computing and ploting the network of conflicting variant locations (i.e. variant locations that presents contradictory genealogical information), by calling \code{\link{PCC.conflicts}}, and then interactively aids the user in determining overconflicting variant locations (with \code{\link{PCC.overconflicting}}), eliminating problematic variant locations (\code{\link{PCC.elimination}}), detecting contamination (\code{\link{PCC.contam}}) or creating new databases reflecting competing genealogies (\code{\link{PCC.equipollent}}).
 }
 \value{
 %%  ~Describe the value returned
@@ -36,10 +40,14 @@ PCC.Exploratory(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE, interactive
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1).
+
+Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+
+Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
 }
 \author{
-%%  ~~who you are~~
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 \note{
 %%  ~~further notes~~
@@ -48,98 +56,11 @@ PCC.Exploratory(x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE, interactive
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+\code{\link{PCC.conflicts}}, \code{\link{PCC.overconflicting}}, \code{\link{PCC.elimination}}, \code{\link{PCC.contam}}, \code{\link{PCC.equipollent}}.
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x, omissionsAsReadings = FALSE, pauseAtPlot = FALSE, 
-    interactive = TRUE) 
-{
-    tableVariantes = x
-    pccConflicts = PCC.conflicts(tableVariantes, omissionsAsReadings = omissionsAsReadings)
-    answered = FALSE
-    while (answered == FALSE) {
-        answerOne = readline("Do you want to proceed to the analysis of the network conflictuality ? Y/N \n ")
-        if (answerOne != "N" && answerOne != "Y") {
-            print("Please enter Y (yes) or N (no).")
-        }
-        if (answerOne == "N") {
-            return(pccConflicts)
-        }
-        if (answerOne == "Y") {
-            answered = TRUE
-        }
-    }
-    answered = FALSE
-    while (answered == FALSE) {
-        pccElimination = PCC.elimination(pccConflicts)
-        writeLines("Are you satisfied with this configuration and do you want to\n Proceed to actual elimination of over-conflicting variant locations [P],\n  Try again with different value [T],\n or Quit [Q] ? \n ")
-        reiterateQuestion = TRUE
-        while (reiterateQuestion == TRUE) {
-            answerOne = readline("(P/T/Q)")
-            if (answerOne != "P" && answerOne != "T" && answerOne != 
-                "Q") {
-                print("Please enter P (Proceed), T (Try again) or Q (Quit).")
-            }
-            if (answerOne == "T") {
-                reiterateQuestion = FALSE
-            }
-            if (answerOne == "Q") {
-                return(pccElimination)
-            }
-            if (answerOne == "P") {
-                reiterateQuestion = FALSE
-                answered = TRUE
-            }
-        }
-    }
-    pccDoElimination = PCC.doElimination(pccElimination)
-    pccConflicts = PCC.conflicts(pccDoElimination, omissionsAsReadings = omissionsAsReadings)
-    if (sum(pccConflicts$conflictsTotal[, 1]) == 0) {
-        print("There is no longer any conflict in the database. Function will stop.")
-        return(pccConflicts)
-    }
-    message = paste("There is still ", nrow(pccConflicts$edgelist), 
-        "conflicts in the database. If this number is high it might indicate that : \n 1. The conflictuality index chosen was too low. \n 2. There are concurring structures in the tradition (due for instance to contamination).")
-    writeLines(message)
-    answered = FALSE
-    while (answered == FALSE) {
-        answerOne = readline("Do you want to proceed to contamination detection methods ? Y/N \n ")
-        if (answerOne != "N" && answerOne != "Y") {
-            print("Please enter Y (yes) or N (no).")
-        }
-        if (answerOne == "N") {
-            return(pccConflicts)
-        }
-        if (answerOne == "Y") {
-            answered = TRUE
-        }
-    }
-    pccContam = PCC.contam(pccConflicts, pauseAtPlot = pauseAtPlot, 
-        omissionsAsReadings = omissionsAsReadings)
-    print(pccContam$conflictsDifferences)
-    answered = FALSE
-    while (answered == FALSE) {
-        answerOne = readline("Do you want to define alternate configurations for stemma building ? Y/N \n ")
-        if (answerOne != "N" && answerOne != "Y") {
-            print("Please enter Y (yes) or N (no).")
-        }
-        if (answerOne == "N") {
-            return(pccContam)
-        }
-        if (answerOne == "Y") {
-            answered = TRUE
-        }
-    }
-    pccEquipollent = PCC.equipollent(pccConflicts)
-    return(pccEquipollent)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{Stemmatology}
