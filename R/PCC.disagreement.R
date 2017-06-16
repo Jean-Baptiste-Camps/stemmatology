@@ -1,6 +1,6 @@
 PCC.disagreement <-
     function(x, omissionsAsReadings = FALSE) {
-        # As input, a variant table (numeric matrix). Ouput are disagreement 
+        # As input, a variants table (numeric matrix). Ouput are disagreement 
         # matrices and database. In addition to the tables giving benigne and severe
         # disagreements, common and oriented omissions, the function also returns,
         # for information, the count of agreements between manuscripts.
