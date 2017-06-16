@@ -8,7 +8,7 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
     # values or the identification of the model, and the links between the
     # mss in the group in the form of an edgelist TODO(JBC): add an option to
     # include in the output the edgelength, computed as = to the number of
-    # desagreement between a ms. and his model.
+    # disagreement between a ms. and his model.
     # Added option recoverNAs (false by default) which is an update to the method. If used, when actual or virtual manuscripts are identified to a reconstructed models, every NA they have is «recovered» by taking the value of the model.
     groups = x$groups
     tableVariantes = x$database
@@ -92,19 +92,19 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
         ##### is a match. If not, the virtual model is supposed to be a lost ms.
         extantModel = NULL  # We bind the mss from the group with the virtual model
         myGroupAndModel = cbind(tableVariantes[, myGroup], myModel)  # We compare them ####TODO(JBC): it might not be a good idea to have this level 1 function call another level 1 function. Perhaps the comparison should go in the higher level global function...
-        myGroupComp = PCC.desagreement(myGroupAndModel)
+        myGroupComp = PCC.disagreement(myGroupAndModel)
         for (m in 1:length(myGroup)) {
-            if (myGroupComp$severeDesagreement[myGroup[m], labelMyModel] == 
-                0 && myGroupComp$benigneDesagreement[myGroup[m], labelMyModel] == 
+            if (myGroupComp$severedisagreement[myGroup[m], labelMyModel] == 
+                0 && myGroupComp$benignedisagreement[myGroup[m], labelMyModel] == 
                 0 && (myGroupComp$omissionsOriented[myGroup[m], labelMyModel] == 
                 0 | is.na(myGroupComp$omissionsOriented[myGroup[m], labelMyModel]))) {
                 print(paste(myGroup[m], "seems to be the model of group", 
                   labelMyMss))
                 extantModel = c(extantModel, myGroup[m])
             } else {
-                print(paste(myGroup[m], "has", myGroupComp$severeDesagreement[myGroup[m], 
-                  labelMyModel], "severe desagreement(s),", myGroupComp$benigneDesagreement[myGroup[m], 
-                  labelMyModel], "benigne desagreement(s),", myGroupComp$omissionsOriented[myGroup[m], 
+                print(paste(myGroup[m], "has", myGroupComp$severedisagreement[myGroup[m], 
+                  labelMyModel], "severe disagreement(s),", myGroupComp$benignedisagreement[myGroup[m], 
+                  labelMyModel], "benigne disagreement(s),", myGroupComp$omissionsOriented[myGroup[m], 
                   labelMyModel], "omissions", "towards the virtual model. It does not seem to be the model"))
             }
         }
@@ -177,7 +177,7 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
             # outside the group. NB & TODO(GLOBAL): this step (that we included in
             # the paper) is PROBABLY not necessary, nor algorithmically consistent.
             # We NEED to think about it. How can the model be outside the group and
-            # have no desagreement with the model, knowing that the virtual model is
+            # have no disagreement with the model, knowing that the virtual model is
             # reconstructed based on common readings to the mss of the group, and
             # that these are, at least once, unique to this group? Yet the complexity
             # of this principle is very high, and intuition hard, so we need to
@@ -190,18 +190,18 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
             if (length(others) > 0) {
                 othersAndModel = cbind(tableVariantes[, others, drop = FALSE], 
                 myModel)  # We compare them ####TODO(JBC): it might not be a good idea to have this level 1 function call another level 1 function. Perhaps the comparison should go in the higher level global function...
-            myOthersComp = PCC.desagreement(othersAndModel)
+            myOthersComp = PCC.disagreement(othersAndModel)
             for (n in 1:length(others)) {
-                if (myOthersComp$severeDesagreement[others[n], labelMyModel] == 
-                  0 && myOthersComp$benigneDesagreement[others[n], labelMyModel] == 
+                if (myOthersComp$severedisagreement[others[n], labelMyModel] == 
+                  0 && myOthersComp$benignedisagreement[others[n], labelMyModel] == 
                   0 && (myOthersComp$omissionsOriented[others[n], labelMyModel] == 
                   0 | is.na(myOthersComp$omissionsOriented[others[n], labelMyModel]))) {
                   print(paste(others[n], "seems to be the model."))
                   extantModel = c(extantModel, others[n])
                 } else {
-                  print(paste(others[n], "has", myOthersComp$severeDesagreement[others[n], 
-                    labelMyModel], "severe desagreement(s),", myOthersComp$benigneDesagreement[others[n], 
-                    labelMyModel], "benigne desagreement(s),", myOthersComp$omissionsOriented[others[n], 
+                  print(paste(others[n], "has", myOthersComp$severedisagreement[others[n], 
+                    labelMyModel], "severe disagreement(s),", myOthersComp$benignedisagreement[others[n], 
+                    labelMyModel], "benigne disagreement(s),", myOthersComp$omissionsOriented[others[n], 
                     labelMyModel], "omissions", "towards the virtual model. It does not seem to be the model"))
                 }
             }

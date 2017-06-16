@@ -22,8 +22,8 @@ function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = TRUE) {
     counter = 0
     while (ncol(tableVariantes) > 3) {
         counter = counter + 1
-        pccDesagreement = PCC.desagreement(tableVariantes)
-        pccBuildGroup = PCC.buildGroup(pccDesagreement)  # We test if no group was found
+        pccdisagreement = PCC.disagreement(tableVariantes)
+        pccBuildGroup = PCC.buildGroup(pccdisagreement)  # We test if no group was found
         if (identical(pccBuildGroup$groups, list())) {
             message("No group was found. Unable to build stemma.")
             # Plot the stemma at this step, if it exists
@@ -83,8 +83,8 @@ function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = TRUE) {
             }
             if (answer == "Y") {
                 counter = counter + 1
-                pccDesagreement = PCC.desagreement(tableVariantes)
-                pccBuildGroup = PCC.buildGroup(pccDesagreement)
+                pccdisagreement = PCC.disagreement(tableVariantes)
+                pccBuildGroup = PCC.buildGroup(pccdisagreement)
                 pccReconstructModel = PCC.reconstructModel(pccBuildGroup, recoverNAs = recoverNAs, omissionsAsReadings = omissionsAsReadings)
                 tableVariantes = pccReconstructModel$database
                 edgelistGlobal = rbind(edgelistGlobal, pccReconstructModel$edgelist)

@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
- ~~ The PCC.doElimination function removes the variant locations labeled as over-conflicting by the PCC.elimination function. ~~
+The PCC.doElimination function removes the variant locations labeled as over-conflicting by the PCC.elimination function.
 }
 \usage{
 PCC.doElimination(x)
@@ -13,11 +13,11 @@ PCC.doElimination(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-   ~~ A PCC.elimination object. ~~
+A PCC.elimination object.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+When PCC.elimination has been applied to a PCC.conflict object, it returns a table where over-conflicting variants are labeled as such. The PCC.doElimination function simply removes those variants.
 }
 \value{
 %%  ~Describe the value returned
@@ -27,10 +27,12 @@ PCC.doElimination(x)
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+Jean-Baptiste Camps et Florian Cafiero, "Genealogical variant locations and simplified stemma: a test case", in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, dir. Tara Andrews & Caroline Mace, Turnhout, 2015, p. 69-93 (Lectio, 1)
+
+Eric Poole, "The Computer in Determining Stemmatic Relationships", Computers and the Humanities 8-4, 1974, p. 207-16
 }
 \author{
-%%  ~~who you are~~
+Jean-Baptiste Camps & Florian Cafiero
 }
 \note{
 %%  ~~further notes~~
@@ -39,28 +41,15 @@ PCC.doElimination(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-~~ \code{\link{PCC.elimination}}, ~~~
+To identify and label over-conflicting variants: \code{\link{PCC.elimination}}
+
+To spot the conflicts between variants: \code{\link{PCC.conflicts}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x) 
-{
-    overconflicting = NULL
-    for (i in 1:nrow(x$vertexAttributes)) {
-        if (x$vertexAttributes[i, 1] == "overconflicting") {
-            overconflicting = c(overconflicting, rownames(x$vertexAttributes)[i])
-        }
-    }
-    x$database = x$database[!rownames(x$database) \%in\% overconflicting, 
-        , drop = FALSE]
-    return(x$database)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{over-conflicting}
+\keyword{variants}% __ONLY ONE__ keyword per line
+\keyword{selection}
+\keyword{deletion}
