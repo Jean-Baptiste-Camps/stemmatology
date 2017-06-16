@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+~~ PCC.elimination is dedicated to the elimination of problematic variant locations, as defined in Poole (1974) and Camps & Cafiero (2015). It helps the user defining a threshold above which variant locations are considered to be over-conflicting. It returns a table where those variant locations are labeled as problematic. ~~
 }
 \usage{
 PCC.elimination(x)
@@ -13,7 +13,7 @@ PCC.elimination(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+~~ \code{x}: a PCC.conflict object ~~
 }
 }
 \details{
@@ -27,7 +27,10 @@ PCC.elimination(x)
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+ ~ Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1)
+ Eric Poole, « The Computer in Determining Stemmatic Relationships », Computers and the Humanities 8-4, 1974, p. 207‑16
+ 
+ ~
 }
 \author{
 %%  ~~who you are~~
@@ -39,7 +42,9 @@ PCC.elimination(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+~~ To remove the variants labeled as problematic: \code{\link{PCC.doElimination}} About the input for this fonction : \code{\link{PCC.conflicts}
+
+~~~
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

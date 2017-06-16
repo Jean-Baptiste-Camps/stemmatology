@@ -5,29 +5,31 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ The PCC.disagreement function helps spotting disagreements (and agreements) between manuscripts. For a given numeric matrix representing the variants of different manuscripts, it locates disagreements (benigne or severe), agreements and omissions in common. ~~
+  The PCC.disagreement function helps spotting disagreements (and agreements) between manuscripts. For a given numeric matrix, representing the variants in different manuscripts, it locates disagreements (benigne or severe), agreements and omissions in common between manuscripts.
 }
 \usage{
 PCC.disagreement(x, omissionsAsReadings = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+ a numeric matrix, with manuscripts in colums, variants in rows, and readings coded by a number.
 }
   \item{omissionsAsReadings}{
-%%     ~~Describe \code{omissionsAsReadings} here~~
+     logical; if TRUE, omissions are considered as readings.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function returns:
+  \item{severeDisagreement }{A list of the severe disagreements between manuscripts.}
+  \item{benigneDisagreement }{A list of the benigne disagreements between manuscripts.}
+  \item{agreements}{A list of agreements between manuscripts.}
+  \item{omissionsInCommon }{A list of all the omission in common between manuscripts.}
+  \item{omissionOriented }{}
+
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -44,10 +46,10 @@ PCC.disagreement(x, omissionsAsReadings = FALSE)
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+%% \examples{
+%% ##---- Should be DIRECTLY executable !! ----
+%% ##-- ==>  Define data, use random,
+%% ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
 function (x, omissionsAsReadings = FALSE) 

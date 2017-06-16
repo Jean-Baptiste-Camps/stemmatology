@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+ ~~ The PCC.doElimination function removes the variant locations labeled as over-conflicting by the PCC.elimination function. ~~
 }
 \usage{
 PCC.doElimination(x)
@@ -13,7 +13,7 @@ PCC.doElimination(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+   ~~ A PCC.elimination object. ~~
 }
 }
 \details{
@@ -39,7 +39,7 @@ PCC.doElimination(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+~~ \code{\link{PCC.elimination}}, ~~~
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

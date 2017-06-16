@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+~~ PCC.conflicts aims at detecting conflicts between variants. ~~
 }
 \usage{
 PCC.conflicts(x, omissionsAsReadings = FALSE)
@@ -13,10 +13,13 @@ PCC.conflicts(x, omissionsAsReadings = FALSE)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+ ~~ a numeric matrix, with manuscripts in colums, variants in rows, and readings coded by a number. ~~
 }
   \item{omissionsAsReadings}{
-%%     ~~Describe \code{omissionsAsReadings} here~~
+     ~~ logical; if TRUE, omissions are considered as readings.~~
+}
+  \item{alternateReadings}{
+     ~~ logical; if TRUE, allows for alternate readings in the same variant location of a manuscript.~~
 }
 }
 \details{
