@@ -1,5 +1,5 @@
-\name{PCC.desagreement}
-\alias{PCC.desagreement}
+\name{PCC.disagreement}
+\alias{PCC.disagreement}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
@@ -8,7 +8,7 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-PCC.desagreement(x, omissionsAsReadings = FALSE)
+PCC.disagreement(x, omissionsAsReadings = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -53,10 +53,10 @@ PCC.desagreement(x, omissionsAsReadings = FALSE)
 function (x, omissionsAsReadings = FALSE) 
 {
     tableVariantes = as.matrix(x)
-    severeDesagreement = matrix(nrow = ncol(tableVariantes), 
+    severeDisagreement = matrix(nrow = ncol(tableVariantes), 
         ncol = ncol(tableVariantes), dimnames = c(labels(tableVariantes)[2], 
             labels(tableVariantes)[2]))
-    benigneDesagreement = matrix(nrow = ncol(tableVariantes), 
+    benigneDisagreement = matrix(nrow = ncol(tableVariantes), 
         ncol = ncol(tableVariantes), dimnames = c(labels(tableVariantes)[2], 
             labels(tableVariantes)[2]))
     agreements = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
@@ -108,14 +108,14 @@ function (x, omissionsAsReadings = FALSE)
                           agreements[colnames(tableVariantes)[j], 
                             colnames(tableVariantes)[k]] = 0
                         }
-                        if (is.na(severeDesagreement[colnames(tableVariantes)[j], 
+                        if (is.na(severeDisagreement[colnames(tableVariantes)[j], 
                           colnames(tableVariantes)[k]])) {
-                          severeDesagreement[colnames(tableVariantes)[j], 
+                          severeDisagreement[colnames(tableVariantes)[j], 
                             colnames(tableVariantes)[k]] = 0
                         }
-                        if (is.na(benigneDesagreement[colnames(tableVariantes)[j], 
+                        if (is.na(benigneDisagreement[colnames(tableVariantes)[j], 
                           colnames(tableVariantes)[k]])) {
-                          benigneDesagreement[colnames(tableVariantes)[j], 
+                          benigneDisagreement[colnames(tableVariantes)[j], 
                             colnames(tableVariantes)[k]] = 0
                         }
                         if (tableVariantes[i, j] == tableVariantes[i, 
@@ -129,11 +129,11 @@ function (x, omissionsAsReadings = FALSE)
                             k), drop = FALSE]
                           if ((tableVariantes[i, j] \%in\% tableSansjk) && 
                             (tableVariantes[i, k] \%in\% tableSansjk)) {
-                            severeDesagreement = incrementTable(severeDesagreement, 
+                            severeDisagreement = incrementTable(severeDisagreement, 
                               tableVariantes, j, k)
                           }
                           else {
-                            benigneDesagreement = incrementTable(benigneDesagreement, 
+                            benigneDisagreement = incrementTable(benigneDisagreement, 
                               tableVariantes, j, k)
                           }
                         }
@@ -153,8 +153,8 @@ function (x, omissionsAsReadings = FALSE)
     X = character(0)
     X = as.list(X)
     X$database = tableVariantes
-    X$severeDesagreement = severeDesagreement
-    X$benigneDesagreement = benigneDesagreement
+    X$severeDisagreement = severeDisagreement
+    X$benigneDisagreement = benigneDisagreement
     X$agreements = agreements
     X$omissionsInCommon = omissionsInCommon
     X$omissionsOriented = omissionsOriented
