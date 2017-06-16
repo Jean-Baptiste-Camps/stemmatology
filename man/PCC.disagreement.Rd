@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+%%  ~~ The PCC.disagreement function helps spotting disagreements (and agreements) between manuscripts. For a given numeric matrix representing the variants of different manuscripts, it locates disagreements (benigne or severe), agreements and omissions in common. ~~
 }
 \usage{
 PCC.disagreement(x, omissionsAsReadings = FALSE)
