@@ -1,8 +1,8 @@
-PCC.desagreement <-
+PCC.disagreement <-
     function(x, omissionsAsReadings = FALSE) {
-        # As input, a numeric matrix (variant table). Ouput are desagreement 
+        # As input, a numeric matrix (variant table). Ouput are disagreement 
         # matrices and database. In addition to the tables giving benigne and severe
-        # desagreements, common and oriented omissions, the function also returns,
+        # disagreements, common and oriented omissions, the function also returns,
         # for information only, the count of agreements between manuscripts.
         tableVariantes = as.matrix(x)
         if (is.matrix(x) == FALSE | is.numeric(x) == FALSE)  {
@@ -10,9 +10,9 @@ PCC.desagreement <-
         } 
         # tableVariantes = data.matrix(x) #We create tables crossing the whole set
         # of manuscripts. First, the one useful to build the stemma
-        severeDesagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
+        severeDisagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
                                     dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
-        benigneDesagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
+        benigneDisagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
                                      dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))  
         omissionsInCommon = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
                                    dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
@@ -81,18 +81,18 @@ PCC.desagreement <-
                                                      colnames(tableVariantes)[k]])) {
                                     agreements[colnames(tableVariantes)[j], colnames(tableVariantes)[k]] = 0
                                 }
-                                if (is.na(severeDesagreement[colnames(tableVariantes)[j], 
+                                if (is.na(severeDisagreement[colnames(tableVariantes)[j], 
                                                              colnames(tableVariantes)[k]])) {
-                                    severeDesagreement[colnames(tableVariantes)[j], 
+                                    severeDisagreement[colnames(tableVariantes)[j], 
                                                        colnames(tableVariantes)[k]] = 0
                                 }
-                                if (is.na(benigneDesagreement[colnames(tableVariantes)[j], 
+                                if (is.na(benigneDisagreement[colnames(tableVariantes)[j], 
                                                               colnames(tableVariantes)[k]])) {
-                                    benigneDesagreement[colnames(tableVariantes)[j], 
+                                    benigneDisagreement[colnames(tableVariantes)[j], 
                                                         colnames(tableVariantes)[k]] = 0
                                 }
                                 # Now that it is done, let's proceed to
-                                # actual comparison. Premier cas, il y a
+                                # actual comparison. First case, il y a
                                 # accord if j = k, alors agreements++
                                 if (tableVariantes[i, j] == tableVariantes[i, k]) {
                                     agreements[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = agreements[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] + 1 
@@ -116,10 +116,10 @@ PCC.desagreement <-
                                     # which(x,y)
                                     if ((tableVariantes[i, j] %in% tableSansjk) && 
                                             (tableVariantes[i, k] %in% tableSansjk)) {
-                                        severeDesagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = severeDesagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] +1
+                                        severeDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = severeDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] +1
                                     } else {
-                                        # sinon benigneDesagreements++
-                                        benigneDesagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = benigneDesagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] +1
+                                        # sinon benigneDisagreements++
+                                        benigneDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = benigneDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] +1
                                     }
                                 }
                             }
@@ -131,8 +131,8 @@ PCC.desagreement <-
         X = character(0)
         X = as.list(X)
         X$database = tableVariantes
-        X$severeDesagreement = severeDesagreement
-        X$benigneDesagreement = benigneDesagreement  #Then the one being proposed as an FYI.
+        X$severeDisagreement = severeDisagreement
+        X$benigneDisagreement = benigneDisagreement  #Then the one being proposed as an FYI.
         X$agreements = agreements
         X$omissionsInCommon = omissionsInCommon
         X$omissionsOriented = omissionsOriented
