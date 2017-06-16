@@ -24,30 +24,34 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recove
   %%%TODO(JBC): Implémenter cette option !!!
 }
   \item{recoverNAs}{
-  logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. Default: \code{FALSE}.
+  logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. Default: \code{TRUE}.
 %%     ~~Describe \code{recoverNAs} here~~
 }
-  \item{pauseAtPlot}{
+  \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
 %%     ~~Describe \code{pauseAtPlot} here~~
 }
-  \item{interactive}{
+  \item{interactive}{logical; if \code{TRUE} (recommended), the algorithm stops each time user input is needed; if \code{FALSE}, it tries to guess an appropriate value. Default: \code{TRUE}.
 %%     ~~Describe \code{interactive} here~~
 }
 }
 \details{
 %%TODO JBC: donner plus d'éléments dès ici
+This function provides a single entry to all the algorithms used in the PCC method. It successively calls \code{\link{PCC.Exploratory}} and  \code{\link{PCC.Stemma}}.
+The algorithmic principles of the PCC method are described in Camps & Cafiero 2015. It builds on the propositions of Poole 1974, 1979. 
 
+In a first stage, problematic configurations in the traditions (i.e. configurations that cannot be linked to a normal genealogy) are identified by crossing every possible pair of variant locations, and are then plotted as a network. When overconflicting (i.e. unreliable) variant locations are identified, different methods of eliminating problematic variant locations are offered.
+
+In a second time, a stemma is build, using the result from the previous function, in an iterative fashion. At each step, witness with no severe disagreements (i.e. disagreements between two witnesses, on two readings both shared with at least one other
+witness, cf. \emph{Trennfehler}, \emph{errores separativi}) are grouped, a model is then reconstructed for each group, and either identified to a witness of the group or to an hypothetic subarchetype.
 
 The option \code{recoverNAs=TRUE} is a novelty not described in the original paper (Camps & Cafiero 2015). 
 
-To understand the underlying principles behind all the functions from this method, particulary the distinction between severe and bening disagreement, the different status given to readings, omissions and \emph{lacunae}, the notion of conflict between variant locations or the way the stemma is builded, see the \emph{references} section. 
+To understand the underlying principles behind all the functions from this method, particulary the distinction between severe and bening disagreement, the different status given to readings, omissions and \emph{lacunae}, the notion of conflict between variant locations or the way the stemma is built, see the \emph{references} section. 
 }
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Output: either a single object of class \code{"pccStemma"}, or a list containing several objects of class \code{"pccStemma"} (if multiple stemmatas were drawn); 
+see \code{\link{PCC.Stemma}}.
 }
 \references{
 Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1).
@@ -57,7 +61,7 @@ Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Com
 Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
 }
 \author{
-Jean-Baptiste Camps & Florian Cafiero
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 \note{
 %%%
@@ -66,52 +70,12 @@ Jean-Baptiste Camps & Florian Cafiero
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{PCC.Exploratory}}, \code{\link{PCC.Stemma}}.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = TRUE, 
-    pauseAtPlot = FALSE, interactive = TRUE) 
-{
-    pccExploratory = PCC.Exploratory(x, omissionsAsReadings = omissionsAsReadings, 
-        pauseAtPlot = pauseAtPlot, interactive = interactive)
-    if (is.matrix(pccExploratory)) {
-        output = pccStemma(pccExploratory)
-    }
-    else {
-        if (!is.matrix(pccExploratory)) {
-            if (class(pccExploratory) == "pccConflicts" | class(pccExploratory) == 
-                "pccElimination" | class(pccExploratory) == "pccContam") {
-                output = PCC.Stemma(pccExploratory$database, 
-                  limit = limit, recoverNAs = recoverNAs)
-            }
-            else {
-                if (class(pccExploratory) == "pccEquipollentDatabases") {
-                  output = as.list(NULL)
-                  for (i in 1:length(pccExploratory)) {
-                    pccStemma = PCC.Stemma(pccExploratory[[i]])
-                    legend("topright", paste("Alternative stemma", 
-                      i, "out of", length(pccExploratory)))
-                    if (i < length(pccExploratory)) {
-                      readline("Press enter to proceed to next alternative stemma")
-                    }
-                    output[[i]] = pccStemma
-                  }
-                }
-                else {
-                  stop("Input is unknown.")
-                }
-            }
-        }
-    }
-    return(output)
-  }
+load(fournival)
+PCC(fournival)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{stemmatology}

@@ -26,6 +26,7 @@ PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
+%% TODO(JBC): définir et documenter la class "pccStemma" de sortie de cette fonction.
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}

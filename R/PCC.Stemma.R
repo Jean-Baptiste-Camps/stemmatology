@@ -1,5 +1,6 @@
 PCC.Stemma <-
 function(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs = TRUE) {
+    # TODO(JBC): la sortie de cette fonction n'a pas de classe, il faudrait l'implémenter
     # TODO(JBC): dans ce groupe de fonction, comme dans le précédent, il est
     # impératif de tester que les options font bien leur job (y compris en
     # étant passées aux sous-fonctions) Première possibilité, le contenu est
