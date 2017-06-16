@@ -7,7 +7,7 @@ function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE, alternateReadings 
     ##### methods. /!\ Long execution time.  05/07/2014: added an option to
     ##### pause at each plot
     if (pauseAtPlot == TRUE) {
-        par(ask = TRUE)
+        par(ask = TRUE)#TODO(JBC): this is now deprecated, see ?par
     } else {
         par(ask = FALSE)
     }
