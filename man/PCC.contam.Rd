@@ -41,7 +41,7 @@ Jean-Baptiste Camps & Florian Cafiero
 %%  ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\section{Warning }{The execution of this command can be time-consuming for large databases.}
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~

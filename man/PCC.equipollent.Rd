@@ -5,18 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-Some over-conflicting variants can be algorithmically ruled out for the building of a stemma (see PCC.overconflicting and PCC.elimination). Yet, in some cases, choosing between conflicting variables is algorithmically undecidable. PCC.equipollent helps addressing this case. It either replicates the data base 
-
-et qui peuvent
-        # représenter des configurations équipollentes ou alternatives de la
-        # tradition, ou des contaminations, et permet - soit de dupliquer la base
-        # en autant de configurations d'ensembles que d'ensembles de nœud sans
-        # conflits entre eux (choix général) - soit de donner une seule base, en
-        # en dupliquant que les mss retenus (mss suspects de contamination, et
-        # qui sont responsables d'une bonne partie ou de la totalité des
-        # conflits, qui ont pu être identifiés ainsi grâce à la fonction
-        # PCC.contam) edgelist = x$edgelist 
-
+Some over-conflicting variants can be algorithmically ruled out for the building of a stemma (see \code{PCC.overconflicting} and \code{PCC.elimination}). Yet, in some cases, choosing between conflicting variables is algorithmically undecidable. PCC.equipollent helps addressing this case. It either replicates the data base to examine the different possble cases, either creates one database where witnesses probably contaminated are replicated.
 }
 \usage{
 PCC.equipollent(x)
@@ -28,7 +17,7 @@ A \code{PCC.conflicts} object.
 }
 }
 \details{
-In some cases
+
 }
 \value{
 %%  ~Describe the value returned

@@ -27,15 +27,15 @@ The function returns:
   \item{severeDisagreement }{A list of the severe disagreements between manuscripts.}
   \item{benigneDisagreement }{A list of the benigne disagreements between manuscripts.}
   \item{agreements}{A list of agreements between manuscripts.}
-  \item{omissionsInCommon }{A list of all the omission in common between manuscripts.}
-  \item{omissionOriented }{}
+  \item{omissionsInCommon }{A list of all the omissions in common between manuscripts.}
+  \item{omissionsOriented }{A list of the omissions present in a manuscript but not in another.}
 
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Jean-Baptiste Camps & Florian Cafiero
 }
 \note{
 %%  ~~further notes~~
@@ -46,122 +46,8 @@ The function returns:
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
-%% \examples{
-%% ##---- Should be DIRECTLY executable !! ----
-%% ##-- ==>  Define data, use random,
-%% ##--	or do  help(data=index)  for the standard data sets.
+\examples{
 
-## The function is currently defined as
-function (x, omissionsAsReadings = FALSE) 
-{
-    tableVariantes = as.matrix(x)
-    severeDisagreement = matrix(nrow = ncol(tableVariantes), 
-        ncol = ncol(tableVariantes), dimnames = c(labels(tableVariantes)[2], 
-            labels(tableVariantes)[2]))
-    benigneDisagreement = matrix(nrow = ncol(tableVariantes), 
-        ncol = ncol(tableVariantes), dimnames = c(labels(tableVariantes)[2], 
-            labels(tableVariantes)[2]))
-    agreements = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-        dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
-    omissionsInCommon = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-        dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
-    omissionsOriented = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-        dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
-    for (i in 1:nrow(tableVariantes)) {
-        for (j in 1:ncol(tableVariantes)) {
-            if (is.na(tableVariantes[i, j])) {
-            }
-            else {
-                if ((tableVariantes[i, j] == 0) && (omissionsAsReadings == 
-                  FALSE)) {
-                  for (k in 1:ncol(tableVariantes)) {
-                    if (is.na(tableVariantes[i, k]) == FALSE) {
-                      if (is.na(omissionsInCommon[colnames(tableVariantes)[j], 
-                        colnames(tableVariantes)[k]])) {
-                        omissionsInCommon[colnames(tableVariantes)[j], 
-                          colnames(tableVariantes)[k]] = 0
-                      }
-                      if (is.na(omissionsOriented[colnames(tableVariantes)[j], 
-                        colnames(tableVariantes)[k]])) {
-                        omissionsOriented[colnames(tableVariantes)[j], 
-                          colnames(tableVariantes)[k]] = 0
-                      }
-                      if (tableVariantes[i, j] == tableVariantes[i, 
-                        k]) {
-                        omissionsInCommon = incrementTable(omissionsInCommon, 
-                          tableVariantes, j, k)
-                      }
-                      if (tableVariantes[i, j] < tableVariantes[i, 
-                        k]) {
-                        omissionsOriented = incrementTable(omissionsOriented, 
-                          tableVariantes, j, k)
-                      }
-                    }
-                  }
-                }
-                else {
-                  if (is.numeric(tableVariantes[i, j])) {
-                    for (k in 1:ncol(tableVariantes)) {
-                      if ((is.na(tableVariantes[i, k]) == FALSE) && 
-                        ((tableVariantes[i, k] != 0) | (omissionsAsReadings == 
-                          TRUE))) {
-                        if (is.na(agreements[colnames(tableVariantes)[j], 
-                          colnames(tableVariantes)[k]])) {
-                          agreements[colnames(tableVariantes)[j], 
-                            colnames(tableVariantes)[k]] = 0
-                        }
-                        if (is.na(severeDisagreement[colnames(tableVariantes)[j], 
-                          colnames(tableVariantes)[k]])) {
-                          severeDisagreement[colnames(tableVariantes)[j], 
-                            colnames(tableVariantes)[k]] = 0
-                        }
-                        if (is.na(benigneDisagreement[colnames(tableVariantes)[j], 
-                          colnames(tableVariantes)[k]])) {
-                          benigneDisagreement[colnames(tableVariantes)[j], 
-                            colnames(tableVariantes)[k]] = 0
-                        }
-                        if (tableVariantes[i, j] == tableVariantes[i, 
-                          k]) {
-                          agreements = incrementTable(agreements, 
-                            tableVariantes, j, k)
-                        }
-                        if (tableVariantes[i, j] != tableVariantes[i, 
-                          k]) {
-                          tableSansjk = tableVariantes[i, -c(j, 
-                            k), drop = FALSE]
-                          if ((tableVariantes[i, j] \%in\% tableSansjk) && 
-                            (tableVariantes[i, k] \%in\% tableSansjk)) {
-                            severeDisagreement = incrementTable(severeDisagreement, 
-                              tableVariantes, j, k)
-                          }
-                          else {
-                            benigneDisagreement = incrementTable(benigneDisagreement, 
-                              tableVariantes, j, k)
-                          }
-                        }
-                      }
-                    }
-                  }
-                  else {
-                    errorMessage = paste("You have non numeric values in the database at [", 
-                      i, ",", j, "] aborting calculation.")
-                    print(errorMessage)
-                    break
-                  }
-                }
-            }
-        }
-    }
-    X = character(0)
-    X = as.list(X)
-    X$database = tableVariantes
-    X$severeDisagreement = severeDisagreement
-    X$benigneDisagreement = benigneDisagreement
-    X$agreements = agreements
-    X$omissionsInCommon = omissionsInCommon
-    X$omissionsOriented = omissionsOriented
-    return(X)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
