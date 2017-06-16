@@ -5,7 +5,7 @@ function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot 
     # impératif de tester que les options font bien leur job (y compris en
     # étant passées aux sous-fonctions) This is the global function for
     # exploratory methods of the PCC type.  In entry, a matrix with a column
-    # per manuscripts, and a row per variant location, with readings coded
+    # per witness, and a row per variant location, with readings coded
     # with numbers.  TODO(JBC): une version prenant en compte interactive =
     # FALSE, pour tout faire d'elle-même avec des valeurs moyennes (pas pour
     # tout de suite)
