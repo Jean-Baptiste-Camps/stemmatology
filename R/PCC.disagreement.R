@@ -1,9 +1,9 @@
 PCC.disagreement <-
     function(x, omissionsAsReadings = FALSE) {
-        # As input, a numeric matrix (variant table). Ouput are disagreement 
+        # As input, a variant table (numeric matrix). Ouput are disagreement 
         # matrices and database. In addition to the tables giving benigne and severe
         # disagreements, common and oriented omissions, the function also returns,
-        # for information only, the count of agreements between manuscripts.
+        # for information, the count of agreements between manuscripts.
         tableVariantes = as.matrix(x)
         if (is.matrix(x) == FALSE | is.numeric(x) == FALSE)  {
             stop ("Input is not a numeric matrix.")
@@ -26,13 +26,13 @@ PCC.disagreement <-
         # oublis de collation, etc. 
         # We take each line (= variant location)
         for (i in 1:nrow(tableVariantes)) {
-            # Then we take each column (= manuscritps)
+            # Then we take each column (= manuscripts)
             for (j in 1:ncol(tableVariantes)) {
                 # First case: the lesson of the manuscript is unknown, and we don't do anything
                 if (is.na(tableVariantes[i, j])) {
                 } else {
                     #If the lesson is known, we compare it to every known lesson.
-                    ## Lets start by handling the omissions.
+                    ## Let's start by handling the omissions.
                     if ((tableVariantes[i, j] == 0) && (omissionsAsReadings == 
                                                             FALSE)) {
                         for (k in 1:ncol(tableVariantes)) {
@@ -40,7 +40,7 @@ PCC.disagreement <-
                             # valeur manquante
                             if (is.na(tableVariantes[i, k]) == FALSE) {
                                 # Now we know that there is at least a case
-                                # where an omission in one of the witness as
+                                # where an omission in one of the witness has
                                 # been compared to the other, so we set the two
                                 # values to 0 if they were NA
                                 if (is.na(omissionsInCommon[colnames(tableVariantes)[j], 
@@ -65,7 +65,7 @@ PCC.disagreement <-
                     } else {
                         #### Beginning of lesson's treatment.
                         for (k in 1:ncol(tableVariantes)) {
-                            # si k n'est pas NA, et que k n'est pas égal à 0
+                            # if k is nor NA, nor equal to 0
                             # ou que omissionsAsReadings == TRUE
                             if ((is.na(tableVariantes[i, k]) == FALSE) && ((tableVariantes[i, 
                                                                                            k] != 0) | (omissionsAsReadings == TRUE))) {
