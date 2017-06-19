@@ -2,13 +2,13 @@ PCC.buildGroup <-
 function(x, limit = 0) {
     ### PCC.buildGroup Function that groups together manuscripts in relevant clusters, then
     ### identify and eventually reconstructs their model # where limit is the
-    ### limit of severe desagreements (errores separativi) allowed within a
-    ### group (default - and strongly advised value - is 0). Inputs are PCC.desagreement objects.
-    severeDesagreement = x$severeDesagreement  #We remove NA from the severeDesagreement list,
+    ### limit of severe disagreements (errores separativi) allowed within a
+    ### group (default - and strongly advised value - is 0). Inputs are PCC.disagreement objects.
+    severeDisagreement = x$severeDisagreement  #We remove NA from the severeDisagreement list,
     # thus starting to distinguish between NA and 0.
-    # severeDesagreement[is.na(severeDesagreement)] = 0;
-    if (length(severeDesagreement[is.na(severeDesagreement)]) > 0) {
-        print("There are NA values in your severeDesagreement matrix.")
+    # severeDisagreement[is.na(severeDisagreement)] = 0;
+    if (length(severeDisagreement[is.na(severeDisagreement)]) > 0) {
+        print("There are NA values in your severeDisagreement matrix.")
         answered = FALSE
         writeLines("Do you whish to proceed anyway (careful !) ?")
         while (answered == FALSE) {
@@ -21,15 +21,15 @@ function(x, limit = 0) {
             }
             if (answer == "Y") {
               #if answer is yes, we assume that no information about disagreement means "no disagreement".
-                severeDesagreement[is.na(severeDesagreement)] = 0
+                severeDisagreement[is.na(severeDisagreement)] = 0
                 answered = TRUE
             }
         }
        
     }
     groups = as.list(NULL)
-    for (i in 1:nrow(severeDesagreement)) {
-        groups[[i]] = labels(severeDesagreement[i, severeDesagreement[i, 
+    for (i in 1:nrow(severeDisagreement)) {
+        groups[[i]] = labels(severeDisagreement[i, severeDisagreement[i, 
             ] == limit])
     }
     # Comparing all lists and deleting identical lines.
@@ -60,15 +60,15 @@ function(x, limit = 0) {
             problems = 0
             for (m in 1:(length(groups[[l]]) - 1)) {
                 for (n in (m + 1):length(groups[[l]])) {
-                  # We confront them in the severeDesagreement table
-                  if (severeDesagreement[groups[[l]][m], groups[[l]][n]] > 
+                  # We confront them in the severeDisagreement table
+                  if (severeDisagreement[groups[[l]][m], groups[[l]][n]] > 
                     0) {
                     problems = problems + 1
                   }
                 }
             }
             if (problems > 0) {
-                message = paste("there is a weird configuration ; we will remove this group from the list alltogether. It concerns mss:")
+                message = paste("there is an unexpected configuration ; we will remove this group from the list altogether. It concerns mss:")
                 print(message)
                 print(groups[[l]])
                 toBeRemovedAsWell = c(toBeRemovedAsWell, l)

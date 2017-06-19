@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-\code{PCC.buildgroup} groups together witnesses in relevant clusters, then identify and eventually reconstructs their model.
+\code{PCC.buildgroup} groups together witnesses in relevant clusters.
 }
 \usage{
 PCC.buildGroup(x, limit = 0)
@@ -13,10 +13,10 @@ PCC.buildGroup(x, limit = 0)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+A PCC.disagreement object.
 }
   \item{limit}{
-%%     ~~Describe \code{limit} here~~
+  The maximum number of severe disagreements allowed for two witnesses in the same group. Default: \code{0}.
 }
 }
 \details{
@@ -33,7 +33,7 @@ PCC.buildGroup(x, limit = 0)
 %% ~put references to the literature/web site here ~
 }
 \author{
-Jean-Baptiste Camps & Florian Cafiero
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 \note{
 %%  ~~further notes~~

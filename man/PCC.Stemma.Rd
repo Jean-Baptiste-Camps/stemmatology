@@ -8,18 +8,27 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0)
+PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+
 }
   \item{omissionsAsReadings}{
-%%     ~~Describe \code{omissionsAsReadings} here~~
+     logical; if \code{TRUE}, omissions are treated as variant readings. They are taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).
+     
+     Default: \code{FALSE}.
 }
   \item{limit}{
-%%     ~~Describe \code{limit} here~~
+The maximum number of severe disagreements expected for witnesses to be in the same group. 
+
+    Default: \code{0}.
+}
+ \item{recoverNAs}{
+  logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. 
+  
+  Default: \code{TRUE}.
 }
 }
 \details{
@@ -37,7 +46,7 @@ PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0)
 %% ~put references to the literature/web site here ~
 }
 \author{
-Jean-Baptiste Camps & Florian Cafiero
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 \note{
 %%  ~~further notes~~
@@ -53,5 +62,4 @@ Jean-Baptiste Camps & Florian Cafiero
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{stemma}

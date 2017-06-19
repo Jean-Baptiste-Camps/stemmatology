@@ -15,7 +15,7 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recove
   if \code{alternateReadings = TRUE}, a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings). 
 }
   \item{omissionsAsReadings}{
-     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
+     logical; if \code{TRUE}, omissions are treated as variant readings. They are taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
      Default: \code{FALSE}.
 }
   \item{alternateReadings}{
@@ -37,14 +37,14 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recove
 This function provides a single entry to all the algorithms used in the PCC method. It successively calls \code{\link{PCC.Exploratory}} and  \code{\link{PCC.Stemma}}.
 The algorithmic principles of the PCC method are described in Camps & Cafiero 2015. It builds on the propositions of Poole 1974, 1979. 
 
-In a first stage, problematic configurations in the traditions (i.e. configurations that cannot be linked to a normal genealogy, without contamination or polygenesis) are identified by crossing every possible pair of variant locations, and are then plotted as a network. When the most unreliable variant locations (i.e. unreliable) variant locations are identified, different methods of eliminating problematic variant locations are offered.
+In a first stage, problematic configurations in the traditions (i.e. configurations that cannot be linked to a normal genealogy, without contamination or polygenesis) are identified by crossing every possible pair of variant locations, and are then plotted as a network. When the most unreliable variant locations (i.e. unreliable) are identified, different methods for eliminating them are offered.
 
-In a second time, a stemma is built, using the results from the previous function, in an iterative fashion. At each step, witness with no severe disagreements (i.e. disagreements between two witnesses, on two readings both shared with at least one other
-witness, cf. \emph{Trennfehler}, \emph{errores separativi}) are grouped, a model is then reconstructed for each group, and either identified to a witness of the group or to an hypothetic subarchetype.
+In a second time, a stemma is iteratively built, using the variant locations selected in the first stage. At each step, witness with no severe disagreements (i.e. disagreements between two witnesses, on two readings both shared with at least one other
+witness, cf. \emph{Trennfehler}, \emph{errores separativi}) are grouped together. A model is then reconstructed for each group, and either identified to a witness of the group or to an hypothetic subarchetype.
 
 The option \code{recoverNAs=TRUE} is a novelty not described in the original paper (Camps & Cafiero 2015). 
 
-To understand the underlying principles behind all the functions from this method, particulary the distinction between severe and bening disagreement, the different status given to readings, omissions and \emph{lacunae}, the notion of conflict between variant locations or the way the stemma is built, see the \emph{references} section. 
+For more information about the underlying principles behind the method applied here, particulary the distinction between severe and benigne disagreement, the different status given to readings, omissions and \emph{lacunae}, the notion of conflict between variant locations or the way the stemma is built, see the \emph{references} section. 
 }
 
 \value{
