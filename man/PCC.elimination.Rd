@@ -1,11 +1,9 @@
 \name{PCC.elimination}
 \alias{PCC.elimination}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{PCC Exploratory Methods: Elimination of Over-Conflicting Variant Locations}
 \description{
-The \code{PCC.elimination} function removes the variant locations labeled as over-conflicting by the \code{PCC.overconclicting} function.
+This function removes from the database the variant locations labeled as over-conflicting by the \code{PCC.overconflicting} function.
 }
 \usage{
 PCC.elimination(x)
@@ -18,19 +16,17 @@ PCC.elimination(x)
 When PCC.overconflicting has been applied to a PCC.conflicts object, it returns a table where over-conflicting variants are labeled as such. The PCC.elimination function simply removes those variants.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number, from which over-conflicting variant locations have been removed. 
 }
 \references{
-Jean-Baptiste Camps et Florian Cafiero, "Genealogical variant locations and simplified stemma: a test case", in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, dir. Tara Andrews & Caroline Mace, Turnhout, 2015, p. 69-93 (Lectio, 1)
+Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
 
-Eric Poole, "The Computer in Determining Stemmatic Relationships", Computers and the Humanities 8-4, 1974, p. 207-16
+Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+
+Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
-Jean-Baptiste Camps & Florian Cafiero
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 \note{
 %%  ~~further notes~~

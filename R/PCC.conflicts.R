@@ -65,11 +65,12 @@ PCC.conflicts <-
         #         ".C"                               0.46      0.89      0.46     0.89
         #
         options(stringsAsFactors = FALSE) # Option to avoid using factor and gaining efficiency
-        tableVariantes = as.matrix(x) 
+        #tableVariantes = as.matrix(x) 
         # Perhaps better to do:
-        #         if (!is.matrix(x)) {
-        #             stop("Please input a matrix")
-        #         }
+        if (!is.matrix(x)) {
+          stop("Please input a matrix")
+        }
+        #TODO(JBC):
         # Initial test to verify if the input is what it is supposed to be 
         if (!is.numeric(tableVariantes) & alternateReadings == FALSE) {
             stop("The imput database is not a numeric matrix. If it is a character matrix containing alternate readings please set alternateReadings to true. Otherwise, try converting it to a numeric matrix object.")
