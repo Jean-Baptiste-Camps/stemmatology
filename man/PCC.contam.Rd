@@ -5,34 +5,46 @@
 %%  ~~function to do ... ~~
 }
 \description{
-This function proposes a test to detect a possible contamination. It computes the number of conflicting variants when removing one of the witnesses, for each witness. If removing a witness makes the number of conflicting variants significantly drop, then contamination can be considered as plausible.
+Supplementary function to detect possible contaminations. It computes the number of conflicting variant locations when removing one of the witnesses, for each witness. If removing a witness makes the number of conflicting variant locations significantly drop, then contamination can be considered as plausible.
 }
 \usage{
-PCC.contam(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE)
+PCC.contam(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE)
 }
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+  if \code{alternateReadings = FALSE} (default), a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number;
+  if \code{alternateReadings = TRUE}, a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings);
+ or an object of class "pccConflicts" or "pccElimination". 
+ %TODO: tester le comportement de 'alternateReadings' dans ce cas
+ }
+ \item{omissionsAsReadings}{
+     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
+     Default: \code{FALSE}.
 }
-  \item{pauseAtPlot}{
-logical;  if TRUE, the algorithm stops each time it builds a plot.
-}
-  \item{omissionsAsReadings}{
-logical; if TRUE, omissions are considered as readings.
+  \item{alternateReadings}{
+  logical; if \code{TRUE}, a witness can have multiple variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values. %; if \code{FALSE}, only one reading per witness is allowed. 
+  Default: \code{FALSE}.
+  }
+  \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  An object of class "pccContam", a list containing
+  \item{totalByMs}{a numeric matrix, with, in rows, each variant locations, and,   in columns, the total sum of conflicts and centrality index, followed by 
+  the sum of conflicts, centrality index and difference to the total sum for the
+  removal of each of the witnesses in turn
+  } %TODO: faudrait-il simplifier ou modifier la structure?
+  \item{conflictsDifferences}{a one row numeric matrix, containing, for each
+  witness, the total decrease in conflicts caused by its removal from the
+  computations}
+  \item{database}{the original database used for the calculations}
 }
 \references{
 %% ~put references to the literature/web site here ~
+%%Références aux communications de Leeds et Nancy ?
 }
 \author{
 Jean-Baptiste Camps & Florian Cafiero

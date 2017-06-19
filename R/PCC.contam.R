@@ -1,11 +1,12 @@
 PCC.contam <-
-function(x, pauseAtPlot = FALSE, omissionsAsReadings = FALSE, alternateReadings = FALSE) {
+function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE) {
     ##### Fonction supplémentaire testant le retrait de chacun des mss pour voir
     ##### la différence en termes de nombre de conflits ### /!\ temps très long
     ##### d'exécution... Pour Ambroise, a priori 290s*16 soit 1h20 # En entrée,
     ##### un objet de type PCC.conflicts Various contamination assessment
     ##### methods. /!\ Long execution time.  05/07/2014: added an option to
     ##### pause at each plot
+    ##### TODO(JBC): add/implement interactive=FALSE ?
     if (pauseAtPlot == TRUE) {
         par(ask = TRUE)#TODO(JBC): this is now deprecated, see ?par
     } else {

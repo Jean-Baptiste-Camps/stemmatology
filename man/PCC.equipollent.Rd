@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-Some over-conflicting variants can be algorithmically ruled out for the building of a stemma (see \code{PCC.overconflicting} and \code{PCC.elimination}). Yet, in some cases, choosing between conflicting variables is algorithmically undecidable. PCC.equipollent helps addressing this case. It either replicates the data base to examine the different possble cases, either creates one database where witnesses probably contaminated are replicated.
+Some over-conflicting variants can be algorithmically ruled out for the building of a stemma (see \code{PCC.overconflicting} and \code{PCC.elimination}). Yet, in some cases, choosing between conflicting variables is algorithmically undecidable. PCC.equipollent helps addressing this case. It either replicates the database to examine the different possble cases, either creates one database where witnesses probably contaminated are replicated.
 }
 \usage{
 PCC.equipollent(x)
@@ -47,5 +47,4 @@ For the input: \code{\link{PCC.conflicts}}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{stemmatology}

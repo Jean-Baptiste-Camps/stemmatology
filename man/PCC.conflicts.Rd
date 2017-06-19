@@ -26,11 +26,12 @@ PCC.conflicts(x, omissionsAsReadings = FALSE)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
+An object of class "pccConflicts", a list containing edgelist, conflictsTotal and original database
 %%  ~Describe the value returned
 %%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  \item{edgelist}{a two-column character matrix, giving the edges between variant locations in the network of conflicts}
+  \item{conflictsTotal}{a one-column numeric matrix, giving the total number of conflicts per variant location}
+  \item{database}{the original database used for the calculations}
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -51,6 +52,4 @@ Jean-Baptiste Camps & Florian Cafiero
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{variants}
-\keyword{conflicts}% __ONLY ONE__ keyword per line
-\keyword{detection}
+\keyword{stemmatology}

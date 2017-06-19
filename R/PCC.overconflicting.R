@@ -5,7 +5,7 @@ PCC.overconflicting<-
         ##### il reste encore à intégrer le partitioning around medoids et sa
         ##### représentation sur le barplot. On pourrait se contenter d'utiliser la
         ##### fonction de colorisation des barres, à partir des classes données par
-        ##### le pam.
+        ##### le pam. #EDIT 19 juin 2017: il me semble que c'est fait à présent.
         reseau = x
         ordConflTot = reseau$conflictsTotal[order(reseau$conflictsTotal[, 1], 
                                                   decreasing = TRUE), ]  

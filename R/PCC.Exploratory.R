@@ -8,7 +8,8 @@ function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot 
     # per witness, and a row per variant location, with readings coded
     # with numbers.  TODO(JBC): une version prenant en compte interactive =
     # FALSE, pour tout faire d'elle-même avec des valeurs moyennes (pas pour
-    # tout de suite)
+    # tout de suite) - ou demander à l'utilisateur de les choisir plutôt
+    # que de proposer des valeurs par défaut risquées
     if (!is.matrix(x)) {
         stop("Input must be a matrix.")
     }
