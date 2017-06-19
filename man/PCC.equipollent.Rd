@@ -20,11 +20,9 @@ A \code{PCC.conflicts} object.
 
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+An object of class pccEquipollent, a list containing
+    \item{databases}{a list with all alternative databases that have been created, if any}
+    \item{notInConflict}{a list with The group(s) of VL without internal conflicts}
 }
 \references{
 %% ~put references to the literature/web site here ~

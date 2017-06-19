@@ -94,16 +94,16 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
         myGroupAndModel = cbind(tableVariantes[, myGroup], myModel)  # We compare them ####TODO(JBC): it might not be a good idea to have this level 1 function call another level 1 function. Perhaps the comparison should go in the higher level global function...
         myGroupComp = PCC.disagreement(myGroupAndModel)
         for (m in 1:length(myGroup)) {
-            if (myGroupComp$severedisagreement[myGroup[m], labelMyModel] == 
-                0 && myGroupComp$benignedisagreement[myGroup[m], labelMyModel] == 
+            if (myGroupComp$severeDisagreement[myGroup[m], labelMyModel] == 
+                0 && myGroupComp$benigneDisagreement[myGroup[m], labelMyModel] == 
                 0 && (myGroupComp$omissionsOriented[myGroup[m], labelMyModel] == 
                 0 | is.na(myGroupComp$omissionsOriented[myGroup[m], labelMyModel]))) {
                 print(paste(myGroup[m], "seems to be the model of group", 
                   labelMyMss))
                 extantModel = c(extantModel, myGroup[m])
             } else {
-                print(paste(myGroup[m], "has", myGroupComp$severedisagreement[myGroup[m], 
-                  labelMyModel], "severe disagreement(s),", myGroupComp$benignedisagreement[myGroup[m], 
+                print(paste(myGroup[m], "has", myGroupComp$severeDisagreement[myGroup[m], 
+                  labelMyModel], "severe disagreement(s),", myGroupComp$benigneDisagreement[myGroup[m], 
                   labelMyModel], "benigne disagreement(s),", myGroupComp$omissionsOriented[myGroup[m], 
                   labelMyModel], "omissions", "towards the virtual model. It does not seem to be the model"))
             }
@@ -192,15 +192,15 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
                 myModel)  # We compare them ####TODO(JBC): it might not be a good idea to have this level 1 function call another level 1 function. Perhaps the comparison should go in the higher level global function...
             myOthersComp = PCC.disagreement(othersAndModel)
             for (n in 1:length(others)) {
-                if (myOthersComp$severedisagreement[others[n], labelMyModel] == 
-                  0 && myOthersComp$benignedisagreement[others[n], labelMyModel] == 
+                if (myOthersComp$severeDisagreement[others[n], labelMyModel] == 
+                  0 && myOthersComp$benigneDisagreement[others[n], labelMyModel] == 
                   0 && (myOthersComp$omissionsOriented[others[n], labelMyModel] == 
                   0 | is.na(myOthersComp$omissionsOriented[others[n], labelMyModel]))) {
                   print(paste(others[n], "seems to be the model."))
                   extantModel = c(extantModel, others[n])
                 } else {
-                  print(paste(others[n], "has", myOthersComp$severedisagreement[others[n], 
-                    labelMyModel], "severe disagreement(s),", myOthersComp$benignedisagreement[others[n], 
+                  print(paste(others[n], "has", myOthersComp$severeDisagreement[others[n], 
+                    labelMyModel], "severe disagreement(s),", myOthersComp$benigneDisagreement[others[n], 
                     labelMyModel], "benigne disagreement(s),", myOthersComp$omissionsOriented[others[n], 
                     labelMyModel], "omissions", "towards the virtual model. It does not seem to be the model"))
                 }

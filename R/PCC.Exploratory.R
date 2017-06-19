@@ -30,7 +30,7 @@ function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot 
     }
     answered = FALSE
     while (answered == FALSE) {
-        pccElimination = PCC.elimination(pccConflicts)
+        pccOverconflicting = PCC.overconflicting(pccConflicts)
         writeLines("Are you satisfied with this configuration and do you want to\n Proceed to actual elimination of over-conflicting variant locations [P],\n  Try again with different value [T],\n or Quit [Q] ? \n ")
         reiterateQuestion = TRUE
         while (reiterateQuestion == TRUE) {
@@ -42,7 +42,7 @@ function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot 
                 reiterateQuestion = FALSE
             }
             if (answerOne == "Q") {
-                return(pccElimination)
+                return(pccOverconflicting)
             }
             if (answerOne == "P") {
                 reiterateQuestion = FALSE
@@ -50,8 +50,8 @@ function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot 
             }
         }
     }
-    pccDoElimination = PCC.doElimination(pccElimination)
-    pccConflicts = PCC.conflicts(pccDoElimination, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)
+    pccElimination = PCC.elimination(pccOverconflicting)
+    pccConflicts = PCC.conflicts(pccElimination, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)
     if (sum(pccConflicts$conflictsTotal[, 1]) == 0) {
         print("There is no longer any conflict in the database. Function will stop.")
         return(pccConflicts)

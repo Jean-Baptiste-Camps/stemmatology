@@ -78,12 +78,12 @@ PCC.equipollent <-
         }
         # Ensuite, demander selon si on veut dupliquer toute la base, ou
         # seulement un ms. donné, agir en fonction
-        print("The group of VL without internal conflicts are :")
+        print("The group(s) of VL without internal conflicts are :")
         print(notInConflict)
         writeLines("Do you wish to separate them for the whole tradition [T]\n or only for some (presumably contaminated) manuscripts [M]\n - or not at all (press any other key)?")
         answer = readline("(T/M/q)")  ##Enter here the duplication code
+        databases = as.list(NULL)
         if ((answer == "T") | (answer == "M")) {
-            databases = as.list(NULL)
             if (answer == "T") {
                 # We create as many alternatives as there are unconflicting
                 # configurations And we delete every conflicting row, **except for the
@@ -107,10 +107,14 @@ PCC.equipollent <-
                     databases[[o]][rownames(database) %in% delete, mss] = NA
                 }
             }
-            class(databases) = "pccEquipollentDatabases" # class containing alternative databases
-            return(databases)
-        } else {
-            class(notInConflict) = "pccEquipollentEdges" # class containing simply edges
-            return(notInConflict)
         }
+        #Préparation de la sortie: 
+        #An object of class pccEquipollent, a list containing
+        # 1. a list with all alternative databases that have been created, if any
+        # 2. a list with The group(s) of VL without internal conflicts
+        output = as.list(NULL)
+        output$databases = databases
+        output$notInConflict = notInConflict
+        class(output) = "pccEquipollent"
+        return(output)
     }

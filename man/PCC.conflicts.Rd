@@ -26,9 +26,7 @@ PCC.conflicts(x, omissionsAsReadings = FALSE)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-An object of class "pccConflicts", a list containing edgelist, conflictsTotal and original database
-%%  ~Describe the value returned
-%%  If it is a LIST, use
+An object of class "pccConflicts", a list containing
   \item{edgelist}{a two-column character matrix, giving the edges between variant locations in the network of conflicts}
   \item{conflictsTotal}{a one-column numeric matrix, giving the total number of conflicts per variant location}
   \item{database}{the original database used for the calculations}

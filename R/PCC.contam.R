@@ -15,13 +15,13 @@ function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot 
     if (is.matrix(x)) {
         tableVariantes = x
     } else {
-        if (class(x) == "pccConflicts" | class(x) == "pccElimination") { # TODO(JBC): There is a cleaner way to define methods for classes
+        if (class(x) == "pccConflicts" | class(x) == "pccOverconflicting") { # TODO(JBC): There is a cleaner way to define methods for classes
             tableVariantes = x$database
         } else {
-            if (class(x) == "pccEquipollentDatabases") {
+            if (class(x) == "pccEquipollent") {
                 stop("It does not really make sense to apply PCC.contam() to an already equipollented database.")
             } else {
-                stop("Input is neither a matrix, nor a object of class pccConflicts or pccElimination.")
+                stop("Input is neither a matrix, nor a object of class pccConflicts or pccOverconflicting.")
             }
         }
     }

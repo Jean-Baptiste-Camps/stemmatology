@@ -134,6 +134,6 @@ PCC.overconflicting<-
         # we add the vertexAttributes to the pccConflicts object inputed, and
         # return it as a pccElimination object
         reseau$vertexAttributes = vertexAttributes 
-        class(reseau) = "pccElimination"
+        class(reseau) = "pccOverconflicting"
         return(reseau)
     }

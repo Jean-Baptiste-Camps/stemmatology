@@ -12,12 +12,10 @@ PCC.elimination(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-A PCC.overconflicting object.
-}
+  \item{x}{an object of class pccOverconflicting.}
 }
 \details{
-When PCC.overconflicting has been applied to a PCC.conflict object, it returns a table where over-conflicting variants are labeled as such. The PCC.elimination function simply removes those variants.
+When PCC.overconflicting has been applied to a PCC.conflicts object, it returns a table where over-conflicting variants are labeled as such. The PCC.elimination function simply removes those variants.
 }
 \value{
 %%  ~Describe the value returned

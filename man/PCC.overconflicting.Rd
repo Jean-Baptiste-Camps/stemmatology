@@ -5,26 +5,25 @@
 %%  ~~function to do ... ~~
 }
 \description{
-PCC.overconflicting is dedicated to the elimination of problematic variant locations, as defined in Poole (1974) and Camps & Cafiero (2015). It helps the user defining a threshold above which variant locations are considered to be over-conflicting. It returns a table where those variant locations are labeled as problematic.
+PCC.overconflicting is dedicated to the identification of problematic variant locations, as defined in Poole (1974) and Camps & Cafiero (2015). It helps the user defining a threshold above which variant locations are considered to be over-conflicting. It returns a table where those variant locations are labeled as overconflicting.
 }
 \usage{
 PCC.overconflicting(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-a PCC.conflict object
-}
+  \item{x}{an object of class pccConflicts}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  An object of class "pccOverconflicting", a list containing the three same first objects as the "pccConflicts" input, 
+    \item{edgelist}{a two-column character matrix, giving the edges between variant locations in the network of conflicts}
+  \item{conflictsTotal}{a one-column numeric matrix, giving the total number of conflicts per variant location}
+  \item{database}{the original database used for the calculations}
+  and adding
+  \item{vertexAttributes}{a two column character matrix, with a row per vertex of the network (i.e. variant location), giving its label and color}
 }
 \references{
 Jean-Baptiste Camps et Florian Cafiero, "Genealogical variant locations and simplified stemma: a test case", in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Mace, Turnhout, 2015, p. 69-93 (Lectio, 1)
@@ -42,9 +41,11 @@ Jean-Baptiste Camps & Florian Cafiero
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-To remove the variants labeled as problematic: \code{\link{PCC.elimination}}
-
-About the input for this fonction : \code{\link{PCC.conflicts}
+%About the input for this fonction : 
+\code{\link{PCC.conflicts}},
+%To remove the variants labeled as problematic: 
+\code{\link{PCC.elimination}},
+\code{\link{PCC.Exploratory}}
 }
 \examples{
 }
