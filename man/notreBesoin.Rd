@@ -1,12 +1,8 @@
 \name{notreBesoin}
 \alias{notreBesoin}
 \docType{data}
-\title{Notre Besoin data set
-%%   ~~ data name/kind ... ~~
-}
-\description{Data from the artificial tradition ...
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
-}
+\title{Notre Besoin data set}
+\description{Data from the artificial tradition \emph{Notre-Besoin}}
 \usage{data(notreBesoin)}
 \format{
   A matrix with 42 observations on the following 13 variables.
@@ -26,20 +22,21 @@
     \item{\code{nb13}}{a numeric vector}
   }
 }
-\details{ The variant locations have been selected and encoded ...
-%%  ~~ If necessary, more details than the __description__ above ~~
+\details{%
+The data comes from an artificial tradition, created under controlled circumstances.
+The variant locations have been selected to retain only substantial readings.
+The data is presented here as used in Camps & Cafiero 2015, without further modifications or corrections.
+Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
 \source{
-    CASC
-    
-    Macé et al.
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
+Baret, Philippe V., Robinson, P., and Macé, C., « Testing methods on an artificially created textual tradition », Linguistica computazionale 24 (2004), P. 1000–1029.
+
+Roos, Teemu, Heikkilä, Tuomas, and Myllymäki, Petri, « Computer-Assisted Stemmatology Challenge », 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
 }
 \references{
-%%  ~~ possibly secondary sources and usages ~~
+Camps (Jean-Baptiste) & Cafiero (Florian), « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, ed. Tara Andrews & Caroline Macé, Turnhout: Brepols, 2015, p. 69‑93 (Lectio, 1), \url{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}.
 }
 \examples{
 data(notreBesoin)
-## maybe str(notreBesoin) ; plot(notreBesoin) ...
 }
 \keyword{datasets}
