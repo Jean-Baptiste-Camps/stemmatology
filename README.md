@@ -1,0 +1,48 @@
+# stemmatology : an R stemmatology package
+# Version: 0.2.2 (pre-alpha)
+# Date: 2014-07-16
+# Author: Jean-Baptiste Camps ; Florian Cafiero
+# Maintainer: complain to <jbcamps@hotmail.com>, <florian.cafiero@polytechnique.edu>
+# Description: This package helps building and analysing the genealogy of textual traditions.
+# License: CC BY-NC-SA 3.0
+
+# This repository contains the source file of the development version for the project of a stemmatology package for R. This package will contain functions for the PCC method as described in Jean-Baptiste Camps And Florian Cafiero, « Genealogical Variant Locations And Simplified Stemma: A Test Case », 2014, as well as other stemmatological method (see roadmap at https://graal.hypotheses.org/925).
+
+#######################################################
+## Log of the last updates
+#######################################################
+#Version 0.2.2, mise à jour du 16 juillet 2014
+#  Ajout de nouvelles fonctions (groupe des fonctions PCC achevé, encore à débuguer)
+#  Correction d'un bug sur PCC.doElimination
+#  Harmonisation des noms de variables
+#  Réduction du nombre de bibliothèques chargées au démarrage
+#Version 0.2.1, mise à jour du 1er juillet 2014
+#    Correction d'un bug sur la fonction PCC.contam (X non défini).
+#    Intégration du tracé du graphique et Insertion des bibliothèques nécessaires à cette fin (à recalibrer encore).
+#    N.B.: ultérieurement, il pourrait être bon, soit de proposer plot comme option [plutôt], soit de redistinguer plot et la fonction conflicts.
+#     Agenda - TODO(global):
+#	 - remplacer print()/writelines() par message() ou warning() lorsque cela est approprié.
+#        - ajouter une fonction PCC (tout court) qui fasse l'ensemble du trajet).
+#        - ajouter la liste des packages qui doivent être masqués lors de l'import du nôtre (pas très urgent, mais doit impérativement être fait avant une release, pour éviter les bugs)
+#        - avant ou durant la mise en package et son chargement sur GitHub, relire l'ensemble du code, le commenter, l'optimiser si possible, le retester et le nettoyer
+#        - intégration d'autres outils de construction de l'arbre  
+#        - développement des méthodes de caractérisation de la contamination (fonctions maison, mais aussi cardiogrammes)
+#       - intégration de la fonction de construction de l'arbre en tradition contaminée.
+#    - à faire, comme partie de la mise en module : définir un ensemble de classes ; différencier les comportements selon les classes ; cf. Leisch, Creating packages, p. 5 et suiv.
+#et R TEAM, “Writing R Extensions”, 2008
+#	 NB: documentation files must be regenerated (using prompt) when a modification to the code has been made.
+
+##NB: Functions for Debugging
+# Debug Mode
+#   debug(fun, text = "", condition = NULL)
+#   debugonce(fun, text = "", condition = NULL)
+#   undebug(fun)
+#   isdebugged(fun)
+# Show error context (very useful)
+#   options(show.error.locations=TRUE)
+
+##NB: pour augmenter l'efficacité du code R et faire du profiling, benchmark :
+# https://www.stat.auckland.ac.nz/~stat782/downloads/10-Efficiency-handouts.pdf
+# Advanced R, Performance : http://adv-r.had.co.nz/Performance.html
+# Commandes Rprof() et summaryRprof()
+# package microbenchmark
