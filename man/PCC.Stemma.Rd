@@ -2,9 +2,10 @@
 \alias{PCC.Stemma}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+PCC.Stemma: Building the Stemma Codicum
 }
-\description{
+\description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. It stops when the last four manuscripts are to be ordered, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
+
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
@@ -35,18 +36,17 @@ The maximum number of severe disagreements expected for witnesses to be in the s
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%% TODO(JBC): définir et documenter la class "pccStemma" de sortie de cette fonction.
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+
 }
 \references{
-%% ~put references to the literature/web site here ~
+Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+
+Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+
+Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
-Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{florian.cafiero@polytechnique.edu})
 }
 \note{
 %%  ~~further notes~~

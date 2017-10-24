@@ -2,10 +2,10 @@
 \alias{Import.TEIApparatus}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Import TEI apparatus
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Allows the user to import a TEI document.
 }
 \usage{
 Import.TEIApparatus(file = x, fromCollatex = False)
@@ -13,10 +13,10 @@ Import.TEIApparatus(file = x, fromCollatex = False)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{
-%%     ~~Describe \code{file} here~~
+Adress of valid TEI file.
 }
   \item{fromCollatex}{
-%%     ~~Describe \code{fromCollatex} here~~
+Default: \code{false}
 }
 }
 \details{
@@ -30,37 +30,15 @@ Import.TEIApparatus(file = x, fromCollatex = False)
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+
+Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+
+Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{florian.cafiero@polytechnique.edu})
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (file = x, fromCollatex = False) 
-{
-    commandeXSLT = paste("xsltproc genere-Tableau-JBCamps-avec-exclusion-des-types_v3_cours.xsl ", 
-        x)
-    parsedTEI = system(commandeXSLT, intern = TRUE)
-    tableVariantes = read.csv(textConnection(parsedTEI), header = TRUE, 
-        row.names = 1, sep = ";")
-    return(tableVariantes)
-  }
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{TEI }

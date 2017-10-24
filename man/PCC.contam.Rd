@@ -2,7 +2,7 @@
 \alias{PCC.contam}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+PCC Exploratory Methods: Contamination Detection
 }
 \description{
 Supplementary function to detect possible contaminations. It computes the number of conflicting variant locations when removing one of the witnesses, for each witness. If removing a witness makes the number of conflicting variant locations significantly drop, then contamination can be considered as plausible.
@@ -43,8 +43,11 @@ PCC.contam(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlo
   \item{database}{the original database used for the calculations}
 }
 \references{
-%% ~put references to the literature/web site here ~
-%%Références aux communications de Leeds et Nancy ?
+Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+
+Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+
+Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
 Jean-Baptiste Camps & Florian Cafiero
