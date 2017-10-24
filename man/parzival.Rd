@@ -4,9 +4,7 @@
 \title{Parzival data set
 %%   ~~ data name/kind ... ~~
 }
-\description{Data from the artifical textual tradition (view )
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
-}
+\description{Data from the artifical textual tradition \emph{Parzival}}
 \usage{data(parzival)}
 \format{
   A matrix with 139 observations on the following 16 variables.
@@ -30,17 +28,20 @@
   }
 }
 \details{
-%%  ~~ If necessary, more details than the __description__ above ~~
+The data comes from an artificial tradition, created under controlled circumstances.
+The variant locations have been selected to retain only substantial readings.
+The data is presented here as used in Camps & Cafiero 2015, without further modifications or corrections.
+Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
 \source{
-Computer assisted stemmatology challenge...
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
+Spencer, M., Davidson, E. A., Barbrook, A. C., and Howe, C. J., Phylogenetics of artificial manuscripts, Journal of Theoretical Biology, 227 (2004), p. 503–11, \url{https://doi.org/10.1016/j.jtbi.2003.11.022}.
+
+Roos, Teemu, Heikkilä, Tuomas, and Myllymäki, Petri, « Computer-Assisted Stemmatology Challenge », 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
 }
 \references{
-%%  ~~ possibly secondary sources and usages ~~
+Camps (Jean-Baptiste) & Cafiero (Florian), « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, ed. Tara Andrews & Caroline Macé, Turnhout: Brepols, 2015, p. 69‑93 (Lectio, 1), \url{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}.
 }
 \examples{
 data(parzival)
-## maybe str(parzival) ; plot(parzival) ...
 }
 \keyword{datasets}

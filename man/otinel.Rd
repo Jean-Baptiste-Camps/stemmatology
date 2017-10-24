@@ -4,9 +4,7 @@
 \title{Otinel data set
 %%   ~~ data name/kind ... ~~
 }
-\description{Data for the tradition of the \emph{Chanson d'Otinel}
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
-}
+\description{Data for the tradition of the \emph{Chanson d'Otinel}}
 \usage{data(otinel)}
 \format{
   A matrix with 36 observations on the following 8 variables.
@@ -22,16 +20,16 @@
   }
 }
 \details{
-%%  ~~ If necessary, more details than the __description__ above ~~
+A sample of 36 substantial readings, taken from the tradition (Old French and translations) of the \emph{Chanson d'Otinel}. Data will be subject to updates.
+Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
-\source{JB Camps, La Chanson d'Otinel,...
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
+\source{%
+Camps (Jean-Baptiste). « La `Chanson d’Otinel’: édition complète du corpus manuscrit et prolégomènes à l’édition critique », thèse de doctorat, dir. Dominique Boutet, Paris-Sorbonne, 2016, \url{http://www.theses.fr/2016PA040173}.
 }
-\references{
+%\references{
 %%  ~~ possibly secondary sources and usages ~~
-}
+%}
 \examples{
 data(otinel)
-## maybe str(otinel) ; plot(otinel) ...
 }
 \keyword{datasets}
