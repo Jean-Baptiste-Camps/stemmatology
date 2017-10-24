@@ -59,7 +59,7 @@ Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La 
 Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
-Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{florian.cafiero@polytechnique.edu})
 }
 \note{
 %%%
