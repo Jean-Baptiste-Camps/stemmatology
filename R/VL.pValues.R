@@ -5,7 +5,7 @@ function(x) {
     pValueTable = matrix(nrow = nrow(tableVariantes), ncol = nrow(tableVariantes), 
         dimnames = c(labels(tableVariantes)[1], labels(tableVariantes)[1]))
     totalpValue = matrix(nrow = nrow(tableVariantes), ncol = 1, dimnames = c(labels(tableVariantes)[1], 
-        "Total inférieur à 0,05"))
+        "Total inferor to 0,05"))
     for (i in 1:nrow(tableVariantes)) {
         testTable = tableVariantes[-i, , drop = FALSE]
         totalpValue[i, ] = 0

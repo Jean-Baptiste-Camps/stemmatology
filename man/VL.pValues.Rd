@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This functions aims at distinguishing random polygenesis from contamination, using Fisher exact test.
 }
 \usage{
 VL.pValues(x)
@@ -17,6 +17,8 @@ VL.pValues(x)
 }
 }
 \details{
+In order to assess the signiﬁcance of each variant location, and distinguish
+random polygenesis from contamination (i.e. copying based on several exemplars), this function 
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
@@ -27,7 +29,8 @@ VL.pValues(x)
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+Jean-Baptiste Camps, « Detecting Contaminations in Textual Traditions
+Computer Assisted and Traditional Methods»,  Leeds, International Medieval Congress, 2013, unpublished paper, \url{https://www.academia.edu/3825633/Detecting_Contaminations_in_Textual_Traditions_Computer_Assisted_and_Traditional_Methods}.
 }
 \author{
 %%  ~~who you are~~
