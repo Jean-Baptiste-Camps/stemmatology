@@ -46,14 +46,14 @@ Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Com
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{florian.cafiero@polytechnique.edu})
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{PCC.disagreement}}, \code{\link{PCC.buildgroup}}, \code{\link{PCC.reconstructModel}}.
 }
 \examples{
 
@@ -61,3 +61,4 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{flor
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{stemma}
+\keyword{stemmatology}
