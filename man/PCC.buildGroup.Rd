@@ -1,8 +1,7 @@
 \name{PCC.buildGroup}
 \alias{PCC.buildGroup}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
+\title{PCC.buildgroup
 }
 \description{
 \code{PCC.buildgroup} groups together witnesses in relevant clusters.
@@ -16,7 +15,7 @@ PCC.buildGroup(x, limit = 0)
 A PCC.disagreement object.
 }
   \item{limit}{
-  The maximum number of severe disagreements allowed for two witnesses in the same group. Default: \code{0}.
+  The maximum number of severe disagreements allowed for two witnesses in the same group. Default (and advised) value: \code{0}.
 }
 }
 \details{
@@ -30,7 +29,11 @@ A PCC.disagreement object.
 %% ...
 }
 \references{
-%% ~put references to the literature/web site here ~
+Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+
+Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+
+Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
@@ -49,5 +52,6 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{stemma}
+\keyword{construction}% __ONLY ONE__ keyword per line
+\keyword{stemmatology}
