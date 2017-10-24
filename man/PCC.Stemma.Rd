@@ -1,9 +1,8 @@
 \name{PCC.Stemma}
 \alias{PCC.Stemma}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{PCC Stemma-building methods}
+
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

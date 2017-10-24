@@ -54,9 +54,9 @@ Notice how a witness can bear several readings (e.g., P1 at VL 1).
     
     \code{\link{PCC}}: global shell for the PCC functions
     
-    \code{\link{PCC.Exploratory}}
+    \code{\link{PCC.Exploratory}}: global function for exploratory methods of the PCC family
     
-    \code{\link{PCC.Stemma}}
+    \code{\link{PCC.Stemma}}: 
     }
 
 \subsection{Other functions}{
@@ -73,14 +73,12 @@ Methods to explore the possible proofs of contamination inside a textual traditi
 \code{\link{VL.pValues}}
 
 % Other methods
-The package aims at making available various other stemmatological methods ...
+The package aims at making available various other stemmatological methods, including further functions for contamination detection, 
+or for theoretical stemmatology.
 
-% Tools
-Various tools for stemmatological analysis
+%The package should include a function to generate arbitrary stemmata based on a set of parameters (fecundity, decimation rate at each level, number of generations, ...).
 
-The package should include a function to generate arbitrary stemmata based on a set of parameters (fecundity, decimation rate at each level, number of generations, ...).
-
-It should also have a function for the analysis of stemmata shapes, and making hypotheses on the parameters of the original tradition
+%It should also have a function for the analysis of stemmata shapes, and making hypotheses on the parameters of the original tradition
 
 }
 \author{
@@ -92,7 +90,6 @@ Maintainer: Jean-Baptiste Camps <\email{jbcamps@hotmail.com}>.
 }
 \references{
 Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
-
 %TODO: mettre le poster quand paru.
 }
 
