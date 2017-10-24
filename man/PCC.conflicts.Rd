@@ -55,7 +55,7 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 \examples{
 %TODO: fignoler globalement les exemples et les reprendre, voire les affiner.
-load(fournival)
+data(fournival)
 myConflicts = PCC.conflicts(fournival)
 myOverconflicting = PCC.overconflicting(myConflicts)
 myNewVariantsTable = PCC.elimination(myOverconflicting)

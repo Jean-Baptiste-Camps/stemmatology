@@ -71,8 +71,8 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{flori
 \code{\link{PCC.Exploratory}}, \code{\link{PCC.Stemma}}.
 }
 \examples{
-load(fournival)
-PCC(fournival)
+%data(fournival)
+%PCC(fournival)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -36,7 +36,7 @@ Jean-Baptiste Camps
 %%  ~~further notes~~
 %}
 
-\warning{This function is still in active development.}
+\note{This function is still in active development.}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

@@ -16,7 +16,7 @@ License: \tab  CC BY-NC-SA 2.0\cr
 
 This package includes various functions for stemmatological analysis. 
 
-\subsection{Input}
+\subsection{Input}{
 
 Most of the functions take, as input a \emph{numeric matrix}, with witnesses in columns, variant locations in rows, and readings coded by a number, e.g.
 
@@ -41,6 +41,7 @@ Alternatively , if \code{alternateReadings = TRUE}, the input can be a \emph{cha
 4 \tab 1,3 \tab 1,2 \tab 1 \tab 2 \tab 3 \cr
 }
 Notice how a witness can bear several readings (e.g., P1 at VL 1).
+}
 
 % Import functions
 \subsection{Import functions}{
@@ -56,21 +57,12 @@ Notice how a witness can bear several readings (e.g., P1 at VL 1).
     
     \code{\link{PCC.Exploratory}}: global function for exploratory methods of the PCC family
     
-    \code{\link{PCC.Stemma}}: 
+    \code{\link{PCC.Stemma}}: Building the Stemma Codicum.
     }
 
 \subsection{Other functions}{
 The package contains also various other functions, particularly aimed at
 detecting contamination. It contains for instance the function \code{\link{VL.pValues}} (presented in Camps 2013 unpublished)
-
-%TODO: reprendre doc de cette commande quand on l'aura écrite
-}    
-    
-}
-
-% Exploratory methods
-Methods to explore the possible proofs of contamination inside a textual tradition
-\code{\link{VL.pValues}}
 
 % Other methods
 The package aims at making available various other stemmatological methods, including further functions for contamination detection, 
@@ -79,8 +71,10 @@ or for theoretical stemmatology.
 %The package should include a function to generate arbitrary stemmata based on a set of parameters (fecundity, decimation rate at each level, number of generations, ...).
 
 %It should also have a function for the analysis of stemmata shapes, and making hypotheses on the parameters of the original tradition
-
+}    
+    
 }
+
 \author{
 Jean-Baptiste Camps (École nationale des chartes, PSL Research University).
 
