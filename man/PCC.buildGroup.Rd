@@ -52,5 +52,6 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{stemma }
+\keyword{stemma}
 \keyword{construction}% __ONLY ONE__ keyword per line
+\keyword{stemmatology}
