@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.contam}
 \alias{PCC.contam}
 %- Also NEED an '\alias' for EACH other topic documented here.

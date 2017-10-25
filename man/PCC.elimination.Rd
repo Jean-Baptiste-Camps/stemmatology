@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.elimination}
 \alias{PCC.elimination}
 %- Also NEED an '\alias' for EACH other topic documented here.

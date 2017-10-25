@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{parzival}
 \alias{parzival}
 \docType{data}

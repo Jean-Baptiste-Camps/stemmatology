@@ -1,9 +1,10 @@
+\encoding{utf8}
 \name{stemmatology}
 \alias{stemmatology-package}
 \docType{package}
 \title{An R stemmatology package}
 \description{
-This packages implements various methods from the stemmatological analysis of textual traditions. It contains both exploratory methods and algorithms aimed at building stemmata from a table of variant locations.
+This packages implements various methods for the stemmatological analysis of textual traditions. It contains both exploratory methods and algorithms aimed at building stemmata from a table of variant locations.
 }
 \details{
 \tabular{ll}{

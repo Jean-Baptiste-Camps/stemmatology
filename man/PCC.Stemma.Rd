@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.Stemma}
 \alias{PCC.Stemma}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -53,7 +54,7 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{flor
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{PCC.disagreement}}, \code{\link{PCC.buildgroup}}, \code{\link{PCC.reconstructModel}}.
+\code{\link{PCC.disagreement}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}.
 }
 \examples{
 

@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{fournival}
 \alias{fournival}
 \docType{data}

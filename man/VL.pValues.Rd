@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{VL.pValues}
 \alias{VL.pValues}
 %- Also NEED an '\alias' for EACH other topic documented here.

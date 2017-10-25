@@ -2,6 +2,6 @@
 ^README-.*\.png$
 ^\.travis\.yml$
 ^codecov\.yml$
-^\.Rhistory$
-^\.gitignore$
-^\.git$
+\.Rhistory
+\.gitignore
+\.git

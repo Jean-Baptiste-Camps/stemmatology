@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{otinel}
 \alias{otinel}
 \docType{data}

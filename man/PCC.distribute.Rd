@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.distribute}
 \alias{PCC.distribute}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -50,5 +51,5 @@ Jean-Baptiste Camps & Florian Cafiero
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{stemmatology}
+\keyword{data-manipulation}%vérif keywords

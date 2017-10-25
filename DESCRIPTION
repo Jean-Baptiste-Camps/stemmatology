@@ -7,7 +7,7 @@ Author: Jean-Baptiste Camps ; Florian Cafiero
 Maintainer: Jean-Baptiste Camps <jbcamps@hotmail.com>
 Description: This package helps building and analysing the genealogy of textual or musical traditions.
 BugReports: https://github.com/Jean-Baptiste-Camps/stemmatology/issues
-Imports: network, sna, cluster
+Imports: graphics, stats, utils, network, sna, cluster
 Suggests: 
     testthat,
     knitr,
@@ -17,3 +17,4 @@ License: CC BY-NC-SA 2.0
 NeedsCompilation: no
 URL: https://github.com/Jean-Baptiste-Camps/stemmatology
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1

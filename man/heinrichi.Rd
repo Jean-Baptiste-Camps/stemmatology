@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{heinrichi}
 \alias{heinrichi}
 \docType{data}

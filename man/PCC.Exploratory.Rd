@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.Exploratory}
 \alias{PCC.Exploratory}
 \title{PCC Exploratory methods}

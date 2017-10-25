@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.overconflicting}
 \alias{PCC.overconflicting}
 %- Also NEED an '\alias' for EACH other topic documented here.

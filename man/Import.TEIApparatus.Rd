@@ -1,10 +1,11 @@
+\encoding{utf8}
 \name{Import.TEIApparatus}
 \alias{Import.TEIApparatus}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Import TEI apparatus}
 \description{Allows the user to import a TEI encoded parallel-segmentation apparatus.}
 \usage{
-Import.TEIApparatus(file = x, fromCollatex = False)
+Import.TEIApparatus(file = x, fromCollatex = FALSE)
 }
 
 \arguments{
