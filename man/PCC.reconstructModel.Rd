@@ -58,6 +58,10 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
+\examples{
+
+}
+
 \seealso{
 More about the next step: \code{\link{PCC.Stemma}}.
 More about the input: \code{\link{PCC.buildGroup}}

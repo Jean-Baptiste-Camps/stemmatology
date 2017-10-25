@@ -57,11 +57,11 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 \examples{
 %TODO: fignoler globalement les exemples et les reprendre, voire les affiner.
 data(fournival)
-%myConflicts = PCC.conflicts(fournival)
+myConflicts = PCC.conflicts(fournival)
 %myOverconflicting = PCC.overconflicting(myConflicts)
 %myNewVariantsTable = PCC.elimination(myOverconflicting)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{stemmatology}
-\keyword{philology}
+%\keyword{philology}

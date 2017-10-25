@@ -41,11 +41,11 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{PCC.Exploratory},
+\code{\link{PCC.Exploratory}},
 %About the input for this fonction : 
 \code{\link{PCC.conflicts}},
 %To remove the variants labeled as problematic: 
-\code{\link{PCC.elimination}}.}
+\code{\link{PCC.elimination}}.
 }
 \examples{
 }

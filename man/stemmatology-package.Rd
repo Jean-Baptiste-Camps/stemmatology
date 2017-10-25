@@ -103,5 +103,5 @@ Please report issues with this package to \url{https://github.com/Jean-Baptiste-
 
 \examples{
 data(fournival)
-PCC.Exploratory(fournival)
+%PCC.Exploratory(fournival)
 }

@@ -16,7 +16,7 @@ VL.pValues(x)
 }
 }
 \details{
-In order to assess the signiﬁcance of each variant location, and distinguish
+In order to assess the significance of each variant location, and distinguish
 random polygenesis from contamination (i.e. copying based on several exemplars), this function crosses two by two every possible pair of variant locations, and applies a Fisher exact test. It then counts the number of configurations in which a VL has passed the significance threshold (i.e. p < 0.05).
 }
 \value{
