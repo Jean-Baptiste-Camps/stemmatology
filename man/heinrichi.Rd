@@ -59,9 +59,6 @@ Roos, Teemu, Heikkilä, Tuomas, and Myllymäki, Petri, « Computer-Assisted Ste
 \references{
 Camps (Jean-Baptiste) & Cafiero (Florian), « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, ed. Tara Andrews & Caroline Macé, Turnhout: Brepols, 2015, p. 69‑93 (Lectio, 1), \url{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}.
 }
-\references{
-Camps (Jean-Baptiste) & Cafiero (Florian), « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, ed. Tara Andrews & Caroline Macé, Turnhout: Brepols, 2015, p. 69‑93 (Lectio, 1), \url{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}.
-}
 \examples{
 data(heinrichi)
 }
