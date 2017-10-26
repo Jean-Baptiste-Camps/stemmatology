@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.Exploratory}
 \alias{PCC.Exploratory}
 \title{PCC Exploratory methods}
@@ -56,8 +57,8 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-load(fournival)
-PCC.Exploratory(fournival)
+data(fournival)
+%PCC.Exploratory(fournival)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

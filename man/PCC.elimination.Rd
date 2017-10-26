@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.elimination}
 \alias{PCC.elimination}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -43,7 +44,4 @@ To spot the conflicts between variants: \code{\link{PCC.conflicts}}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{over-conflicting}
-\keyword{variants}% __ONLY ONE__ keyword per line
-\keyword{selection}
-\keyword{deletion}
+\keyword{stemmatology}

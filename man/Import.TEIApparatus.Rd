@@ -1,16 +1,13 @@
+\encoding{utf8}
 \name{Import.TEIApparatus}
 \alias{Import.TEIApparatus}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Import TEI apparatus
-}
-\description{
-Allows the user to import a TEI document.
-}
+\title{Import TEI apparatus}
+\description{Allows the user to import a TEI encoded parallel-segmentation apparatus.}
 \usage{
-Import.TEIApparatus(file = x, fromCollatex = False)
+Import.TEIApparatus(file = x, fromCollatex = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{file}{
 Adress of valid TEI file.
@@ -29,11 +26,12 @@ Default: \code{false}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 }
-\references{
+%\references{
+%}
 
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{florian.cafiero@polytechnique.edu})
 }
 
 
-\keyword{TEI }
+\keyword{TEI}

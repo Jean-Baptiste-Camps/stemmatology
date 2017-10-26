@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.equipollent}
 \alias{PCC.equipollent}
 %- Also NEED an '\alias' for EACH other topic documented here.

@@ -1,1 +1,7 @@
 exportPattern("^[[:alpha:]]+")
+importFrom("graphics", "axis", "barplot", "legend", "par", "plot")
+importFrom("stats", "fisher.test", "na.omit")
+importFrom("utils", "read.csv")
+importFrom("sna", "gplot", "gplot.layout.fruchtermanreingold")
+importFrom("network", "as.network", "network.vertex.names", "as.matrix.network", "set.vertex.attribute", "get.vertex.attribute")
+importFrom("cluster", "pam")

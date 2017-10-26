@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.buildGroup}
 \alias{PCC.buildGroup}
 %- Also NEED an '\alias' for EACH other topic documented here.

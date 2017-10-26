@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{notreBesoin}
 \alias{notreBesoin}
 \docType{data}

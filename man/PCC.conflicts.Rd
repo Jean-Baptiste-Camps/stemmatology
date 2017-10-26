@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.conflicts}
 \alias{PCC.conflicts}
 \title{PCC Exploratory Methods: Conflicts between Variant Locations}
@@ -55,12 +56,12 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
 \examples{
 %TODO: fignoler globalement les exemples et les reprendre, voire les affiner.
-load(fournival)
+data(fournival)
 myConflicts = PCC.conflicts(fournival)
-myOverconflicting = PCC.overconflicting(myConflicts)
-myNewVariantsTable = PCC.elimination(myOverconflicting)
+%myOverconflicting = PCC.overconflicting(myConflicts)
+%myNewVariantsTable = PCC.elimination(myOverconflicting)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{stemmatology}
-\keyword{philology}
+%\keyword{philology}

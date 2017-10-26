@@ -1,3 +1,4 @@
+\encoding{utf8}
 \name{PCC.reconstructModel}
 \alias{PCC.reconstructModel}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -19,11 +20,12 @@ A PCCbuildGroup object.
      
      Default: \code{FALSE}.
 }
-  \item{limit}{
-The maximum number of severe disagreements expected for witnesses to be in the same group. 
-
-    Default: \code{0}.
-}
+%  \item{limit}{
+%The maximum number of severe disagreements expected for witnesses to be in the same group. 
+%
+%    Default: \code{0}.
+%}
+%TODO: faut-il implementer qqchose de ce genre pour cette fonction?
  \item{recoverNAs}{
   logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. 
   
@@ -56,7 +58,11 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
+\examples{
+
+}
+
 \seealso{
-More about the next step: \code{\link{PCC.stemma}}.
+More about the next step: \code{\link{PCC.Stemma}}.
 More about the input: \code{\link{PCC.buildGroup}}
 }
