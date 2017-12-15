@@ -12,7 +12,7 @@ Package: \tab stemmatology\cr
 Type: \tab Package\cr
 Version: \tab 0.2.2\cr
 Date: \tab 2014-07-16\cr
-License: \tab  CC BY-NC-SA 2.0\cr
+License: \tab GPL-3\cr
 }
 
 This package includes various functions for stemmatological analysis. 

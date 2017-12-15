@@ -13,7 +13,7 @@ Suggests:
     knitr,
     rmarkdown,
     covr
-License: CC BY-NC-SA 2.0
+License: GPL-3
 NeedsCompilation: no
 URL: https://github.com/Jean-Baptiste-Camps/stemmatology
 VignetteBuilder: knitr
