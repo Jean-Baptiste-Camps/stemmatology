@@ -8,7 +8,7 @@
 \code{PCC.buildgroup} groups together witnesses in relevant clusters.
 }
 \usage{
-PCC.buildGroup(x, limit = 0)
+PCC.buildGroup(x, limit = 0, ask = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,17 +17,19 @@ A PCC.disagreement object.
 }
   \item{limit}{
   The maximum number of severe disagreements allowed for two witnesses in the same group. Default (and advised) value: \code{0}.
+  \item{ask}{
+  logical; if FALSE, decisions will be made without asking the user for input.
+  }
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function returns:
+  \item{database }{The original database.}
+  \item{groups }{A list of the groups that were created, identified by their labels.}
+
 }
 \references{
 Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.

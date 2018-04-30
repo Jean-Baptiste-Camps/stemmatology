@@ -25,11 +25,12 @@ PCC.disagreement(x, omissionsAsReadings = FALSE)
 }
 \value{
 The function returns:
+  \item{database }{The original database.}
   \item{severeDisagreement }{A list of the severe disagreements between manuscripts.}
   \item{benigneDisagreement }{A list of the benigne disagreements between manuscripts.}
   \item{agreements}{A list of agreements between manuscripts.}
-  \item{omissionsInCommon }{A list of all the omissions in common between manuscripts.}
-  \item{omissionsOriented }{A list of the omissions present in a manuscript but not in another.}
+  \item{omissionsInCommon }{A list of all the omissions in common between manuscripts(if omissionsAsReadings is set to TRUE, this will be NA).}
+  \item{omissionsOriented }{A list of the omissions present in a manuscript but not in another (if omissionsAsReadings is set to TRUE, this will be NA).}
 
 }
 \references{
