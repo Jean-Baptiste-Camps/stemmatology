@@ -19,6 +19,7 @@ A PCC.disagreement object.
   The maximum number of severe disagreements allowed for two witnesses in the same group. Default (and advised) value: \code{0}.
   \item{ask}{
   logical; if FALSE, decisions will be made without asking the user for input.
+  Default: TRUE
   }
 }
 }

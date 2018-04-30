@@ -77,10 +77,9 @@ PCC.disagreement <-
                                 # the comparison, if it is NA at this point,
                                 # should not be. That's why we test for NA
                                 # and set to 0.
-                                # NB: this is were we remove NA, that will subsist only if
+                                # NB: this is where we remove NA, that will subsist only if
                                 # the category examined (agreements, disagreements, etc.)
                                 # between two manuscripts is completely empty.
-                                # TODO: is this the behaviour we wish for NA ?
                                 if (is.na(agreements[colnames(tableVariantes)[j], 
                                                      colnames(tableVariantes)[k]])) {
                                     agreements[colnames(tableVariantes)[j], colnames(tableVariantes)[k]] = 0

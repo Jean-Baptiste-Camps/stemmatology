@@ -1,25 +1,28 @@
 PCC.reconstructModel <-
-function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
-    # Ajouter la conservation de la base de données initiales, dans sa version complétée
-    # Is omissionsAsReadings implemented ?
+function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE, ask=TRUE, verbose=FALSE) {
     # Function to reconstruct the model for a group of ms.  Take in entry an
     # object of type PCC.buildGroups, that is a list of vectors of mss labels
     # (one for each group) Gives back the vector containing the virtual model
     # values or the identification of the model, and the links between the
-    # mss in the group in the form of an edgelist TODO(JBC): add an option to
+    # mss in the group in the form of an edgelist 
+    # TODO(JBC): add an option to
     # include in the output the edgelength, computed as = to the number of
     # disagreement between a ms. and his model.
-    # Added option recoverNAs (false by default) which is an update to the method. If used, when actual or virtual manuscripts are identified to a reconstructed models, every NA they have is «recovered» by taking the value of the model.
+    # Added option recoverNAs (false by default) which is an update to the method. 
+    # If used, when actual or virtual manuscripts are identified to a 
+    # reconstructed models, every NA they have is «recovered» by taking
+    # the value of the model.
     groups = x$groups
     tableVariantes = x$database
     newDatabase = x$database
     modelsReconstructed = as.list(NULL)
     models = as.list(NULL)  # The edgelist that will contain the stemmatic information
-    # edgelist = c(character(0),character(0));
-    edgelist = matrix(c(character(0), character(0)), ncol = 2)  # We create a matrix of models for each group, but we have to create the labels first
+    edgelist = matrix(c(character(0), character(0)), ncol = 2)  
+    # We create a matrix of models for each group, but we have 
+    # to create the labels first
     groupsLabels = NULL
     descripti = NULL
-    for (g in 1:length(groups)) {
+    for (g in seq_len(length(groups))) {
         thisGroupLabels = paste(groups[[g]], collapse = "")
         groupsLabels = c(groupsLabels, thisGroupLabels)
     }
@@ -28,11 +31,12 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
         groupsLabels))
     for (i in 1:length(groups)) {
         # For each variantlocation
-        myGroup = as.vector(groups[[i]])  # For the moment, the label of the virtual model is of the form x(myMss)
+        myGroup = as.vector(groups[[i]])  
+        # For the moment, the label of the virtual model is of the form x(myMss)
         # It could perhaps be replaced by a random alphanumeric of length 2 or 3?
         labelMyMss = paste(myGroup, collapse = "")  ##Debug:
-        print(paste("Now comparing group", labelMyMss))  ##
-        labelMyModel = paste("x(", labelMyMss, ")", sep = "")
+        if(verbose){print(paste("Now comparing group", labelMyMss))}
+        labelMyModel = paste("{", labelMyMss, "}", sep = "")
         myModel = matrix(nrow = nrow(tableVariantes), ncol = 1, dimnames = c(labels(tableVariantes)[1], 
             labelMyModel))
         for (j in 1:nrow(tableVariantes)) {
@@ -80,9 +84,11 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
                 if (length(myCommonReading) == 0) {
                   # If there is no common reading, the reading of the model remains
                   # unassessable (NA)
-                  print(paste("Reading not assessable for the group ", labelMyMss, 
-                    " at VL ", rownames(tableVariantes)[j], ". This can happen sometimes.", 
-                    sep = ""))
+                  if(verbose){
+                    print(paste("Reading not assessable for the group ", labelMyMss, 
+                                " at VL ", rownames(tableVariantes)[j], ". This can happen sometimes.", 
+                                sep = ""))
+                  }
                 }
             }
         }
@@ -98,14 +104,18 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
                 0 && myGroupComp$benigneDisagreement[myGroup[m], labelMyModel] == 
                 0 && (myGroupComp$omissionsOriented[myGroup[m], labelMyModel] == 
                 0 | is.na(myGroupComp$omissionsOriented[myGroup[m], labelMyModel]))) {
-                print(paste(myGroup[m], "seems to be the model of group", 
-                  labelMyMss))
+                if(verbose){
+                  print(paste(myGroup[m], "seems to be the model of group", 
+                              labelMyMss))
+                }
                 extantModel = c(extantModel, myGroup[m])
             } else {
-                print(paste(myGroup[m], "has", myGroupComp$severeDisagreement[myGroup[m], 
-                  labelMyModel], "severe disagreement(s),", myGroupComp$benigneDisagreement[myGroup[m], 
-                  labelMyModel], "benigne disagreement(s),", myGroupComp$omissionsOriented[myGroup[m], 
-                  labelMyModel], "omissions", "towards the virtual model. It does not seem to be the model"))
+                if(verbose){
+                  print(paste(myGroup[m], "has", myGroupComp$severeDisagreement[myGroup[m], 
+                                                                                labelMyModel], "severe disagreement(s),", myGroupComp$benigneDisagreement[myGroup[m], 
+                                                                                                                                                          labelMyModel], "benigne disagreement(s),", myGroupComp$omissionsOriented[myGroup[m], 
+                                                                                                                                                                                                                                   labelMyModel], "omissions", "towards the virtual model. It does not seem to be the model"))
+                }
             }
         }
         # Now that the comparison is done, we verify that the results are
@@ -154,8 +164,10 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
             }
         }
         if (length(extantModel) == 1 && keepVirtualModel == FALSE) {
-            print(paste(extantModel, "is the only ms. inside the group that seems to be the model of group", 
-                labelMyMss))
+            if(verbose){
+              print(paste(extantModel, "is the only ms. inside the group that seems to be the model of group", 
+                          labelMyMss))
+              }
             colnames(modelsByGroup)[i] = labelMyMss
             modelsByGroup[, i] = extantModel
             # option to recover NAs when a ms. of the database is identified with a just reconstructed model
@@ -182,7 +194,9 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
             # that these are, at least once, unique to this group? Yet the complexity
             # of this principle is very high, and intuition hard, so we need to
             # THINK.
-            writeLines(paste("No ms inside group", labelMyMss, "seems to be the model. We will proceed\n to a comparison with mss outside the group."))  #NB: si nous voulons être rigoureux, il faut que la base de données inclue également les mss retirés aux étapes précédentes?
+            if(verbose){
+              writeLines(paste("No ms inside group", labelMyMss, "seems to be the model. We will proceed\n to a comparison with mss outside the group."))  #NB: si nous voulons être rigoureux, il faut que la base de données inclue également les mss retirés aux étapes précédentes?
+            }
             # We create a database containing the model and the mss outside the group
             others = colnames(tableVariantes)[!colnames(tableVariantes) %in% 
                 myGroup]
@@ -196,13 +210,15 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
                   0 && myOthersComp$benigneDisagreement[others[n], labelMyModel] == 
                   0 && (myOthersComp$omissionsOriented[others[n], labelMyModel] == 
                   0 | is.na(myOthersComp$omissionsOriented[others[n], labelMyModel]))) {
-                  print(paste(others[n], "seems to be the model."))
+                  if(verbose){print(paste(others[n], "seems to be the model."))}
                   extantModel = c(extantModel, others[n])
                 } else {
-                  print(paste(others[n], "has", myOthersComp$severeDisagreement[others[n], 
+                  if(verbose){
+                    print(paste(others[n], "has", myOthersComp$severeDisagreement[others[n], 
                     labelMyModel], "severe disagreement(s),", myOthersComp$benigneDisagreement[others[n], 
                     labelMyModel], "benigne disagreement(s),", myOthersComp$omissionsOriented[others[n], 
                     labelMyModel], "omissions", "towards the virtual model. It does not seem to be the model"))
+                  }
                 }
             }
             # Now that the comparison is done, we verify that the results are
@@ -215,7 +231,7 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
                   collapse = ""))
             }
             if (length(extantModel) == 1) {
-                print(paste(extantModel, "seems to be the model of this group"))
+                if(verbose){print(paste(extantModel, "seems to be the model of this group"))}
                 colnames(modelsByGroup)[i] = labelMyMss
                 modelsByGroup[, i] = extantModel
                 # option to recover NAs when a ms. of the database is identified with a just reconstructed model
@@ -236,8 +252,10 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
             if (length(extantModel) == 0) {
                 # If length is STILL equal to 0, then the manuscript is lost, and we keep
                 # the virtual model
-                writeLines(paste("No extant ms. at all seems to be the model of the group", 
+                if(verbose){
+                  writeLines(paste("No extant ms. at all seems to be the model of the group", 
                   labelMyMss, ".\n It is presumably a lost ms."))
+                }
                 colnames(modelsByGroup)[i] = labelMyMss
                 modelsByGroup[, i] = labelMyModel  # models[[i]] = myModel #This seems to create a weird bug (again with R and its object classes...). I'll try this for the moment :
                 models[[i]] = as.matrix(myModel)  #DEBUG :
@@ -296,9 +314,9 @@ function(x, omissionsAsReadings = FALSE, recoverNAs = TRUE) {
     }
     output$database = database  # the edgelist
     # Debug: plot the stemma (no edge length modification for the moment)
-    stemma = as.network(edgelist, directed = TRUE, matrix.type = "edgelist")
-    gplot(stemma, displaylabels, label = network.vertex.names(stemma), gmode = "digraph", 
-        boxed.labels = TRUE, usearrows = TRUE)
+    #stemma = as.network(edgelist, directed = TRUE, matrix.type = "edgelist")
+    #gplot(stemma, displaylabels, label = network.vertex.names(stemma), gmode = "digraph", 
+    #    boxed.labels = TRUE, usearrows = TRUE)
     output$edgelist = edgelist  # and the rest
     output$models = modelsReconstructed
     output$modelsByGroup = modelsByGroup

@@ -8,7 +8,7 @@
 \code{PCC.reconstructModel} examines coherent clusters of witnesses (PCC.buildGroup), to either identify their model in the tradition, either suggest a virtual model for the group.  
 }
 \usage{
-PCC.reconstructModel(x, omissionsAsReadings = FALSE, recoverNAs = TRUE)
+PCC.reconstructModel(x, omissionsAsReadings = FALSE, recoverNAs = TRUE, ask = TRUE, verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,7 +17,6 @@ A PCCbuildGroup object.
 }
   \item{omissionsAsReadings}{
      logical; if \code{TRUE}, omissions are treated as variant readings. They are taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).
-     
      Default: \code{FALSE}.
 }
 %  \item{limit}{
@@ -28,9 +27,17 @@ A PCCbuildGroup object.
 %TODO: faut-il implementer qqchose de ce genre pour cette fonction?
  \item{recoverNAs}{
   logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. 
-  
   Default: \code{TRUE}.
 }
+ \item{ask}{
+  logical; if FALSE, decisions will be made without asking the user for input.
+  Default: TRUE
+  }
+  \item{verbose}{
+  logical; if FALSE, the function will only return the results, without information
+  on the operations.
+  Default: FALSE
+  }
 }
 \details{
 This function takes PCC.buildGroup objects as input. It computes the characteristics of a model of any group, and compares it to the existing witnesses. If a witness has the same characteristics as the computed model, it is identified as the model for the group. If no witness seems to be a good fit, the function adds a virtual model to the tradition.

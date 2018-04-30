@@ -1,4 +1,4 @@
-context("PCC.Disagreement")
+context("PCC.disagreement")
 
 test_that("disagreements, agreements and omissions are correctly computed", {
   x = matrix(
