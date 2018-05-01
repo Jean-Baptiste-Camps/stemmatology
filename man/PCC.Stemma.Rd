@@ -5,12 +5,12 @@
 \title{
 PCC.Stemma: Building the Stemma Codicum
 }
-\description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. It stops when the last four manuscripts are to be ordered, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
+\description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. By default, it stops when less than four manuscripts are to be compared, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
 
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE)
+PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE, ask = TRUE, verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -31,6 +31,15 @@ The maximum number of severe disagreements expected for witnesses to be in the s
   
   Default: \code{TRUE}.
 }
+\item{ask}{
+  logical; if FALSE, decisions will be made without asking the user for input.
+  Default: TRUE
+  }
+  \item{verbose}{
+  logical; if FALSE, the function will only return the results, without information
+  on the operations.
+  Default: FALSE
+  }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~

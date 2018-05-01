@@ -50,7 +50,7 @@ Jean-Baptiste Camps & Florian Cafiero
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{PCC.Stemma}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}.
 }
 \examples{
 

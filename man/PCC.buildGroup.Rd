@@ -27,7 +27,7 @@ A PCC.disagreement object.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-The function returns:
+The function returns a list containing:
   \item{database }{The original database.}
   \item{groups }{A list of the groups that were created, identified by their labels.}
 
@@ -49,7 +49,7 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{PCC.Stemma}}, \code{\link{PCC.disagreement}}, \code{\link{PCC.reconstructModel}}.
 }
 \examples{
 
@@ -57,5 +57,4 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{stemma}
-\keyword{construction}% __ONLY ONE__ keyword per line
 \keyword{stemmatology}
