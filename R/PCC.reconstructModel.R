@@ -457,9 +457,12 @@ PCC.reconstructModel <-
     output$database = database  # the edgelist
     # Debug: plot the stemma (no edge length modification for the moment)
     if(verbose){
-      stemma = as.network(edgelist, directed = TRUE, matrix.type = "edgelist")
-      gplot(stemma, displaylabels, label = network.vertex.names(stemma), gmode = "digraph",
-            boxed.labels = TRUE, usearrows = TRUE)
+      #switching to igraph
+      #stemma = as.network(edgelist, directed = TRUE, matrix.type = "edgelist")
+      #gplot(stemma, displaylabels, label = network.vertex.names(stemma), gmode = "digraph",
+      #      boxed.labels = TRUE, usearrows = TRUE)
+      myNetwork = igraph::graph_from_edgelist(edgelist, directed = TRUE)
+      igraph::plot.igraph(myNetwork, layout=layout_as_tree)
     }
     output$edgelist = edgelist  # and the rest
     output$models = modelsReconstructed

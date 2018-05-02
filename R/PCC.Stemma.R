@@ -37,17 +37,19 @@ PCC.Stemma <-
         message("No group was found. Unable to build stemma.")
         # Plot the stemma at this step, if it exists
         if (!is.null(edgelistGlobal)) {
-          stemma = as.network(edgelistGlobal,
-                              directed = TRUE,
-                              matrix.type = "edgelist")
-          gplot(
-            stemma,
-            displaylabels,
-            label = network.vertex.names(stemma),
-            gmode = "digraph",
-            boxed.labels = TRUE,
-            usearrows = TRUE
-          )
+          # stemma = as.network(edgelistGlobal,
+          #                     directed = TRUE,
+          #                     matrix.type = "edgelist")
+          # gplot(
+          #   stemma,
+          #   displaylabels,
+          #   label = network.vertex.names(stemma),
+          #   gmode = "digraph",
+          #   boxed.labels = TRUE,
+          #   usearrows = TRUE
+          # )
+          myNetwork = igraph::graph_from_edgelist(edgelistGlobal, directed = TRUE)
+          igraph::plot.igraph(myNetwork, layout=layout_as_tree)
           output = as.list(NULL)
           output$edgelist = edgelistGlobal
           output$database = tableVariantes
@@ -75,19 +77,21 @@ PCC.Stemma <-
       modelsGlobal[[counter]] = pccReconstructModel$models
       modelsByGroupGlobal[[counter]] = pccReconstructModel$modelsByGroup
     }
-    stemma = as.network(edgelistGlobal,
-                        directed = TRUE,
-                        matrix.type = "edgelist")
-    gplot(
-      stemma,
-      displaylabels,
-      label = network.vertex.names(stemma),
-      gmode = "digraph",
-      boxed.labels = TRUE,
-      usearrows = TRUE
-    )
+    # stemma = as.network(edgelistGlobal,
+    #                     directed = TRUE,
+    #                     matrix.type = "edgelist")
+    # gplot(
+    #   stemma,
+    #   displaylabels,
+    #   label = network.vertex.names(stemma),
+    #   gmode = "digraph",
+    #   boxed.labels = TRUE,
+    #   usearrows = TRUE
+    # )
     if (is.null(tableVariantes)) {
       # Job's done
+      myNetwork = igraph::graph_from_edgelist(edgelistGlobal, directed = TRUE, main="Final stemma")
+      igraph::plot.igraph(myNetwork, layout=layout_as_tree)
       output = as.list(NULL)
       output$edgelist = edgelistGlobal
       output$database = tableVariantes
@@ -100,6 +104,8 @@ PCC.Stemma <-
     # and if not, we ask the user if he wants the end of the stemma
     if (ncol(tableVariantes) > 1) {
       if(ask){
+        myNetwork = igraph::graph_from_edgelist(edgelistGlobal, directed = TRUE)
+        igraph::plot.igraph(myNetwork, layout=layout_as_tree)
         writeLines(
           "There is now less than four manuscripts in the database.\nStemma building has now lost in accuracy. \nDo you want to continue anyway (take last step with caution) ?\n Y/N\n"
         )
@@ -136,20 +142,39 @@ PCC.Stemma <-
           verbose = verbose
         )
         tableVariantes = pccReconstructModel$database
-        edgelistGlobal = rbind(edgelistGlobal, pccReconstructModel$edgelist)
         modelsGlobal[[counter]] = pccReconstructModel$models
         modelsByGroupGlobal[[counter]] = pccReconstructModel$modelsByGroup
-        stemma = as.network(edgelistGlobal,
-                            directed = TRUE,
-                            matrix.type = "edgelist")
-        gplot(
-          stemma,
-          displaylabels,
-          label = network.vertex.names(stemma),
-          gmode = "digraph",
-          boxed.labels = TRUE,
-          usearrows = TRUE
-        )
+        # stemma = as.network(edgelistGlobal,
+        #                     directed = TRUE,
+        #                     matrix.type = "edgelist")
+        # gplot(
+        #   stemma,
+        #   displaylabels,
+        #   label = network.vertex.names(stemma),
+        #   gmode = "digraph",
+        #   boxed.labels = TRUE,
+        #   usearrows = TRUE
+        # )
+        # 
+        # And here, because we want dashes for the (uncertain) relations
+        # established as the last step, we will create to 
+        # separate networks with differente properties, before concatening
+        myNetworkCert = igraph::graph_from_edgelist(edgelistGlobal, directed = TRUE)
+        # With full lines for all edges
+        igraph::E(myNetworkCert)$lty = 1
+        # Then dashed for the uncertain ones
+        myNetworkUncert = igraph::graph_from_edgelist(pccReconstructModel$edgelist, directed = TRUE)
+        igraph::E(myNetworkUncert)$lty = 3
+        # Then unite them
+        myNetwork = igraph::union(myNetworkCert, myNetworkUncert, byname=TRUE)
+        # fusion lty_1 et lty_2
+        E(myNetwork)$lty =  ifelse(is.na(E(myNetwork)$lty_1),
+                                   E(myNetwork)$lty_2,E(myNetwork)$lty_1)
+        # And plotting
+        igraph::plot.igraph(myNetwork, layout=layout_as_tree, main="Final stemma")
+        # Preparing edgelist for the output
+        edgelistGlobal = rbind(edgelistGlobal, pccReconstructModel$edgelist)
+        # and output
         output = as.list(NULL)
         output$edgelist = edgelistGlobal
         output$database = tableVariantes

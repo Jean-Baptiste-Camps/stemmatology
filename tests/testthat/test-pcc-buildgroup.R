@@ -1,4 +1,4 @@
-context("PCC.buildgroup")
+context("PCC.buildGroup")
 
 test_that("Groups are built correctly", {
   #First, we fake a PCC.disagreement object
