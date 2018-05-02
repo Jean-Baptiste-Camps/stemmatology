@@ -31,7 +31,7 @@ PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pause
 \details{
 This function is meant to guide the user through the process of assessing and eliminating unreliable variant locations and/or identify competing genealogies (i.e. contamination), as described in Camps & Cafiero 2015. 
 
-It starts by computing and ploting the network of conflicting variant locations (i.e. variant locations that presents contradictory genealogical information), by calling \code{\link{PCC.conflicts}}, and then interactively aids the user in determining overconflicting variant locations (with \code{\link{PCC.overconflicting}}), eliminating problematic variant locations (\code{\link{PCC.elimination}}), detecting contamination (\code{\link{PCC.contam}}) or creating new databases reflecting competing genealogies (\code{\link{PCC.equipollent}}).
+It starts by computing and ploting the network of conflicting variant locations (i.e. variant locations that present contradictory genealogical information), by calling \code{\link{PCC.conflicts}}, and then interactively aids the user in determining overconflicting variant locations (with \code{\link{PCC.overconflicting}}), eliminating problematic variant locations (\code{\link{PCC.elimination}}), detecting contamination (\code{\link{PCC.contam}}) or creating new databases reflecting competing genealogies (\code{\link{PCC.equipollent}}).
 }
 \value{
 According to the choices made by the user, the output can be an object belonging to one of the following classes: \code{pccConflicts}, \code{pccOverconflicting}, \code{pccContam} or \code{pccEquipollent}.

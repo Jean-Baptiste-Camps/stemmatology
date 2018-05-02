@@ -1,4 +1,4 @@
-context("test-pcc-buildgroup.R")
+context("PCC.buildgroup")
 
 test_that("Groups are built correctly", {
   #First, we fake a PCC.disagreement object

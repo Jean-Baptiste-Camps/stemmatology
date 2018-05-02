@@ -80,10 +80,10 @@ test_that("disagreements, agreements and omissions
   expect_equal(PCC.disagreement(x, omissionsAsReadings = TRUE), results)
 })
 
-x = matrix(
-  c(1,0,1,0,1,1,1,1,2,2,2,2,2,2,2,2,NA,0,3,2,NA,3,0,3,NA), 
-  nrow = 5, ncol = 5, 
-  dimnames = list(c("VL1","VL2","VL3","VL4","VL5"), c("A","B","C","D","E")))
+# x = matrix(
+#   c(1,0,1,0,1,1,1,1,2,2,2,2,2,2,2,2,NA,0,3,2,NA,3,0,3,NA), 
+#   nrow = 5, ncol = 5, 
+#   dimnames = list(c("VL1","VL2","VL3","VL4","VL5"), c("A","B","C","D","E")))
 
 #With omissionsAsReadings to default FALSE
 #      A B C D E
