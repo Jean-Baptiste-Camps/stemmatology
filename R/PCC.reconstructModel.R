@@ -468,22 +468,22 @@ PCC.reconstructModel <-
     output$models = modelsReconstructed
     output$modelsByGroup = modelsByGroup
     return(output)  
-    ## Adjust edgelength using igraph => NB, incompatible avec network, donc fait buguer les autres fonctions...
+    ## Adjust edgelength using igraph
     # library(igraph) edgelist = matrix(
     # c('A','B','B','A','A','B','C','D','F','G'), ncol = 2 ) g =
     # graph(edgelist, directed = TRUE) Pour calculer le poids, qui est
     # inversement proportionnel à la distance (désaccords+omissionsoreientées
     # dans les deux sens), en le rendant égal à 1/d length = c(29, 12, 10, 0,
-    # 28) ## On a besoin que le poids soit une valeur positive pour que ça
+    # 28) 
+    ## On a besoin que le poids soit une valeur positive pour que ça
     # marche à peu près, et plus le poids est élevé, plus on va avoir des
     # nœuds proches. Pour l'implémenter, il faudrait donc calculer le nombre
     # maximal de désaccords dans toute la tradition, mettons par ex. 30, et
     # soustraire pour chaque ms. son nombre de désaccord de ce total, par ex.
     # pour un ms. ayant deux désaccords, on passe à poids = 28, etc. et pour
     # celui en ayant 30 à 0 (la solution d'utiliser des poids négatifs fait
-    # buguer l'algorithme) E(g)$weight = length l =
-    # layout.fruchterman.reingold(g, weights=E(g)$weight, niter = 100000 )
-    # plot(g, layout=l) Autre solution, plus dans l'esprit (mais ne gérant
+    # buguer l'algorithme) 
+    # Autre solution, plus dans l'esprit (mais ne gérant
     # pas la contamination?), utiliser le module phylo. À partir d'une
     # edgelist :
     # https://stat.ethz.ch/pipermail/r-sig-phylo/2009-July/000405.html
