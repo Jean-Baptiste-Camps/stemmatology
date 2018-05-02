@@ -245,7 +245,9 @@ PCC.reconstructModel <-
         ### If we are not in interactive (ask=TRUE) mode
         ### or if the user has so chosen, we keep the 
         ### reconstructed model
-        if(ask==FALSE | answerOne == "K"){
+        if(ask==FALSE || answerOne == "K"){
+          # NB: we need || instead of | to stop evaluation if first
+          # test is true (avoid answerOne not existing with ask FALSE)
           colnames(modelsByGroup)[i] = labelMyMss
           modelsByGroup[, i] = labelMyModel  
           # models[[i]] = myModel 
