@@ -1,5 +1,13 @@
 "PCC" <-
-    function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recoverNAs = TRUE, pauseAtPlot = FALSE, interactive = TRUE) {
+  function(x,
+           omissionsAsReadings = FALSE,
+           alternateReadings = FALSE,
+           limit = 0,
+           recoverNAs = TRUE,
+           layout_as_stemma = FALSE,
+           pauseAtPlot = FALSE,
+           interactive = TRUE) {
+    
     # Global shell for the PCC functions. Successively calls PCC.Exploratory
     # and PCC.Stemma on the dataset NB: TODO(JBC) this function should be
     # updated when we will have defined appropriate object classes for the
@@ -8,6 +16,7 @@
     # Here, we will need to have appropriate version of the command for the
     # various outputs of PCC.Exploratory if is.pccOverconflicting
     if (is.matrix(pccExploratory)) {
+      # What does this do?
         output = pccStemma(pccExploratory)
     } else {
         if (!is.matrix(pccExploratory)) {
@@ -15,7 +24,7 @@
             if (class(pccExploratory) == "pccConflicts" 
               | class(pccExploratory) == "pccOverconflicting" 
               | class(pccExploratory) == "pccContam") {
-                output = PCC.Stemma(pccExploratory$database, limit = limit, recoverNAs = recoverNAs)
+                output = PCC.Stemma(pccExploratory$database, limit = limit, recoverNAs = recoverNAs, layout_as_stemma = layout_as_stemma)
             } else {
                 # if is.pccEquipollent
                 if (class(pccExploratory) == "pccEquipollent") {
@@ -24,8 +33,8 @@
                   }
                   output = as.list(NULL)
                   for (i in 1:length(pccExploratory$databases)) {
-                    pccStemma = PCC.Stemma(pccExploratory$databases[[i]])
-                    title(sub = paste("Alternative stemma", i, "out of", 
+                    pccStemma = PCC.Stemma(pccExploratory$databases[[i]], limit = limit, recoverNAs = recoverNAs, layout_as_stemma = layout_as_stemma)
+                    graphics::title(sub = paste("Alternative stemma", i, "out of", 
                       length(pccExploratory)))
                     if (i < length(pccExploratory$databases)) {
                       readline("Press enter to proceed to next alternative stemma")

@@ -16,7 +16,6 @@ layout_as_stemma(x)
   \item{x}{an edgelist containing, as a third column, the distance between the 
   two nodes.}
 }
-}
 \details{
 The distance between the nodes will usually correspond to the number of 
 different readings (disagreements and omissions). If a node has several
@@ -31,7 +30,7 @@ A layout, i.e. a matrix of two columns, giving x,y coordinates for each node.
 \author{Jean-Baptiste Camps}
 %\note{
 %%  ~~further notes~~
-}
+%}
 
 \section{Warning}{This function is experimental. Horizontal overlapping may occur
 has a result.}

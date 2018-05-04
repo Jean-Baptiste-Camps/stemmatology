@@ -16,9 +16,10 @@ test_that("PCC.Stemma works properly", {
     edgelist = structure(
       c(
         "{ABC}","{ABC}","{ABC}","D","{D{ABC}}","{D{ABC}}",
-        "A","B","C","E","D","{ABC}"
+        "A","B","C","E","D","{ABC}",
+        "1","2","2","4","0","0"
       ),
-      .Dim = c(6L, 2L)
+      .Dim = c(6L, 3L)
     ),
     database = structure(
       c(NA, 0, 1, 4, 2, 1, 1, 1),

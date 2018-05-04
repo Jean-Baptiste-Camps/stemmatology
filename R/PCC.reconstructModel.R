@@ -29,7 +29,7 @@ PCC.reconstructModel <-
     # added to the database.
     modelsToAdd = as.list(NULL)  
     # The edgelist that will contain the stemmatic information
-    edgelist = matrix(c(character(0), character(0)), ncol = 2)
+    edgelist = matrix(c(character(0), character(0), character(0)), ncol = 3)
     # We create a matrix of models for each group, but we have
     # to create the labels first
     groupsLabels = NULL
@@ -152,9 +152,6 @@ PCC.reconstructModel <-
       # We bind the mss from the group with the virtual model
       myGroupAndModel = cbind(tableVariantes[, myGroup], myModel)  
       # We compare them 
-      ####TODO(JBC): it might not be a good idea to have this level 1 function 
-      #### call another level 1 function. 
-      #### Perhaps the comparison should go in the higher level global function...
       myGroupComp = PCC.disagreement(myGroupAndModel)
       for (m in seq_len(length(myGroup))) {
         #TODO: only 0 or add an option to treat NA as zeros? (deal 
@@ -409,16 +406,21 @@ PCC.reconstructModel <-
         }
       }
       ### Here we create the edgelist. 
-      ### If we want to modify edge
-      ### length, it might be possible using the phylo package...  See :
-      ### [R-sig-phylo] convert edge list to phylo object
-      ### https://stat.ethz.ch/pipermail/r-sig-phylo/2009-July/000404.html for
-      ### each manuscript in the group
+      ### for each manuscript in the group
       for (p in 1:length(myGroup)) {
         # if he is not the model
         if (myGroup[p] != modelsByGroup[i]) {
           # we add a link between the model and him in the edgelist
-          edgelist = rbind(edgelist, c(modelsByGroup[i], myGroup[p]))  
+          # as well as a calculation of distance:
+          # total number of disagreements, and omissions both ways
+          
+          myDist = c(
+            myGroupComp$benigneDisagreement[myGroup[p],modelsByGroup[i]],
+            myGroupComp$omissionsOriented[myGroup[p],modelsByGroup[i]],
+            myGroupComp$omissionsOriented[modelsByGroup[i],myGroup[p]])
+          myDist[is.na(myDist)] = 0
+          myDist = sum(myDist)
+          edgelist = rbind(edgelist, c(modelsByGroup[i], myGroup[p], myDist))  
           # we add the wit. to the descripti (to be removed) list
           descripti = c(descripti, myGroup[p])
         }
@@ -455,36 +457,13 @@ PCC.reconstructModel <-
       database = tableVariantes[, nonDescripti, drop = FALSE]
     }
     output$database = database  # the edgelist
-    # Debug: plot the stemma (no edge length modification for the moment)
-    if(verbose){
-      #switching to igraph
-      #stemma = as.network(edgelist, directed = TRUE, matrix.type = "edgelist")
-      #gplot(stemma, displaylabels, label = network.vertex.names(stemma), gmode = "digraph",
-      #      boxed.labels = TRUE, usearrows = TRUE)
-      myNetwork = igraph::graph_from_edgelist(edgelist, directed = TRUE)
-      igraph::plot.igraph(myNetwork, layout=layout_as_tree)
-    }
+    # Debug: plot the stemma
+    #if(verbose){
+    #  myNetwork = igraph::graph_from_edgelist(edgelist, directed = TRUE)
+    #  igraph::plot.igraph(myNetwork, layout=layout_as_tree)
+    #}
     output$edgelist = edgelist  # and the rest
     output$models = modelsReconstructed
     output$modelsByGroup = modelsByGroup
-    return(output)  
-    ## Adjust edgelength using igraph
-    # library(igraph) edgelist = matrix(
-    # c('A','B','B','A','A','B','C','D','F','G'), ncol = 2 ) g =
-    # graph(edgelist, directed = TRUE) Pour calculer le poids, qui est
-    # inversement proportionnel à la distance (désaccords+omissionsoreientées
-    # dans les deux sens), en le rendant égal à 1/d length = c(29, 12, 10, 0,
-    # 28) 
-    ## On a besoin que le poids soit une valeur positive pour que ça
-    # marche à peu près, et plus le poids est élevé, plus on va avoir des
-    # nœuds proches. Pour l'implémenter, il faudrait donc calculer le nombre
-    # maximal de désaccords dans toute la tradition, mettons par ex. 30, et
-    # soustraire pour chaque ms. son nombre de désaccord de ce total, par ex.
-    # pour un ms. ayant deux désaccords, on passe à poids = 28, etc. et pour
-    # celui en ayant 30 à 0 (la solution d'utiliser des poids négatifs fait
-    # buguer l'algorithme) 
-    # Autre solution, plus dans l'esprit (mais ne gérant
-    # pas la contamination?), utiliser le module phylo. À partir d'une
-    # edgelist :
-    # https://stat.ethz.ch/pipermail/r-sig-phylo/2009-July/000405.html
+    return(output)
   }

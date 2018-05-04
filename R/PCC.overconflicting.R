@@ -105,7 +105,7 @@ PCC.overconflicting<-
                         # eux-mêmes overconflicting
                         if (vertexAttributes[colnames(adjacencyTable)[j], 1] != 
                                 "overconflicting") {
-                            # si non, alors le nœud est undécidable
+                            # si non, alors le noeud est undécidable
                             undecidable = TRUE
                             break()
                         }
@@ -116,7 +116,7 @@ PCC.overconflicting<-
                 }
             }
         }
-        # À présent, on va attribuer aux nœuds du réseau les attributs de
+        # À présent, on va attribuer aux noeuds du réseau les attributs de
         # couleur. Pour ce faire, on doit récupérer les identifiants à partir des
         # étiquettes.
         vertexNameId = network.vertex.names(myNetwork)

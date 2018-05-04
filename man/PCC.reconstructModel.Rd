@@ -43,7 +43,7 @@ The function returns a list containing
   \item{fullDatabase}{The full database, with the new reconstructed models 
   and recovered NAs (if applicable).}
   \item{database}{The same with the \emph{descripti} removed.}
-  \item{edgelist}{An edgelist expressing the relations between the witnesses of each group.}
+  \item{edgelist}{An edgelist expressing the relations between the witnesses of each group with, as a third column, the distances between witnesses.}
   \item{models}{A list containing the database of readings for each model.}
   \item{modelsByGroup}{A matrix with, in columns the groups, and a single row containing the label of their model.}
 

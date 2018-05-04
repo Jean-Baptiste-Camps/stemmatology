@@ -12,7 +12,7 @@ layout_as_stemma <-
     myNetwork = igraph::graph_from_edgelist(edgelist[, 1:2], directed = TRUE)
     
     # Let's find roots
-    roots = which(sapply(sapply(V(myNetwork),function(x) neighbors(myNetwork,x, mode="in")), length) == 0)
+    roots = which(sapply(sapply(igraph::V(myNetwork),function(x) igraph::neighbors(myNetwork,x, mode="in")), length) == 0)
     
     myLayout = igraph::layout_as_tree(myNetwork, root = roots, mode = "out")
     

@@ -6,13 +6,10 @@
 PCC.Stemma: Building the Stemma Codicum
 }
 \description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. By default, it stops when less than four manuscripts are to be compared, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
-
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE, ask = TRUE, verbose = FALSE)
+PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE, layout_as_stemma = FALSE, ask = TRUE, verbose = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number; or a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings).
 }
@@ -28,8 +25,11 @@ The maximum number of severe disagreements expected for witnesses to be in the s
 }
  \item{recoverNAs}{
   logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. 
-  
   Default: \code{TRUE}.
+}
+\item{layout_as_stemma}{logical; if TRUE, the witnesses will be placed vertically
+according to the distance from their parent, as per the function \code{\link{layout_as_stemma}} (experimental!)
+Default: FALSE
 }
 \item{ask}{
   logical; if FALSE, decisions will be made without asking the user for input.
@@ -63,7 +63,7 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{flor
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{PCC.disagreement}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}.
+\code{\link{PCC.disagreement}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}, \code{\link{layout_as_stemma}}.
 }
 \examples{
 

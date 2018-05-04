@@ -19,7 +19,11 @@ test_that("Models are reconstructed correctly", {
     fullDatabase = structure(
       c(1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 2, 2, 1, 2, 1, 0, 0, 3, 2, 1, NA, 3, 2, 0, 1, 4, 2, 1, 1, 1, 2, 1, 2, 5, 2, 1, 1, 4, 1, 0, 1, NA, 2, 1, 1, 1), .Dim = c(8L, 6L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8"), c("A", "B", "C", "D", "E", "{ABC}"))), 
     database = structure(c(2, 0, 1, 4, 2, 1, 1, 1, 1, 0, 1, NA, 2, 1, 1, 1), .Dim = c(8L, 2L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8"), c("D", "{ABC}"))),
-    edgelist = structure(c("{ABC}", "{ABC}", "{ABC}", "D", "A", "B", "C", "E"), .Dim = c(4L, 2L)), 
+    edgelist = structure(
+      c("{ABC}", "{ABC}", "{ABC}", "D", 
+        "A", "B", "C", "E",
+        "1","2","2","4"
+        ), .Dim = c(4L, 3L)), 
     models = list(
       structure(c(1, 0, 1, NA, 2, 1, 1, 1), .Dim = c(8L, 1L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8"), "{ABC}")), 
       structure(c(2, NA, 1, NA, 2, 1, 1, 1), .Dim = c(8L, 1L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8"), "{DE}"))), 
@@ -32,7 +36,10 @@ test_that("Models are reconstructed correctly", {
       c(1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 2, 2, 1, 2, 1, 0, 0, 3, 2, 1, NA, 3, 2, 0, 1, 4, 2, 1, 1, 1, 2, 1, 2, 5, 2, 1, 1, 4, 1, 0, 1, NA, 2, 1, 1, 1), 
       .Dim = c(8L, 6L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8"), c("A", "B", "C", "D", "E", "{ABC}"))), 
     database = structure(c(2, 0, 1, 4, 2, 1, 1, 1, 1, 0, 1, NA, 2, 1, 1, 1), .Dim = c(8L, 2L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8"), c("D", "{ABC}" ))), 
-    edgelist = structure(c("{ABC}", "{ABC}", "{ABC}", "D", "A", "B", "C", "E"), .Dim = c(4L, 2L)), 
+    edgelist = structure(
+      c("{ABC}", "{ABC}", "{ABC}", "D", "A", "B", "C", "E",
+        "1","2","2","4"
+        ), .Dim = c(4L, 3L)), 
     models = list(structure(c(1, 0, 1, NA, 2, 1, 1, 1), .Dim = c(8L, 1L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8"), "{ABC}")), structure(c(2, 0, 1, NA, 2, 1, 1, 1), .Dim = c(8L, 1L), .Dimnames = list( c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8" ), "{DE}"))), 
     modelsByGroup = structure(c("{ABC}", "D" ), .Dim = 1:2, .Dimnames = list("Models", c("ABC", "DE"))))
   
