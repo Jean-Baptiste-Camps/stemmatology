@@ -25,7 +25,7 @@
                   output = as.list(NULL)
                   for (i in 1:length(pccExploratory$databases)) {
                     pccStemma = PCC.Stemma(pccExploratory$databases[[i]])
-                    title( paste("Alternative stemma", i, "out of", 
+                    title(sub = paste("Alternative stemma", i, "out of", 
                       length(pccExploratory)))
                     if (i < length(pccExploratory$databases)) {
                       readline("Press enter to proceed to next alternative stemma")
