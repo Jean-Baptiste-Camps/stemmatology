@@ -2,8 +2,7 @@
 \name{PCC.buildGroup}
 \alias{PCC.buildGroup}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{PCC.buildgroup
-}
+\title{PCC.buildgroup}
 \description{
 \code{PCC.buildgroup} groups together witnesses in relevant clusters.
 }
@@ -17,11 +16,11 @@ A PCC.disagreement object.
 }
   \item{limit}{
   The maximum number of severe disagreements allowed for two witnesses in the same group. Default (and advised) value: \code{0}.
+  }
   \item{ask}{
   logical; if FALSE, decisions will be made without asking the user for input.
   Default: TRUE
   }
-}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -54,7 +53,5 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 \examples{
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{stemma}
 \keyword{stemmatology}

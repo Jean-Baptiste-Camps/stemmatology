@@ -23,13 +23,16 @@ PCC.reconstructModel <-
     groups = x$groups
     tableVariantes = x$database
     newDatabase = x$database
-    modelsReconstructed = as.list(NULL)
+    modelsReconstructed = matrix(
+      nrow = nrow(tableVariantes), 
+      ncol = 0, 
+      dimnames = list(dimnames(tableVariantes)[[1]]))
     # modelsToAdd is the list that will contain
     # only the reconstructed models that should be
     # added to the database.
     modelsToAdd = as.list(NULL)  
     # The edgelist that will contain the stemmatic information
-    edgelist = matrix(c(character(0), character(0)), ncol = 2)
+    edgelist = matrix(c(character(0), character(0), character(0)), ncol = 3)
     # We create a matrix of models for each group, but we have
     # to create the labels first
     groupsLabels = NULL
@@ -52,7 +55,7 @@ PCC.reconstructModel <-
       labelMyMss = paste(myGroup, collapse = "")  
       ##Debug:
       if (verbose) {
-        cat("Now comparing group", labelMyMss)
+        cat("Now comparing group", labelMyMss,"\n")
       }
       labelMyModel = paste("{", labelMyMss, "}", sep = "")
       myModel = matrix(
@@ -132,7 +135,9 @@ PCC.reconstructModel <-
                 "Reading not assessable for the group",
                 labelMyMss,
                 "at VL",
-                rownames(tableVariantes)[j]#,
+                rownames(tableVariantes)[j],
+                "\n"
+                #,
                 #"\nThis can happen sometimes."
                 )
             }
@@ -152,9 +157,6 @@ PCC.reconstructModel <-
       # We bind the mss from the group with the virtual model
       myGroupAndModel = cbind(tableVariantes[, myGroup], myModel)  
       # We compare them 
-      ####TODO(JBC): it might not be a good idea to have this level 1 function 
-      #### call another level 1 function. 
-      #### Perhaps the comparison should go in the higher level global function...
       myGroupComp = PCC.disagreement(myGroupAndModel)
       for (m in seq_len(length(myGroup))) {
         #TODO: only 0 or add an option to treat NA as zeros? (deal 
@@ -168,7 +170,7 @@ PCC.reconstructModel <-
              is.na(myGroupComp$omissionsOriented[myGroup[m], labelMyModel]))) {
           if (verbose) {
             cat(myGroup[m], "seems to be the model of group",
-                        labelMyMss)
+                        labelMyMss, "\n")
           }
           extantModel = c(extantModel, myGroup[m])
         } else {
@@ -185,7 +187,7 @@ PCC.reconstructModel <-
               myGroupComp$omissionsOriented[myGroup[m],
                                             labelMyModel],
               "omissions",
-              "\ntowards the virtual model.\nIt does not seem to be the model"
+              "\ntowards the virtual model.\nIt does not seem to be the model\n"
             )
           }
         }
@@ -263,7 +265,7 @@ PCC.reconstructModel <-
           cat(
             extantModel,
             "is the only ms. inside the group that seems to be the model of group",
-            labelMyMss
+            labelMyMss, "\n"
           )
         }
         colnames(modelsByGroup)[i] = labelMyMss
@@ -280,7 +282,10 @@ PCC.reconstructModel <-
                 !is.na(myModel[r, ])) {
               # Debug:
               if(verbose){
-                cat("Recovering reading of virtual model", labelMyModel, "at VL", r, "Value was", tableVariantes[r, extantModel], "will be", myModel[r,])
+                cat("Recovering reading of virtual model", 
+                    labelMyModel, "at VL", r, "Value was", 
+                    tableVariantes[r, extantModel], 
+                    "will be", myModel[r,],"\n")
                 }
               tableVariantes[r, extantModel] = myModel[r, ]
             }
@@ -304,7 +309,7 @@ PCC.reconstructModel <-
             paste(
               "No ms inside group",
               labelMyMss,
-              "seems to be the model. We will proceed\n to a comparison with mss outside the group."
+              "seems to be the model.\nWe will proceed to a comparison with mss outside the group."
             )
           )  #NB: si nous voulons être rigoureux, il faut que la base de données inclue également les mss retirés aux étapes précédentes?
         }
@@ -327,7 +332,7 @@ PCC.reconstructModel <-
                   is.na(myOthersComp$omissionsOriented[others[n], labelMyModel])
                 )) {
               if (verbose) {
-                cat(others[n], "seems to be the model.")
+                cat(others[n], "seems to be the model.\n")
               }
               extantModel = c(extantModel, others[n])
             } else {
@@ -344,7 +349,7 @@ PCC.reconstructModel <-
                   myOthersComp$omissionsOriented[others[n],
                                                  labelMyModel],
                   "omissions",
-                  "towards the virtual model. It does not seem to be the model"
+                  "towards the virtual model.\nIt does not seem to be the model\n"
                 )
               }
             }
@@ -366,7 +371,7 @@ PCC.reconstructModel <-
           }
           if (length(extantModel) == 1) {
             if (verbose) {
-              cat(extantModel, "seems to be the model of this group")
+              cat(extantModel, "seems to be the model of this group\n")
             }
             colnames(modelsByGroup)[i] = labelMyMss
             modelsByGroup[, i] = extantModel
@@ -389,7 +394,7 @@ PCC.reconstructModel <-
             }
           }
         } else {
-          if(verbose){print("There are no other manuscript left in the database.")}
+          if(verbose){print("There are no other manuscript left in the database.\n")}
         }
         if (length(extantModel) == 0) {
           # If length is STILL equal to 0, then the manuscript is lost, and we keep
@@ -409,21 +414,26 @@ PCC.reconstructModel <-
         }
       }
       ### Here we create the edgelist. 
-      ### If we want to modify edge
-      ### length, it might be possible using the phylo package...  See :
-      ### [R-sig-phylo] convert edge list to phylo object
-      ### https://stat.ethz.ch/pipermail/r-sig-phylo/2009-July/000404.html for
-      ### each manuscript in the group
+      ### for each manuscript in the group
       for (p in 1:length(myGroup)) {
         # if he is not the model
         if (myGroup[p] != modelsByGroup[i]) {
           # we add a link between the model and him in the edgelist
-          edgelist = rbind(edgelist, c(modelsByGroup[i], myGroup[p]))  
+          # as well as a calculation of distance:
+          # total number of disagreements, and omissions both ways
+          
+          myDist = c(
+            myGroupComp$benigneDisagreement[myGroup[p],modelsByGroup[i]],
+            myGroupComp$omissionsOriented[myGroup[p],modelsByGroup[i]],
+            myGroupComp$omissionsOriented[modelsByGroup[i],myGroup[p]])
+          myDist[is.na(myDist)] = 0
+          myDist = sum(myDist)
+          edgelist = rbind(edgelist, c(modelsByGroup[i], myGroup[p], myDist))  
           # we add the wit. to the descripti (to be removed) list
           descripti = c(descripti, myGroup[p])
         }
       }
-      modelsReconstructed[[i]] = myModel
+      modelsReconstructed = cbind(modelsReconstructed,myModel)
     }
     # modelsToAdd is the list containing the database for each virtual model, if
     # and only if the virtual model could not be identified with an existing
@@ -454,34 +464,15 @@ PCC.reconstructModel <-
       # So, to avoid that, you have to set ,drop = FALSE
       database = tableVariantes[, nonDescripti, drop = FALSE]
     }
-    output$database = database  # the edgelist
-    # Debug: plot the stemma (no edge length modification for the moment)
-    if(verbose){
-      stemma = as.network(edgelist, directed = TRUE, matrix.type = "edgelist")
-      gplot(stemma, displaylabels, label = network.vertex.names(stemma), gmode = "digraph",
-            boxed.labels = TRUE, usearrows = TRUE)
-    }
+    output$database = database  
+    # the edgelist
+    # Debug: plot the stemma
+    #if(verbose){
+    #  myNetwork = igraph::graph_from_edgelist(edgelist, directed = TRUE)
+    #  igraph::plot.igraph(myNetwork, layout=layout_as_tree)
+    #}
     output$edgelist = edgelist  # and the rest
     output$models = modelsReconstructed
     output$modelsByGroup = modelsByGroup
-    return(output)  
-    ## Adjust edgelength using igraph => NB, incompatible avec network, donc fait buguer les autres fonctions...
-    # library(igraph) edgelist = matrix(
-    # c('A','B','B','A','A','B','C','D','F','G'), ncol = 2 ) g =
-    # graph(edgelist, directed = TRUE) Pour calculer le poids, qui est
-    # inversement proportionnel à la distance (désaccords+omissionsoreientées
-    # dans les deux sens), en le rendant égal à 1/d length = c(29, 12, 10, 0,
-    # 28) ## On a besoin que le poids soit une valeur positive pour que ça
-    # marche à peu près, et plus le poids est élevé, plus on va avoir des
-    # nœuds proches. Pour l'implémenter, il faudrait donc calculer le nombre
-    # maximal de désaccords dans toute la tradition, mettons par ex. 30, et
-    # soustraire pour chaque ms. son nombre de désaccord de ce total, par ex.
-    # pour un ms. ayant deux désaccords, on passe à poids = 28, etc. et pour
-    # celui en ayant 30 à 0 (la solution d'utiliser des poids négatifs fait
-    # buguer l'algorithme) E(g)$weight = length l =
-    # layout.fruchterman.reingold(g, weights=E(g)$weight, niter = 100000 )
-    # plot(g, layout=l) Autre solution, plus dans l'esprit (mais ne gérant
-    # pas la contamination?), utiliser le module phylo. À partir d'une
-    # edgelist :
-    # https://stat.ethz.ch/pipermail/r-sig-phylo/2009-July/000405.html
+    return(output)
   }

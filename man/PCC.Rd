@@ -7,7 +7,7 @@
     Global shell for all the PCC functions, both exploratory and stemma-building. This command successively executes PCC.Exploratory and PCC.Stemma, while asking user for input when necessary.
 }
 \usage{
-PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recoverNAs = TRUE, pauseAtPlot = FALSE, interactive = TRUE)
+PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recoverNAs = TRUE, layout_as_stemma = FALSE, pauseAtPlot = FALSE, interactive = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,10 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recove
 }
   \item{recoverNAs}{
   logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. Default: \code{TRUE}.
+}
+\item{layout_as_stemma}{logical; if TRUE, the witnesses will be placed vertically
+according to the distance from their parent, as per the function \code{\link{layout_as_stemma}} (experimental!)
+Default: FALSE
 }
   \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
 }
