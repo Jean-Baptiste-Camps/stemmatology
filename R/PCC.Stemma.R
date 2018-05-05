@@ -38,7 +38,7 @@ PCC.Stemma <-
         message("No group was found. Unable to build stemma.")
         # Plot the stemma at this step, if it exists
         if (!is.null(edgelistGlobal)) {
-          myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2], directed = TRUE)
+          myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2, drop = FALSE], directed = TRUE)
           if(layout_as_stemma){
             myLayout = layout_as_stemma(edgelistGlobal)
           }
@@ -75,7 +75,7 @@ PCC.Stemma <-
     }
     if (is.null(tableVariantes)) {
       # Job's done
-      myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2], directed = TRUE)
+      myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2, drop = FALSE], directed = TRUE)
       if(layout_as_stemma){
         myLayout = layout_as_stemma(edgelistGlobal)
       }
@@ -95,7 +95,7 @@ PCC.Stemma <-
     # and if not, we ask the user if he wants the end of the stemma
     if (ncol(tableVariantes) > 1) {
       if(ask){
-        myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2], directed = TRUE)
+        myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2, drop = FALSE], directed = TRUE)
         if(layout_as_stemma){
           myLayout = layout_as_stemma(edgelistGlobal)
         } else{
@@ -143,11 +143,11 @@ PCC.Stemma <-
         # And here, because we want dashes for the (uncertain) relations
         # established as the last step, we will create to 
         # separate networks with differente properties, before concatening
-        myNetworkCert = igraph::graph_from_edgelist(edgelistGlobal[,1:2], directed = TRUE)
+        myNetworkCert = igraph::graph_from_edgelist(edgelistGlobal[,1:2, drop = FALSE], directed = TRUE)
         # With full lines for all edges
         igraph::E(myNetworkCert)$lty = 1
         # Then dashed for the uncertain ones
-        myNetworkUncert = igraph::graph_from_edgelist(pccReconstructModel$edgelist[,1:2], directed = TRUE)
+        myNetworkUncert = igraph::graph_from_edgelist(pccReconstructModel$edgelist[,1:2, drop = FALSE], directed = TRUE)
         igraph::E(myNetworkUncert)$lty = 3
         # Then unite them
         myNetwork = igraph::union(myNetworkCert, myNetworkUncert, byname=TRUE)
