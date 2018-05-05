@@ -53,7 +53,12 @@ Jean-Baptiste Camps & Florian Cafiero
 \code{\link{PCC.Stemma}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}.
 }
 \examples{
-
+#Load a tradition
+data("fournival")
+#Option: explore the tradition to see problems in variant locations
+#PCC.Exploratory(fournival)
+#Calculate disagreements
+PCC.disagreement(fournival)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

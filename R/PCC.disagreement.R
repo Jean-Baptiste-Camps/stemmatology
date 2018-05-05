@@ -5,22 +5,27 @@ PCC.disagreement <-
         # disagreements, common and oriented omissions, the function also returns,
         # for information, the count of agreements between manuscripts.
         tableVariantes = as.matrix(x)
-        if (is.matrix(x) == FALSE | is.numeric(x) == FALSE)  {
+        if (is.matrix(x) == FALSE || is.numeric(x) == FALSE)  {
             stop ("Input is not a numeric matrix.")
         } 
-        # tableVariantes = data.matrix(x) #We create tables crossing the whole set
+        # tableVariantes = data.matrix(x) 
+        #We create tables crossing the whole set
         # of manuscripts. First, the one useful to build the stemma
+        myWit = dimnames(tableVariantes)[[2]]
+        myDimnames = list(myWit,myWit)
+        
         severeDisagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-                                    dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
+                                    dimnames = myDimnames)
         benigneDisagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-                                     dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))  
+                                     dimnames = myDimnames)  
         omissionsInCommon = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-                                   dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
+                                   dimnames = myDimnames)
         omissionsOriented = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-                                   dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2])) 
+                                   dimnames = myDimnames) 
         #Then the one being proposed as an FYI
         agreements = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
-                            dimnames = c(labels(tableVariantes)[2], labels(tableVariantes)[2]))
+                            dimnames = myDimnames)
+        rm(myDimnames)
         # Je n'en mets pas pour les NA, qui, en tant que manque d'information, 
         # peuvent être soit des lacunes, soit des oublis d'encodage, soit des 
         # oublis de collation, etc. 
@@ -31,11 +36,13 @@ PCC.disagreement <-
                 # First case: the lesson of the manuscript is unknown, and we don't do anything
                 if (is.na(tableVariantes[i, j])) {
                 } else {
+                  myWitJ = myWit[j]
                     #If the lesson is known, we compare it to every known lesson.
                     ## Let's start by handling the omissions.
                     if ((tableVariantes[i, j] == 0) && (omissionsAsReadings == 
                                                             FALSE)) {
                         for (k in 1:ncol(tableVariantes)) {
+                          myWitK = myWit[k]
                             # On teste d'abord que l'on ne croise pas avec une
                             # valeur manquante
                             if (is.na(tableVariantes[i, k]) == FALSE) {
@@ -43,22 +50,22 @@ PCC.disagreement <-
                                 # where an omission in one of the witness has
                                 # been compared to the other, so we set the two
                                 # values to 0 if they were NA
-                                if (is.na(omissionsInCommon[colnames(tableVariantes)[j], 
-                                                            colnames(tableVariantes)[k]])) {
-                                    omissionsInCommon[colnames(tableVariantes)[j], colnames(tableVariantes)[k]] = 0
+                                if (is.na(omissionsInCommon[myWitJ, 
+                                                            myWitK])) {
+                                    omissionsInCommon[myWitJ, myWitK] = 0
                                 }
-                                if (is.na(omissionsOriented[colnames(tableVariantes)[j], 
-                                                            colnames(tableVariantes)[k]])) {
-                                    omissionsOriented[colnames(tableVariantes)[j], colnames(tableVariantes)[k]] = 0
+                                if (is.na(omissionsOriented[myWitJ, 
+                                                            myWitK])) {
+                                    omissionsOriented[myWitJ, myWitK] = 0
                                 }
                                 # First case: common omission
                                 if (tableVariantes[i, j] == tableVariantes[i, k]) {
                                     # We use our own function for the table's incrementation.
-                                    omissionsInCommon[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = omissionsInCommon[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] + 1
+                                    omissionsInCommon[myWitJ,myWitK] = omissionsInCommon[myWitJ,myWitK] + 1
                                 }
                                 # Second case: oriented omission
                                 if (tableVariantes[i, j] < tableVariantes[i, k]) {
-                                    omissionsOriented[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = omissionsOriented[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] +1
+                                    omissionsOriented[myWitJ,myWitK] = omissionsOriented[myWitJ,myWitK] +1
                                 }
                             }
                         }
@@ -67,8 +74,8 @@ PCC.disagreement <-
                         for (k in 1:ncol(tableVariantes)) {
                             # if k is nor NA, nor equal to 0
                             # ou que omissionsAsReadings == TRUE
-                            if ((is.na(tableVariantes[i, k]) == FALSE) && ((tableVariantes[i, 
-                                                                                           k] != 0) | (omissionsAsReadings == TRUE))) {
+                          myWitK = myWit[k]
+                            if ((is.na(tableVariantes[i, k]) == FALSE) && ((tableVariantes[i, k] != 0) || (omissionsAsReadings == TRUE))) {
                                 # Careful, for this is a bit tricky : before
                                 # comparing the two readings, we already
                                 # have established something: the two
@@ -80,25 +87,25 @@ PCC.disagreement <-
                                 # NB: this is where we remove NA, that will subsist only if
                                 # the category examined (agreements, disagreements, etc.)
                                 # between two manuscripts is completely empty.
-                                if (is.na(agreements[colnames(tableVariantes)[j], 
-                                                     colnames(tableVariantes)[k]])) {
-                                    agreements[colnames(tableVariantes)[j], colnames(tableVariantes)[k]] = 0
+                                if (is.na(agreements[myWitJ, 
+                                                     myWitK])) {
+                                    agreements[myWitJ, myWitK] = 0
                                 }
-                                if (is.na(severeDisagreement[colnames(tableVariantes)[j], 
-                                                             colnames(tableVariantes)[k]])) {
-                                    severeDisagreement[colnames(tableVariantes)[j], 
-                                                       colnames(tableVariantes)[k]] = 0
+                                if (is.na(severeDisagreement[myWitJ, 
+                                                             myWitK])) {
+                                    severeDisagreement[myWitJ, 
+                                                       myWitK] = 0
                                 }
-                                if (is.na(benigneDisagreement[colnames(tableVariantes)[j], 
-                                                              colnames(tableVariantes)[k]])) {
-                                    benigneDisagreement[colnames(tableVariantes)[j], 
-                                                        colnames(tableVariantes)[k]] = 0
+                                if (is.na(benigneDisagreement[myWitJ, 
+                                                              myWitK])) {
+                                    benigneDisagreement[myWitJ, 
+                                                        myWitK] = 0
                                 }
                                 # Now that it is done, let's proceed to
                                 # actual comparison. First case, il y a
                                 # accord if j = k, alors agreements++
                                 if (tableVariantes[i, j] == tableVariantes[i, k]) {
-                                    agreements[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = agreements[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] + 1 
+                                    agreements[myWitJ,myWitK] = agreements[myWitJ,myWitK] + 1 
                                 }
                                 # if j != k alors
                                 if (tableVariantes[i, j] != tableVariantes[i, k]) {
@@ -119,10 +126,10 @@ PCC.disagreement <-
                                     # which(x,y)
                                     if ((tableVariantes[i, j] %in% tableSansjk) && 
                                             (tableVariantes[i, k] %in% tableSansjk)) {
-                                        severeDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = severeDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] +1
+                                        severeDisagreement[myWitJ,myWitK] = severeDisagreement[myWitJ,myWitK] +1
                                     } else {
                                         # sinon benigneDisagreements++
-                                        benigneDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] = benigneDisagreement[colnames(tableVariantes)[j],colnames(tableVariantes)[k]] +1
+                                        benigneDisagreement[myWitJ,myWitK] = benigneDisagreement[myWitJ,myWitK] +1
                                     }
                                 }
                             }

@@ -45,7 +45,7 @@ test_that("Models are reconstructed correctly", {
   
   expect_equal(PCC.reconstructModel(x, omissionsAsReadings = TRUE), results)
   
-  result = PCC.reconstructModel(x, recoverNAs = FALSE)
+  result = expect_output(PCC.reconstructModel(x, recoverNAs = FALSE, verbose = TRUE))
   
   expect_equal(result$fullDatabase[5,4], as.double(NA))
   expect_equal(result$database[5,1], as.double(NA))

@@ -52,7 +52,7 @@ PCC.reconstructModel <-
       labelMyMss = paste(myGroup, collapse = "")  
       ##Debug:
       if (verbose) {
-        cat("Now comparing group", labelMyMss)
+        cat("Now comparing group", labelMyMss,"\n")
       }
       labelMyModel = paste("{", labelMyMss, "}", sep = "")
       myModel = matrix(
@@ -132,7 +132,9 @@ PCC.reconstructModel <-
                 "Reading not assessable for the group",
                 labelMyMss,
                 "at VL",
-                rownames(tableVariantes)[j]#,
+                rownames(tableVariantes)[j],
+                "\n"
+                #,
                 #"\nThis can happen sometimes."
                 )
             }
@@ -165,7 +167,7 @@ PCC.reconstructModel <-
              is.na(myGroupComp$omissionsOriented[myGroup[m], labelMyModel]))) {
           if (verbose) {
             cat(myGroup[m], "seems to be the model of group",
-                        labelMyMss)
+                        labelMyMss, "\n")
           }
           extantModel = c(extantModel, myGroup[m])
         } else {
@@ -182,7 +184,7 @@ PCC.reconstructModel <-
               myGroupComp$omissionsOriented[myGroup[m],
                                             labelMyModel],
               "omissions",
-              "\ntowards the virtual model.\nIt does not seem to be the model"
+              "\ntowards the virtual model.\nIt does not seem to be the model\n"
             )
           }
         }
@@ -260,7 +262,7 @@ PCC.reconstructModel <-
           cat(
             extantModel,
             "is the only ms. inside the group that seems to be the model of group",
-            labelMyMss
+            labelMyMss, "\n"
           )
         }
         colnames(modelsByGroup)[i] = labelMyMss
@@ -277,7 +279,10 @@ PCC.reconstructModel <-
                 !is.na(myModel[r, ])) {
               # Debug:
               if(verbose){
-                cat("Recovering reading of virtual model", labelMyModel, "at VL", r, "Value was", tableVariantes[r, extantModel], "will be", myModel[r,])
+                cat("Recovering reading of virtual model", 
+                    labelMyModel, "at VL", r, "Value was", 
+                    tableVariantes[r, extantModel], 
+                    "will be", myModel[r,],"\n")
                 }
               tableVariantes[r, extantModel] = myModel[r, ]
             }
@@ -301,7 +306,7 @@ PCC.reconstructModel <-
             paste(
               "No ms inside group",
               labelMyMss,
-              "seems to be the model. We will proceed\n to a comparison with mss outside the group."
+              "seems to be the model.\nWe will proceed to a comparison with mss outside the group."
             )
           )  #NB: si nous voulons être rigoureux, il faut que la base de données inclue également les mss retirés aux étapes précédentes?
         }
@@ -324,7 +329,7 @@ PCC.reconstructModel <-
                   is.na(myOthersComp$omissionsOriented[others[n], labelMyModel])
                 )) {
               if (verbose) {
-                cat(others[n], "seems to be the model.")
+                cat(others[n], "seems to be the model.\n")
               }
               extantModel = c(extantModel, others[n])
             } else {
@@ -341,7 +346,7 @@ PCC.reconstructModel <-
                   myOthersComp$omissionsOriented[others[n],
                                                  labelMyModel],
                   "omissions",
-                  "towards the virtual model. It does not seem to be the model"
+                  "towards the virtual model.\nIt does not seem to be the model\n"
                 )
               }
             }
@@ -363,7 +368,7 @@ PCC.reconstructModel <-
           }
           if (length(extantModel) == 1) {
             if (verbose) {
-              cat(extantModel, "seems to be the model of this group")
+              cat(extantModel, "seems to be the model of this group\n")
             }
             colnames(modelsByGroup)[i] = labelMyMss
             modelsByGroup[, i] = extantModel
@@ -386,7 +391,7 @@ PCC.reconstructModel <-
             }
           }
         } else {
-          if(verbose){print("There are no other manuscript left in the database.")}
+          if(verbose){print("There are no other manuscript left in the database.\n")}
         }
         if (length(extantModel) == 0) {
           # If length is STILL equal to 0, then the manuscript is lost, and we keep
