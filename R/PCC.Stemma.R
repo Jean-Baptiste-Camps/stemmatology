@@ -6,6 +6,7 @@ PCC.Stemma <-
            layout_as_stemma = FALSE,
            ask = TRUE,
            verbose = FALSE) {
+    # TODO(JBC): find a way to avoid redundancy for output ?
     # TODO(JBC): la sortie de cette fonction n'a pas de classe, il faudrait 
     # l'implémenter
     # TODO(JBC): Modifier cette fonction pour pouvoir prendre en entrée une
@@ -18,17 +19,35 @@ PCC.Stemma <-
     # PCC.Stemma(x[[i]], omissionsAsReadings = omissionsAsReadings, limit =
     # limit) output[[i]] = pccStemma # } return(output) # } Deuxième
     # possibilité, le contenu n'est qu'une seule table de variantes
-    # TODO: deport output creation to a function to avoid redundancy?
-    # Explore graphical parameters for stemmata
-    # ,
-    # pad=1,
-    # label.pad = 0,
-    #label.pos=5,
-    # label.cex=0.7
     tableVariantes = x
     edgelistGlobal = NULL # matrix(c(character(0), character(0)), ncol = 2)
-    modelsGlobal = as.list(NULL)
-    modelsByGroupGlobal = as.list(NULL)
+    models = matrix(
+      nrow = nrow(tableVariantes), 
+      ncol = 0, 
+      dimnames = list(dimnames(tableVariantes)[[1]]))
+    modelsByGroup = matrix(
+      nrow = 1,
+      ncol = 0,
+      dimnames = list("Models")
+    )
+    fullDatabase = tableVariantes
+    # And now, we need to define an internal
+    # function to collate databases, to
+    # avoid redundancy
+    collateDbs <- function(x,y){
+      myCols = colnames(y)
+      for(i in seq_len(length(myCols))){
+        # If the columns already exists,
+        # replace it.
+        if(myCols[i] %in% colnames(x)){
+          x[, myCols[i]] = y[,i]
+        } else {
+          # Otherwise, add it
+          x = cbind(x, y[,i, drop = FALSE])
+        }
+      }
+      return(x)
+    }
     counter = 0
     while (ncol(tableVariantes) > 3) {
       counter = counter + 1
@@ -47,10 +66,11 @@ PCC.Stemma <-
           }
           igraph::plot.igraph(myNetwork, layout=myLayout)
           output = as.list(NULL)
-          output$edgelist = edgelistGlobal
+          output$fullDatabase = fullDatabase
           output$database = tableVariantes
-          output$modelsGlobal = modelsGlobal
-          output$modelsByGroupGlobal = modelsByGroupGlobal
+          output$edgelist = edgelistGlobal
+          output$models = models
+          output$modelsByGroup = modelsByGroup
           return(output)
         } else {
           return()
@@ -64,14 +84,15 @@ PCC.Stemma <-
         verbose = verbose
       )
       tableVariantes = pccReconstructModel$database
+      fullDatabase = collateDbs(fullDatabase, tableVariantes)
       if (!exists("tableVariantes")) {
         stop("No database found.")
         return(tableVariantes)
       }
       # Now we save the objects given out by PCC.reconstructModel
       edgelistGlobal = rbind(edgelistGlobal, pccReconstructModel$edgelist)
-      modelsGlobal[[counter]] = pccReconstructModel$models
-      modelsByGroupGlobal[[counter]] = pccReconstructModel$modelsByGroup
+      models = cbind(models,pccReconstructModel$models)
+      modelsByGroup = cbind(modelsByGroup,pccReconstructModel$modelsByGroup)
     }
     if (is.null(tableVariantes)) {
       # Job's done
@@ -84,10 +105,11 @@ PCC.Stemma <-
       }
       igraph::plot.igraph(myNetwork, layout=myLayout)
       output = as.list(NULL)
-      output$edgelist = edgelistGlobal
+      output$fullDatabase = fullDatabase
       output$database = tableVariantes
-      output$modelsGlobal = modelsGlobal
-      output$modelsByGroupGlobal = modelsByGroupGlobal
+      output$edgelist = edgelistGlobal
+      output$models = models
+      output$modelsByGroup = modelsByGroup
       return(output)
     }
     # There is now less than 4 manuscripts in the database. The method is no
@@ -113,10 +135,11 @@ PCC.Stemma <-
           }
           if (answer == "N") {
             output = as.list(NULL)
-            output$edgelist = edgelistGlobal
+            output$fullDatabase = fullDatabase
             output$database = tableVariantes
-            output$modelsGlobal = modelsGlobal
-            output$modelsByGroupGlobal = modelsByGroupGlobal
+            output$edgelist = edgelistGlobal
+            output$models = models
+            output$modelsByGroup = modelsByGroup
             return(output)
           }
           if (answer == "Y") {
@@ -138,8 +161,9 @@ PCC.Stemma <-
           verbose = verbose
         )
         tableVariantes = pccReconstructModel$database
-        modelsGlobal[[counter]] = pccReconstructModel$models
-        modelsByGroupGlobal[[counter]] = pccReconstructModel$modelsByGroup
+        fullDatabase = collateDbs(fullDatabase, tableVariantes)
+        models = cbind(models,pccReconstructModel$models)
+        modelsByGroup = cbind(modelsByGroup,pccReconstructModel$modelsByGroup)
         # And here, because we want dashes for the (uncertain) relations
         # established as the last step, we will create to 
         # separate networks with differente properties, before concatening
@@ -170,18 +194,20 @@ PCC.Stemma <-
         igraph::plot.igraph(myNetwork, layout=myLayout, main="Final stemma")
         # and output
         output = as.list(NULL)
-        output$edgelist = edgelistGlobal
+        output$fullDatabase = fullDatabase
         output$database = tableVariantes
-        output$modelsGlobal = modelsGlobal
-        output$modelsByGroupGlobal = modelsByGroupGlobal
+        output$edgelist = edgelistGlobal
+        output$models = models
+        output$modelsByGroup = modelsByGroup
         return(output)
       }
     } else {
       output = as.list(NULL)
-      output$edgelist = edgelistGlobal
+      output$fullDatabase = fullDatabase
       output$database = tableVariantes
-      output$modelsGlobal = modelsGlobal
-      output$modelsByGroupGlobal = modelsByGroupGlobal
+      output$edgelist = edgelistGlobal
+      output$models = models
+      output$modelsByGroup = modelsByGroup
       return(output)
     }
   }

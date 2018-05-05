@@ -23,7 +23,10 @@ PCC.reconstructModel <-
     groups = x$groups
     tableVariantes = x$database
     newDatabase = x$database
-    modelsReconstructed = as.list(NULL)
+    modelsReconstructed = matrix(
+      nrow = nrow(tableVariantes), 
+      ncol = 0, 
+      dimnames = list(dimnames(tableVariantes)[[1]]))
     # modelsToAdd is the list that will contain
     # only the reconstructed models that should be
     # added to the database.
@@ -430,7 +433,7 @@ PCC.reconstructModel <-
           descripti = c(descripti, myGroup[p])
         }
       }
-      modelsReconstructed[[i]] = myModel
+      modelsReconstructed = cbind(modelsReconstructed,myModel)
     }
     # modelsToAdd is the list containing the database for each virtual model, if
     # and only if the virtual model could not be identified with an existing
@@ -461,7 +464,8 @@ PCC.reconstructModel <-
       # So, to avoid that, you have to set ,drop = FALSE
       database = tableVariantes[, nonDescripti, drop = FALSE]
     }
-    output$database = database  # the edgelist
+    output$database = database  
+    # the edgelist
     # Debug: plot the stemma
     #if(verbose){
     #  myNetwork = igraph::graph_from_edgelist(edgelist, directed = TRUE)

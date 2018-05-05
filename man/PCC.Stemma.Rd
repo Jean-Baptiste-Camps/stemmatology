@@ -44,7 +44,13 @@ Default: FALSE
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{The function returns either a single object of class \code{"pccStemma"}, or a list containing several objects of class \code{"pccStemma"} (if multiple stemmatas were drawn)
+\value{The function returns either a single list, or a list containing several lists (if multiple stemmata were drawn). Each list contains:
+\item{fullDatabase}{The full database, with the new reconstructed models 
+  and recovered NAs (if applicable).}
+  \item{database}{The same with the \emph{descripti} removed.}
+  \item{edgelist}{An edgelist expressing the relations between the witnesses of each group with, as a third column, the distances between witnesses.}
+  \item{models}{A list containing the database of readings for each model at the time of their reconstruction (i.e., before they are compared to extant witnesses).}
+  \item{modelsByGroup}{A matrix with, in columns the groups, and a single row containing the label of their model.}
 }
 \references{
 Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
