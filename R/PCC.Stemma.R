@@ -56,6 +56,7 @@ PCC.Stemma <-
       if (identical(pccBuildGroup$groups, list())) {
         message("No group was found. Unable to build stemma.")
         # Plot the stemma at this step, if it exists
+        # TODO: deport stemma plotting to avoid redundancy ?
         if (!is.null(edgelistGlobal)) {
           myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2, drop = FALSE], directed = TRUE)
           if(layout_as_stemma){
@@ -64,6 +65,13 @@ PCC.Stemma <-
           else{
             myLayout = layout_as_tree(myNetwork)
           }
+          # Color the reconstructed wit. 
+          # (i.e., nodes with names starting with { ) 
+          # in grey, others in orange
+          # NB: this could be made more robust by using a 
+          # vector of color attributes passed between functions
+          V(myNetwork)$color = "orange"
+          V(myNetwork)[grep('^{', V(myNetwork)$name, perl=TRUE)]$color = "grey"
           igraph::plot.igraph(myNetwork, layout=myLayout)
           output = as.list(NULL)
           output$fullDatabase = fullDatabase
@@ -103,6 +111,8 @@ PCC.Stemma <-
       else{
         myLayout = layout_as_tree(myNetwork)
       }
+      V(myNetwork)$color = "orange"
+      V(myNetwork)[grep('^{', V(myNetwork)$name, perl=TRUE)]$color = "grey"
       igraph::plot.igraph(myNetwork, layout=myLayout)
       output = as.list(NULL)
       output$fullDatabase = fullDatabase
@@ -123,6 +133,8 @@ PCC.Stemma <-
         } else{
           myLayout = layout_as_tree(myNetwork)
         }
+        V(myNetwork)$color = "orange"
+        V(myNetwork)[grep('^{', V(myNetwork)$name, perl=TRUE)]$color = "grey"
         igraph::plot.igraph(myNetwork, layout=myLayout)
         writeLines(
           "There is now less than four manuscripts in the database.\nStemma building has now lost in accuracy. \nDo you want to continue anyway (take last step with caution) ?\n Y/N\n"
@@ -191,6 +203,8 @@ PCC.Stemma <-
           myLayout = layout_as_tree(myNetwork)
         }
         # And plotting
+        V(myNetwork)$color = "orange"
+        V(myNetwork)[grep('^{', V(myNetwork)$name, perl=TRUE)]$color = "grey"
         igraph::plot.igraph(myNetwork, layout=myLayout, main="Final stemma")
         # and output
         output = as.list(NULL)
