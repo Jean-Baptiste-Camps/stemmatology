@@ -35,7 +35,7 @@
                   for (i in 1:length(pccExploratory$databases)) {
                     pccStemma = PCC.Stemma(pccExploratory$databases[[i]], limit = limit, recoverNAs = recoverNAs, layout_as_stemma = layout_as_stemma)
                     graphics::title(sub = paste("Alternative stemma", i, "out of", 
-                      length(pccExploratory)))
+                      length(pccExploratory$databases)))
                     if (i < length(pccExploratory$databases)) {
                       readline("Press enter to proceed to next alternative stemma")
                     }
