@@ -1,11 +1,11 @@
 Package: stemmatology
 Type: Package
-Title: An R stemmatology package
+Title: An R Stemmatology Package
 Version: 0.2.3
 Date: 2018-05-04
 Author: Jean-Baptiste Camps ; Florian Cafiero
 Maintainer: Jean-Baptiste Camps <jbcamps@hotmail.com>
-Description: This package helps building and analysing the genealogy of textual or musical traditions.
+Description: Build and analyse the genealogy of textual or musical traditions.
 BugReports: https://github.com/Jean-Baptiste-Camps/stemmatology/issues
 Imports: graphics, stats, utils, network, sna, cluster, igraph
 Suggests: 
@@ -14,6 +14,7 @@ Suggests:
     rmarkdown,
     covr
 License: GPL-3 | file LICENSE
+Encoding: UTF-8
 NeedsCompilation: no
 URL: https://github.com/Jean-Baptiste-Camps/stemmatology
 VignetteBuilder: knitr
