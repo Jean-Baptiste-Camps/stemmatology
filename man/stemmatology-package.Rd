@@ -2,18 +2,21 @@
 \name{stemmatology}
 \alias{stemmatology-package}
 \docType{package}
-\title{An R stemmatology package}
+\title{An R Stemmatology Package}
 \description{
-This packages implements various methods for the stemmatological analysis of textual traditions. It contains both exploratory methods and algorithms aimed at building stemmata from a table of variant locations.
+Build and analyse the genealogy of textual or musical traditions.
 }
 \details{
 \tabular{ll}{
 Package: \tab stemmatology\cr
 Type: \tab Package\cr
-Version: \tab 0.2.2\cr
-Date: \tab 2014-07-16\cr
+Version: \tab 0.2.3\cr
+Date: \tab 2018-05-07\cr
 License: \tab GPL-3\cr
 }
+
+\emph{Stemmatology} is the name of the field dedicated to studying text genealogies
+and establishing genealogical tree-like graphs known as stemma codicum.
 
 This package includes various functions for stemmatological analysis. 
 
@@ -30,18 +33,18 @@ Most of the functions take, as input a \emph{numeric matrix}, with witnesses in 
 5 \tab 1 \tab 1 \tab 1 \tab 2 \tab NA \tab 1 \tab 1 \tab NA \tab 1 \tab 1\cr
 6 \tab 1 \tab 1 \tab 1 \tab 1 \tab NA \tab 1 \tab 1 \tab NA \tab 1 \tab 1\cr
 }
-where A, B, …, O are the various witnesses in columns, 1…6 the various variant locations, in rows, and the differents readings are coded either 0 (omission), 1, 2, …, n. NA is used for the lack of information (physical lacuna, absence of observation, variant location not applicable to a given witness, etc.).
+where A, B, …, O are the various witnesses in columns, 1…6 the various variant locations, in rows, and the differents readings are coded either 0 (omission), 1, 2, …, \emph{n}. \code{NA} is used for the lack of information (physical lacuna, absence of observation, variant location not applicable to a given witness, etc.).
 
 Alternatively , if \code{alternateReadings = TRUE}, the input can be a \emph{character matrix}, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings), e.g.
 
 \tabular{llllll}{
- \tab A \tab D1 \tab F \tab T \tab P1 \cr
-1 \tab 1 \tab 2 \tab 2 \tab 2 \tab 1,2 \cr
-2 \tab 1 \tab 2 \tab 1,2 \tab 2 \tab 1 \cr
-3 \tab 1 \tab 1 \tab 1 \tab 1 \tab 2 \cr
-4 \tab 1,3 \tab 1,2 \tab 1 \tab 2 \tab 3 \cr
+ \tab A \tab D \tab F \tab T \tab P \cr
+1 \tab "1" \tab "2" \tab "2" \tab "2" \tab "1,2" \cr
+2 \tab "1" \tab "2" \tab "1,2" \tab "2" \tab "1" \cr
+3 \tab "1" \tab "1" \tab "1" \tab "1" \tab "2" \cr
+4 \tab "1,3" \tab "1,2" \tab "1" \tab "2" \tab "3" \cr
 }
-Notice how a witness can bear several readings (e.g., P1 at VL 1).
+Notice how a witness can bear several readings (e.g., P at VL 1).
 }
 
 % Import functions
@@ -77,15 +80,18 @@ or for theoretical stemmatology.
 }
 
 \author{
-Jean-Baptiste Camps (École nationale des chartes, PSL Research University).
+Jean-Baptiste Camps (École nationale des chartes | Université PSL).
 
 Florian Cafiero.
 
 Maintainer: Jean-Baptiste Camps <\email{jbcamps@hotmail.com}>.
 }
+
 \references{
-Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
-%TODO: mettre le poster quand paru.
+
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2), edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
+
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 }
 
 \note{%

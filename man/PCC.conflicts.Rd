@@ -14,7 +14,7 @@ PCC.conflicts(x, omissionsAsReadings = FALSE, alternateReadings = FALSE)
   if \code{alternateReadings = TRUE}, a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings). 
 }
   \item{omissionsAsReadings}{
-     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
+     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining contradictions between variant locations or in computing disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
      Default: \code{FALSE}.
 }
   \item{alternateReadings}{

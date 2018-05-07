@@ -5,14 +5,11 @@
 \title{
 PCC.Stemma: Building the Stemma Codicum
 }
-\description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. It stops when the last four manuscripts are to be ordered, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
-
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+\description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. By default, it stops when less than four manuscripts are to be compared, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
 }
 \usage{
-PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE)
+PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE, layout_as_stemma = FALSE, ask = TRUE, verbose = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number; or a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings).
 }
@@ -28,14 +25,32 @@ The maximum number of severe disagreements expected for witnesses to be in the s
 }
  \item{recoverNAs}{
   logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. 
-  
   Default: \code{TRUE}.
 }
+\item{layout_as_stemma}{logical; if TRUE, the witnesses will be placed vertically
+according to the distance from their parent, as per the function \code{\link{layout_as_stemma}} (experimental!)
+Default: FALSE
+}
+\item{ask}{
+  logical; if FALSE, decisions will be made without asking the user for input.
+  Default: TRUE
+  }
+  \item{verbose}{
+  logical; if FALSE, the function will only return the results, without information
+  on the operations.
+  Default: FALSE
+  }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{The function returns either a single object of class \code{"pccStemma"}, or a list containing several objects of class \code{"pccStemma"} (if multiple stemmatas were drawn)
+\value{The function returns either a single list, or a list containing several lists (if multiple stemmata were drawn). Each list contains:
+\item{fullDatabase}{The full database, with the new reconstructed models 
+  and recovered NAs (if applicable).}
+  \item{database}{The same with the \emph{descripti} removed.}
+  \item{edgelist}{An edgelist expressing the relations between the witnesses of each group with, as a third column, the distances between witnesses.}
+  \item{models}{A list containing the database of readings for each model at the time of their reconstruction (i.e., before they are compared to extant witnesses).}
+  \item{modelsByGroup}{A matrix with, in columns the groups, and a single row containing the label of their model.}
 }
 \references{
 Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
@@ -54,7 +69,7 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{flor
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{PCC.disagreement}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}.
+\code{\link{PCC.disagreement}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}, \code{\link{layout_as_stemma}}.
 }
 \examples{
 

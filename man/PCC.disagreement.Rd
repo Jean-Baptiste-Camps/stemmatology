@@ -25,11 +25,12 @@ PCC.disagreement(x, omissionsAsReadings = FALSE)
 }
 \value{
 The function returns:
+  \item{database }{The original database.}
   \item{severeDisagreement }{A list of the severe disagreements between manuscripts.}
   \item{benigneDisagreement }{A list of the benigne disagreements between manuscripts.}
   \item{agreements}{A list of agreements between manuscripts.}
-  \item{omissionsInCommon }{A list of all the omissions in common between manuscripts.}
-  \item{omissionsOriented }{A list of the omissions present in a manuscript but not in another.}
+  \item{omissionsInCommon }{A list of all the omissions in common between manuscripts(if omissionsAsReadings is set to TRUE, this will be NA).}
+  \item{omissionsOriented }{A list of the omissions present in a manuscript but not in another (if omissionsAsReadings is set to TRUE, this will be NA).}
 
 }
 \references{
@@ -49,10 +50,15 @@ Jean-Baptiste Camps & Florian Cafiero
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{PCC.Stemma}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}.
 }
 \examples{
-
+#Load a tradition
+data("fournival")
+#Option: explore the tradition to see problems in variant locations
+#PCC.Exploratory(fournival)
+#Calculate disagreements
+PCC.disagreement(fournival)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
