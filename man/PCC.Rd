@@ -7,7 +7,7 @@
     Global shell for all the PCC functions, both exploratory and stemma-building. This command successively executes PCC.Exploratory and PCC.Stemma, while asking user for input when necessary.
 }
 \usage{
-PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recoverNAs = TRUE, layout_as_stemma = FALSE, pauseAtPlot = FALSE, interactive = TRUE)
+PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recoverNAs = TRUE, layout_as_stemma = FALSE, pauseAtPlot = FALSE, ask = TRUE, verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,10 +33,16 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recove
 according to the distance from their parent, as per the function \code{\link{layout_as_stemma}} (experimental!)
 Default: FALSE
 }
-  \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
+  \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam}. Default: \code{FALSE}.
 }
-  \item{interactive}{logical; if \code{TRUE} (recommended), the algorithm stops each time user input is needed; if \code{FALSE}, it tries to guess an appropriate value. Default: \code{TRUE}.
-}
+\item{ask}{
+  logical; if \code{FALSE}, decisions will be made without asking the user for input.
+  Default: \code{TRUE}
+  }
+  \item{verbose}{
+  logical; if \code{FALSE}, the function will only return the results, without information on the operations.
+  Default: \code{FALSE}.
+  }
 }
 \details{
 This function provides a single entry to all the algorithms used in the PCC method. It successively calls \code{\link{PCC.Exploratory}} and  \code{\link{PCC.Stemma}}.

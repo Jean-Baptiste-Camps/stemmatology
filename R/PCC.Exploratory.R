@@ -1,20 +1,19 @@
 PCC.Exploratory <-
 function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, 
-    interactive = TRUE) {
-    # TODO(JBC): dans ce groupe de fonction, comme dans le précédent, il est
-    # impératif de tester que les options font bien leur job (y compris en
-    # étant passées aux sous-fonctions) This is the global function for
-    # exploratory methods of the PCC type.  In entry, a matrix with a column
-    # per witness, and a row per variant location, with readings coded
-    # with numbers.  TODO(JBC): une version prenant en compte interactive =
-    # FALSE, pour tout faire d'elle-même avec des valeurs moyennes (pas pour
+    ask = TRUE) {
+    # This is the global function for exploratory methods of the PCC type.  
+    # In entry, a matrix with a column per witness, and a row per variant location, 
+    # with readings coded with numbers.  
+    # TODO(JBC): une version prenant en compte ask = FALSE, 
+    # pour tout faire d'elle-même avec des valeurs moyennes (pas pour
     # tout de suite) - ou demander à l'utilisateur de les choisir plutôt
     # que de proposer des valeurs par défaut risquées
     if (!is.matrix(x)) {
         stop("Input must be a matrix.")
     }
     tableVariantes = x
-    pccConflicts = PCC.conflicts(tableVariantes, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)  # Simple interaction, which tests for value inputed by the user
+    pccConflicts = PCC.conflicts(tableVariantes, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)  
+    # Simple interaction, which tests for value inputed by the user
     answered = FALSE
     while (answered == FALSE) {
         answerOne = readline("Do you want to proceed to the analysis of the network conflictuality ? Y/N \n ")

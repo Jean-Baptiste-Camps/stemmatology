@@ -6,17 +6,19 @@
            recoverNAs = TRUE,
            layout_as_stemma = FALSE,
            pauseAtPlot = FALSE,
-           interactive = TRUE) {
+           ask = TRUE,
+           verbose = FALSE
+           ) {
     
     # Global shell for the PCC functions. Successively calls PCC.Exploratory
     # and PCC.Stemma on the dataset NB: TODO(JBC) this function should be
     # updated when we will have defined appropriate object classes for the
     # various functions, and harmonised them.
-    pccExploratory = PCC.Exploratory(x, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings, pauseAtPlot = pauseAtPlot, interactive = interactive)
+    pccExploratory = PCC.Exploratory(x, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings, pauseAtPlot = pauseAtPlot, ask = ask)
     # Here, we will need to have appropriate version of the command for the
     # various outputs of PCC.Exploratory if is.pccOverconflicting
     if (is.matrix(pccExploratory)) {
-      # What does this do?
+      #TODO: What does this do?
         output = pccStemma(pccExploratory)
     } else {
         if (!is.matrix(pccExploratory)) {
@@ -24,7 +26,7 @@
             if (class(pccExploratory) == "pccConflicts" 
               | class(pccExploratory) == "pccOverconflicting" 
               | class(pccExploratory) == "pccContam") {
-                output = PCC.Stemma(pccExploratory$database, limit = limit, recoverNAs = recoverNAs, layout_as_stemma = layout_as_stemma)
+                output = PCC.Stemma(pccExploratory$database, limit = limit, recoverNAs = recoverNAs, layout_as_stemma = layout_as_stemma, ask = ask, verbose = verbose)
             } else {
                 # if is.pccEquipollent
                 if (class(pccExploratory) == "pccEquipollent") {
@@ -33,7 +35,7 @@
                   }
                   output = as.list(NULL)
                   for (i in 1:length(pccExploratory$databases)) {
-                    pccStemma = PCC.Stemma(pccExploratory$databases[[i]], limit = limit, recoverNAs = recoverNAs, layout_as_stemma = layout_as_stemma)
+                    pccStemma = PCC.Stemma(pccExploratory$databases[[i]], limit = limit, recoverNAs = recoverNAs, layout_as_stemma = layout_as_stemma, ask = ask, verbose = verbose)
                     graphics::title(sub = paste("Alternative stemma", i, "out of", 
                       length(pccExploratory$databases)))
                     if (i < length(pccExploratory$databases)) {

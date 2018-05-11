@@ -25,8 +25,10 @@ PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pause
   }
   \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
 }
-  \item{interactive}{logical; if \code{TRUE} (recommended), the algorithm stops each time user input is needed; if \code{FALSE}, it tries to guess an appropriate value. Default: \code{TRUE}.
-}
+  \item{ask}{
+  logical; if \code{FALSE}, decisions will be made without asking the user for input.
+  Default: \code{TRUE}
+  }
 }
 \details{
 This function is meant to guide the user through the process of assessing and eliminating unreliable variant locations and/or identify competing genealogies (i.e. contamination), as described in Camps & Cafiero 2015. 

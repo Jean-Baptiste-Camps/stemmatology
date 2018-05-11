@@ -32,13 +32,12 @@ according to the distance from their parent, as per the function \code{\link{lay
 Default: FALSE
 }
 \item{ask}{
-  logical; if FALSE, decisions will be made without asking the user for input.
-  Default: TRUE
+  logical; if \code{FALSE}, decisions will be made without asking the user for input.
+  Default: \code{TRUE}
   }
   \item{verbose}{
-  logical; if FALSE, the function will only return the results, without information
-  on the operations.
-  Default: FALSE
+  logical; if \code{FALSE}, the function will only return the results, without information on the operations.
+  Default: \code{FALSE}.
   }
 }
 \details{
