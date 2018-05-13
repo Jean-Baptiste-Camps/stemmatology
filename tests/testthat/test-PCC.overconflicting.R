@@ -62,3 +62,27 @@ test_that("PCC.overconflicting yields correct output on simple input", {
   #expect_error(PCC.overconflicting(x, ask = FALSE, threshold = 100))
   #expect_error(PCC.overconflicting(x, ask = FALSE, threshold = -1))
 })
+
+test_that("yields correct output on harder case with self conflicts", {
+  x = list(
+      edgelist = structure(
+        c("VL1", "VL1", "VL1", "VL1", "VL1","VL5",
+          "VL1", "VL2", "VL4", "VL5", "VL6","VL5"),
+        .Dim = c(6L, 2L)), 
+      conflictsTotal = 
+        structure(c(6, 1, 0, 1, 3, 1, 
+                    2,0.2, 0, 0.2, 1, 0.2), 
+                  .Dim = c(6L, 2L), .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6"), c("Number of conflicts", "Centrality index"))), 
+      database = NULL #we won't check that for the moment
+      )
+  class(x) = "pccConflicts"
+  
+  vertexAttributes = structure(
+    c("overconflicting", "sober", "sober", "overconflicting", "sober", 
+      "red", "green", "green", "red", "green"), 
+    .Dim = c(5L, 2L), 
+    .Dimnames = list(c("VL1", "VL2", "VL4", "VL5", "VL6"), c("label","color")))
+  
+  expect_equal(PCC.overconflicting(x, ask = FALSE, threshold = 0.6)$vertexAttributes, vertexAttributes)
+
+})
