@@ -7,6 +7,7 @@
            layout_as_stemma = FALSE,
            pauseAtPlot = FALSE,
            ask = TRUE,
+           threshold = NULL,
            verbose = FALSE
            ) {
     
@@ -14,7 +15,7 @@
     # and PCC.Stemma on the dataset NB: TODO(JBC) this function should be
     # updated when we will have defined appropriate object classes for the
     # various functions, and harmonised them.
-    pccExploratory = PCC.Exploratory(x, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings, pauseAtPlot = pauseAtPlot, ask = ask)
+    pccExploratory = PCC.Exploratory(x, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings, pauseAtPlot = pauseAtPlot, ask = ask, threshold = threshold)
     # Here, we will need to have appropriate version of the command for the
     # various outputs of PCC.Exploratory if is.pccOverconflicting
     if (is.matrix(pccExploratory)) {

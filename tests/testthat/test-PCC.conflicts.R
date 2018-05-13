@@ -44,6 +44,9 @@ test_that("PCC.conflicts works properly on basic setting", {
   
   expect_equal(PCC.conflicts(x, omissionsAsReadings = TRUE), results)
   
+  # and now test that incorrect input is spotted
+  expect_error(PCC.conflicts(x, alternateReadings = TRUE))
+  
 })
 
 # variants
@@ -99,6 +102,8 @@ test_that("PCC.conflicts works with alternateReadings",{
     
   expect_equal(PCC.conflicts(x, alternateReadings = TRUE), results)
   
+  # and now test that incorrect input is spotted
+  expect_error(PCC.conflicts(x, alternateReadings = FALSE))
 })
 
 #       A    B   C   D   E
@@ -120,7 +125,32 @@ test_that("PCC.conflicts works with alternateReadings",{
 test_that("PCC.conflicts correct output on Fournival", {
   data("fournival")
   myConflicts = PCC.conflicts(fournival)
-  expect_equal_to_reference(myConflicts, file="myConflicts.rds")
+  expect_equal_to_reference(myConflicts, file = "myConflicts.rds")
 })
 
+test_that("non-matrix input is detected", {
+  x = list(c(1,2,3),c(1,3,2))
+  expect_error(PCC.conflicts(x))
+})
+
+test_that("PCC.conflicts works with no conflicts",{
+  x = matrix(
+    data = c(
+      1,1,1,1,
+      1,1,0,1,
+      2,1,1,1,
+      2,2,0,2,
+      2,3,0,NA
+    ),
+    ncol = 5,
+    nrow = 4,
+    dimnames = list(
+      c("VL1","VL2","VL3","VL4"),
+      c("A","B","C","D","E")
+    )
+  )
+  
+  expect_message(PCC.conflicts(x))
+  
+})
 

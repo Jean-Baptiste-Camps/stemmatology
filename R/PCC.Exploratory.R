@@ -1,6 +1,6 @@
 PCC.Exploratory <-
 function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, 
-    ask = TRUE) {
+    ask = TRUE, threshold = NULL) {
     # This is the global function for exploratory methods of the PCC type.  
     # In entry, a matrix with a column per witness, and a row per variant location, 
     # with readings coded with numbers.  
@@ -29,7 +29,7 @@ function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot 
     }
     answered = FALSE
     while (answered == FALSE) {
-        pccOverconflicting = PCC.overconflicting(pccConflicts)
+        pccOverconflicting = PCC.overconflicting(pccConflicts, ask = ask, threshold = threshold)
         writeLines("Are you satisfied with this configuration and do you want to\n Proceed to actual elimination of over-conflicting variant locations [P],\n  Try again with different value [T],\n or Quit [Q] ? \n ")
         reiterateQuestion = TRUE
         while (reiterateQuestion == TRUE) {

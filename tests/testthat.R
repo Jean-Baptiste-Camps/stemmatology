@@ -1,3 +1,3 @@
-library(testthat)
-library(stemmatology)
+library("testthat")
+library("stemmatology")
 test_check("stemmatology")

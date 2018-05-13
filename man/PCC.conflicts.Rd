@@ -3,7 +3,7 @@
 \alias{PCC.conflicts}
 \title{PCC Exploratory Methods: Conflicts between Variant Locations}
 \description{
-Given a matrix of variant locations, this function compares them by pairs to identify contradictions between them.
+Given a matrix of variant locations, this function compares them by pairs to identify conflicting genealogical information between them.
 }
 \usage{
 PCC.conflicts(x, omissionsAsReadings = FALSE, alternateReadings = FALSE)
@@ -37,7 +37,7 @@ An object of class "pccConflicts", a list containing
 }
 
 \references{
-Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+Jean-Baptiste Camps and Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
 
 Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
 
@@ -46,7 +46,7 @@ Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Com
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
-\note{
+\note{%
 %%  ~~further notes~~
 }
 
@@ -55,9 +55,11 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 \code{\link{PCC.Exploratory}}, \code{\link{PCC.overconflicting}}.
 }
 \examples{
-%TODO: fignoler globalement les exemples et les reprendre, voire les affiner.
+# Load data
 data(fournival)
+# Analyse its conflicts
 myConflicts = PCC.conflicts(fournival)
+%# Create a new database, with overconflicting labelled
 %myOverconflicting = PCC.overconflicting(myConflicts)
 %myNewVariantsTable = PCC.elimination(myOverconflicting)
 }

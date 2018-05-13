@@ -7,11 +7,16 @@
 Given a network of conflicts (contradictions) between variant locations, this function helps in assessing which are the problematic ones.
 }
 \usage{
-PCC.overconflicting(x)
+PCC.overconflicting(x, ask = TRUE, threshold = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{an object of class pccConflicts.}
+  \item{ask}{
+  logical; if \code{FALSE}, decisions will be made without asking the user for input.
+  Default: \code{TRUE}
+  }
+  \item{threshold}{numeric; the centrality threshold above which variant locations are considered to be over-conflicting. Used only with \code{ask = FALSE}.}
 }
 \details{
 This function is dedicated to the identification of problematic variant locations, as defined in Poole 1974 and Camps & Cafiero 2015. It helps the user defining a threshold, defined in terms of centrality index, above which variant locations are considered to be over-conflicting. This output can be then passed to the function \code{\link{PCC.elimination}}, to remove them from the database.

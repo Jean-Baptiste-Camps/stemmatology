@@ -39,6 +39,7 @@ Default: FALSE
   logical; if \code{FALSE}, decisions will be made without asking the user for input.
   Default: \code{TRUE}
   }
+    \item{threshold}{numeric; the centrality threshold above which variant locations are considered to be over-conflicting. Used only with \code{ask = FALSE}.}
   \item{verbose}{
   logical; if \code{FALSE}, the function will only return the results, without information on the operations.
   Default: \code{FALSE}.

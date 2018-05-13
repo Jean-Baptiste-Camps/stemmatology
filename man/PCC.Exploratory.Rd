@@ -7,7 +7,7 @@ This is the global function for exploratory methods of the PCC family.
 It interactively makes use of the lower-level exploratory functions, to assess conflicts between variant locations, eliminate problematic configurations or identify likely contaminations. 
 }
 \usage{
-PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, interactive = TRUE)
+PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, ask = TRUE, threshold = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +29,7 @@ PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pause
   logical; if \code{FALSE}, decisions will be made without asking the user for input.
   Default: \code{TRUE}
   }
+  \item{threshold}{numeric; the centrality threshold above which variant locations are considered to be over-conflicting. Used only with \code{ask = FALSE}.}
 }
 \details{
 This function is meant to guide the user through the process of assessing and eliminating unreliable variant locations and/or identify competing genealogies (i.e. contamination), as described in Camps & Cafiero 2015. 

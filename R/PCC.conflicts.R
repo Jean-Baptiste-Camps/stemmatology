@@ -8,6 +8,8 @@ PCC.conflicts <-
     # as well as many small inflexions to the code due to the fact
     # that we need to cross VL with themselves if alternate…
     # it could also make the network more legible.
+    # This could even be ported into a different function, 
+    # for separate use.
     # Option to avoid using factor and gaining efficiency
     # Perhaps better to do:
     if (!is.matrix(x)) {
@@ -18,15 +20,16 @@ PCC.conflicts <-
     if (!is.numeric(tableVariantes) &
         alternateReadings == FALSE) {
       stop(
-        "The imput database is not a numeric matrix. If it is a character matrix containing alternate readings please set alternateReadings to true. Otherwise, try converting it to a numeric matrix object."
+        "The input database is not a numeric matrix. If it is a character matrix\ncontaining alternate readings please set alternateReadings to TRUE.\nOtherwise, try converting it to a numeric matrix object."
       )
     }
     if (!is.character(tableVariantes) &
         alternateReadings == TRUE) {
       stop(
-        "The imput database is not a character matrix. If it is a numeric matrix (i.e. not containing alternate readings) please set alternateReadings to false."
+        "The input database is not a character matrix. If it is a numeric matrix\n(i.e. not containing alternate readings) please set alternateReadings to FALSE"
       )
     }
+    # TODO: verify if rownames are present?
     # Preparing the objects we will need later
     tableVariantesInitial = tableVariantes
     # Créer une matrice (edgelist) à deux colonnes, à laquelle on ajoute une
@@ -263,9 +266,11 @@ PCC.conflicts <-
       # TODO: adjust label cex?
       igraph::plot.igraph(myNetwork,
                           layout = myLayout,
-                          vertex.label.cex = 0.7)
+                          vertex.label.cex = 0.7,
+                          main = 'Conflicting variant locations'
+                          )
     } else {
-      print("There is absolutely no conflicts in this database.")
+      message("There is absolutely no conflicts in this database.")
     }
     class(output) = "pccConflicts"
     return(output)
