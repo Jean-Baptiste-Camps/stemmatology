@@ -20,14 +20,11 @@ PCC.contam(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlo
  }
  \item{omissionsAsReadings}{
      logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
-     Default: \code{FALSE}.
-}
+Default: \code{FALSE}.}
   \item{alternateReadings}{
   logical; if \code{TRUE}, a witness can have multiple variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values. %; if \code{FALSE}, only one reading per witness is allowed. 
-  Default: \code{FALSE}.
-  }
-  \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.
-}
+  Default: \code{FALSE}.}
+  \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -60,12 +57,9 @@ Jean-Baptiste Camps & Florian Cafiero
 \section{Warning }{The execution of this command can be time-consuming for large databases.}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{PCC.Exploratory}}, \code{\link{PCC.equipollent}}.
 }
 \examples{
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{contamination}
-\keyword{detection}% __ONLY ONE__ keyword per line
+\keyword{stemmatology}
