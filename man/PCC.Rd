@@ -7,7 +7,9 @@
     Global shell for all the PCC functions, both exploratory and stemma-building. This command successively executes PCC.Exploratory and PCC.Stemma, while asking user for input when necessary.
 }
 \usage{
-PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, recoverNAs = TRUE, layout_as_stemma = FALSE, pauseAtPlot = FALSE, ask = TRUE, verbose = FALSE)
+PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0, 
+    recoverNAs = TRUE, layout_as_stemma = FALSE, pauseAtPlot = FALSE, 
+    ask = TRUE, threshold = NULL, verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

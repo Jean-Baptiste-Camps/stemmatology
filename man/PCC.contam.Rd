@@ -9,7 +9,7 @@ PCC Exploratory Methods: Contamination Detection
 Supplementary function to detect possible contaminations. It computes the number of conflicting variant locations when removing one of the witnesses, for each witness. If removing a witness makes the number of conflicting variant locations significantly drop, then contamination can be considered as plausible.
 }
 \usage{
-PCC.contam(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE)
+PCC.contam(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, ask = TRUE)
 }
 \arguments{
   \item{x}{
@@ -25,9 +25,15 @@ Default: \code{FALSE}.}
   logical; if \code{TRUE}, a witness can have multiple variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values. %; if \code{FALSE}, only one reading per witness is allowed. 
   Default: \code{FALSE}.}
   \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.}
+  \item{ask}{
+  logical; if \code{FALSE}, decisions will be made without asking the user for input.
+  Default: \code{TRUE}
+  }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+
+
+
 }
 \value{
   An object of class "pccContam", a list containing

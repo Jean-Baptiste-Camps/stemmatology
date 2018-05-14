@@ -3,10 +3,11 @@ context("PCC.elimination")
 test_that("yields correct output on simple object", {
   x = list(
     edgelist = structure(c("VL1", "VL1", "VL2", "VL4"), 
-                         .Dim = c(2L, 2L)), 
+      .Dim = c(2L, 2L)), 
     conflictsTotal = structure(c(2, 1, 0, 1, 2, 1, 0, 1), 
-                               .Dim = c(4L, 2L), 
-                               .Dimnames = list(c("VL1", "VL2","VL3", "VL4"), c("Number of conflicts", "Centrality index"))), 
+      .Dim = c(4L, 2L), 
+      .Dimnames = list(c("VL1", "VL2","VL3", "VL4"), 
+                       c("Number of conflicts", "Centrality index"))), 
     database = matrix(
       data = c(
         1,1,1,1,

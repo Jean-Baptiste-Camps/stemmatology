@@ -1,65 +1,101 @@
 PCC.contam <-
-function(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE) {
-    ##### Fonction supplémentaire testant le retrait de chacun des mss pour voir
-    ##### la différence en termes de nombre de conflits ### /!\ temps très long
-    ##### d'exécution... Pour Ambroise, a priori 290s*16 soit 1h20 # En entrée,
-    ##### un objet de type PCC.conflicts Various contamination assessment
-    ##### methods. /!\ Long execution time.  05/07/2014: added an option to
-    ##### pause at each plot
+  function(x,
+           omissionsAsReadings = FALSE,
+           alternateReadings = FALSE,
+           pauseAtPlot = FALSE,
+           ask = TRUE) {
+    ## Function for detecting contamination.
+    ## For now, it computes the difference in total conflicts
+    ## for the removal of each witness
+    ## /!\ Very long execution time.
+    ## For Ambroise, 290s*16 = 1h20
+    ## Input: PCC.conflicts, overconflicting, or matrix
+    ## 05/07/2014: added an option to pause at each plot
     ##### TODO(JBC): add/implement interactive=FALSE ?
     if (pauseAtPlot == TRUE) {
-        par(ask = TRUE)#TODO(JBC): this is now deprecated, see ?par
+      par(ask = TRUE)#TODO(JBC): this is now deprecated, see ?par
     } else {
-        par(ask = FALSE)
+      par(ask = FALSE)
     }
-    if (is.matrix(x)) {
-        tableVariantes = x
-    } else {
-        if (class(x) == "pccConflicts" | class(x) == "pccOverconflicting") { # TODO(JBC): There is a cleaner way to define methods for classes
-            tableVariantes = x$database
-        } else {
-            if (class(x) == "pccEquipollent") {
-                stop("It does not really make sense to apply PCC.contam() to an already equipollented database.")
-            } else {
-                stop("Input is neither a matrix, nor a object of class pccConflicts or pccOverconflicting.")
-            }
-        }
-    }
-    #conflictsDifferences = as.data.frame(character(0))
-    conflictsDifferences = as.matrix(integer(0))
     X = as.list(NULL)
-    X$totalByMs = x$conflictsTotal
-    for (i in 1:ncol(tableVariantes)) {
-        database = tableVariantes[, -i, drop = FALSE]  #Adding the new row to the synthesis of the conflicts differences
-        pccConflicts = PCC.conflicts(database, omissionsAsReadings = omissionsAsReadings, alternateReadings = alternateReadings)  #Adding a label to the plot (if there is actually a plot, otherwise, stating that there is no conflicts
-        if (length(pccConflicts$edgelist) != 0) {
-            legend("topright", c("Without ms. ", colnames(tableVariantes)[i]))
-        } else {
-            message = paste("Without ms. ", colnames(tableVariantes)[i], 
-                "there is NO CONFLICTS in the database. If the number of conflicts is \n otherwise high, it is likely that this manuscript is in cause")
-            writeLines(message)
-            if (pauseAtPlot == TRUE) {
-                cat("Press [enter] to continue")
-                line = readline()
-            }
+    if (is.matrix(x)) {
+      # if x is a matrix, let's create a PCC.conflicts object
+      x = PCC.conflicts(x,
+                        omissionsAsReadings = omissionsAsReadings,
+                        alternateReadings = alternateReadings)
+    } else {
+      if (class(x) == "pccEquipollent") {
+        stop(
+          "It does not really make sense to apply PCC.contam()\n to an already equipollented database."
+        )
+      } else {
+        {
+          if (class(x) != "pccConflicts" &
+              class(x) != "pccOverconflicting") {
+            # TODO(JBC): There is a cleaner way to define methods for classes
+            stop(
+              "Input is neither a matrix, nor a object of class pccConflicts or pccOverconflicting."
+            )
+          }
         }
-        # Calculating the differences in conflict number
-        difference = (sum(pccConflicts$conflictsTotal[,1])/2) - (sum(x$conflictsTotal[,1])/2)
-        conflictsDifferences = rbind(conflictsDifferences, difference)
-        rownames(conflictsDifferences)[i] = colnames(tableVariantes)[i]  #Adding the conflicts per VL with this ms. removed
-        colnames(pccConflicts$conflictsTotal)[1] = colnames(tableVariantes)[i]
-        X$totalByMs = cbind(X$totalByMs, pccConflicts$conflictsTotal)  #Adding the difference in number of conflicts
-        diffMSTotal = pccConflicts$conflictsTotal[, 1, drop = FALSE]
-        for (j in 1:nrow(X$totalByMs)) {
-            diffMSTotal[j, ] = pccConflicts$conflictsTotal[j, 1] - X$totalByMs[j, 1]
-        }
-        colnames(diffMSTotal) = "Difference"
-        X$totalByMs = cbind(X$totalByMs, diffMSTotal)
+      }
     }
-    X$conflictsDifferences = conflictsDifferences  #Summary of differences for the removal of each ms.
-    colnames(X$conflictsDifferences) = "Conflicts differences"  #Remove the pause at plot option before finishing the function
+    tableVariantes = x$database
+    X$totalByMs = x$conflictsTotal
+    conflictsDifferences = as.matrix(integer(0))
+    for (i in 1:ncol(tableVariantes)) {
+      #Adding the new row to the synthesis of the conflicts differences
+      database = tableVariantes[, -i, drop = FALSE]
+      pccConflicts = PCC.conflicts(database,
+                                   omissionsAsReadings = omissionsAsReadings,
+                                   alternateReadings = alternateReadings)
+      # Adding a label to the plot (if there is actually a plot, otherwise,
+      # stating that there is no conflicts
+      if (length(pccConflicts$edgelist) != 0) {
+        graphics::title(main = "Conflicting variant locations",
+                        sub = paste("Without ms.", colnames(tableVariantes)[i]))
+      } else {
+        cat(
+          "Without ms.",
+          colnames(tableVariantes)[i],
+          "there are NO CONFLICTS in the database.\n",
+          "If the number of conflicts is otherwise high,\n",
+          "it is likely that this manuscript is in cause\n"
+        )
+        if (pauseAtPlot == TRUE) {
+          cat("Press [enter] to continue")
+          line = readline()
+        }
+      }
+      # Calculating the differences in conflict number
+      difference = (
+        sum(pccConflicts$conflictsTotal[, 1]) / 2) - 
+        (sum(x$conflictsTotal[, 1]) / 2)
+      conflictsDifferences = rbind(conflictsDifferences, difference)
+      rownames(conflictsDifferences)[i] = colnames(tableVariantes)[i]  
+      #Adding the conflicts per VL with this ms. removed
+      colnames(pccConflicts$conflictsTotal)[1] = colnames(tableVariantes)[i]
+      # Creating an object with the difference in centrality and total conflicts
+      diffMSTotal = matrix(
+        data = c(
+          pccConflicts$conflictsTotal[, 1] - X$totalByMs[, 1],
+          pccConflicts$conflictsTotal[, 2] - X$totalByMs[, 2]
+          ), nrow = nrow(pccConflicts$conflictsTotal), ncol = 2,
+        dimnames = list(
+          rownames(pccConflicts$conflictsTotal),
+          c(
+            paste("d. confl.", colnames(tableVariantes)[i]), 
+            paste("d. centr.", colnames(tableVariantes)[i])
+            )
+        ))
+      X$totalByMs = cbind(X$totalByMs, diffMSTotal)
+    }
+    X$conflictsDifferences = conflictsDifferences  
+    # Summary of differences for the removal of each ms.
+    colnames(X$conflictsDifferences) = "Conflicts differences"
     X$database = tableVariantes
+    # Remove the pause at plot option before finishing the function
     par(ask = FALSE)
     class(X) = "pccContam"
-    return(X)  ##Pourquoi récupère-t-on une edgelist inutile?
-}
+    return(X)
+  }

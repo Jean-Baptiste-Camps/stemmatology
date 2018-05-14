@@ -36,11 +36,6 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-To identify and label over-conflicting variants: \code{\link{PCC.overconflicting}}
-
-To spot the conflicts between variants: \code{\link{PCC.conflicts}}
-}
-\seealso{
 \code{\link{PCC.Exploratory}},
 \code{\link{PCC.conflicts}},
 \code{\link{PCC.overconflicting}},

@@ -66,8 +66,9 @@ test_that("PCC.conflicts works with alternateReadings",{
   
   # TODO: test à ajouter quand on se sera décidés sur la mesure de
   # centralité
-  #PCC.conflicts(x, alternateReadings = TRUE)
-  #bugue, et 2e bug si on fait, rbind(x,x)
+  
+  expect_equal(PCC.conflicts(x, alternateReadings = TRUE)$edgelist, 
+               matrix(c("VL1","VL1"), nrow=1))
   
   #PCC.conflicts(rbind(x,x), alternateReadings = TRUE)
   
