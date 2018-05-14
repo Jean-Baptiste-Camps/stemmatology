@@ -47,9 +47,7 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 
 \seealso{
 \code{\link{PCC.Exploratory}},
-%About the input for this fonction : 
 \code{\link{PCC.conflicts}},
-%To remove the variants labeled as problematic: 
 \code{\link{PCC.elimination}}.
 }
 \examples{

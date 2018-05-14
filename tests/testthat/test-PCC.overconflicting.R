@@ -86,3 +86,33 @@ test_that("yields correct output on harder case with self conflicts", {
   expect_equal(PCC.overconflicting(x, ask = FALSE, threshold = 0.6)$vertexAttributes, vertexAttributes)
 
 })
+
+test_that("inputs are checked correctly", {
+  # Checking input class
+  x = list(
+    edgelist = structure(c("VL1", "VL1", "VL2", "VL4"), 
+                         .Dim = c(2L, 2L)), 
+    conflictsTotal = structure(c(2, 1, 0, 1, 2, 1, 0, 1), 
+                               .Dim = c(4L, 2L), 
+                               .Dimnames = list(c("VL1", "VL2","VL3", "VL4"), c("Number of conflicts", "Centrality index"))), 
+    database = matrix(
+      data = c(
+        1,1,1,1,
+        1,2,0,2,
+        2,1,1,1,
+        2,2,0,2,
+        2,3,0,NA
+      ),
+      ncol = 5,
+      nrow = 4,
+      dimnames = list(
+        c("VL1","VL2","VL3","VL4"),
+        c("A","B","C","D","E")
+      )
+    ))
+  #class(x) = "pccConflicts"
+  expect_error(PCC.overconflicting(x))
+  
+  # Test for input with no conflict?
+  
+})

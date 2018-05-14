@@ -10,6 +10,7 @@ PCC.conflicts <-
     # it could also make the network more legible.
     # This could even be ported into a different function, 
     # for separate use.
+    # Except that it is not what we need
     # Option to avoid using factor and gaining efficiency
     # Perhaps better to do:
     if (!is.matrix(x)) {
@@ -32,12 +33,9 @@ PCC.conflicts <-
     # TODO: verify if rownames are present?
     # Preparing the objects we will need later
     tableVariantesInitial = tableVariantes
-    # Créer une matrice (edgelist) à deux colonnes, à laquelle on ajoute une
-    # ligne par paire en conflit.
-    edgelist = matrix(c(character(0), character(0)), ncol = 2)  # Créer un tableau du nombre de conflits
-    # we try not to use the time consuming rbind => it does not cause a gain
-    # edgelist = NULL ;
-    # Créer une matrice des conflits (nouvelle solution, optimisée). NB: ceci étant auparavant un dataframe, j'en fait à présent une matrice
+    # Create an edgelist for conflicts
+    edgelist = matrix(c(character(0), character(0)), ncol = 2)
+    # Create a matrix of conflicts per VL
     conflictsTotal = matrix(
       data = 0,
       nrow = nrow(tableVariantes),
@@ -159,7 +157,10 @@ PCC.conflicts <-
               }
             }
             # Et c'est ici que les problèmes commencent
-            # We look for configuration such as, given a first , variant location containing {x, x', ..} and a second {y, y', ... }, for each combination {x, y} € m_k and {x, y'} € m_k, is there a x' such as {x', y} € m_k and {x', y'} € m_k
+            # We look for configuration such as, given a first , 
+            # variant location containing {x, x', ..} and a second {y, y', ... }, 
+            # for each combination {x, y} € m_k and {x, y'} € m_k, 
+            # is there a x' such as {x', y} € m_k and {x', y'} € m_k
             problematicConfiguration = FALSE # FALSE until proven otherwise
             # for each x
             # and as long as a problematic configuration has not been found

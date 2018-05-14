@@ -123,7 +123,7 @@ test_that("PCC.conflicts works with alternateReadings",{
 
 #TODO: check fournival output
 test_that("PCC.conflicts correct output on Fournival", {
-  data("fournival")
+  data("fournival", package = "stemmatology")
   myConflicts = PCC.conflicts(fournival)
   expect_equal_to_reference(myConflicts, file = "myConflicts.rds")
 })

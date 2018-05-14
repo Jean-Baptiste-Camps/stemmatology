@@ -1,14 +1,8 @@
 PCC.elimination <-
 function(x) {
-    ### Fonction qui prend en entrée un objet de type pccOverconflicting, et
-    ### procède à la suppression des lieux variants étiquetés comme
-    ### overconflicting, et donne en sortie la nouvelle base de données
-    ### (seulement ; il faut donc rappeler ensuite PCC.conflicts, etc.)
-    ### Cette fonction, de dimensions très restreintes, pourrait peut-être
-    ### aller entièrement dans PCC.elimination (en option) ?
-    ### => à la réflexion, non, car il peut y avoir des usages où l'on 
-    ### souhaite juste tracer le réseau coloré des conflits, ou des usages
-    ### où l'on veut itérer l'estimation des overconflicting sans éliminer
+    ### Takes in input an object of class pccOverconflicting, and
+    ### deletes variant locations labelled as overconflicting;
+    ### outputs the new database.
     # we select the overconflicting
     overconflicting = rownames(x$vertexAttributes)[x$vertexAttributes[, 1] == "overconflicting"]
     # and we remove them

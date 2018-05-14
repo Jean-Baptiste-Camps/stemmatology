@@ -40,6 +40,12 @@ To identify and label over-conflicting variants: \code{\link{PCC.overconflicting
 
 To spot the conflicts between variants: \code{\link{PCC.conflicts}}
 }
+\seealso{
+\code{\link{PCC.Exploratory}},
+\code{\link{PCC.conflicts}},
+\code{\link{PCC.overconflicting}},
+\code{\link{PCC.contam}}.
+}
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
