@@ -37,10 +37,7 @@ Default: \code{FALSE}.}
 }
 \value{
   An object of class "pccContam", a list containing
-  \item{totalByMs}{a numeric matrix, with, in rows, each variant locations, and,   in columns, the total sum of conflicts and centrality index, followed by 
-  the sum of conflicts, centrality index and difference to the total sum for the
-  removal of each of the witnesses in turn
-  } %TODO: faudrait-il simplifier ou modifier la structure?
+  \item{totalByMs}{a numeric matrix, with, in rows, each variant locations, and,   in columns, the number of conflicts and centrality in the full database, followed by the difference in total conflicts and centrality caused by the removal of each witness.}
   \item{conflictsDifferences}{a one row numeric matrix, containing, for each
   witness, the total decrease in conflicts caused by its removal from the
   computations}

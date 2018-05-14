@@ -1,6 +1,6 @@
 context("PCC.contam")
 
-test_that("works on numeric matrix input", {
+test_that("works on numeric matrix input, or on pccConflicts or pccOverconflicting", {
   x = matrix(
     data = c(
       1,1,1,1,
@@ -38,6 +38,31 @@ test_that("works on numeric matrix input", {
         )
       )
     , results)
+  
+  
+  pccConflicts = PCC.conflicts(x)
+  
+  expect_output(expect_message(PCC.contam(pccConflicts)))
+  
+  expect_equal(
+    expect_output(
+      expect_message(
+        PCC.contam(pccConflicts)
+      )
+    )
+    , results)
+  
+  
+  pccOverconflicting = PCC.overconflicting(pccConflicts, ask = FALSE, threshold = 2)
+  
+  expect_equal(
+    expect_output(
+      expect_message(
+        PCC.contam(pccOverconflicting)
+      )
+    )
+    , results)
+  
 })
 
 
@@ -62,18 +87,129 @@ test_that("works on character matrix input", {
   expect_error(PCC.contam(x))
   
   # And now check correct result
-  PCC.contam(x, alternateReadings = TRUE)
+  
+  results = list(
+    totalByMs = structure(
+      c(
+        6,
+        1,
+        0,
+        1,
+        3,
+        1,
+        2,
+        0.2,
+        0,
+        0.2,
+        1,
+        0.2,
+        -6,
+        -1,
+        0,
+        -1,
+        -3,
+        -1,
+        -2,
+        -0.2,
+        0,
+        -0.2,
+        -1,
+        -0.2,
+        -3,
+        -1,
+        0,
+        -1,
+        0,
+        -1,
+        0,
+        -0.2,
+        0,
+        -0.2,
+        1,
+        -0.2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -2,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        -0.2,
+        0,
+        -0.2,
+        2,
+        0.133333333333333,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ),
+      .Dim = c(6L, 12L),
+      .Dimnames = list(
+        c("VL1", "VL2", "VL3",
+          "VL4", "VL5", "VL6"),
+        c(
+          "Number of conflicts",
+          "Centrality index",
+          "d. confl. A",
+          "d. centr. A",
+          "d. confl. B",
+          "d. centr. B",
+          "d. confl. C",
+          "d. centr. C",
+          "d. confl. D",
+          "d. centr. D",
+          "d. confl. E",
+          "d. centr. E"
+        )
+      )
+    ), conflictsDifferences = structure(
+      c(-6,-3, 0,-2, 0),
+      .Dim = c(5L,1L),
+      .Dimnames = list(c("A", "B", "C", "D", "E"), "Conflicts differences")
+    ),
+    database = x)
+  
+  class(results) = "pccContam"
+  
+  expect_equal(
+    expect_output(
+      expect_message(
+        PCC.contam(x, alternateReadings = TRUE)
+      )
+    )
+    , results)
   
 })
+# $conflictsDifferences
+# Conflicts differences
+# A                    -6
+# B                    -3
+# C                     0
+# D                    -2
+# E                     0
 
-test_that("works on pccConflicts input", {
-  
-})
-
-test_that("works on pccOverConflicting input", {
-  
-})
-
-test_that("works on larger input", {
-  
-})
+# TODO
+# test_that("works on larger input", {
+#   
+# })
