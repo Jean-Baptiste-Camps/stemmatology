@@ -1,4 +1,4 @@
-Import.TEIApparatus <-
+import.TEIApparatus <-
   function(file = "",
            appTypes = c("substantive")) {
     # load xml document
@@ -16,9 +16,18 @@ Import.TEIApparatus <-
       ncol = length(myWits),
       dimnames = list(NULL, myWits)
     )
-    
     # and now, let's get the app values
-    myApps = xml_find_all(doc, "/descendant::app")
+    if (is.null(appTypes)) {
+      myApps = xml_find_all(doc, "/descendant::app")
+    } else {
+      myTypes = paste("@type = '",
+                      appTypes,
+                      "'",
+                      sep = "",
+                      collapse = " or ")
+      myXpath = paste("/descendant::app[", myTypes, "]", sep = "")
+      myApps = xml_find_all(doc, xpath = myXpath)
+    }
     # and transform them
     for (i in seq_len(length(myApps))) {
       # create a list of rdg with their witnesses,
@@ -63,12 +72,11 @@ Import.TEIApparatus <-
       # if it has an xml:id, we take that, otherwise
       # we take the index of the row
       myLabel = xml_text(xml_find_all(myApps[i], "@xml:id"))
-      if(length(myLabel) == 0){
+      if (length(myLabel) == 0) {
         myLabel = as.character(i)
       }
       tableVariantes = rbind(tableVariantes, myRow)
       rownames(tableVariantes)[i] = myLabel
     }
-    
     return(tableVariantes)
   }

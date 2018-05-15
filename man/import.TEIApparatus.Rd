@@ -1,20 +1,19 @@
 \encoding{utf8}
-\name{Import.TEIApparatus}
-\alias{Import.TEIApparatus}
+\name{import.TEIApparatus}
+\alias{import.TEIApparatus}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Import TEI apparatus}
-\description{Allows the user to import a TEI encoded parallel-segmentation apparatus.}
+\description{Import a TEI encoded parallel-segmentation apparatus.}
 \usage{
-Import.TEIApparatus(file = "")
+import.TEIApparatus(file = "", appTypes = c("substantive"))
 }
 
 \arguments{
-  \item{file}{
-Path to a valid TEI file..
-}
+  \item{file}{Path to a valid TEI file.}
+  \item{appTypes}{a vector of strings giving the types of entries that should be retained (as per \code{app/@type}). Default: "substantive". To include all types, set to \code{NULL}.}
 }
 \details{
-This function takes in input the path to a TEI file, with a \code{<listWit>} and with \code{app} entries encoded in parallel-segmentation mode. Using the witness sigla, it then creates a database of variant locations, with witnesses in columns and variant locations in rows. 
+This function takes in input the path to a TEI file, with a \code{<listWit>} and with \code{app} entries encoded in parallel-segmentation mode. Using the witness sigla, it then creates a database of variant locations, with witnesses in columns and variant locations in rows. The \code{@types} attributes of the \code{<app>} elements are used to assess if they should be included in the variant locations matrix (default: only `substantive' app entries)
 }
 
 \value{%
