@@ -5,33 +5,32 @@
 \title{Import TEI apparatus}
 \description{Allows the user to import a TEI encoded parallel-segmentation apparatus.}
 \usage{
-Import.TEIApparatus(file = x, fromCollatex = FALSE)
+Import.TEIApparatus(file = "")
 }
 
 \arguments{
   \item{file}{
-Adress of valid TEI file.
-}
-  \item{fromCollatex}{
-Default: \code{false}
+Path to a valid TEI file..
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+This function takes in input the path to a TEI file, with a \code{<listWit>} and with \code{app} entries encoded in parallel-segmentation mode. Using the witness sigla, it then creates a database of variant locations, with witnesses in columns and variant locations in rows. 
 }
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+
+\value{%
+Either a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number;
+or, if alternative readings were found at some point, a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings).
+The output of this function can be used as input for the \code{\link{PCC}} functions.
 }
 %\references{
 %}
-
-\author{
-Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{florian.cafiero@polytechnique.edu})
+\note{
+If you want more control over the conversion, you can use directly the stylesheets available at \url{https://github.com/Jean-Baptiste-Camps/stemmatology-utils}.
 }
 
+\author{
+Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
+}
 
-\keyword{TEI}
+\keyword{manip}
+\keyword{stemmatology}

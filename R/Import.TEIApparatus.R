@@ -1,20 +1,44 @@
 Import.TEIApparatus <-
-function(file = x, fromCollatex = FALSE) {
-    ### Ajout d'une fonction d'import de document TEI encodé conformément à nos
-    ### préconisations.  NB: si on veut vraiment garder la fonction import.TEI
-    ### (souhaitable à terme), il faudra vraiment - convertir en XSLT 1.0 la
-    ### feuille écrite en XSLT 2.0 - créer un fichier CONFIGURE pour vérifier
-    ### la présence de libxslt (Unix) et des merdouilles équivalentes sur
-    ### Windows Il existe une librairie Sxslt Le problème est néanmoins qu'elle
-    ### n'accepte pas XSLT 2.0 dont nous avons pour l'instant besoin...  À
-    ### terme, pourrait être intéressant d'ajouter une option «from CollateX»
-    ### pour l'import teiDoc = = readLines(x) #N'est plus utile si on utilise
-    ### la commande xsltproc... 
-    ### Version qui devrait fonctionner avec Linux et avec XSLT 1.0...
-    commandeXSLT = paste("xsltproc genere-Tableau-JBCamps-avec-exclusion-des-types_v3_cours.xsl ", 
-        x)
-    parsedTEI = system(commandeXSLT, intern = TRUE)
-    tableVariantes = as.matrix(read.csv(textConnection(parsedTEI), header = TRUE, row.names = 1, 
-        sep = ";", stringsAsFactors = FALSE))
+  function(file = "",
+           appTypes = c("substantive")) {
+    
+    # load xml document
+    doc = read_xml(file)
+    # for the moment, I strip the default namespaces, to deal with poorly made XML
+    xml_ns_strip(doc)
+    # Find all witnesses
+    myWits = xml_text(xml_find_all(doc, 
+                      "/descendant::listWit/descendant::witness/@xml:id"))
+    # alphabetic sort
+    myWits = sort(myWits)
+    
+    # create the matrix
+    tableVariantes = matrix(nrow = 0, ncol = length(myWits), 
+                            dimnames = list(NULL, myWits))
+    
+    # and now, let's get the app values
+    myApps = xml_find_all(doc, "/descendant::app")
+    # and transform them
+    for(i in seq_len(length(myApps))){
+      
+      # create a list of rdg with their position, their witness,
+      # and their type
+      myRdgs = xml_find_all(myApps[i], "./rdg")
+      myRdgWits = xml_text(xml_find_all(myApps[i], "./rdg/@wit"))
+      myRdgWits = gsub("#", " ",myRdgWits)
+      myRdgWits = sub("^\\s+|\\s+$", "",myRdgWits)
+      myRdgWits = strsplit(myRdgWits, "\\s+")
+      
+      myRow = NULL
+      for(j in seq_len(length(myWits))){
+        # do the wit appear?
+        
+        # is it an omission?
+        
+        # does it appear several time?
+      }
+    }
+    
+   
     return(tableVariantes)
-}
+  }

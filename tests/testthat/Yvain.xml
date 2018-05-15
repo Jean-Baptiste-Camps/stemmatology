@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+   schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title ref="http://viaf.org/viaf/183568542/"
+               key="Chré tien de Troyes 113.-1135? Le chevalier au lion">Yvain ou le chevalier au
+               lion</title>
+            <author ref="http://viaf.org/viaf/87681171/" key="Chré tien de Troyes, 113.-1183?"
+               >Chrétien de Troyes</author>
+            <respStmt>
+               <resp>Collation des variantes par les étudiants de</resp>
+               <orgName>l'École des chartes</orgName>
+            </respStmt>
+            <respStmt>
+               <resp>sous la direction de</resp>
+               <persName>Jean-Baptiste Camps</persName>
+            </respStmt>
+         </titleStmt>
+         <publicationStmt>
+            <p>Document de travail inédit</p>
+         </publicationStmt>
+         <sourceDesc>
+            <listWit>
+               <!-- Liste des témoins du Chevalier au lion, avec des notices excessivement sommaires,
+                  servant surtout ici à enregistrer les sigles des témoins, les identifier, et fournir
+                  les références bibliographiques des transcriptions.
+               -->
+                  <head>Témoins utilisés dans le cadre de la présente collation</head>
+                  <witness xml:id="H">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Paris</settlement>
+                           <repository>Bibliothèque nationale de France</repository>
+                           <collection>fonds français</collection>
+                           <idno>fr. 794</idno>
+                           <msName>Copie de Guiot</msName>
+                           <msName type="sigle">H</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Pierre Kunstmann</editor> (<orgName>Laboratoire
+                        de Français Ancien, Université d'Ottawa</orgName>)</bibl>, avec référence
+                     aux folios du ms. Celui-ci présente 3 colonnes par page, notées a/b/c pour le
+                     recto, d/e/f pour le verso. L'indication de début de colonne est suivie de la
+                     numérotation du vers. La marque de paragraphe est utilisée pour signaler une
+                     lettrine dans le ms. </witness>
+                  <witness xml:id="P">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Paris</settlement>
+                           <repository>Bibliothèque nationale de France</repository>
+                           <collection>fonds français</collection>
+                           <idno>fr. 1433</idno>
+                           <msName type="sigle">P</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Pierre Kunstmann</editor> (<orgName>Laboratoire
+                        de Français Ancien, Université d'Ottawa</orgName>)</bibl>, avec référence
+                     aux folios du ms.. Celui-ci présente 2 colonnes par page, notées a/b pour le
+                     recto, c/d pour le verso. L'indication de début de colonne est suivie de la
+                     numérotation du vers dans la copie de Guiot (ms. H), prise comme étalon. La
+                     marque de paragraphe est utilisée pour signaler une lettrine dans le ms. La
+                     ponctuation et la séparation des mots suivent l'usage moderne. Les abréviations
+                     du copiste ont été développées et les lettres suppléées sont soulignées; les
+                     points de suspension signalent des omissions de vers dans le ms., et les
+                     erreurs manifestes du copiste sont indiquées par un astérisque. Les passages
+                     incompréhensibles sont marqués d'une croix </witness>
+                  <witness xml:id="L">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Paris</settlement>
+                           <repository>BnF</repository>
+                           <collection>fonds français</collection>
+                           <idno>fr. 1638</idno>
+                           <msName>Remaniement offert à François Ier</msName>
+                           <msName type="sigle">L</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Pierre Kunstmann</editor> (<orgName>Laboratoire
+                        de Français Ancien, Université d'Ottawa</orgName>)</bibl>, avec référence
+                     aux folios du ms. et, le cas échéant, aux vers du roman de Chrétien de Troyes
+                     [copie de Guiot, telle qu'éditée par M. Roques]. La ponctuation et la
+                     séparation des mots suivent l'usage moderne. Les crochets droits indiquent les
+                     éléments ajoutés et les parenthèses les éléments retranchés; « l. » signifie
+                     "lire plutôt"; les points de suspension signalent des omissions de vers dans le
+                     ms., et les erreurs manifestes du copiste sont marquées par un astérisque.
+                     Après l'achèvement de cette transcription a paru une <bibl>édition du texte de
+                        P. Sala, effectuée par <editor>Pierre Servet</editor> (Paris, Honoré
+                        Champion, 1996)</bibl>. Nous avons alors comparé les transcriptions et
+                     observé un certain nombre de lectures différentes (avec parfois des écarts
+                     importants); celles-ci se trouvent aux vers suivants (numérotation de P.
+                     Servet): 558, 835, 923, 961, 973, 1021, 1023, 1044, 1079, 1103, 1137, 1139,
+                     1140, 1248, 1304, 1488, 1531, 1534, 1546, 1570, 1572, 1599, 1616, 1651, 1728,
+                     1765, 1793, 1818, 1821, 1845,1923, 1931, 1945, 1953, 1954, 1961, 1992, 1993,
+                     1995, 2026, 2032, 2042, 2046, 2052, 2115, 2145, 2155, 2215, 2266, 2280, 2292,
+                     2298, 2343, 2354, 2356, 2364, 2372, 2375, 2393, 2412, 2415, 2417, 2441, 2442,
+                     2453, 2594, 2601, 2603, 2618, 2660, 2735, 2740, 2793, 2804, 2842, 2853, 2911,
+                     2924, 2943, 2998, 3008, 3067, 3070, 3072, 3087, 3096, 3107, 3119, 3133, 3141,
+                     3196, 3209, 3241, 3250, 3254, 3263, 3267, 3308, 3348, 3410, 3459, 3477, 3522,
+                     3524, 3659, 3684, 3691, 3760, 3906, 3907, 3933, 3934, 3989, 4035, 4042, 4048,
+                     4055, 4084, 4175, 4177, 4241, 4265, 4273 </witness>
+                  <witness xml:id="G">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Paris</settlement>
+                           <repository>BnF</repository>
+                           <collection>fonds français</collection>
+                           <idno>fr. 12560</idno>
+                           <msName type="sigle">G</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Pierre Kunstmann</editor> (<orgName>Laboratoire
+                        de Français Ancien, Université d'Ottawa</orgName>)</bibl>, avec référence
+                     aux folios du ms.. Celui-ci présente 2 colonnes par page, notées a/b pour le
+                     recto, c/d pour le verso. L'indication de début de colonne est suivie de la
+                     numérotation du vers dans la copie de Guiot (ms. H), prise comme étalon. Un
+                     saut de ligne signale une lettrine dans le ms. La ponctuation et la séparation
+                     des mots suivent l'usage moderne. Les abréviations du copiste ont été
+                     développées et les lettres suppléées sont soulignées; les points de suspension
+                     signalent des omissions de vers dans le ms., et les erreurs manifestes du
+                     copiste sont indiquées par un astérisque. Les passages incompréhensibles sont
+                     marqués d'une croix. </witness>
+                  <witness xml:id="A">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Chantilly</settlement>
+                           <repository>Bibl. et archives du château</repository>
+                           <idno>472</idno>
+                           <msName type="sigle">A</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Pierre Kunstmann</editor> (<orgName>Laboratoire
+                        de Français Ancien, Université d'Ottawa</orgName>)</bibl>, avec référence
+                     aux folios du ms.. Celui-ci présente 3 colonnes par page, notées a/b/c pour le
+                     recto, d/e/f pour le verso. L'indication de début de colonne est suivie de la
+                     numérotation du vers dans la copie de Guiot (ms. H), prise comme étalon. Le
+                     caractère gras signale une lettrine dans le ms. La ponctuation et la séparation
+                     des mots suivent l'usage moderne. Les abréviations du copiste ont été
+                     développées et les lettres suppléées sont soulignées. Les points de suspension
+                     signalent des omissions de vers dans le ms.. Les erreurs manifestes du copiste,
+                     particulièrement négligent, sont indiquées par un astérisque; nous en avons usé
+                     fréquemment. Quand l'astérisque est précédé d'un espace, il indique que
+                     l'erreur porte sur tout le vers (interversion de vers, par ex.). Les passages
+                     incompréhensibles sont marqués d'une croix. Les crochets droits sont utilisés
+                     pour des lettres illisibles, mais dont la restitution est aisée. Vu le
+                     caractère dialectal marqué de ce texte (picard-wallon), il ne nous a pas semblé
+                     utile de recourir à la cédille pour la transcription. </witness>
+                  <witness xml:id="V">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Cité du Vatican</settlement>
+                           <repository>BAV</repository>
+                           <collection>Codices Reginenses latini</collection>
+                           <idno>Reg. lat. 1725</idno>
+                           <msName type="sigle">V</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Pierre Kunstmann</editor> (<orgName>Laboratoire
+                        de Français Ancien, Université d'Ottawa</orgName>)</bibl>, avec référence
+                     aux folios du ms.. Celui-ci présente 2 colonnes par page, notées a/b pour le
+                     recto, c/d pour le verso. L'indication de début de colonne est suivie de la
+                     numérotation du vers dans la copie de Guiot (ms. H), prise comme étalon. La
+                     marque de paragraphe est utilisée pour signaler une lettrine dans le ms. La
+                     ponctuation et la séparation des mots suivent l'usage moderne. Les abréviations
+                     du copiste ont été développées et les lettres suppléées sont soulignées; les
+                     points de suspension signalent des omissions de vers dans le ms., et les
+                     erreurs manifestes du copiste sont indiquées par un astérisque. Les parenthèses
+                     suivies d'un astérisque correspondent à des répétitions de vers. Les passages
+                     incompréhensibles sont marqués d'une croix. Les caractères effacés ou
+                     difficiles à lire sur la photographie du ms. sont mis entre crochets droits. </witness>
+                  <witness xml:id="R">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Princeton</settlement>
+                           <repository>Univ. Library</repository>
+                           <collection>Robert Garrett Collection</collection>
+                           <idno>Garrett 125</idno>
+                           <msName type="sigle">R</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Pierre Kunstmann</editor> (<orgName>Laboratoire
+                        de Français Ancien, Université d'Ottawa</orgName>)</bibl>, avec référence
+                     aux folios du ms.. Celui-ci présente 2 colonnes par page, notées a/b pour le
+                     recto, c/d pour le verso. L'indication de début de colonne est suivie de la
+                     numérotation du vers dans la copie de Guiot (ms. H), prise comme étalon. Un
+                     saut de ligne signale une lettrine dans le ms. La ponctuation et la séparation
+                     des mots suivent l'usage moderne. Les abréviations du copiste ont été
+                     développées et les lettres suppléées sont soulignées; les points de suspension
+                     signalent des omissions de vers dans le ms., et les erreurs manifestes du
+                     copiste sont indiquées par un astérisque. Les passages incompréhensibles sont
+                     marqués d'une croix. Lors de la reliure, certains folios ont été
+                     malencontreusement déplacés et d'autres ont malheureusement disparu. Pour le
+                     Chevalier au Lion il manque 4 folios, correspondant aux vers 2681-2846,
+                     3821-3979, 5638-5811 et 6270-6439 du ms. H; ces lacunes sont signalées par des
+                     points de suspension. </witness>
+                  <witness xml:id="S">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Paris</settlement>
+                           <repository>BnF</repository>
+                           <collection>Fonds français</collection>
+                           <idno>fr. 12603</idno>
+                           <msName type="sigle">S</msName>
+                        </msIdentifier>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Kejsa Meyer</editor> (<orgName>Laboratoire de
+                        Français Ancien, Université d'Ottawa</orgName>)</bibl>. </witness>
+                  <witness xml:id="F">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Paris</settlement>
+                           <repository>BnF</repository>
+                           <collection>fonds français</collection>
+                           <idno>fr. 1450</idno>
+                           <msName type="sigle">F</msName>
+                        </msIdentifier>
+                        <msContents>
+                           <summary>Le manuscrit contient les vers 1-3976.</summary>
+                        </msContents>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Kejsa Meyer</editor> (<orgName>Laboratoire de
+                        Français Ancien, Université d'Ottawa</orgName>)</bibl>. </witness>
+                  <witness xml:id="M">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Montpellier</settlement>
+                           <repository>Faculté de médecine</repository>
+                           <idno>252</idno>
+                           <msName type="sigle">M</msName>
+                        </msIdentifier>
+                        <msContents>
+                           <summary>2878 vers: vers 1535-2162 et 2467-3714</summary>
+                        </msContents>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Kejsa Meyer</editor> (<orgName>Laboratoire de
+                        Français Ancien, Université d'Ottawa</orgName>)</bibl>. </witness>
+                  <witness xml:id="An">
+                     <msDesc>
+                        <msIdentifier>
+                           <repository>coll. part.</repository>
+                           <msName>Fragment d'Annonay</msName>
+                           <msName type="sigle">An</msName>
+                        </msIdentifier>
+                        <msContents>
+                           <summary>Vers 1529-1832; 2131-2432; 3797-3949; 4103-4254; 4901-4939 (fins
+                              de vers seulement); 4940-4976 (débuts de vers seulement). 5015-5166 ;
+                           </summary>
+                        </msContents>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Kejsa Meyer</editor> (<orgName>Laboratoire de
+                        Français Ancien, Université d'Ottawa</orgName>)</bibl>. </witness>
+                  <witness xml:id="Br">
+                     <msDesc>
+                        <msIdentifier>
+                           <settlement>Bruges</settlement>
+                           <repository>Stadsarchief</repository>
+                           <collection>Archief van de familie Adornes en de
+                              Jerusalem-stichting</collection>
+                           <idno>inconnue</idno>
+                           <msName type="sigle">Br</msName>
+                        </msIdentifier>
+                        <msContents>
+                           <summary>Vers: 4073-4105 (fins de vers seulement); 4106-4171; 4172-4204
+                              (débuts de vers seulement). </summary>
+                        </msContents>
+                     </msDesc>
+                     <bibl>Transcription par <editor>Kejsa Meyer</editor> (<orgName>Laboratoire de
+                        Français Ancien, Université d'Ottawa</orgName>)</bibl>. </witness>
+               
+            </listWit>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <variantEncoding method="parallel-segmentation" location="internal"/>
+         <editorialDecl>
+            <p>Ce document est encodé selon le modèle ODD conçu par [référence à ajouter]</p>
+         </editorialDecl>
+      </encodingDesc>
+      <profileDesc/>
+      <revisionDesc>
+         <change who="#JBC" when="2017-06">Création du document, intégration des devoirs corrigés de
+            la promotion de M2 TNAH 2017</change>
+      </revisionDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <!--H 3686 Onques ne fu cil si cortois 
+            P 3686 Onques chil ne fu si courtois 
+            V 3686 Onques cil ne fu si cortois 
+            F 3686 Cil ne fu onques tant cortois 
+            G 3686 Et cil ne fu pas tant cortois 
+            A 3686 Onques cil ne fu tant courtois 
+            S 3686 Onques cil ne fu tant courtois
+            R 3686 Onques cil ne fu si cortois
+            M 3686 Onques cil ne fut tant cortois-->
+         <l n="3686">
+            <!-- First variant, Onques vs. Et -->
+            <app xml:id="VL_3686.1" type="functionWord">
+               <rdg wit="#H #P #V #A #S #R #M #F">
+                  <app xml:id="VL_3686.1.1">
+                     <!-- Subvariant: inversion of Onques -->
+                     <rdg wit="#H #P #V #A #S #R #M">Onques</rdg>
+                     <rdg wit="#F" corresp="#inv_F_01"/>
+                  </app>
+               </rdg>
+               <rdg wit="#G">Et</rdg>
+            </app>
+            <!-- Graphical variant chil / cil-->
+            <app type="graphic" xml:id="VL_3686.2">
+               <rdg wit="#P">chil</rdg>
+               <rdg wit="#F #V #G #A #S #R #M #H">
+                  <!-- H has 'cil' but at a different place, we nonetheless 
+                  indicate that its reading is the same that FVGASRM
+                  -->
+                  <!-- NB: substantive type added for test purpose -->
+                  <app xml:id="VL_3686.2.1" type="substantive">
+                     <rdg wit="#F #V #G #A #S #R #M">cil</rdg>
+                     <rdg wit="#H" corresp="#inv_H_01"/>
+                  </app>
+               </rdg>
+            </app>
+            ne <app type="graphic" xml:id="VL_3686.3">
+               <rdg wit="#H #P #V #F #G #A #S #R">fu</rdg>
+               <rdg wit="#M">fut</rdg>
+            </app>
+            <!-- And here we account the inversion -->
+            <app type="functionWord" xml:id="VL_3686.4">
+               <rdg wit="#H" xml:id="inv_H_01">cil</rdg>
+               <rdg wit="#P #V #F #G #A #S #R #M"/>
+            </app>
+            <app type="functionWord" xml:id="VL_3686.5">
+               <rdg wit="#G">pas</rdg>
+               <rdg wit="#F" xml:id="inv_F_01">onques</rdg>
+               <rdg wit="#H #P #V #A #S #R #M"/>
+            </app>
+            <!--
+            <app type="synonymism">
+               <rdg wit="#H #P #V #R">si</rdg>
+               <rdg wit="#F #G #A #S #M">tant</rdg>
+            </app>
+            <app type="graphic">
+               <rdg wit="#H #V #F #G #R #M">cortois</rdg>
+               <rdg wit="#P #A #S">courtois</rdg>
+            </app>-->
+         </l>
+      </body>
+   </text>
+</TEI>
