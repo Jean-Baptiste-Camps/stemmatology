@@ -2,8 +2,7 @@ PCC.contam <-
   function(x,
            omissionsAsReadings = FALSE,
            alternateReadings = FALSE,
-           pauseAtPlot = FALSE,
-           ask = TRUE) {
+           pauseAtPlot = FALSE) {#TODO: add a verbose option?
     ## Function for detecting contamination.
     ## For now, it computes the difference in total conflicts
     ## for the removal of each witness
@@ -11,12 +10,6 @@ PCC.contam <-
     ## For Ambroise, 290s*16 = 1h20
     ## Input: PCC.conflicts, overconflicting, or matrix
     ## 05/07/2014: added an option to pause at each plot
-    ##### TODO(JBC): add/implement interactive=FALSE ?
-    if (pauseAtPlot == TRUE) {
-      par(ask = TRUE)#TODO(JBC): this is now deprecated, see ?par
-    } else {
-      par(ask = FALSE)
-    }
     X = as.list(NULL)
     if (is.matrix(x)) {
       # if x is a matrix, let's create a PCC.conflicts object
@@ -26,7 +19,7 @@ PCC.contam <-
     } else {
       if (class(x) == "pccEquipollent") {
         stop(
-          "It does not really make sense to apply PCC.contam()\n to an already equipollented database."
+          "It does not make sense to apply PCC.contam()\n to an already equipollented database."
         )
       } else {
         {
@@ -34,7 +27,7 @@ PCC.contam <-
               class(x) != "pccOverconflicting") {
             # TODO(JBC): There is a cleaner way to define methods for classes
             stop(
-              "Input is neither a matrix, nor a object of class pccConflicts or pccOverconflicting."
+              "Input is neither a matrix, nor an object of class pccConflicts or pccOverconflicting."
             )
           }
         }
@@ -68,9 +61,8 @@ PCC.contam <-
         }
       }
       # Calculating the differences in conflict number
-      difference = (
-        sum(pccConflicts$conflictsTotal[, 1]) / 2) - 
-        (sum(x$conflictsTotal[, 1]) / 2)
+      difference = (sum(pccConflicts$conflictsTotal[, 1]) / 2) - 
+        (sum(x$conflictsTotal[, 1] / 2) )
       conflictsDifferences = rbind(conflictsDifferences, difference)
       rownames(conflictsDifferences)[i] = colnames(tableVariantes)[i]  
       #Adding the conflicts per VL with this ms. removed
@@ -94,8 +86,6 @@ PCC.contam <-
     # Summary of differences for the removal of each ms.
     colnames(X$conflictsDifferences) = "Conflicts differences"
     X$database = tableVariantes
-    # Remove the pause at plot option before finishing the function
-    par(ask = FALSE)
     class(X) = "pccContam"
     return(X)
   }

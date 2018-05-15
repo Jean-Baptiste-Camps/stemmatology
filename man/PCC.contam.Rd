@@ -1,39 +1,32 @@
 \encoding{utf8}
 \name{PCC.contam}
 \alias{PCC.contam}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 PCC Exploratory Methods: Contamination Detection
 }
 \description{
-Supplementary function to detect possible contaminations. It computes the number of conflicting variant locations when removing one of the witnesses, for each witness. If removing a witness makes the number of conflicting variant locations significantly drop, then contamination can be considered as plausible.
+Detect possible contaminations by assessing the role of each witness in conflicting information between variant locations.
 }
 \usage{
-PCC.contam(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE, ask = TRUE)
+PCC.contam(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, pauseAtPlot = FALSE)
 }
 \arguments{
   \item{x}{
   if \code{alternateReadings = FALSE} (default), a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number;
   if \code{alternateReadings = TRUE}, a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings);
  or an object of class "pccConflicts" or "pccElimination". 
- %TODO: tester le comportement de 'alternateReadings' dans ce cas
  }
  \item{omissionsAsReadings}{
-     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).%; if \code{FALSE}, they are treated only as omissions.  
+     logical; if \code{TRUE}, omissions are treated as variant readings (and taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).
 Default: \code{FALSE}.}
   \item{alternateReadings}{
-  logical; if \code{TRUE}, a witness can have multiple variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values. %; if \code{FALSE}, only one reading per witness is allowed. 
+  logical; if \code{TRUE}, a witness can have multiple variants for a single variant location (contaminated manuscripts, editio variorum, …), encoded as comma-separated values.
   Default: \code{FALSE}.}
   \item{pauseAtPlot}{logical; if \code{TRUE}, the algorithms stops at each plot during the execution of \code{PCC.contam} (by setting graphical parameter \code{ask = TRUE}). Default: \code{FALSE}.}
-  \item{ask}{
-  logical; if \code{FALSE}, decisions will be made without asking the user for input.
-  Default: \code{TRUE}
-  }
 }
 \details{
-
-
-
+To help assess the role of each witness in the conflicting information between variant locations, this function computes the number of conflicting variant locations when removing one of the witnesses, for each witness. If removing a witness makes the number of conflicting variant locations significantly drop, then contamination can be considered as plausible.
+Be aware that this function will be most efficient for contaminations limited to a single manuscript.
 }
 \value{
   An object of class "pccContam", a list containing
@@ -54,7 +47,7 @@ Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Com
 Jean-Baptiste Camps & Florian Cafiero
 }
 \note{
-%%  ~~further notes~~
+Additional contamination detection methods will be implemented in the future.
 }
 
 \section{Warning }{The execution of this command can be time-consuming for large databases.}
@@ -63,6 +56,16 @@ Jean-Baptiste Camps & Florian Cafiero
 \code{\link{PCC.Exploratory}}, \code{\link{PCC.equipollent}}.
 }
 \examples{
-
+# load a data set
+data("fournival")
+# identify conflicts
+x = PCC.conflicts(fournival)
+# identify problematic variant locations
+x = PCC.overconflicting(x, ask = FALSE, threshold = 0.06)
+# eliminate them
+x = PCC.elimination(x)
+# examinate the rest of the problematic cases, to detect
+# plausible contaminations
+PCC.contam(x)
 }
 \keyword{stemmatology}

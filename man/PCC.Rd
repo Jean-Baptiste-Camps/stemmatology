@@ -11,7 +11,6 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0,
     recoverNAs = TRUE, layout_as_stemma = FALSE, pauseAtPlot = FALSE, 
     ask = TRUE, threshold = NULL, verbose = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
   if \code{alternateReadings = FALSE} (default), a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number;
