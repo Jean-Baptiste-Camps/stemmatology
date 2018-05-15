@@ -48,6 +48,7 @@ PCC.contam <-
         graphics::title(main = "Conflicting variant locations",
                         sub = paste("Without ms.", colnames(tableVariantes)[i]))
       } else {
+        #TODO: put this behind a verbose option?
         cat(
           "Without ms.",
           colnames(tableVariantes)[i],

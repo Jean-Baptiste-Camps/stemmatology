@@ -8,11 +8,11 @@ test_that("yields correct output on (cleaned) fournival", {
   y = PCC.conflicts(y)
   
   expect_equal_to_reference(
-    PCC.equipollent(y, ask = FALSE, scope = "W", wit = "D"), 
+    PCC.equipollent(y, ask = FALSE, scope = "W", wits = "D"), 
     file = "equipollent_fourni_witD.rds")
   
   expect_equal_to_reference(
-    PCC.equipollent(y, ask = FALSE, scope = "T"), 
+    expect_output(PCC.equipollent(y, ask = FALSE, scope = "T", verbose = TRUE)), 
     file = "equipollent_fourni_T.rds")
   
   # and now let's check for correct input
