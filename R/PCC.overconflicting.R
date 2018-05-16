@@ -46,7 +46,7 @@ PCC.overconflicting <-
     }
     rm(testClasses) # don't need it anymore
     classes1 = cluster::pam(ordConflTot[, 1], numberOfClasses)
-    barplot(
+    graphics::barplot(
       ordConflTot[, 1],
       col = classes1$clustering,
       main = "Total conflicts by variant location",
@@ -58,13 +58,14 @@ PCC.overconflicting <-
       sub = paste("coloured according to pam with", numberOfClasses, "clusters"),
       yaxt = "n"
     )
-    axis(side = 2, at = seq(0, ordConflTot[1, 1], by = 2))
+    graphics::axis(side = 2, at = seq(0, ordConflTot[1, 1], by = 2))
     #Arrêt, et demander à procéder jusqu'au second graphique
     if (ask == TRUE) {
-      par(ask = TRUE)
+      cat("Press [enter] to continue")
+      line = readline()
     }
     classes2 = cluster::pam(ordConflTot[, 2], numberOfClasses)
-    barplot(
+    graphics::barplot(
       ordConflTot[, 2],
       col = classes2$clustering,
       main = "Centrality by variant location",
@@ -77,7 +78,11 @@ PCC.overconflicting <-
                   numberOfClasses, "clusters"),
       yaxt = "n"
     )
-    axis(side = 2, at = seq(0, ordConflTot[1, 2], by = 0.02))
+    graphics::axis(side = 2, at = seq(0, ordConflTot[1, 2], by = 0.02))
+    if (ask == TRUE) {
+      cat("Press [enter] to continue")
+      line = readline()
+    }
     ## We show centrality distribution visually. Other methods possible?
     ## Perhaps, by clustering, could we suggest a value.
     ## See also k-means, scale, etc. ?
@@ -90,6 +95,7 @@ PCC.overconflicting <-
     ### Maybe look at ClustOfVar (http://arxiv.org/pdf/1112.0295v1.pdf)
     myNetwork = igraph::graph_from_edgelist(data$edgelist,
                                             directed = FALSE)
+    
     # Let's set a centrality threshold, if it wasn't defined yet
     if (ask == TRUE) {
       answered = FALSE
@@ -146,7 +152,6 @@ PCC.overconflicting <-
       vertex.label.cex = 0.7,
       main = 'Conflicting variant locations'
     )
-    par(ask = FALSE)
     # we add the vertexAttributes to the pccConflicts object inputed, and
     # return it as a pccElimination object
     data$vertexAttributes = vertexAttributes

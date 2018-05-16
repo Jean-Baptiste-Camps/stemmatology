@@ -172,7 +172,7 @@ PCC.conflicts <-
                 break()
               }
               # is there at least to y's (omitting NA's) ?
-              if (length(unique(na.omit(VLB[which(VLA == uniqueVLA[x])]))) > 1) {
+              if (length(unique(stats::na.omit(VLB[which(VLA == uniqueVLA[x])]))) > 1) {
                 # if there is, lets keep it
                 indexOfxy = which(VLA == uniqueVLA[x])
                 uniqueVLBmatchingx = unique(VLB[indexOfxy])
@@ -190,7 +190,7 @@ PCC.conflicts <-
                   names(myMatches) = uniqueVLA
                   # Now for the hard part. We have to see if at least two y have an x' (other than x) in common
                   for (y in 1:length(uniqueNewVLB)) {
-                    myNewMatches = unique(na.omit(newVLA[which(newVLB == uniqueNewVLB[y])]))
+                    myNewMatches = unique(stats::na.omit(newVLA[which(newVLB == uniqueNewVLB[y])]))
                     if (length(myNewMatches) > 0) {
                       # Very important test, to verify we are not going to bind a NA column to myMatches...
                       for (m in 1:length(myNewMatches)) {
