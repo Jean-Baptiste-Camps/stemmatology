@@ -1,12 +1,13 @@
 import.TEIApparatus <-
   function(file = "",
            appTypes = c("substantive")) {
+    #TODO: add the possibility to import from a collatex output without listWit?
     # load xml document
-    doc = read_xml(file)
+    doc = xml2::read_xml(file)
     # for the moment, I strip the default namespaces, to deal with poorly made XML
-    xml_ns_strip(doc)
+    xml2::xml_ns_strip(doc)
     # Find all witnesses
-    myWits = xml_text(xml_find_all(doc,
+    myWits = xml2::xml_text(xml2::xml_find_all(doc,
                                    "/descendant::listWit/descendant::witness/@xml:id"))
     # alphabetic sort
     myWits = sort(myWits)
@@ -18,7 +19,7 @@ import.TEIApparatus <-
     )
     # and now, let's get the app values
     if (is.null(appTypes)) {
-      myApps = xml_find_all(doc, "/descendant::app")
+      myApps = xml2::xml_find_all(doc, "/descendant::app")
     } else {
       myTypes = paste("@type = '",
                       appTypes,
@@ -26,21 +27,21 @@ import.TEIApparatus <-
                       sep = "",
                       collapse = " or ")
       myXpath = paste("/descendant::app[", myTypes, "]", sep = "")
-      myApps = xml_find_all(doc, xpath = myXpath)
+      myApps = xml2::xml_find_all(doc, xpath = myXpath)
     }
     # and transform them
     for (i in seq_len(length(myApps))) {
       # create a list of rdg with their witnesses,
       # and a second with their codes
-      myRdgs = xml_find_all(myApps[i], "./rdg")
-      myRdgWits = xml_text(xml_find_all(myApps[i], "./rdg/@wit"))
+      myRdgs = xml2::xml_find_all(myApps[i], "./rdg")
+      myRdgWits = xml2::xml_text(xml2::xml_find_all(myApps[i], "./rdg/@wit"))
       myRdgWits = gsub("#", " ", myRdgWits)
       myRdgWits = sub("^\\s+|\\s+$", "", myRdgWits)
       myRdgWits = strsplit(myRdgWits, "\\s+")
       myRdgVars = NULL
       # 0 for omission, 1…n for readings
       for (j in seq_len(length(myRdgs))) {
-        if (xml_text(myRdgs[j], "normalize-space(.)") == "") {
+        if (xml2::xml_text(myRdgs[j], "normalize-space(.)") == "") {
           myRdgVars = c(myRdgVars, 0)
         }
         else{
@@ -71,7 +72,7 @@ import.TEIApparatus <-
       # and now, give my row a label
       # if it has an xml:id, we take that, otherwise
       # we take the index of the row
-      myLabel = xml_text(xml_find_all(myApps[i], "@xml:id"))
+      myLabel = xml2::xml_text(xml2::xml_find_all(myApps[i], "@xml:id"))
       if (length(myLabel) == 0) {
         myLabel = as.character(i)
       }
