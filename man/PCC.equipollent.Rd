@@ -8,7 +8,7 @@ PCC Exploratory Methods: Extracting Competing Genealogies
 reflect different competing genealogies, due to contamination, either for a single manuscript, or for the whole tradition. \code{PCC.equipollent} identifies the variant locations without internal conflicts, and allows to create separate databases for each internally consistent configuration.
 }
 \usage{
-PCC.equipollent(x, ask = TRUE, scope = c(NULL, 'T', 'W'), wits = NULL, verbose = FALSE)
+PCC.equipollent(x, ask = TRUE, scope = NULL, wits = NULL, verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

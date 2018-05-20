@@ -49,7 +49,7 @@ Notice how a witness can bear several readings (e.g., P at VL 1).
 
 % Import functions
 \subsection{Import functions}{
-    \code{\link{Import.TEIApparatus}}: a function to import a TEI P5 encoded apparatus into a stemmatological matrix usable with other functions. It should have options for import from CollateX. %TODO: est-ce implémenté ?
+    \code{\link{import.TEIApparatus}}: a function to import a TEI P5 encoded apparatus into a stemmatological matrix usable with other functions. It should have options for import from CollateX. 
 }
 % Fonctions 
 
@@ -65,8 +65,8 @@ Notice how a witness can bear several readings (e.g., P at VL 1).
     }
 
 \subsection{Other functions}{
-The package contains also various other functions, particularly aimed at
-detecting contamination. It contains for instance the function \code{\link{VL.pValues}} (presented in Camps 2013 unpublished)
+%The package contains also various other functions, particularly aimed at
+%detecting contamination. It contains for instance the function \code{\link{VL.pValues}} (presented in Camps 2013 unpublished)
 
 % Other methods
 The package aims at making available various other stemmatological methods, including further functions for contamination detection, 
@@ -99,8 +99,6 @@ Please report issues with this package to \url{https://github.com/Jean-Baptiste-
 }
 
 \keyword{stemmatology}
-\keyword{stemmatics}
-\keyword{stemma}
 
 \seealso{
 \code{\link{PCC}},

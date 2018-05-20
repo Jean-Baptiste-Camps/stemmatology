@@ -8,7 +8,8 @@
 \code{PCC.reconstructModel} examines coherent clusters of witnesses (PCC.buildGroup), to either identify their model in the tradition, either suggest a reconstructed model for the group.  
 }
 \usage{
-PCC.reconstructModel(x, omissionsAsReadings = FALSE, recoverNAs = TRUE, ask = TRUE, verbose = FALSE)
+PCC.reconstructModel(x, omissionsAsReadings = FALSE, recoverNAs = TRUE,
+                     ask = TRUE, verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

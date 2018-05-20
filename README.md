@@ -7,6 +7,7 @@
 
 
     Package: stemmatology
+    Type: Package
     Title: An R Stemmatology Package
     Version: 0.2.3
     Date: 2018-05-04
@@ -14,11 +15,18 @@
     Maintainer: Jean-Baptiste Camps <jbcamps@hotmail.com>
     Description: Build and analyse the genealogy of textual or musical traditions.
     BugReports: https://github.com/Jean-Baptiste-Camps/stemmatology/issues
-    Imports: graphics, stats, utils, network, sna, cluster, igraph
+    Imports: graphics, stats, cluster, igraph, xml2
+    Suggests: 
+        testthat,
+        knitr,
+        rmarkdown,
+        covr
     License: GPL-3 | file LICENSE
     Encoding: UTF-8
     NeedsCompilation: no
     URL: https://github.com/Jean-Baptiste-Camps/stemmatology
+    VignetteBuilder: knitr
+    RoxygenNote: 6.0.1
     
     
 This repository contains the source file of the development version for the project of a stemmatology package for R. This package already contains functions for the PCC method as described in Camps & Cafiero 2014 (see below, section _On the Method_), and will implement as well  other stemmatological methods (see roadmap at https://graal.hypotheses.org/925).

@@ -8,7 +8,8 @@ PCC.Stemma: Building the Stemma Codicum
 \description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. By default, it stops when less than four manuscripts are to be compared, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
 }
 \usage{
-PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE, layout_as_stemma = FALSE, ask = TRUE, verbose = FALSE)
+PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE,
+           layout_as_stemma = FALSE, ask = TRUE, verbose = FALSE)
 }
 \arguments{
   \item{x}{a numeric matrix, with witnesses in columns, variant locations in rows, and readings coded by a number; or a character matrix, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings).

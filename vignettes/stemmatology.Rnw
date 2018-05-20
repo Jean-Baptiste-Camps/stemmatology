@@ -67,7 +67,6 @@ URL: \url{...}
 \section*{Requirements}
 
 <<>>=
-library(network)
 @
 
 
