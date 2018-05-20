@@ -1,4 +1,6 @@
-exportPattern("^[[:alpha:]]+")
+exportPattern("^[^\\.]") # This exports everything from stemmatology
+# namespace that does not start with a dot. If at some point we
+# want a more explicit listing, we might use export(PCC, PCC.Exploratory…)
 importFrom("graphics", "axis", "barplot", "plot","title")
 # It would be possible to remove stats import with a few modifications (only 2 uses)
 importFrom("stats", "fisher.test", "na.omit")
