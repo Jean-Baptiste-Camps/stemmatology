@@ -1,7 +1,6 @@
 \encoding{utf8}
 \name{PCC.buildGroup}
 \alias{PCC.buildGroup}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{PCC.buildgroup}
 \description{
 \code{PCC.buildgroup} groups together witnesses in relevant clusters.
@@ -9,7 +8,6 @@
 \usage{
 PCC.buildGroup(x, limit = 0, ask = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 A PCC.disagreement object.

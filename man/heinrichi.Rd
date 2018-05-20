@@ -53,12 +53,12 @@ The data is presented here as used in Camps & Cafiero 2015, without further modi
 Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
 \source{
-Roos, Teemu, and Heikkilä, Tuomas, « Evaluating methods for computer-assisted stemmatology using artificial benchmark data sets », Literary and Linguistic Computing 24/4 (2009), p. 417–433.
+Roos, Teemu, and Tuomas Heikkilä. ‘Evaluating methods for computer-assisted stemmatology using artificial benchmark data sets’. \emph{Literary and Linguistic Computing} 24/4 (2009), p. 417–433.
 
-Roos, Teemu, Heikkilä, Tuomas, and Myllymäki, Petri, « Computer-Assisted Stemmatology Challenge », 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
+Roos, Teemu, Tuomas Heikkilä, and Petri Myllymäki. ‘Computer-Assisted Stemmatology Challenge’. Helsinki, 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
 }
 \references{
-Camps (Jean-Baptiste) & Cafiero (Florian), « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, ed. Tara Andrews & Caroline Macé, Turnhout: Brepols, 2015, p. 69‑93 (Lectio, 1), \url{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 }
 \examples{
 data(heinrichi)

@@ -4,7 +4,8 @@ language: R
 sudo: false
 cache: packages
 
-warnings_are_errors: false #Modify once warnings are solved. Added temporarily 20171025
+# warnings_are_errors: false #Modify once warnings are solved. Added temporarily 20171025
+r_check_args: --as-cran
 
 after_success:
   - Rscript -e 'covr::codecov()'

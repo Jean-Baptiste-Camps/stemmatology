@@ -1,7 +1,6 @@
 \encoding{utf8}
 \name{import.TEIApparatus}
 \alias{import.TEIApparatus}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{Import TEI apparatus}
 \description{Import a TEI encoded parallel-segmentation apparatus.}
 \usage{

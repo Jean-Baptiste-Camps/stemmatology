@@ -44,11 +44,12 @@ An object of class pccEquipollent, a list containing
     \item{notInConflict}{a list with the set(s) of VL without internal conflicts}
 }
 \references{
-Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. \emph{Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2)}, edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
 
-Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+Camps, Jean-Baptiste. ‘Detecting Contaminations in Textual Traditions
+Computer Assisted and Traditional Methods’.  Leeds, International Medieval Congress, 2013, unpublished paper, \url{https://www.academia.edu/3825633/Detecting_Contaminations_in_Textual_Traditions_Computer_Assisted_and_Traditional_Methods}.
 
-Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 }
 \author{
 Jean-Baptiste Camps & Florian Cafiero
@@ -71,14 +72,17 @@ y = PCC.elimination(y)
 # look for further conflicts
 y = PCC.conflicts(y)
 # and now, create configurations for competing genealogies
-# either for the whole tradition
-newDB = PCC.equipollent(y, ask = FALSE, scope = "T")
-# or for one manuscript
+# for instance, for one witness
 newDB = PCC.equipollent(y, ask = FALSE, scope = "W", wits = "D")
-# or for several of them
+
+\dontrun{
+# Alternatively, you can create them for the whole tradition
+newDB = PCC.equipollent(y, ask = FALSE, scope = "T")
+# or for several witnesses
 newDB = PCC.equipollent(y, ask = FALSE, scope = "W", wits = c("A", "D"))
-# and then proceed to create one or several stemmata, e.g.
+# and then you proceed to create one or several stemmata, e.g.
 PCC.Stemma(newDB$databases[[1]], ask = FALSE)
+}
 }
 \keyword{stemmatology}
 \keyword{manip}

@@ -30,12 +30,12 @@ The data is presented here as used in Camps & Cafiero 2015, without further modi
 Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
 \source{
-Baret, Philippe V., Robinson, P., and Macé, C., « Testing methods on an artificially created textual tradition », Linguistica computazionale 24 (2004), P. 1000–1029.
+Baret, Philippe V.,  P. Robinson, and C. Macé. ‘Testing methods on an artificially created textual tradition’. \emph{Linguistica computazionale} 24 (2004), p. 1000–1029.
 
-Roos, Teemu, Heikkilä, Tuomas, and Myllymäki, Petri, « Computer-Assisted Stemmatology Challenge », 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
+Roos, Teemu, Tuomas Heikkilä, and Petri Myllymäki. ‘Computer-Assisted Stemmatology Challenge’. Helsinki, 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
 }
 \references{
-Camps (Jean-Baptiste) & Cafiero (Florian), « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, ed. Tara Andrews & Caroline Macé, Turnhout: Brepols, 2015, p. 69‑93 (Lectio, 1), \url{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 }
 \examples{
 data(notreBesoin)

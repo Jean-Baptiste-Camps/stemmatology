@@ -2,9 +2,7 @@
 \name{otinel}
 \alias{otinel}
 \docType{data}
-\title{Otinel data set
-%%   ~~ data name/kind ... ~~
-}
+\title{Otinel data set}
 \description{Data for the tradition of the \emph{Chanson d'Otinel}}
 \usage{data(otinel)}
 \format{
@@ -25,7 +23,7 @@ A sample of 36 substantial readings, taken from the tradition (Old French and tr
 Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
 \source{%
-Camps (Jean-Baptiste). « La `Chanson d’Otinel’: édition complète du corpus manuscrit et prolégomènes à l’édition critique », thèse de doctorat, dir. Dominique Boutet, Paris-Sorbonne, 2016, \url{http://www.theses.fr/2016PA040173}.
+Camps, Jean-Baptiste. \emph{La `Chanson d’Otinel’: édition complète du corpus manuscrit et prolégomènes à l’édition critique}, PhD thesis, dir. Dominique Boutet, Paris-Sorbonne, 2016, \url{http://www.theses.fr/2016PA040173}.
 }
 %\references{
 %%  ~~ possibly secondary sources and usages ~~

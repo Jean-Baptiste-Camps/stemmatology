@@ -1,7 +1,6 @@
 \encoding{utf8}
 \name{PCC}
 \alias{PCC}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{PCC (Poole-Camps-Cafiero) stemmatological method}
 \description{%
     Global shell for all the PCC functions, both exploratory and stemma-building. This command successively executes PCC.Exploratory and PCC.Stemma, while asking user for input when necessary.
@@ -25,7 +24,6 @@ PCC(x, omissionsAsReadings = FALSE, alternateReadings = FALSE, limit = 0,
   Default: \code{FALSE}.
   }
   \item{limit}{The maximum number of severe disagreements expected for witnesses to be in the same group. Default: \code{0}.
-  %%%TODO(JBC): Implémenter cette option !!!
 }
   \item{recoverNAs}{
   logical; if \code{TRUE}, when an actual witness or reconstructed subarchetype is identified to the reconstructed model of a group, every NA it has is recovered by taking the value of the reconstructed model; if \code{FALSE}, their NAs values are kept. Default: \code{TRUE}.
@@ -65,28 +63,36 @@ The function returns either a single object of class \code{"pccStemma"}, or a li
 see \code{\link{PCC.Stemma}}.
 }
 \references{
-Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. \emph{Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2)}, edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
 
-Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 
-Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161.
+
+Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{florian.cafiero@polytechnique.edu})
 }
-\note{
-%%%
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 \code{\link{PCC.Exploratory}}, \code{\link{PCC.Stemma}}.
 }
 \examples{
-%data(fournival)
-%PCC(fournival)
+\dontrun{
+# Interactive mode
+# Load data
+data(fournival)
+# or alternatively, import it
+fournival = import.TEIApparatus(file = "myFournival.xml", 
+    appTypes = c("substantive"))
+# Analyse it with the PCC functions
+PCC(fournival)%
+
+# Non interactive mode
+PCC(fournival, ask = FALSE, threshold = 0.06)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+
+}
+
 \keyword{stemmatology}

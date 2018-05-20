@@ -37,11 +37,8 @@ Be aware that this function will be most efficient for contaminations limited to
   \item{database}{the original database used for the calculations}
 }
 \references{
-Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
-
-Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
-
-Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+Camps, Jean-Baptiste. ‘Detecting Contaminations in Textual Traditions
+Computer Assisted and Traditional Methods’.  Leeds, International Medieval Congress, 2013, unpublished paper, \url{https://www.academia.edu/3825633/Detecting_Contaminations_in_Textual_Traditions_Computer_Assisted_and_Traditional_Methods}.
 }
 \author{
 Jean-Baptiste Camps & Florian Cafiero
@@ -58,8 +55,8 @@ Additional contamination detection methods will be implemented in the future.
 \examples{
 # load a data set
 data("fournival")
-# identify conflicts
-x = PCC.conflicts(fournival)
+# identify conflicts on a subset
+x = PCC.conflicts(fournival[1:200,])
 # identify problematic variant locations
 x = PCC.overconflicting(x, ask = FALSE, threshold = 0.06)
 # eliminate them
