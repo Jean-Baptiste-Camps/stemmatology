@@ -44,6 +44,7 @@ function(x, limit = 0, ask = TRUE) {
       # And here, we add a final test to check if there are unvalid
       # configurations in which some members are in conflict between
       # themselves, in which case we will remove them.
+      # TODO: improve this !
       toBeRemovedAsWell = as.vector(NULL)
       for (l in seq_len(length(groups))) {
         # We look in the severe desagreement table for all witnesses

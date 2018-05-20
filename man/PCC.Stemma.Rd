@@ -1,11 +1,8 @@
 \encoding{utf8}
 \name{PCC.Stemma}
 \alias{PCC.Stemma}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-PCC.Stemma: Building the Stemma Codicum
-}
-\description{The \code{PCC.Stemma} function calls successively the functions PCC.disagreement, PCC.buildgroup and PCC.reconstructModel to build a stemma codicum of the tradition studied. By default, it stops when less than four manuscripts are to be compared, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last manuscripts.
+\title{PCC.Stemma: Building the Stemma Codicum}
+\description{Builds a \emph{stemma codicum} of the tradition, following the Poole-Camps-Cafiero method.
 }
 \usage{
 PCC.Stemma(x, omissionsAsReadings = FALSE, limit = 0, recoverNAs= TRUE,
@@ -42,7 +39,7 @@ Default: FALSE
   }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The \code{PCC.Stemma} function calls successively the functions \code{\link{PCC.disagreement}}, \code{\link{PCC.buildGroup}} and \code{\link{PCC.reconstructModel}} to build a stemma codicum of the tradition studied. By default, it stops when less than four witnesses are to be compared, as the possibility of errors becomes high. The user is however able to ask the algorithm its final answer for those last witnesses.
 }
 \value{The function returns either a single list, or a list containing several lists (if multiple stemmata were drawn). Each list contains:
 \item{fullDatabase}{The full database, with the new reconstructed models 

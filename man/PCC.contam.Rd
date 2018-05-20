@@ -53,10 +53,11 @@ Additional contamination detection methods will be implemented in the future.
 \code{\link{PCC.Exploratory}}, \code{\link{PCC.equipollent}}.
 }
 \examples{
+\dontrun{
 # load a data set
 data("fournival")
 # identify conflicts on a subset
-x = PCC.conflicts(fournival[1:200,])
+x = PCC.conflicts(fournival[100:200,])
 # identify problematic variant locations
 x = PCC.overconflicting(x, ask = FALSE, threshold = 0.06)
 # eliminate them
@@ -64,5 +65,6 @@ x = PCC.elimination(x)
 # examinate the rest of the problematic cases, to detect
 # plausible contaminations
 PCC.contam(x)
+}
 }
 \keyword{stemmatology}
