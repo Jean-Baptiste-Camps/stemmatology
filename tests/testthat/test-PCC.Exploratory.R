@@ -48,3 +48,75 @@ test_that("user input is checked correctly", {
   
   #TODO: check for colnames / rownames
 })
+
+test_that("yields expected output on smaller case", {
+  x = matrix(data = c(
+    1,1,1,2,2,
+    0,0,0,0,1,
+    1,1,0,1,2,
+    1,2,3,4,5,
+    1,2,2,NA,2,
+    1,2,1,1,1,
+    1,1,NA,1,1,
+    1,2,3,1,4,
+    1,1,3,2,2,
+    1,3,1,2,2,
+    3,1,1,2,2,
+    1,2,2,2,1
+  ), byrow = TRUE,
+  ncol = 5,
+  nrow = 12,
+  dimnames = list(
+    c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8", "VL9", "VL10", "VL11", "VL12"),
+    c("A","B","C","D","E")
+  )
+  )
+  
+  # With a threshold that will eliminate all conflicts
+  results = list(
+    edgelist = 
+      structure(character(0), .Dim = c(0L, 2L)), 
+    conflictsTotal = structure(c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 
+        .Dim = c(11L, 2L), 
+        .Dimnames = list(c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6", "VL7", "VL8", "VL9", "VL10", "VL11"), 
+                         c("Number of conflicts", "Centrality index"))), 
+    database = x[-12,]#Removing the 12th VL
+    )
+  class(results) = 'pccConflicts'
+  expect_equal(
+    expect_message(PCC.Exploratory(x, ask = FALSE, threshold = 0.6)),
+    results
+  )
+  
+  # Now with a higher threshold, that will lead to the use of PCC equipollent
+  # TODO: fix PCC.equipollent
+  PCC.Exploratory(x, ask = FALSE, threshold = 2)
+})
+
+# Extended database to have conflicts
+# and an potential equipollent database
+# Repeat variation of VL1 at VL9-11
+# to increase genealogical tendancy
+# and then add a conflicting VL
+# Expected config one:
+# {ABC} (with virtual model)
+# {DE} (with D as model)
+#
+# Expected config two
+# {AE} (with virtual model)
+# {BCD} (with D as model)
+#     A B  C  D E
+# VL1 1 1  1  2 2
+# VL2 0 0  0  0 1
+# VL3 1 1  0  1 2
+# VL4 1 2  3  4 5
+# VL5 1 2  2 NA 2
+# VL6 1 2  1  1 1
+# VL7 1 1 NA  1 1
+# VL8 1 2  3  1 4
+# VL9 1 1  3  2 2
+#VL10 1 3  1  2 2
+#VL11 3 1  1  2 2
+#VL12 1 2  2  2 1
+
+#TODO: extend it to other exploratory functions !

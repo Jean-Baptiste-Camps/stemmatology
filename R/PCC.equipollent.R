@@ -41,7 +41,7 @@ PCC.equipollent <-
     adjacencyTable = igraph::as_adjacency_matrix(myNetwork, sparse = FALSE)
     notInConflict = as.list(NULL)
     for (i in 1:nrow(adjacencyTable)) {
-      notInConflict[[i]] = labels(adjacencyTable[i, adjacencyTable[i, ] == 0])
+      notInConflict[[i]] = colnames(adjacencyTable[i, adjacencyTable[i, ] == 0, drop = FALSE])
       # Modified code to compare only to half the table, since it is symetrical
       # When we will put this version in function, we can also remove the next for loop,
       # since there will be no identical lists
