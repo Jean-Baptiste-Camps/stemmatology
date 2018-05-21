@@ -24,6 +24,10 @@ PCC.Exploratory <-
     pccConflicts = PCC.conflicts(tableVariantes,
                                  omissionsAsReadings = omissionsAsReadings,
                                  alternateReadings = alternateReadings)
+    # If there are no conflicts, output directly
+    if (sum(pccConflicts$conflictsTotal[, 1]) == 0) {
+      return(pccConflicts)
+    }
     # Simple interaction, which tests for value inputed by the user
     if(ask == TRUE){
       answered = FALSE
