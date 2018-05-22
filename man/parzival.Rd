@@ -2,9 +2,7 @@
 \name{parzival}
 \alias{parzival}
 \docType{data}
-\title{Parzival data set
-%%   ~~ data name/kind ... ~~
-}
+\title{Parzival data set}
 \description{Data from the artifical textual tradition \emph{Parzival}}
 \usage{data(parzival)}
 \format{
@@ -35,12 +33,12 @@ The data is presented here as used in Camps & Cafiero 2015, without further modi
 Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
 \source{
-Spencer, M., Davidson, E. A., Barbrook, A. C., and Howe, C. J., Phylogenetics of artificial manuscripts, Journal of Theoretical Biology, 227 (2004), p. 503–11, \url{https://doi.org/10.1016/j.jtbi.2003.11.022}.
+M. Spencer, E. A. Davidson, A. C. Barbrook, and C. J. Howe. ‘Phylogenetics of artificial manuscripts’. \emph{Journal of Theoretical Biology}, 227 (2004), p. 503–11, \url{https://doi.org/10.1016/j.jtbi.2003.11.022}.
 
-Roos, Teemu, Heikkilä, Tuomas, and Myllymäki, Petri, « Computer-Assisted Stemmatology Challenge », 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
+Roos, Teemu, Tuomas Heikkilä, and Petri Myllymäki. ‘Computer-Assisted Stemmatology Challenge’. Helsinki, 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
 }
 \references{
-Camps (Jean-Baptiste) & Cafiero (Florian), « Genealogical variant locations and simplified stemma: a test case », in Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, ed. Tara Andrews & Caroline Macé, Turnhout: Brepols, 2015, p. 69‑93 (Lectio, 1), \url{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 }
 \examples{
 data(parzival)

@@ -21,24 +21,26 @@
 %\VignetteIndexEntry{stemmatology Vignette}
 
 
-\author{J.B. Camps, Florian Cafiero}
+\author{Jean-Baptiste Camps, Florian Cafiero}
 
-\title{\pkg{stemmatology}: A \proglang{R} Stemmatology Package}
-\Plaintitle{stemmatology: A R Stemmatology Package}
-\Shorttitle{\pkg{stemmatology}: A \proglang{R} Stemmatology Package}
+\title{\pkg{stemmatology}: An \proglang{R} Stemmatology Package}
+\Plaintitle{stemmatology: An R Stemmatology Package}
+\Shorttitle{\pkg{stemmatology}: An \proglang{R} Stemmatology Package}
 
 \Abstract{
-This package includes various functions for stemmatological analysis. Its purpose is to provide the user with implementation of the PCC Method, but also with various other tools and utilities...
+\emph{Stemmatology} is the name of the field dedicated to studying text genealogies
+and establishing genealogical tree-like graphs known as stemma codicum.
+
+This package includes various functions for stemmatological analysis. It particularly implements functions following the Poole-Camps-Cafiero method, as well as functions to import data. 
 }
 
-\Keywords{stemmatology, network, graphs, relational data}
-%\Keywords{relational data, data structures, graphs, \pkg{network}, \pkg{statnet}, \proglang{R}}
+\Keywords{stemmatology, philology, network, graphs}
 
 \Address{
 JB Camps\\
 École nationale des chartes\\
-\url{jbcamps@hotmail.com}\\
-URL: \url{...}
+\href{mailto:jbcamps@hotmail.com}{jbcamps@hotmail.com}\\
+URL: \url{www.chartes.psl.eu/jean-baptiste-camps}
 }
 
 \begin{document}
@@ -59,32 +61,110 @@ URL: \url{...}
 
 \maketitle
 
-%\begin{abstract}
-%This package includes various functions for stemmatological analysis. Its purpose is to provide the user with ...
-%\end{abstract}
-\pkg{Stemmatology} in 
 
-\section*{Requirements}
+\section{Input}
 
-<<>>=
-library(network)
+Most of the functions take, as input a \emph{numeric matrix}, with witnesses in columns, variant locations in rows, and readings coded by a number, e.g.
+
+\begin{table}[!h]
+\begin{tabular}{lllllllllll}
+  & A & B & C & D & E & H & I & J & K & O\\ \hline \hline 
+1 & 0 & 1 & 1 & 1 & NA & 1 & 1 & NA & 1 & 1\\
+2 & 1 & 1 & 1 & 1 & NA & 1 & 1 & NA & 1 & 1\\
+3 & 1 & 1 & 1 & 1 & NA & 1 & 1 & NA & 1 & 1\\
+4 & 1 & 1 & 1 & 2 & NA & 1 & 1 & NA & 1 & 1\\
+5 & 1 & 1 & 1 & 2 & NA & 1 & 1 & NA & 1 & 1\\
+6 & 1 & 1 & 1 & 1 & NA & 1 & 1 & NA & 1 & 1
+\end{tabular}
+\end{table}
+where $A, B, …, O$ are the various witnesses in columns, $1 … 6$ the various variant locations, in rows, and the differents readings are coded either $0$ (omission), $1, 2, …, n$. \code{NA} is used for the lack of information (physical lacuna, absence of observation, variant location not applicable to a given witness, etc.).
+
+Alternatively , if \code{alternateReadings = TRUE}, the input can be a \emph{character matrix}, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings), e.g.
+\begin{table}[!h]
+\begin{tabular}{llllll}
+ & A & D & F & T & P \\ \hline \hline
+1 & "1" & "2" & "2" & "2" & "1,2" \\
+2 & "1" & "2" & "1,2" & "2" & "1" \\
+3 & "1" & "1" & "1" & "1" & "2" \\
+4 & "1,3" & "1,2" & "1" & "2" & "3"
+\end{tabular}
+\end{table}
+
+Notice how a witness can bear several readings (e.g., P at VL 1).
+
+
+% Import functions
+\subsection{Create or import data}
+ 
+  Data can be created inside R or imported. They can be imported by reading a csv file, for instance (e.g. with \code{read.csv}). They can also be imported from a TEI encoded apparatus in parallel-segmentation, either by using an XSL stylesheet, or the built-in function \code{import.TEIApparatus}.
+  
+  The function \code{import.TEIApparatus} allows to import a TEI P5 encoded apparatus into a stemmatological matrix usable with other functions. It has some parameters to refine the import (variant types, …), and can read either from disk or from an URL. 
+
+% Fonctions 
+
+\section{PCC Method}
+
+    Functions are made available for the PCC method (See Camps and Cafiero 2014 or \code{PCC} for more details). The most important are
+\begin{description}
+\item[\code{PCC}] global shell for the PCC functions;
+\item[\code{PCC.Exploratory}] global function for exploratory methods of the PCC family;
+\item[\code{PCC.Stemma}] Building the Stemma Codicum.
+\end{description}
+
+\section{Other functions}
+The package contains also various other functions, particularly aimed at
+detecting contamination. It contains for instance the function \code{PCC.contam}.%\code{\link{VL.pValues}} (presented in Camps 2013 unpublished)
+
+% Other methods
+The package aims at making available various other stemmatological methods, including further functions for contamination detection, 
+or for theoretical stemmatology.
+
+%The package should include a function to generate arbitrary stemmata based on a set of parameters (fecundity, decimation rate at each level, number of generations, ...).
+
+%It should also have a function for the analysis of stemmata shapes, and making hypotheses on the parameters of the original tradition
+
+\section*{References}
+
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. \emph{Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2)}, edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
+
+Camps, Jean-Baptiste. ‘Detecting Contaminations in Textual Traditions
+Computer Assisted and Traditional Methods’.  Leeds, International Medieval Congress, 2013, unpublished paper, \url{https://www.academia.edu/3825633/Detecting_Contaminations_in_Textual_Traditions_Computer_Assisted_and_Traditional_Methods}.
+
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
+
+Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161.
+
+Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+
+\section*{Bugs and Issues}
+
+Please report issues with this package to \url{https://github.com/Jean-Baptiste-Camps/stemmatology}.
+
+\section*{Example of use}
+
+<<eval=FALSE>>=
+# Interactive mode
+# Load data
+data(fournival)
+# or alternatively, import it
+fournival = import.TEIApparatus(file = "myFournival.xml", 
+    appTypes = c("substantive"))
+# Analyse it with the PCC functions
+PCC(fournival)
+
+# Complete step-by-step non interactive use
+data("fournival")
+# look for conflicts
+myConflicts = PCC.conflicts(fournival)
+# remove conflicting VL
+myConflicts = PCC.overconflicting(myConflicts, ask = FALSE, threshold = 0.06)
+myNewData = PCC.elimination(myConflicts)
+# look for competing genealogies
+myConflicts = PCC.conflicts(myNewData)
+myNewData = PCC.equipollent(myConflicts, ask = FALSE, scope = "W", wits = "D")
+# build a stemma
+PCC.Stemma(myNewData$databases[[3]], ask = FALSE)
 @
-
-
-\section{Functions for the PCC method}
-
-
-
-\section{Import functions}
-
-\section{Various exploratory methods}
-
-\section{Other Methods}
-
-\section{Tools}
-
-\section{Low level functions}
-
 
 
 \end{document}

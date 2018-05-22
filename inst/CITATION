@@ -1,0 +1,12 @@
+note <- sprintf("version %s", meta$Version)
+year <- sub("-.*", "", meta$Date)
+
+bibentry(bibtype = "Manual",
+         title = "{stemmatology}: An R Stemmatology Package",
+         author = c(person("Jean-Baptiste", "Camps", role=c('aut','cre')),
+                    person("Florian", "Cafiero")),
+         year = year,
+         note = note,
+         url = meta$URL,
+         doi = "10.5281/zenodo.1117389"
+         )

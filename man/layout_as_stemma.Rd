@@ -1,17 +1,13 @@
 \name{layout_as_stemma}
 \alias{layout_as_stemma}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{layout_as_stemma}
 \description{
 \code{layout_as_stemma} creates a tree-like layout from an edgelist,
 where nodes are placed horizontally according to
-a measure of distance from their parent node.
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+a measure of distance from their parent node.}
 \usage{
 layout_as_stemma(x)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{an edgelist containing, as a third column, the distance between the 
   two nodes.}
@@ -28,9 +24,6 @@ A layout, i.e. a matrix of two columns, giving x,y coordinates for each node.
 %% ~put references to the literature/web site here ~
 %}
 \author{Jean-Baptiste Camps}
-%\note{
-%%  ~~further notes~~
-%}
 
 \section{Warning}{This function is experimental. Horizontal overlapping may occur
 has a result.}
@@ -48,5 +41,4 @@ layout = layout_as_stemma(edgelist)
 plot(g, layout = layout)
 }
 \keyword{stemmatology}
-\keyword{stemma}
 \keyword{graphs}

@@ -1,6 +1,11 @@
 #######################################################
 ## Log of the last updates
 #######################################################
+##
+## /!\ this is an old version history. For recent updates,
+## please see on Github
+## https://github.com/Jean-Baptiste-Camps/stemmatology
+##
 #Version 0.2.2, mise à jour du 16 juillet 2014
 #  Ajout de nouvelles fonctions (groupe des fonctions PCC achevé, encore à débuguer)
 #  Correction d'un bug sur PCC.doElimination

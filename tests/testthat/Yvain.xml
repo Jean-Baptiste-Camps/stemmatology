@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+   schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<!-- Simplified and modified TEI file for app conversion tests -->
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title ref="http://viaf.org/viaf/183568542/"
+               key="Chré tien de Troyes 113.-1135? Le chevalier au lion">Yvain ou le chevalier au
+               lion</title>
+            <author ref="http://viaf.org/viaf/87681171/" key="Chré tien de Troyes, 113.-1183?"
+               >Chrétien de Troyes</author>
+            <respStmt>
+               <resp>Collation des variantes par les étudiants de</resp>
+               <orgName>l'École des chartes</orgName>
+            </respStmt>
+            <respStmt>
+               <resp>sous la direction de</resp>
+               <persName>Jean-Baptiste Camps</persName>
+            </respStmt>
+         </titleStmt>
+         <publicationStmt>
+            <p>Document de travail inédit</p>
+         </publicationStmt>
+         <sourceDesc>
+            <listWit>
+               <!-- list of witnesses
+               -->
+                  <head>Témoins utilisés dans le cadre de la présente collation</head>
+                  <witness xml:id="H">
+                     <!-- msDesc and bibliographic references removed -->
+                  </witness>
+                  <witness xml:id="P">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+                  <witness xml:id="L">
+                     <!-- msDesc and bibliographic references removed -->
+                  </witness>
+                  <witness xml:id="G">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+                  <witness xml:id="A">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+                  <witness xml:id="V">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+                  <witness xml:id="R">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+                  <witness xml:id="S">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+                  <witness xml:id="F">
+                     <!-- msDesc and bibliographic references removed -->
+                  </witness>
+                  <witness xml:id="M">
+                     <!-- msDesc and bibliographic references removed -->
+                  </witness>
+                  <witness xml:id="An">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+                  <witness xml:id="Br">
+                     <!-- msDesc and bibliographic references removed -->   
+                  </witness>
+            </listWit>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <variantEncoding method="parallel-segmentation" location="internal"/>
+         <editorialDecl>
+            <p>Ce document est encodé selon le modèle ODD conçu par [référence à ajouter]</p>
+         </editorialDecl>
+      </encodingDesc>
+      <profileDesc/>
+      <revisionDesc>
+         <change who="#JBC" when="2018-05">Modified this version for testing purposes</change>
+         <change who="#JBC" when="2017-06">Création du document, intégration des devoirs corrigés de
+            la promotion de M2 TNAH 2017</change>
+      </revisionDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <!--H 3686 Onques ne fu cil si cortois 
+            P 3686 Onques chil ne fu si courtois 
+            V 3686 Onques cil ne fu si cortois 
+            F 3686 Cil ne fu onques tant cortois 
+            G 3686 Et cil ne fu pas tant cortois 
+            A 3686 Onques cil ne fu tant courtois 
+            S 3686 Onques cil ne fu tant courtois
+            R 3686 Onques cil ne fu si cortois
+            M 3686 Onques cil ne fut tant cortois-->
+         <l n="3686">
+            <!-- First variant, Onques vs. Et -->
+            <app xml:id="VL_3686.1" type="functionWord">
+               <rdg wit="#H #P #V #A #S #R #M #F">
+                  <app xml:id="VL_3686.1.1">
+                     <!-- Subvariant: inversion of Onques -->
+                     <rdg wit="#H #P #V #A #S #R #M">Onques</rdg>
+                     <rdg wit="#F" corresp="#inv_F_01"/>
+                  </app>
+               </rdg>
+               <rdg wit="#G">Et</rdg>
+            </app>
+            <!-- Graphical variant chil / cil-->
+            <app type="graphic" xml:id="VL_3686.2">
+               <rdg wit="#P">chil</rdg>
+               <rdg wit="#F #V #G #A #S #R #M #H">
+                  <!-- H has 'cil' but at a different place, we nonetheless 
+                  indicate that its reading is the same that FVGASRM
+                  -->
+                  <!-- NB: substantive type added for test purpose -->
+                  <app xml:id="VL_3686.2.1" type="substantive">
+                     <rdg wit="#F #V #G #A #S #R #M">cil</rdg>
+                     <rdg wit="#H" corresp="#inv_H_01"/>
+                  </app>
+               </rdg>
+            </app>
+            ne <app type="graphic" xml:id="VL_3686.3">
+               <rdg wit="#H #P #V #F #G #A #S #R">fu</rdg>
+               <rdg wit="#M">fut</rdg>
+            </app>
+            <!-- And here we account the inversion -->
+            <app type="functionWord" xml:id="VL_3686.4">
+               <rdg wit="#H" xml:id="inv_H_01">cil</rdg>
+               <rdg wit="#P #V #F #G #A #S #R #M"/>
+            </app>
+            <app type="functionWord" xml:id="VL_3686.5">
+               <rdg wit="#G">pas</rdg>
+               <rdg wit="#F" xml:id="inv_F_01">onques</rdg>
+               <rdg wit="#H #P #V #A #S #R #M"/>
+            </app>
+            <!-- Two apps without xml:id -->
+            <app type="synonymism">
+               <rdg wit="#H #P #V #R">si</rdg>
+               <rdg wit="#F #G #A #S #M">tant</rdg>
+            </app>
+            <app type="graphic">
+               <rdg wit="#H #V #F #G #R #M">cortois</rdg>
+               <rdg wit="#P #A #S">courtois</rdg>
+            </app>
+         </l>
+      </body>
+   </text>
+</TEI>

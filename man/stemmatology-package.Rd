@@ -10,8 +10,8 @@ Build and analyse the genealogy of textual or musical traditions.
 \tabular{ll}{
 Package: \tab stemmatology\cr
 Type: \tab Package\cr
-Version: \tab 0.2.3\cr
-Date: \tab 2018-05-07\cr
+Version: \tab 0.3.0\cr
+Date: \tab 2018-05-20\cr
 License: \tab GPL-3\cr
 }
 
@@ -48,8 +48,10 @@ Notice how a witness can bear several readings (e.g., P at VL 1).
 }
 
 % Import functions
-\subsection{Import functions}{
-    \code{\link{Import.TEIApparatus}}: a function to import a TEI P5 encoded apparatus into a stemmatological matrix usable with other functions. It should have options for import from CollateX. %TODO: est-ce implémenté ?
+\subsection{Create or import data}{
+  Data can be created inside R or imported. They can be imported by reading a csv file, for instance (e.g. with \code{\link{read.csv}}). They can also be imported from a TEI encoded apparatus in parallel-segmentation, either by using an XSL stylesheet, or the built-in function \code{\link{import.TEIApparatus}}.
+  
+  The function \code{\link{import.TEIApparatus}} allows to import a TEI P5 encoded apparatus into a stemmatological matrix usable with other functions. It has some parameters to refine the import (variant types, …), and can read either from disk or from an URL. 
 }
 % Fonctions 
 
@@ -66,7 +68,7 @@ Notice how a witness can bear several readings (e.g., P at VL 1).
 
 \subsection{Other functions}{
 The package contains also various other functions, particularly aimed at
-detecting contamination. It contains for instance the function \code{\link{VL.pValues}} (presented in Camps 2013 unpublished)
+detecting contamination. It contains for instance the function \code{\link{PCC.contam}}.%\code{\link{VL.pValues}} (presented in Camps 2013 unpublished)
 
 % Other methods
 The package aims at making available various other stemmatological methods, including further functions for contamination detection, 
@@ -88,10 +90,9 @@ Maintainer: Jean-Baptiste Camps <\email{jbcamps@hotmail.com}>.
 }
 
 \references{
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. \emph{Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2)}, edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
 
-Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2), edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
-
-Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 }
 
 \note{%
@@ -99,8 +100,6 @@ Please report issues with this package to \url{https://github.com/Jean-Baptiste-
 }
 
 \keyword{stemmatology}
-\keyword{stemmatics}
-\keyword{stemma}
 
 \seealso{
 \code{\link{PCC}},
@@ -108,6 +107,27 @@ Please report issues with this package to \url{https://github.com/Jean-Baptiste-
 }
 
 \examples{
+\dontrun{
+# Interactive mode
+# Load data
 data(fournival)
-%PCC.Exploratory(fournival)
+# or alternatively, import it
+fournival = import.TEIApparatus(file = "myFournival.xml", 
+    appTypes = c("substantive"))
+# Analyse it with the PCC functions
+PCC(fournival)
+
+# Complete step-by-step non interactive use
+data("fournival")
+# look for conflicts
+myConflicts = PCC.conflicts(fournival)
+# remove conflicting VL
+myConflicts = PCC.overconflicting(myConflicts, ask = FALSE, threshold = 0.06)
+myNewData = PCC.elimination(myConflicts)
+# look for competing genealogies
+myConflicts = PCC.conflicts(myNewData)
+myNewData = PCC.equipollent(myConflicts, ask = FALSE, scope = "W", wits = "D")
+# build a stemma
+PCC.Stemma(myNewData$databases[[3]], ask = FALSE)
+}
 }

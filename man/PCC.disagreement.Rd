@@ -1,13 +1,9 @@
 \encoding{utf8}
 \name{PCC.disagreement}
 \alias{PCC.disagreement}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-PCC.disagreement 
-}
+\title{PCC.disagreement: Find disagreements and agreements between witnesses}
 \description{
-  The PCC.disagreement function helps spotting disagreements (and agreements) between manuscripts. For a given numeric matrix, representing the variants in different manuscripts, it locates disagreements (benigne or severe), agreements and omissions in common between manuscripts.
-}
+  The PCC.disagreement function helps spotting disagreements (and agreements) between manuscripts. For a given numeric matrix, representing the variants in different manuscripts, it locates disagreements (benigne or severe), agreements and omissions in common between manuscripts.}
 \usage{
 PCC.disagreement(x, omissionsAsReadings = FALSE)
 }
@@ -21,7 +17,11 @@ PCC.disagreement(x, omissionsAsReadings = FALSE)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+A distinction is made between severe and benigne disagreements (see Camps & Cafiero 2015). Severe disagreements are disagreements between witnesses on two readings that are each shared by at least two witnesses. They have stronger genealogical implications than benigne disagreements, that involve at least one singular reading. This distinction is used by the methods of the \code{\link{PCC}} family.
+
+This function also gives common omissions, and oriented omissions (i.e. omission present in one witness but not an other). No distinction is made between omission and addition, as this means establishing the orientation in genealogical relationship.
+
+Agreements are given as well, mostly with an indicative value, as they cannot be taken as a direct measure of similarity.
 }
 \value{
 The function returns:
@@ -34,20 +34,15 @@ The function returns:
 
 }
 \references{
-Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. \emph{Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2)}, edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
 
-Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 
-Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
-}
-\author{
-Jean-Baptiste Camps & Florian Cafiero
-}
-\note{
-%%  ~~further notes~~
-}
+Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161.
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+}
+\author{Jean-Baptiste Camps & Florian Cafiero}
 
 \seealso{
 \code{\link{PCC.Stemma}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}.
@@ -57,8 +52,11 @@ Jean-Baptiste Camps & Florian Cafiero
 data("fournival")
 #Option: explore the tradition to see problems in variant locations
 #PCC.Exploratory(fournival)
+\dontshow{
+# subsetting for time gain
+fournival = fournival[1:25,]
+}
 #Calculate disagreements
 PCC.disagreement(fournival)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+\keyword{stemmatology}

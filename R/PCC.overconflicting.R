@@ -1,139 +1,160 @@
-PCC.overconflicting<-
-    function(x) {
-        ##### Fonction d'élimination des lieux variants problématiques, avec quelques
-        ##### aides au choix. En entrée, un object de type PCC.conflicts Finitions :
-        ##### il reste encore à intégrer le partitioning around medoids et sa
-        ##### représentation sur le barplot. On pourrait se contenter d'utiliser la
-        ##### fonction de colorisation des barres, à partir des classes données par
-        ##### le pam. #EDIT 19 juin 2017: il me semble que c'est fait à présent.
-        reseau = x
-        ordConflTot = reseau$conflictsTotal[order(reseau$conflictsTotal[, 1], 
-                                                  decreasing = TRUE), ]  
-        # On commence ici par quelques fonctions graphiques (barplots) pour aider
-        # au choix du seuil de centralité, avec en renfort un clustering de type
-        # partitioning around medoids (k-means en plus robuste et meilleur) avec
-        # 4 classes, et en colorant les barres selon ces classes
-        # NB: pour l'instant on utilise essentiellement les valeurs par défaut de
-        # cette fonction, mais il y en a d'autres (euclid ou manhattan, ...).
-        # Mais a priori, d'après les tests effectués, les données sont
-        # suffisamment marquées et la méthode robuste pour que ça ne change
-        # strictement rien. Just test before that there is more than three
-        # individuals in the database. If not, warn the user and use three
-        # classes only
-        testClasses = ordConflTot[, 1]
-        if (length(testClasses[testClasses > 0]) > 3) {
-            numberOfClasses = 4
-        } else {
-            if (length(testClasses[testClasses > 0]) > 1) {
-                print("The number of conflicts is VERY LOW. Is your database correct?")
-                numberOfClasses = 3
-            }
-            if (length(testClasses[testClasses > 0]) == 0) {
-                stop("There is no conflicts in this database.")
-            }
-        }
-        classes1 = pam(ordConflTot[,1], numberOfClasses)
-        barplot(ordConflTot[, 1], col = classes1$clustering, main = "Total de conflits par lieu variant", 
-                names.arg = rownames(ordConflTot), xlab = "VL", ylab = "Conflicts Total", 
-                ylim = (c(0, ordConflTot[1, 1])), cex.axis = "1", sub = "coloured according to partitioning around medoids with 4 clusters", 
-                yaxt = "n")
-        axis(side = 2, at = seq(0, ordConflTot[1, 1], by = 2))  
-        #Arrêt, et demander à procéder jusqu'au second graphique
-        par(ask = TRUE)
-        classes2 = pam(ordConflTot[, 2], numberOfClasses)
-        barplot(ordConflTot[, 2], col = classes2$clustering, main = "Indice de centralité par lieu variant", 
-                names.arg = rownames(ordConflTot), xlab = "VL", ylab = "Centrality Index", 
-                ylim = (c(0, ordConflTot[1, 2])), cex.axis = "1", sub = "coloured according to partitioning around medoids with 4 clusters", 
-                yaxt = "n")
-        axis(side = 2, at = seq(0, ordConflTot[1, 2], by = 0.02))  
-        ## On présente les degrés de centralité visuellement. Réfléchir si d'autres
-        ## méthodes pourraient être possibles.
-        ## Serait intéressant de voir si on peut clusterer pour voir ou couper, ou
-        ## faire des suggestions à l'utilisateur Voir si on peut aller du côté des
-        ## k-means, scale, et autres. 
-        # Pour l'instant, fonction pam du package cluster Partitioning Around Medoids
-        ## Description: Partitioning (clustering) of the data into ‘k’ clusters
-        ## ``around medoids'', a more robust version of K-means. Marche vraiment
-        ## très bien avec 4 classes, du moins sur l'échantillon Chevalier au Lyon
-        ## (assez logique : une classe pour les over-conflicting, une pour les non
-        ## assessables, une pour les sobres, et une pour les non-conflicting) Avec
-        ## 3 classes, marche vraiment très bien aussi, dans le sens où les deux
-        ## premiers groupes s'assemblent Éventuellement, voir aussi du côté du
-        ## module ClustOfVar (http://arxiv.org/pdf/1112.0295v1.pdf), assez
-        ## intéressant (mais Commençons par créer le réseau
-        myNetwork = as.network(reseau$edgelist, directed = FALSE, matrix.type = "edgelist")  
-        #Définissons un seuil de centralité
-        answered = FALSE
-        while (answered == FALSE) {
-            seuilCentrality = as.numeric(readline("Choisissez le seuil de centralité > "))
-            if (is.na(seuilCentrality)) {
-                print("Please enter a number.")
-            } else {
-                if (seuilCentrality >= 2) {
-                    print("Please enter a number inferior to 2 (which is the maximum possible value).")
-                } else {
-                    answered = TRUE
-                }
-            }
-        }
-        # pour éviter d'utiliser des facteurs qu'on ne voudrait pas
-        options(stringsAsFactors = FALSE) 
-        # On crée une table d'étiquettes pour les nœuds (vertexAttributes)
-        hasConflicts = reseau$conflictsTotal[reseau$conflictsTotal[, 2] > 0, , drop = FALSE]
-        vertexAttributes = matrix(nrow = nrow(hasConflicts), ncol = 2, dimnames = list(rownames(hasConflicts), c("label","color")))
-        # Et on étiquette les nœuds, selon le seuil de centralité
-        vertexAttributes[hasConflicts[, 2] > seuilCentrality, 1] = "overconflicting"
-        vertexAttributes[hasConflicts[, 2] > seuilCentrality, 2] = "red"
-        vertexAttributes[hasConflicts[, 2] < seuilCentrality & hasConflicts[, 2] > 0, 1] = "unknown"
-        vertexAttributes[hasConflicts[, 2] < seuilCentrality & hasConflicts[, 2] > 0, 2] = "grey"
-        # Voyons maintenant pour étiqueter les «sobres» :
-        # On récupère la table d'adjacence
-        adjacencyTable = as.matrix.network(myNetwork, matrix.type = "adjacency")
-        # et on boucle sur les nœuds
-        for (i in 1:nrow(vertexAttributes)) {
-            # Si le nœud n'est pas lui-même overconflicting
-            if (vertexAttributes[i, 1] != "overconflicting") {
-                # undecidable = 0  #J'enlève ça pour l'instant, mais on pourrait
-                # vouloir à terme compter le nombre de conflits avec des non
-                # overconflicting
-                undecidable = FALSE
-                # On croise contre toutes les colonnes de la matrice d'adjacence
-                for (j in 1:ncol(adjacencyTable)) {
-                    # S'il y a un lien
-                    if (adjacencyTable[rownames(vertexAttributes)[i], j] > 0) {
-                        # on teste pour voir si chacun des nœuds avec lesquels il y a lien sont
-                        # eux-mêmes overconflicting
-                        if (vertexAttributes[colnames(adjacencyTable)[j], 1] != 
-                                "overconflicting") {
-                            # si non, alors le noeud est undécidable
-                            undecidable = TRUE
-                            break()
-                        }
-                    }
-                }
-                if (undecidable == FALSE) {
-                    vertexAttributes[i, ] = c("sober", "green")
-                }
-            }
-        }
-        # À présent, on va attribuer aux noeuds du réseau les attributs de
-        # couleur. Pour ce faire, on doit récupérer les identifiants à partir des
-        # étiquettes.
-        vertexNameId = network.vertex.names(myNetwork)
-        vertexId = NULL
-        for (i in 1:nrow(vertexAttributes)) {
-            vertexId = c(vertexId, which(vertexNameId == rownames(vertexAttributes)[i]))
-        }
-        # Et maintenant, on les utilise pour modifier les nœuds
-        myNetwork = set.vertex.attribute(myNetwork, "color", vertexAttributes[ , "color"],
-                                         v = vertexId)
-        gplot(myNetwork, displaylabels, label = network.vertex.names(myNetwork), 
-              gmode = "graph", vertex.col = get.vertex.attribute(myNetwork, "color"), 
-              boxed.labels = TRUE)
-        par(ask = FALSE) 
-        # we add the vertexAttributes to the pccConflicts object inputed, and
-        # return it as a pccElimination object
-        reseau$vertexAttributes = vertexAttributes 
-        class(reseau) = "pccOverconflicting"
-        return(reseau)
+PCC.overconflicting <-
+  function(x, ask = TRUE, threshold = NULL) {
+    # Identifies overconflicting variant locations,
+    # by helping to assess a threshold in centrality
+    # and then labelling the output.
+    # Input: an object of class PCC.conflicts
+    # We start by checking if input is consistent
+    if (class(x) != "pccConflicts") {
+      stop("Input must be a pccConflicts object.")
     }
+    # And options
+    if (ask == FALSE) {
+      if (is.null(threshold)) {
+        stop("You must specify a threshold if not in interactive mode (ask = FALSE).")
+      } else{
+        if (!is.numeric(threshold)) {
+          stop("Threshold must be a numeric value.")
+        }
+      }
+      # TODO: further checks of consistency of threshold value?
+    }
+    data = x
+    ordConflTot = data$conflictsTotal[order(data$conflictsTotal[, 1],
+                                            decreasing = TRUE),]
+    # We start with a few visualisation (barplots) to help the user choose
+    # a centrality threshold, with the additional help of a clustering,
+    # by partitioning around medoids with
+    # 4 classes, by colouring bar according to this clustering.
+    # NB: for now, we use default values, and could try variations
+    # (euclid ou manhattan, ...).
+    # But, according to the tests, results are robust to these variations.
+    # Just test before that there is more than three
+    # individuals in the database. If not, warn the user and use three
+    # classes only
+    testClasses = ordConflTot[, 1]
+    if (length(testClasses[testClasses > 0]) > 3) {
+      numberOfClasses = 4
+    } else {
+      if (length(testClasses[testClasses > 0]) > 1) {
+        message("The number of conflicts is VERY LOW. Is your database correct?")
+        numberOfClasses = length(testClasses[testClasses > 0])
+      }
+      if (length(testClasses[testClasses > 0]) == 0) {
+        stop("There is no conflict in this database.")
+      }
+    }
+    rm(testClasses) # don't need it anymore
+    classes1 = cluster::pam(ordConflTot[, 1], numberOfClasses)
+    graphics::barplot(
+      ordConflTot[, 1],
+      col = classes1$clustering,
+      main = "Total conflicts by variant location",
+      names.arg = rownames(ordConflTot),
+      xlab = "VL",
+      ylab = "Total conflicts",
+      ylim = (c(0, ordConflTot[1, 1])),
+      cex.axis = "1",
+      sub = paste("coloured according to pam with", numberOfClasses, "clusters"),
+      yaxt = "n"
+    )
+    graphics::axis(side = 2, at = seq(0, ordConflTot[1, 1], by = 2))
+    #Arrêt, et demander à procéder jusqu'au second graphique
+    if (ask == TRUE) {
+      cat("Press [enter] to continue")
+      line = readline()
+    }
+    classes2 = cluster::pam(ordConflTot[, 2], numberOfClasses)
+    graphics::barplot(
+      ordConflTot[, 2],
+      col = classes2$clustering,
+      main = "Centrality by variant location",
+      names.arg = rownames(ordConflTot),
+      xlab = "VL",
+      ylab = "Centrality Index",
+      ylim = (c(0, ordConflTot[1, 2])),
+      cex.axis = "1",
+      sub = paste("coloured according to pam with",
+                  numberOfClasses, "clusters"),
+      yaxt = "n"
+    )
+    graphics::axis(side = 2, at = seq(0, ordConflTot[1, 2], by = 0.02))
+    if (ask == TRUE) {
+      cat("Press [enter] to continue")
+      line = readline()
+    }
+    ## We show centrality distribution visually. Other methods possible?
+    ## Perhaps, by clustering, could we suggest a value.
+    ## See also k-means, scale, etc. ?
+    ## For the moment, pam works very well with 4 classes, at least
+    ## on Chevalier au Lyon
+    ## (makes sense : 1 class for over-conflicting, one for non
+    ## assessables, one for sobers, and one for non-conflicting).
+    ### With 3 classes, works very well too, in the sense that the 2
+    ### firs clusters group together.
+    ### Maybe look at ClustOfVar (http://arxiv.org/pdf/1112.0295v1.pdf)
+    myNetwork = igraph::graph_from_edgelist(data$edgelist,
+                                            directed = FALSE)
+    
+    # Let's set a centrality threshold, if it wasn't defined yet
+    if (ask == TRUE) {
+      answered = FALSE
+      while (answered == FALSE) {
+        threshold = as.numeric(readline("Choose a centrality threshold > "))
+        if (is.na(threshold)) {
+          print("Please enter a number.")
+        } else {
+          if (threshold >= 2) {
+            #TODO: modify if the formula changes
+            print("Please enter a number inferior to 2 (which is the maximum possible value).")
+          } else {
+            answered = TRUE
+          }
+        }
+      }
+    }
+    # To avoid using unnecessary factors
+    options(stringsAsFactors = FALSE)
+    # Create a table of labels for nodes (vertexAttributes)
+    hasConflicts = data$conflictsTotal[data$conflictsTotal[, 2] > 0, , drop = FALSE]
+    vertexAttributes = matrix(
+      nrow = nrow(hasConflicts),
+      ncol = 2,
+      dimnames = list(rownames(hasConflicts), c("label", "color"))
+    )
+    # And label nodes according to centrality threshold
+    vertexAttributes[hasConflicts[, 2] > threshold, 1] = "overconflicting"
+    vertexAttributes[hasConflicts[, 2] > threshold, 2] = "red"
+    vertexAttributes[hasConflicts[, 2] <= threshold &
+                       hasConflicts[, 2] > 0, 1] = "unknown"
+    vertexAttributes[hasConflicts[, 2] <= threshold &
+                       hasConflicts[, 2] > 0, 2] = "grey"
+    # And now for labelling 'sobers'
+    # Loop on nodes to be assessed
+    toAssess = vertexAttributes[vertexAttributes[, 1] != "overconflicting", , drop = FALSE]
+    for (i in seq_len(nrow(toAssess))) {
+      # If the node is linked to a node that isn't overconflicting
+      # Get the neighbors
+      myNeighbors = igraph::neighbors(myNetwork, rownames(toAssess)[i])
+      # if there is no link to something else than an overconflicting
+      if (!"unknown" %in% vertexAttributes[myNeighbors$name, 1]) {
+        vertexAttributes[rownames(toAssess)[i],] = c("sober", "green")
+      }
+    }
+    rm(toAssess)
+    # And now, we give colour attributes to nodes
+    igraph::V(myNetwork)[rownames(vertexAttributes)]$color = vertexAttributes[, 2]
+    # And plot
+    myLayout = igraph::layout_with_fr(myNetwork)
+    igraph::plot.igraph(
+      myNetwork,
+      layout = myLayout,
+      vertex.label.cex = 0.7,
+      main = 'Conflicting variant locations'
+    )
+    # we add the vertexAttributes to the pccConflicts object inputed, and
+    # return it as a pccElimination object
+    data$vertexAttributes = vertexAttributes
+    class(data) = "pccOverconflicting"
+    return(data)
+  }

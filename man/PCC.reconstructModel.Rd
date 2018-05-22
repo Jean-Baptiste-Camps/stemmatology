@@ -1,19 +1,18 @@
 \encoding{utf8}
 \name{PCC.reconstructModel}
 \alias{PCC.reconstructModel}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{PCC.reconstructModel
-}
+\title{PCC.reconstructModel: Reconstruct the Model of Groups of Witnesses}
 \description{
-\code{PCC.reconstructModel} examines coherent clusters of witnesses (PCC.buildGroup), to either identify their model in the tradition, either suggest a reconstructed model for the group.  
+\code{PCC.reconstructModel} examines coherent clusters of witnesses (\code{\link{PCC.buildGroup}}), to either identify their model in the tradition, either suggest a reconstructed model for the group.  
 }
 \usage{
-PCC.reconstructModel(x, omissionsAsReadings = FALSE, recoverNAs = TRUE, ask = TRUE, verbose = FALSE)
+PCC.reconstructModel(x, omissionsAsReadings = FALSE, recoverNAs = TRUE,
+                     ask = TRUE, verbose = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{x}{
-A PCCbuildGroup object.
+%A pccBuildGroup object.
+The output of \code{\link{PCC.buildGroup}}.
 }
   \item{omissionsAsReadings}{
      logical; if \code{TRUE}, omissions are treated as variant readings. They are taken into account in determining conflicts between variant locations or in computing severe disagreements between witnesses).
@@ -48,18 +47,20 @@ The function returns a list containing
   \item{modelsByGroup}{A matrix with, in columns the groups, and a single row containing the label of their model.}
 }
 \references{
-Jean-Baptiste Camps et Florian Cafiero, « Genealogical variant locations and simplified stemma: a test case », in \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, dir. Tara Andrews & Caroline Macé, Turnhout, 2015, p. 69‑93 (Lectio, 1), \url{http://halshs.archives-ouvertes.fr/halshs-01435633/}.
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. \emph{Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2)}, edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.
 
-Eric Poole, « L’analyse stemmatique des textes documentaires », in \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161
+Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 
-Eric Poole, « The Computer in Determining Stemmatic Relationships », \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161.
+
+Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
 }
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
