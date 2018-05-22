@@ -52,6 +52,10 @@ Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Co
 data("fournival")
 #Option: explore the tradition to see problems in variant locations
 #PCC.Exploratory(fournival)
+\dontshow{
+# subsetting for time gain
+fournival = fournival[1:25,]
+}
 #Calculate disagreements
 PCC.disagreement(fournival)
 }

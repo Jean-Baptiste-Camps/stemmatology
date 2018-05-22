@@ -48,6 +48,10 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 \examples{
 # Load data
 data("fournival")
+\dontshow{
+# subsetting for time gain
+fournival = fournival[1:25,]
+}
 # Analyse its conflicts
 myConflicts = PCC.conflicts(fournival)
 \dontrun{
