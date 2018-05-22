@@ -89,8 +89,25 @@ test_that("yields expected output on smaller case", {
   )
   
   # Now with a higher threshold, that will lead to the use of PCC equipollent
-  # TODO: fix PCC.equipollent
-  PCC.Exploratory(x, ask = FALSE, threshold = 2)
+  db = PCC.conflicts(x)
+  notInConflict = list(c("VL1", "VL9", "VL10"), "VL12")
+  y = x
+  y["VL12", c("D", "A", "E")] = NA
+  z = x
+  z[c("VL1","VL9", "VL10"), c("D", "A", "E")] = NA
+  results = list(
+    databases = list(y,z),
+    notInConflict = notInConflict
+  )
+  class(results) = "pccEquipollent"
+  expect_equal(
+    expect_message(
+      expect_output(
+        PCC.Exploratory(x, ask = FALSE, threshold = 2)
+        )
+      ),
+    results
+    )
 })
 
 # Extended database to have conflicts
@@ -105,6 +122,12 @@ test_that("yields expected output on smaller case", {
 # Expected config two
 # {AE} (with virtual model)
 # {BCD} (with D as model)
+# -> not really:
+# 1 severe disagr. BCD vs AE
+# 1 deuxième, VL11, BC vs DE
+# {BC} with virtual model
+# {AE} with virtual model
+#  D as archetype
 #     A B  C  D E
 # VL1 1 1  1  2 2
 # VL2 0 0  0  0 1
@@ -118,5 +141,20 @@ test_that("yields expected output on smaller case", {
 #VL10 1 3  1  2 2
 #VL11 3 1  1  2 2
 #VL12 1 2  2  2 1
+
+# Details config two
+#     A B  C  D E {AE} {BC}  {D{AE}{BC}}
+# VL1 N 1  1  N N  NA   1       1
+# VL2 0 0  0  0 1  NA   0       0
+# VL3 1 1  0  1 2   1   1       1
+# VL4 1 2  3  4 5  NA  NA       4
+# VL5 1 2  2 NA 2   2   2       2
+# VL6 1 2  1  1 1   1   1       1
+# VL7 1 1 NA  1 1   1   1       1
+# VL8 1 2  3  1 4   1  NA       1
+# VL9 N 1  3  N N  NA  NA      NA
+#VL10 N 3  1  N N  NA  NA      NA
+#VL11 3 1  1  2 2   2   1       2
+#VL12 1 2  2  2 1   1   2       2
 
 #TODO: extend it to other exploratory functions !
