@@ -64,6 +64,8 @@ This function is still experimental, and will work optimally only for simple cas
 \examples{
 # load data
 data("fournival")
+
+\dontrun{
 # look for conflicts
 y = PCC.conflicts(fournival)
 # identify and eliminate overconflicting VL
@@ -71,6 +73,10 @@ y = PCC.overconflicting(y, ask = FALSE, threshold = 0.06)
 y = PCC.elimination(y)
 # look for further conflicts
 y = PCC.conflicts(y)
+}
+\dontshow{# subsetting for time gain
+y = fournival[1:25,]
+y = PCC.conflicts(y)}
 # and now, create configurations for competing genealogies
 # for instance, for one witness
 newDB = PCC.equipollent(y, ask = FALSE, scope = "W", wits = "D")

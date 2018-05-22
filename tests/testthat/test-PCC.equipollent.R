@@ -81,4 +81,7 @@ test_that("yields expected output on smaller case", {
     results
   )
   
+  # Check that there is an error if input with no row in edgelist
+  db$edgelist = matrix(nrow = 0, ncol = 2)
+  expect_error(PCC.equipollent(db, ask = FALSE, scope = "T"))
 })

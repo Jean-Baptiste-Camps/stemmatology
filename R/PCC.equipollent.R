@@ -34,6 +34,10 @@ PCC.equipollent <-
         }
       }
     }
+    # Verify that there are conflicts to start with
+    if(nrow(x$edgelist) == 0){
+      stop("No conflicts in input. PCC.equipollent will stop.")
+    }
     # First, we need an adjacency matrix
     myNetwork = igraph::graph_from_edgelist(x$edgelist, directed = FALSE)
     database = x$database
