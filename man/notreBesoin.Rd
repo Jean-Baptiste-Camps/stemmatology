@@ -30,7 +30,7 @@ The data is presented here as used in Camps & Cafiero 2015, without further modi
 Readings have been converted to numeric codes (0 being omission, and NA an absence of value).
 }
 \source{
-Baret, Philippe V.,  P. Robinson, and C. Macé. ‘Testing methods on an artificially created textual tradition’. \emph{Linguistica computazionale} 24 (2004), p. 1000–1029.
+Baret, Philippe V.,  P. Robinson, and C. Macé. ‘Testing methods on an artificially created textual tradition’. \emph{Linguistica computazionale} 24 (2004), p. 1000–1029.
 
 Roos, Teemu, Tuomas Heikkilä, and Petri Myllymäki. ‘Computer-Assisted Stemmatology Challenge’. Helsinki, 2007, \url{https://www.cs.helsinki.fi/u/ttonteri/casc/data.html}.
 }

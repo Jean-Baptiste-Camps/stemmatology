@@ -45,9 +45,9 @@ layout_as_stemma <-
     # # first, let's take all unique horizontal coords
     # myYs = sort(unique(myLayout[, 2]))
     # for (i in seq_len(length(myYs))) {
-    #   # Do we have more than one node ?
+    #   # Do we have more than one node?
     #   if (length(myLayout[, 2][myLayout[, 2] == myYs[i]]) > 1) {
-    #     # Are some of them at the same horizontal placement ?
+    #     # Are some of them at the same horizontal placement?
     #     myXs = sort(unique(myLayout[, 1][myLayout[, 2] == myYs[i]]))
     #     # if we have less unique value than values
     #     if (length(myXs) < length(myLayout[, 1][myLayout[, 2] == myYs[i]])) {
