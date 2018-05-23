@@ -24,11 +24,11 @@ A numeric matric with the counts for each variant location.
 %TODO: fonction à revoir et affiner.
 }
 \references{
-Jean-Baptiste Camps, « Detecting Contaminations in Textual Traditions
-Computer Assisted and Traditional Methods »,  Leeds, International Medieval Congress, 2013, unpublished paper, \url{https://www.academia.edu/3825633/Detecting_Contaminations_in_Textual_Traditions_Computer_Assisted_and_Traditional_Methods}.
+Camps, Jean-Baptiste. ‘Detecting Contaminations in Textual Traditions
+Computer Assisted and Traditional Methods’.  Leeds, International Medieval Congress, 2013, unpublished paper, \url{https://www.academia.edu/3825633/Detecting_Contaminations_in_Textual_Traditions_Computer_Assisted_and_Traditional_Methods}.
 
-Jean-Baptiste Camps, « Sélection des lieux variants et construction d’un
-stemma : nouvelles expérimentations », 27e CILPR, Nancy, 2013, unpublished.
+%Jean-Baptiste Camps, «Sélection des lieux variants et construction d’un
+%stemma: nouvelles expérimentations», 27e CILPR, Nancy, 2013, unpublished.
 }
 \author{
 Jean-Baptiste Camps

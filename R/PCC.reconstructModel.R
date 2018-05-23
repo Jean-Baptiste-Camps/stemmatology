@@ -303,7 +303,7 @@ PCC.reconstructModel <-
         # that these are, at least once, unique to this group? Yet the complexity
         # of this principle is very high, and intuition hard, so we need to
         # check it.
-        # TODO: this also creates a lot of redundancy in code. Clean it up ?
+        # TODO: this also creates a lot of redundancy in code. Clean it up?
         if (verbose) {
           writeLines(
             paste(

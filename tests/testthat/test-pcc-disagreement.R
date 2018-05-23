@@ -228,7 +228,7 @@ test_that("disagreements, agreements and omissions are correctly computed on a s
   
   expect_equal(PCC.disagreement(x), results)
 })
-# TODO: the same with omissionsAsReadings ?
+# TODO: the same with omissionsAsReadings?
 
 # $database
 #     A B  C  D E
