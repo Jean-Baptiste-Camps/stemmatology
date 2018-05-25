@@ -64,8 +64,7 @@ This function is still experimental, and will work optimally only for simple cas
 \examples{
 # load data
 data("fournival")
-
-\dontrun{
+\donttest{
 # look for conflicts
 y = PCC.conflicts(fournival)
 # identify and eliminate overconflicting VL
@@ -81,14 +80,13 @@ y = PCC.conflicts(y)}
 # for instance, for one witness
 newDB = PCC.equipollent(y, ask = FALSE, scope = "W", wits = "D")
 
-\dontrun{
 # Alternatively, you can create them for the whole tradition
 newDB = PCC.equipollent(y, ask = FALSE, scope = "T")
 # or for several witnesses
 newDB = PCC.equipollent(y, ask = FALSE, scope = "W", wits = c("A", "D"))
+
 # and then you proceed to create one or several stemmata, e.g.
-PCC.Stemma(newDB$databases[[1]], ask = FALSE)
-}
+# PCC.Stemma(newDB$databases[[1]], ask = FALSE)
 }
 \keyword{stemmatology}
 \keyword{manip}

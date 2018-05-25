@@ -3,21 +3,21 @@
 \alias{PCC.disagreement}
 \title{PCC.disagreement: Find disagreements and agreements between witnesses}
 \description{
-  The PCC.disagreement function helps spotting disagreements (and agreements) between manuscripts. For a given numeric matrix, representing the variants in different manuscripts, it locates disagreements (benigne or severe), agreements and omissions in common between manuscripts.}
+  The PCC.disagreement function helps spotting disagreements (and agreements) between manuscripts. For a given numeric matrix, representing the variants in different manuscripts, it locates disagreements (benign or severe), agreements and omissions in common between manuscripts.}
 \usage{
 PCC.disagreement(x, omissionsAsReadings = FALSE)
 }
 
 \arguments{
   \item{x}{
- a numeric matrix, with manuscripts in colums, variants in rows, and readings coded by a number.
+ a numeric matrix, with manuscripts in columns, variants in rows, and readings coded by a number.
 }
   \item{omissionsAsReadings}{
      logical; if TRUE, omissions are considered as readings.
 }
 }
 \details{
-A distinction is made between severe and benigne disagreements (see Camps & Cafiero 2015). Severe disagreements are disagreements between witnesses on two readings that are each shared by at least two witnesses. They have stronger genealogical implications than benigne disagreements, that involve at least one singular reading. This distinction is used by the methods of the \code{\link{PCC}} family.
+A distinction is made between severe and benign disagreements (see Camps & Cafiero 2015). Severe disagreements are disagreements between witnesses on two readings that are each shared by at least two witnesses. They have stronger genealogical implications than benign disagreements, that involve at least one singular reading. This distinction is used by the methods of the \code{\link{PCC}} family.
 
 This function also gives common omissions, and oriented omissions (i.e. omission present in one witness but not an other). No distinction is made between omission and addition, as this means establishing the orientation in genealogical relationship.
 
@@ -27,7 +27,7 @@ Agreements are given as well, mostly with an indicative value, as they cannot be
 The function returns:
   \item{database }{The original database.}
   \item{severeDisagreement }{A list of the severe disagreements between manuscripts.}
-  \item{benigneDisagreement }{A list of the benigne disagreements between manuscripts.}
+  \item{benignDisagreement }{A list of the benign disagreements between manuscripts.}
   \item{agreements}{A list of agreements between manuscripts.}
   \item{omissionsInCommon }{A list of all the omissions in common between manuscripts(if omissionsAsReadings is set to TRUE, this will be NA).}
   \item{omissionsOriented }{A list of the omissions present in a manuscript but not in another (if omissionsAsReadings is set to TRUE, this will be NA).}

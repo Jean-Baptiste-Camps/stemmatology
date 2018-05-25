@@ -7,3 +7,4 @@
 \.git
 version_history
 deprec
+^cran-comments\.md$

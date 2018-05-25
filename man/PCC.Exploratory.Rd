@@ -38,7 +38,7 @@ PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = FALSE,
 \details{
 This function is meant to guide the user through the process of assessing and eliminating unreliable variant locations and/or identify competing genealogies (i.e. contamination), as described in Camps & Cafiero 2015. 
 
-It starts by computing and ploting the network of conflicting variant locations (i.e. variant locations that present contradictory genealogical information), by calling \code{\link{PCC.conflicts}}, and then interactively aids the user in determining overconflicting variant locations (with \code{\link{PCC.overconflicting}}), eliminating problematic variant locations (\code{\link{PCC.elimination}}), detecting contamination (\code{\link{PCC.contam}}) or creating new databases reflecting competing genealogies (\code{\link{PCC.equipollent}}).
+It starts by computing and plotting the network of conflicting variant locations (i.e. variant locations that present contradictory genealogical information), by calling \code{\link{PCC.conflicts}}, and then interactively aids the user in determining overconflicting variant locations (with \code{\link{PCC.overconflicting}}), eliminating problematic variant locations (\code{\link{PCC.elimination}}), detecting contamination (\code{\link{PCC.contam}}) or creating new databases reflecting competing genealogies (\code{\link{PCC.equipollent}}).
 }
 \value{
 According to the choices made by the user, the output can be an object belonging to one of the following classes: \code{pccConflicts}, \code{pccOverconflicting}, \code{pccContam} or \code{pccEquipollent}.
@@ -60,18 +60,21 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero
 \code{\link{PCC.conflicts}}, \code{\link{PCC.overconflicting}}, \code{\link{PCC.elimination}}, \code{\link{PCC.contam}}, \code{\link{PCC.equipollent}}.
 }
 \examples{
-\dontrun{
-# Interactive mode
 # Load data
 data(fournival)
+\dontrun{
+# Interactive mode
 # or alternatively, import it
-fournival = import.TEIApparatus(file = "myFournival.xml", 
-                      appTypes = c("substantive"))
+#fournival = import.TEIApparatus(file = "myFournival.xml", 
+#                      appTypes = c("substantive"))
 # Analyse it with the PCC functions
 PCC.Exploratory(fournival)
-
+}
+\dontshow{
+# subsetting for exec time
+fournival = fournival[1:50,c(-5,-8)]
+}
 # Non interactive mode
 PCC.Exploratory(fournival, ask = FALSE, threshold = 0.06)
-}
 }
 \keyword{stemmatology}

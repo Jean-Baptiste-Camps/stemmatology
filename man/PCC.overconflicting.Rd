@@ -25,7 +25,7 @@ This function is dedicated to the identification of problematic variant location
   \item{conflictsTotal}{a one-column numeric matrix, giving the total number of conflicts per variant location}
   \item{database}{the original database used for the calculations}
   and adding
-  \item{vertexAttributes}{a two column character matrix, with a row per vertex of the network (i.e. variant location), giving its label and color}
+  \item{vertexAttributes}{a two column character matrix, with a row per vertex of the network (i.e. variant location), giving its label and colour}
 }
 \references{
 Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the Computer-Assisted Analysis of Textual Traditions’. \emph{Proceedings of the Second Workshop on Corpus-Based Research in the Humanities (CRH-2)}, edited by Andrew U. Frank et al., 2018, pp. 65–74, \url{https://halshs.archives-ouvertes.fr/hal-01695903v1}.

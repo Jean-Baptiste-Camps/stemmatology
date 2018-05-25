@@ -31,7 +31,7 @@ test_that("disagreements, agreements and omissions are correctly computed", {
       .Dim = c(5L, 5L),
       .Dimnames = list(c("A", "B", "C", "D", "E"), c("A", "B", "C", "D", "E"))
     ),
-    benigneDisagreement = structure(
+    benignDisagreement = structure(
       c(0, 0, 1, 0, NA, 0, 0, 2, 0, 1, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0, NA, 1, 1, 0, 0),
       .Dim = c(5L, 5L),
       .Dimnames = list(c("A", "B", "C", "D", "E"), c("A", "B", "C", "D", "E"))
@@ -74,7 +74,7 @@ test_that("disagreements, agreements and omissions are correctly computed", {
 # D  1 2 1 0  0
 # E NA 1 1 0  0
 # 
-# $benigneDisagreement
+# $benignDisagreement
 # A B C D  E
 # A  0 0 1 0 NA
 # B  0 0 2 0  1
@@ -124,7 +124,7 @@ test_that("disagreements, agreements and omissions
         .Dim = c(5L, 5L),
         .Dimnames = list(c("A", "B", "C", "D", "E"), c("A", "B", "C", "D", "E"))
       ),
-      benigneDisagreement = structure(
+      benignDisagreement = structure(
         c(0, 2, 3, 1, 2, 2, 0, 2, 0, 1, 3, 2, 0, 1, 2, 1, 0, 1, 0, 0, 2, 1, 2, 0, 0),
         .Dim = c(5L, 5L),
         .Dimnames = list(c("A", "B", "C", "D", "E"), c("A", "B", "C", "D", "E"))
@@ -163,7 +163,7 @@ test_that("disagreements, agreements and omissions
 # D 2 3 1 0 0
 # E 1 2 1 0 0
 # 
-# $benigneDisagreement
+# $benignDisagreement
 # A B C D E
 # A 0 2 3 1 2
 # B 2 0 2 0 1
@@ -213,7 +213,7 @@ test_that("disagreements, agreements and omissions are correctly computed on a s
         structure(
           c(0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0),
           .Dim = c(5L, 5L), .Dimnames = list(c("A", "B", "C", "D", "E"), c("A", "B", "C", "D", "E"))), 
-    benigneDisagreement = structure(
+    benignDisagreement = structure(
         c(0, 4, 3, 1, 4, 4, 0, 3, 3, 4, 3, 3, 0, 2, 2, 1, 3, 2, 0, 3, 4, 4, 2, 3, 0), 
           .Dim = c(5L, 5L), .Dimnames = list(c("A", "B", "C", "D", "E"), c("A", "B", "C", "D", "E"))), 
     agreements = structure(
@@ -249,7 +249,7 @@ test_that("disagreements, agreements and omissions are correctly computed on a s
 # D 1 1 1 0 0
 # E 1 1 1 0 0
 # 
-# $benigneDisagreement
+# $benignDisagreement
 #   A B C D E
 # A 0 4 3 1 4
 # B 4 0 3 3 4
