@@ -33,7 +33,13 @@ This repository contains the source file of the development version for the proj
 
 ## Installation
 
-You can install stemmatology from Github with:
+You can install stemmatology from CRAN, with:
+```r
+install.packages("stemmatology")
+```
+
+or, alternatively, if you want the last version,
+you can install from Github with:
 
 ```r
 # install.packages("devtools")
