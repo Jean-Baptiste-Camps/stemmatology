@@ -3,7 +3,7 @@
 \alias{PCC.elimination}
 \title{PCC Exploratory Methods: Elimination of Over-Conflicting Variant Locations}
 \description{
-This function removes from the database the variant locations labeled as over-conflicting by the \code{PCC.overconflicting} function.
+This function removes from the database the variant locations labelled as over-conflicting by the \code{PCC.overconflicting} function.
 }
 \usage{
 PCC.elimination(x)

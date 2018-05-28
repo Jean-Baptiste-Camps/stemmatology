@@ -163,7 +163,7 @@ PCC.reconstructModel <-
         # with it in PCC.disagreement)
         if (myGroupComp$severeDisagreement[myGroup[m], labelMyModel] ==
             0 &&
-            myGroupComp$benigneDisagreement[myGroup[m], labelMyModel] ==
+            myGroupComp$benignDisagreement[myGroup[m], labelMyModel] ==
             0 &&
             (myGroupComp$omissionsOriented[myGroup[m], labelMyModel] ==
              0 |
@@ -181,9 +181,9 @@ PCC.reconstructModel <-
               myGroupComp$severeDisagreement[myGroup[m],
                                              labelMyModel],
               "severe disagreement(s),\n",
-              myGroupComp$benigneDisagreement[myGroup[m],
+              myGroupComp$benignDisagreement[myGroup[m],
                                               labelMyModel],
-              "benigne disagreement(s),\n",
+              "benign disagreement(s),\n",
               myGroupComp$omissionsOriented[myGroup[m],
                                             labelMyModel],
               "omissions",
@@ -324,7 +324,7 @@ PCC.reconstructModel <-
           for (n in 1:length(others)) {
             if (myOthersComp$severeDisagreement[others[n], labelMyModel] ==
                 0 &&
-                myOthersComp$benigneDisagreement[others[n], labelMyModel] ==
+                myOthersComp$benignDisagreement[others[n], labelMyModel] ==
                 0 &&
                 (
                   myOthersComp$omissionsOriented[others[n], labelMyModel] ==
@@ -343,9 +343,9 @@ PCC.reconstructModel <-
                   myOthersComp$severeDisagreement[others[n],
                                                   labelMyModel],
                   "severe disagreement(s),",
-                  myOthersComp$benigneDisagreement[others[n],
+                  myOthersComp$benignDisagreement[others[n],
                                                    labelMyModel],
-                  "benigne disagreement(s),",
+                  "benign disagreement(s),",
                   myOthersComp$omissionsOriented[others[n],
                                                  labelMyModel],
                   "omissions",
@@ -423,7 +423,7 @@ PCC.reconstructModel <-
           # total number of disagreements, and omissions both ways
           
           myDist = c(
-            myGroupComp$benigneDisagreement[myGroup[p],modelsByGroup[i]],
+            myGroupComp$benignDisagreement[myGroup[p],modelsByGroup[i]],
             myGroupComp$omissionsOriented[myGroup[p],modelsByGroup[i]],
             myGroupComp$omissionsOriented[modelsByGroup[i],myGroup[p]])
           myDist[is.na(myDist)] = 0
