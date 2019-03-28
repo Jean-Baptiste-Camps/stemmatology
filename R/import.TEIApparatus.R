@@ -39,7 +39,7 @@ import.TEIApparatus <-
       myRdgWits = sub("^\\s+|\\s+$", "", myRdgWits)
       myRdgWits = strsplit(myRdgWits, "\\s+")
       myRdgVars = NULL
-      # 0 for omission, 1…n for readings
+      # 0 for omission, 1...n for readings
       for (j in seq_len(length(myRdgs))) {
         if (xml2::xml_text(myRdgs[j], "normalize-space(.)") == "") {
           myRdgVars = c(myRdgVars, 0)
