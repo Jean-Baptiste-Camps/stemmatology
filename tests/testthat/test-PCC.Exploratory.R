@@ -158,3 +158,25 @@ test_that("yields expected output on smaller case", {
 #VL12 1 2  2  2 1   1   2       2
 
 #TODO: extend it to other exploratory functions !
+# 
+# test_that("works on non numeric input", {
+#   x = matrix(data = c(
+#     "1","1","2","2","1,2",
+#     "1","1","2","2","1,2",
+#     "0","0","1","2","1,2",
+#     "1","1","2","2","1",
+#     "1","1","2","2","2",
+#     "1","2","3","4","5"
+#   ), byrow = TRUE,
+#   ncol = 5,
+#   nrow = 6,
+#   dimnames = list(
+#     c("VL1", "VL2", "VL3", "VL4", "VL5", "VL6"),
+#     c("A","B","C","D","E")
+#   )
+#   )
+#   # TODO: create test and debug for very small databases
+#   PCC.Exploratory(x, omissionsAsReadings = FALSE, alternateReadings = TRUE)
+#   
+#   
+# })
