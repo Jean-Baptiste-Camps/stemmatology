@@ -61,7 +61,7 @@ PCC.equipollent <-
     # configurations in which some members are in conflict between
     # themselves, in which case we will remove them.
     # In order for that to work, we need to deduplicate problematic
-    # configurations into unproblematic ones… Harder than it looks
+    # configurations into unproblematic ones... Harder than it looks
     toBeRemovedAsWell = as.vector(NULL)
     #If there is more than two members
     for (l in seq_len(length(notInConflict))) {

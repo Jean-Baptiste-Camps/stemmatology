@@ -6,7 +6,7 @@ PCC.conflicts <-
     # TODO: perhaps better, for alternateReadings, to create as many
     # new rows as necessary, at the start, and avoid code redundancy
     # as well as many small inflexions to the code due to the fact
-    # that we need to cross VL with themselves if alternate…
+    # that we need to cross VL with themselves if alternate.
     # it could also make the network more legible.
     # This could even be ported into a different function, 
     # for separate use.

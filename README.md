@@ -4,13 +4,15 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/Jean-Baptiste-Camps/stemmatology/master.svg)](https://codecov.io/github/Jean-Baptiste-Camps/stemmatology?branch=master) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/stemmatology)](https://cran.r-project.org/package=stemmatology)
 [![DOI](https://zenodo.org/badge/21941228.svg)](https://zenodo.org/badge/latestdoi/21941228)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/stemmatology)](https://cran.r-project.org/package=stemmatology)
+
 
 
     Package: stemmatology
     Type: Package
     Title: Stemmatological Analysis of Textual Traditions
-    Version: 0.3.1
-    Date: 2018-05-25
+    Version: 0.3.2
+    Date: 2019-03-28
     Author: Jean-Baptiste Camps ; Florian Cafiero
     Maintainer: Jean-Baptiste Camps <jbcamps@hotmail.com>
     Description: Explore and analyse the genealogy of textual or musical traditions, from their variants, with various stemmatological methods, mainly the disagreement-based algorithms suggested by Camps and Cafiero (2015) <doi:10.1484/M.LECTIO-EB.5.102565>.
