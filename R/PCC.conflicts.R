@@ -241,7 +241,7 @@ PCC.conflicts <-
       }
     } else {
       for (z in 1:nrow(centrality)) {
-        centrality[z,] = centrality[z,] = 0
+        centrality[z,] = 0
       }
     }
     ## Now we create the objects that the function will return (a list

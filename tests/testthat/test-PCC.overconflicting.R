@@ -116,3 +116,6 @@ test_that("inputs are checked correctly", {
   # Test for input with no conflict?
   
 })
+
+
+

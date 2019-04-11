@@ -36,7 +36,7 @@ PCC.overconflicting <-
     if (length(testClasses[testClasses > 0]) > 3) {
       numberOfClasses = 4
     } else {
-      if (length(testClasses[testClasses > 0]) > 1) {
+      if (length(testClasses[testClasses > 0]) >= 1) {
         message("The number of conflicts is VERY LOW. Is your database correct?")
         numberOfClasses = length(testClasses[testClasses > 0])
       }
