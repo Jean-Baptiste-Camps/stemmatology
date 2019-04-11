@@ -42,7 +42,7 @@ test_that("Layout as stemma works", {
   
   
   # With hard to handle contamination
-  # visualisation problem due to original 'layout_as_tree' function ?
+  # visualisation problem due to original 'layout_as_tree' function?
   edgelist = structure(
     c("{ABC}", "{ABC}", "{ABC}", "D", "A","A","D",
       "A", "B", "C", "E", "F","G","B",

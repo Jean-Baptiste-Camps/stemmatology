@@ -4,16 +4,18 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/Jean-Baptiste-Camps/stemmatology/master.svg)](https://codecov.io/github/Jean-Baptiste-Camps/stemmatology?branch=master) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/stemmatology)](https://cran.r-project.org/package=stemmatology)
 [![DOI](https://zenodo.org/badge/21941228.svg)](https://zenodo.org/badge/latestdoi/21941228)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/stemmatology)](https://cran.r-project.org/package=stemmatology)
+
 
 
     Package: stemmatology
     Type: Package
-    Title: An R Stemmatology Package
-    Version: 0.3.0
-    Date: 2018-05-20
+    Title: Stemmatological Analysis of Textual Traditions
+    Version: 0.3.2
+    Date: 2019-03-28
     Author: Jean-Baptiste Camps ; Florian Cafiero
     Maintainer: Jean-Baptiste Camps <jbcamps@hotmail.com>
-    Description: Build and analyse the genealogy of textual or musical traditions.
+    Description: Explore and analyse the genealogy of textual or musical traditions, from their variants, with various stemmatological methods, mainly the disagreement-based algorithms suggested by Camps and Cafiero (2015) <doi:10.1484/M.LECTIO-EB.5.102565>.
     BugReports: https://github.com/Jean-Baptiste-Camps/stemmatology/issues
     Imports: graphics, stats, cluster, igraph, xml2
     Suggests: 
@@ -27,13 +29,19 @@
     URL: https://github.com/Jean-Baptiste-Camps/stemmatology
     VignetteBuilder: knitr
     RoxygenNote: 6.0.1
-    
-    
-This repository contains the source file of the development version for the project of a stemmatology package for R. This package already contains functions for the PCC method as described in Camps & Cafiero 2014 (see below, section _On the Method_), and will implement as well  other stemmatological methods (see roadmap at https://graal.hypotheses.org/925).
+
+
+This repository contains the source file of the development version for the project of a stemmatology package for R. This package already contains functions for the PCC method as described in Camps & Cafiero 2015 (see below, section _On the Method_), and will implement as well  other stemmatological methods (see roadmap at https://graal.hypotheses.org/925).
 
 ## Installation
 
-You can install stemmatology from Github with:
+You can install stemmatology from CRAN, with:
+```r
+install.packages("stemmatology")
+```
+
+or, alternatively, if you want the last version,
+you can install from Github with:
 
 ```r
 # install.packages("devtools")

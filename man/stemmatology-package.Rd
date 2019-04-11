@@ -33,7 +33,7 @@ Most of the functions take, as input a \emph{numeric matrix}, with witnesses in 
 5 \tab 1 \tab 1 \tab 1 \tab 2 \tab NA \tab 1 \tab 1 \tab NA \tab 1 \tab 1\cr
 6 \tab 1 \tab 1 \tab 1 \tab 1 \tab NA \tab 1 \tab 1 \tab NA \tab 1 \tab 1\cr
 }
-where A, B, …, O are the various witnesses in columns, 1…6 the various variant locations, in rows, and the differents readings are coded either 0 (omission), 1, 2, …, \emph{n}. \code{NA} is used for the lack of information (physical lacuna, absence of observation, variant location not applicable to a given witness, etc.).
+where A, B, …, O are the various witnesses in columns, 1…6 the various variant locations, in rows, and the different readings are coded either 0 (omission), 1, 2, …, \emph{n}. \code{NA} is used for the lack of information (physical lacuna, absence of observation, variant location not applicable to a given witness, etc.).
 
 Alternatively , if \code{alternateReadings = TRUE}, the input can be a \emph{character matrix}, with witnesses in columns, variant locations in rows, and, in each cell, one or several readings, coded by numbers and separated by a comma (e.g. '1,2,3', if the witness has three different readings), e.g.
 
@@ -107,18 +107,26 @@ Please report issues with this package to \url{https://github.com/Jean-Baptiste-
 }
 
 \examples{
-\dontrun{
-# Interactive mode
+
 # Load data
 data(fournival)
 # or alternatively, import it
-fournival = import.TEIApparatus(file = "myFournival.xml", 
-    appTypes = c("substantive"))
+#fournival = import.TEIApparatus(file = "myFournival.xml", 
+#    appTypes = c("substantive"))
+
+\dontrun{
+# Interactive mode
+
 # Analyse it with the PCC functions
 PCC(fournival)
+}
 
 # Complete step-by-step non interactive use
 data("fournival")
+\dontshow{
+# subsetting for exec time
+fournival = fournival[1:200,c(-5,-8)]
+}
 # look for conflicts
 myConflicts = PCC.conflicts(fournival)
 # remove conflicting VL
@@ -128,6 +136,5 @@ myNewData = PCC.elimination(myConflicts)
 myConflicts = PCC.conflicts(myNewData)
 myNewData = PCC.equipollent(myConflicts, ask = FALSE, scope = "W", wits = "D")
 # build a stemma
-PCC.Stemma(myNewData$databases[[3]], ask = FALSE)
-}
+PCC.Stemma(myNewData$databases[[1]], ask = FALSE)
 }

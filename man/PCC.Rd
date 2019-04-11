@@ -51,15 +51,15 @@ The algorithmic principles of the PCC method are described in Camps & Cafiero 20
 In a first stage, problematic configurations in the traditions (i.e. configurations that cannot be linked to a normal genealogy, without contamination or polygenesis) are identified by crossing every possible pair of variant locations, and are then plotted as a network. When the most unreliable variant locations (i.e. unreliable) are identified, different methods for eliminating them are offered.
 
 In a second time, a stemma is iteratively built, using the variant locations selected in the first stage. At each step, witness with no severe disagreements (i.e. disagreements between two witnesses, on two readings both shared with at least one other
-witness, cf. \emph{Trennfehler}, \emph{errores separativi}) are grouped together. A model is then reconstructed for each group, and either identified to a witness of the group or to an hypothetic subarchetype.
+witness, cf. \emph{Trennfehler}, \emph{errores separativi}) are grouped together. A model is then reconstructed for each group, and either identified to a witness of the group or to an hypothetical subarchetype.
 
 The option \code{recoverNAs=TRUE} is a novelty not described in the original paper (Camps & Cafiero 2015). 
 
-For more information about the underlying principles behind the method applied here, particulary the distinction between severe and benigne disagreement, the different status given to readings, omissions and \emph{lacunae}, the notion of conflict between variant locations or the way the stemma is built, see the \emph{references} section. 
+For more information about the underlying principles behind the method applied here, particularly the distinction between severe and benign disagreement, the different status given to readings, omissions and \emph{lacunae}, the notion of conflict between variant locations or the way the stemma is built, see the \emph{references} section. 
 }
 
 \value{
-The function returns either a single object of class \code{"pccStemma"}, or a list containing several objects of class \code{"pccStemma"} (if multiple stemmatas were drawn); 
+The function returns either a single object of class \code{"pccStemma"}, or a list containing several objects of class \code{"pccStemma"} (if multiple stemmata were drawn); 
 see \code{\link{PCC.Stemma}}.
 }
 \references{
@@ -67,9 +67,9 @@ Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the
 
 Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 
-Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161.
+Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151-161.
 
-Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207-16.
 }
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{florian.cafiero@polytechnique.edu})
@@ -79,18 +79,23 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero(\email{flori
 \code{\link{PCC.Exploratory}}, \code{\link{PCC.Stemma}}.
 }
 \examples{
-\dontrun{
-# Interactive mode
 # Load data
-data(fournival)
+data("fournival")
 # or alternatively, import it
-fournival = import.TEIApparatus(file = "myFournival.xml", 
-    appTypes = c("substantive"))
-# Analyse it with the PCC functions
-PCC(fournival)%
+# fournival = import.TEIApparatus(file = "myFournival.xml", 
+#    appTypes = c("substantive"))
 
+# Analyse it with the PCC functions
+\dontshow{
+# subsetting for exec time
+fournival = fournival[40:200,c(-5,-7,-8)]
+}
 # Non interactive mode
 PCC(fournival, ask = FALSE, threshold = 0.06)
+
+\dontrun{
+# Interactive mode
+PCC(fournival)
 }
 
 }

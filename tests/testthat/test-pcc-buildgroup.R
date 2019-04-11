@@ -56,4 +56,4 @@ test_that("NA are removed automatically in non interactive mode", {
   
 })
 
-#TODO: test that the database is passed along ? No great risk of bug.
+#TODO: test that the database is passed along? No great risk of bug.

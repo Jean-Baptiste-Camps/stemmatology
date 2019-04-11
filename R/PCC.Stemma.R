@@ -6,7 +6,7 @@ PCC.Stemma <-
            layout_as_stemma = FALSE,
            ask = TRUE,
            verbose = FALSE) {
-    # TODO(JBC): find a way to avoid redundancy for output ?
+    # TODO(JBC): find a way to avoid redundancy for output?
     # TODO(JBC): la sortie de cette fonction n'a pas de classe, il faudrait 
     # l'implémenter
     # TODO(JBC): Modifier cette fonction pour pouvoir prendre en entrée une
@@ -56,7 +56,7 @@ PCC.Stemma <-
       if (identical(pccBuildGroup$groups, list())) {
         message("No group was found. Unable to build stemma.")
         # Plot the stemma at this step, if it exists
-        # TODO: deport stemma plotting to avoid redundancy ?
+        # TODO: deport stemma plotting to avoid redundancy?
         if (!is.null(edgelistGlobal)) {
           myNetwork = igraph::graph_from_edgelist(edgelistGlobal[,1:2, drop = FALSE], directed = TRUE)
           if(layout_as_stemma){

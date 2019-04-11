@@ -1,7 +1,7 @@
 PCC.disagreement <-
     function(x, omissionsAsReadings = FALSE) {
         # As input, a variants table (numeric matrix). Ouput are disagreement 
-        # matrices and database. In addition to the tables giving benigne and severe
+        # matrices and database. In addition to the tables giving benign and severe
         # disagreements, common and oriented omissions, the function also returns,
         # for information, the count of agreements between manuscripts.
         tableVariantes = as.matrix(x)
@@ -16,7 +16,7 @@ PCC.disagreement <-
         
         severeDisagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
                                     dimnames = myDimnames)
-        benigneDisagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
+        benignDisagreement = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
                                      dimnames = myDimnames)  
         omissionsInCommon = matrix(nrow = ncol(tableVariantes), ncol = ncol(tableVariantes), 
                                    dimnames = myDimnames)
@@ -96,9 +96,9 @@ PCC.disagreement <-
                                     severeDisagreement[myWitJ, 
                                                        myWitK] = 0
                                 }
-                                if (is.na(benigneDisagreement[myWitJ, 
+                                if (is.na(benignDisagreement[myWitJ, 
                                                               myWitK])) {
-                                    benigneDisagreement[myWitJ, 
+                                    benignDisagreement[myWitJ, 
                                                         myWitK] = 0
                                 }
                                 # Now that it is done, let's proceed to
@@ -128,8 +128,8 @@ PCC.disagreement <-
                                             (tableVariantes[i, k] %in% tableSansjk)) {
                                         severeDisagreement[myWitJ,myWitK] = severeDisagreement[myWitJ,myWitK] +1
                                     } else {
-                                        # sinon benigneDisagreements++
-                                        benigneDisagreement[myWitJ,myWitK] = benigneDisagreement[myWitJ,myWitK] +1
+                                        # sinon benignDisagreements++
+                                        benignDisagreement[myWitJ,myWitK] = benignDisagreement[myWitJ,myWitK] +1
                                     }
                                 }
                             }
@@ -142,7 +142,7 @@ PCC.disagreement <-
         X = as.list(X)
         X$database = tableVariantes
         X$severeDisagreement = severeDisagreement
-        X$benigneDisagreement = benigneDisagreement  #Then the one being proposed as an FYI.
+        X$benignDisagreement = benignDisagreement  #Then the one being proposed as an FYI.
         X$agreements = agreements
         X$omissionsInCommon = omissionsInCommon
         X$omissionsOriented = omissionsOriented

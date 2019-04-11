@@ -3,7 +3,7 @@
 \alias{parzival}
 \docType{data}
 \title{Parzival data set}
-\description{Data from the artifical textual tradition \emph{Parzival}}
+\description{Data from the artificial textual tradition \emph{Parzival}}
 \usage{data(parzival)}
 \format{
   A matrix with 139 observations on the following 16 variables.

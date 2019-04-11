@@ -54,9 +54,9 @@ Camps, Jean-Baptiste, and Florian Cafiero. ‘Stemmatology: An R Package for the
 
 Camps, Jean-Baptiste, and Florian Cafiero. ‘Genealogical Variant Locations and Simplified Stemma: A Test Case’. \emph{Analysis of Ancient and Medieval Texts and Manuscripts: Digital Approaches}, edited by Tara Andrews and Caroline Macé, Brepols, 2015, pp. 69–93, \url{https://halshs.archives-ouvertes.fr/halshs-01435633}, DOI: \href{http://dx.doi.org/10.1484/M.LECTIO-EB.5.102565}{10.1484/M.LECTIO-EB.5.102565}.
 
-Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151‑161.
+Poole, Eric. ‘L’analyse stemmatique des textes documentaires’. \emph{La pratique des ordinateurs dans la critique des textes}, Paris, 1979, p. 151-161.
 
-Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207‑16.
+Poole, Eric, ‘The Computer in Determining Stemmatic Relationships’. \emph{Computers and the Humanities}, 8-4 (1974), p. 207-16.
 }
 \author{
 Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{florian.cafiero@polytechnique.edu})
@@ -65,21 +65,24 @@ Jean-Baptiste Camps (\email{jbcamps@hotmail.com}) & Florian Cafiero (\email{flor
 \code{\link{PCC.disagreement}}, \code{\link{PCC.buildGroup}}, \code{\link{PCC.reconstructModel}}, \code{\link{layout_as_stemma}}.
 }
 \examples{
+# Load data
+data("parzival")
+# or alternatively, import it
+#fournival = import.TEIApparatus(file = "myFournival.xml", 
+#                      appTypes = c("substantive"))
 \dontrun{
 # Interactive mode
-# Load data
-data(fournival)
-# or alternatively, import it
-fournival = import.TEIApparatus(file = "myFournival.xml", 
-                      appTypes = c("substantive"))
 # Analyse it with the PCC functions
-myDBs = PCC.Exploratory(fournival)
+myDBs = PCC.Exploratory(parzival)
 # draw a stemma
-PCC.Stemma(myDBs$databases[[3]])
-
-# Non interactive mode
-myDBs = PCC.Exploratory(fournival, ask = FALSE, threshold = 0.06)
-PCC.Stemma(myDBs$databases[[3]], ask = FALSE)
+PCC.Stemma(myDBs$databases[[2]])
 }
+\dontshow{
+# subsetting for exec time
+parzival = parzival[1:100,c(-6,-8,-12,-13,-14)]
+}
+# Non interactive mode
+myDBs = PCC.Exploratory(parzival, ask = FALSE, threshold = 0.06)
+PCC.Stemma(myDBs$databases[[2]], ask = FALSE)
 }
 \keyword{stemmatology}
